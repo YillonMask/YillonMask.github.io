@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Xinrui (Richard) Yi — AI/ML Engineer</title>
+<meta name="description" content="M.S. CS @ Northeastern. Building production AI systems — RAG infrastructure, AI agents, and the messy plumbing in between." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f6f3ee;
+    --bg-soft: #efeae2;
+    --ink: #1a1a1a;
+    --ink-soft: #4a4a4a;
+    --ink-muted: #8a8a8a;
+    --rule: #d9d3c8;
+    --accent: #b8412c;
+    --accent-soft: #e8c5bc;
+    --card: #fbf9f5;
+    --shadow: 0 1px 0 rgba(0,0,0,0.04);
+  }
+
+  [data-theme="dark"] {
+    --bg: #0e0e0c;
+    --bg-soft: #161614;
+    --ink: #f0ece4;
+    --ink-soft: #b8b3a8;
+    --ink-muted: #6e6a62;
+    --rule: #2a2926;
+    --accent: #e8a07a;
+    --accent-soft: #4a2a20;
+    --card: #14140f;
+    --shadow: 0 1px 0 rgba(255,255,255,0.03);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Geist', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .serif { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; }
+  .mono  { font-family: 'Geist Mono', monospace; }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    z-index: 100;
+  }
+  .nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 32px;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  .nav-brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+  }
+  .nav-brand .dot { color: var(--accent); }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    font-size: 13px;
+  }
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--rule);
+    color: var(--ink-soft);
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 12px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 110px 0 80px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-eyebrow {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--ink-muted);
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 24px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 300;
+  }
+  .hero-lede {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 620px;
+    line-height: 1.55;
+    margin-bottom: 36px;
+  }
+  .hero-lede strong { color: var(--ink); font-weight: 500; }
+
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-family: 'Geist Mono', monospace;
+  }
+  .hero-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-meta .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* ---------- SECTION ---------- */
+  section {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-head {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    margin-bottom: 56px;
+    align-items: baseline;
+  }
+  .section-num {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 36px;
+    letter-spacing: -0.02em;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  .section-body {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+  }
+  .section-body .label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding-top: 4px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin-bottom: 18px;
+  }
+  .about p strong { color: var(--ink); font-weight: 500; }
+  .about p:last-child { margin-bottom: 0; }
+
+  /* ---------- PROJECTS ---------- */
+  .project {
+    padding: 36px 0;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+  }
+  .project:first-child { border-top: none; padding-top: 0; }
+  .project:last-child { padding-bottom: 0; }
+
+  .project-meta {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+  .project-meta .role { color: var(--accent); display: block; margin-bottom: 4px; }
+
+  .project h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 24px;
+    letter-spacing: -0.015em;
+    margin-bottom: 6px;
+  }
+  .project .tagline {
+    font-size: 14px;
+    color: var(--ink-muted);
+    font-style: italic;
+    margin-bottom: 18px;
+    font-family: 'Fraunces', serif;
+  }
+  .project-desc {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.65;
+    margin-bottom: 18px;
+  }
+  .project-desc strong { color: var(--ink); font-weight: 500; }
+
+  .metrics {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding: 16px 0;
+    margin-bottom: 18px;
+    border-top: 1px dashed var(--rule);
+    border-bottom: 1px dashed var(--rule);
+  }
+  .metric .num {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    display: block;
+    line-height: 1.1;
+  }
+  .metric .lbl {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-top: 4px;
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .stack span {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    padding: 3px 9px;
+    background: var(--bg-soft);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+
+  .project-links a {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--ink);
+    text-decoration: none;
+    margin-right: 18px;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .project-links a:hover { color: var(--accent); border-color: var(--accent); }
+  .project-links a::after { content: " ↗"; }
+
+  /* ---------- EXPERIENCE TIMELINE ---------- */
+  .exp-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    padding: 28px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .exp-item:first-child { border-top: none; padding-top: 0; }
+  .exp-date {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+  }
+  .exp-role {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .exp-company {
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-family: 'Geist Mono', monospace;
+  }
+  .exp-desc {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skill-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .skill-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .skill-row:last-child { border-bottom: none; }
+  .skill-cat {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .skill-list {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  .skill-list strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact {
+    padding: 100px 0 80px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .contact h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .contact h2 em { font-style: italic; color: var(--accent); }
+  .contact p {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 540px;
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+    max-width: 720px;
+  }
+  .contact-card {
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .contact-card .lbl {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+  }
+  .contact-card a {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .contact-card a:hover { color: var(--accent); }
+
+  footer {
+    padding: 28px 0;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ---------- REVEAL ANIMATION ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 720px) {
+    .container { padding: 0 22px; }
+    .nav-inner { padding: 14px 22px; }
+    .nav-links { gap: 16px; font-size: 12px; }
+    .hero { padding: 70px 0 56px; }
+    section { padding: 56px 0; }
+    .section-head, .section-body, .project, .exp-item, .skill-row {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .section-num, .label, .project-meta, .exp-date, .skill-cat {
+      font-size: 10px;
+    }
+    .metrics { gap: 20px; }
+    .metric .num { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">Xinrui Yi<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">◐</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-eyebrow reveal">Available · New Grad · May 2026</div>
+    <h1 class="reveal">
+      I build <em>production AI systems</em>—from RAG infrastructure to agents in the wild.
+    </h1>
+    <p class="hero-lede reveal">
+      M.S. Computer Science at Northeastern, currently shipping AI/ML infra.
+      Before this, I spent two years as a design and software engineer at <strong>China Railway</strong>,
+      working on bridges and infrastructure that had to actually stand up. That mindset—reliability,
+      observability, the boring plumbing—is what I bring to AI systems now.
+    </p>
+    <div class="hero-meta reveal">
+      <span><span class="dot"></span> Bay Area, CA</span>
+      <span>No sponsorship needed</span>
+      <span>SWE / AI · ML Engineering</span>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="container">
+    <div class="section-body">
+      <div class="label">01 / About</div>
+      <div>
+        <p>
+          I'm <strong>Xinrui (Richard) Yi</strong>—an M.S. CS candidate graduating in May 2026,
+          looking for new-grad roles in AI/ML engineering and software engineering.
+        </p>
+        <p>
+          My recent work has been on the unglamorous side of AI: making RAG retrieval actually return
+          the right thing, getting agents to handle real concurrent traffic, and watching dashboards
+          when things break. I care about <strong>latency, accuracy, and uptime</strong>—the metrics that
+          tell you whether a system is real or a demo.
+        </p>
+        <p>
+          Long-term, I'm drawn to AI applied to physical-world domains: AEC tech, autonomous systems,
+          robotics. There's a lot of ground between a clever model and software people can rely on,
+          and that's where I want to spend my time.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-num">02 / Selected Work</div>
+      <h2 class="section-title">Things I've <em>shipped</em>.</h2>
+    </div>
+
+    <!-- PROJECT 1: ASTREAS -->
+    <article class="project">
+      <div class="project-meta">
+        <span class="role">ML Engineer Intern</span>
+        Astreas Performance<br>
+        Mountain View · CA<br>
+        Jun – Aug 2025
+      </div>
+      <div>
+        <h3>Production RAG for a health optimization platform</h3>
+        <p class="tagline">5,000+ beta users. 8,000+ daily queries. 99.5% uptime.</p>
+        <p class="project-desc">
+          Architected and scaled a <strong>retrieval-augmented generation system</strong> serving thousands
+          of users on Google Cloud Run. The first version had a 2.3s response time and shaky retrieval
+          quality. I instrumented the pipeline with AutoRAG, isolated the bottlenecks, then rebuilt
+          retrieval around <strong>Weaviate with HNSW + hybrid (dense/sparse) search</strong>, overlapping
+          chunking, and a cross-encoder reranker. Layered <strong>PathRAG</strong> on top to query a
+          50GB+ multi-domain health dataset as a graph. Deployed via Terraform-managed Docker on GCP
+          with auto-scaling FastAPI workers.
+        </p>
+        <div class="metrics">
+          <div class="metric"><span class="num">2.3s → 1.4s</span><div class="lbl">Query Latency</div></div>
+          <div class="metric"><span class="num">0.73 → 0.89</span><div class="lbl">NDCG@10</div></div>
+          <div class="metric"><span class="num">72% → 90%</span><div class="lbl">Recommendation Acc.</div></div>
+          <div class="metric"><span class="num">−30%</span><div class="lbl">Infra Cost</div></div>
+        </div>
+        <div class="stack">
+          <span>Python</span><span>FastAPI</span><span>Weaviate</span><span>PathRAG</span>
+          <span>AutoRAG</span><span>Cross-encoder rerank</span><span>Terraform</span>
+          <span>Docker</span><span>GCP Cloud Run</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 2: VOC.AI -->
+    <article class="project">
+      <div class="project-meta">
+        <span class="role">AI Agent Engineer Intern</span>
+        Voc.ai<br>
+        San Jose · CA<br>
+        Jan – Apr 2025
+      </div>
+      <div>
+        <h3>AI customer-service agents for enterprise clients</h3>
+        <p class="tagline">Tools, knowledge bases, and the load-tested guts behind them.</p>
+        <p class="project-desc">
+          Built and deployed <strong>AI-powered customer-service agents</strong> with database query tools
+          for order lookup and per-tenant knowledge-base integration. The interesting part wasn't the
+          model—it was making it survive real traffic. Stood up <strong>Prometheus</strong> dashboards
+          for latency and throughput, ran <strong>Locust</strong> load tests to find breaking points,
+          added <strong>Redis caching</strong> for hot order/customer data, and moved inquiry events
+          onto <strong>Kafka</strong> for non-blocking processing across multiple agents.
+        </p>
+        <div class="metrics">
+          <div class="metric"><span class="num">280ms → 95ms</span><div class="lbl">Cached Query</div></div>
+          <div class="metric"><span class="num">99.97%</span><div class="lbl">Kafka Delivery</div></div>
+          <div class="metric"><span class="num">850 → 1,200</span><div class="lbl">Concurrent Users</div></div>
+          <div class="metric"><span class="num">99.8%</span><div class="lbl">Uptime</div></div>
+        </div>
+        <div class="stack">
+          <span>Python</span><span>LangChain</span><span>Prometheus</span><span>Locust</span>
+          <span>Redis</span><span>Kafka</span><span>AWS EC2</span><span>ElastiCache</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 3: BITEWISE -->
+    <article class="project">
+      <div class="project-meta">
+        <span class="role">Founder · Hackathon</span>
+        BiteWise<br>
+        Top 30 / TED AI<br>
+        2024
+      </div>
+      <div>
+        <h3>BiteWise — AI meal planning that doesn't hallucinate</h3>
+        <p class="tagline">Top 30 finalist, TED AI hackathon (UN Sustainability Goals).</p>
+        <p class="project-desc">
+          Android app for tracking dietary habits and getting personalized recipe recommendations.
+          The technical challenge was hallucinations—LLMs love to invent ingredients and confident
+          nutrition numbers. I structured the prompt chain with <strong>Chain-of-Thought via LangChain</strong>
+          and tight grounding against tracked user data, cutting observed hallucinations by ~98%.
+          Recipes get generated by Gemini, accompanying images by DALL·E 3, all stored in Firebase.
+        </p>
+        <div class="stack">
+          <span>Flutter</span><span>Firebase</span><span>Vertex AI</span>
+          <span>LangChain</span><span>Gemini</span><span>DALL·E 3</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/RacerAxe/BiteWise" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-num">03 / Background</div>
+      <h2 class="section-title">An <em>unusual</em> path here.</h2>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">2023 — 2026</div>
+      <div>
+        <div class="exp-role">M.S. Computer Science</div>
+        <div class="exp-company">Northeastern University · GPA 3.9</div>
+        <div class="exp-desc">
+          Coursework in Machine Learning, NLP, Distributed Systems, and Cloud Computing.
+          Career Peer Advisor and Teaching Assistant on the side.
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">2021 — 2023</div>
+      <div>
+        <div class="exp-role">Design & Software Engineer</div>
+        <div class="exp-company">China Railway Major Bridge Reconnaissance & Design Institute</div>
+        <div class="exp-desc">
+          Two years on bridge and large-scale infrastructure projects. Built a Java-based AutoCAD
+          automation tool that cut design-cycle time by 30%, plus a keyword-based drawing retrieval
+          module so engineers could stop searching folders by hand. Most of what I know about
+          shipping reliable software comes from this period—when your software helps design things
+          that hold up trains, "mostly works" isn't a status.
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">2017 — 2021</div>
+      <div>
+        <div class="exp-role">B.S. & M.S. Civil Engineering</div>
+        <div class="exp-company">University at Buffalo · CS-Related GPA 4.0</div>
+        <div class="exp-desc">
+          Picked up programming alongside the engineering coursework. The fastest way to make a CAD
+          workflow less painful turned out to be writing your own tools, and that habit stuck.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-num">04 / Stack</div>
+      <h2 class="section-title">What I <em>reach for</em>.</h2>
+    </div>
+
+    <div class="skill-grid">
+      <div class="skill-row">
+        <div class="skill-cat">Languages</div>
+        <div class="skill-list">
+          <strong>Python</strong>, <strong>Java</strong>, C++, JavaScript, TypeScript, Go
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">AI / ML</div>
+        <div class="skill-list">
+          <strong>PyTorch</strong>, TensorFlow, <strong>LangChain</strong>, vLLM,
+          RAG (Weaviate, PathRAG, AutoRAG), cross-encoder reranking, Claude Code, Cursor
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Backend & Infra</div>
+        <div class="skill-list">
+          <strong>FastAPI</strong>, Spring Boot, Django, Flask, Node.js,
+          <strong>Docker</strong>, Kubernetes, <strong>Terraform</strong>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Cloud & Data</div>
+        <div class="skill-list">
+          <strong>AWS</strong> (EC2, Lambda, S3, ElastiCache),
+          <strong>GCP</strong> (Cloud Run), MySQL, PostgreSQL, MongoDB, Supabase,
+          <strong>Redis</strong>, <strong>Kafka</strong>, Prometheus, Locust
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat">Frontend & Mobile</div>
+        <div class="skill-list">
+          React, TypeScript, Flutter, Firebase
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="container">
+    <h2>Let's <em>talk</em>.</h2>
+    <p>
+      I'm actively looking for new-grad SWE and AI/ML engineering roles for 2026.
+      Best way to reach me is email — I read everything.
+    </p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="lbl">Email</div>
+        <a href="mailto:yi.xin@northeastern.edu">yi.xin@northeastern.edu</a>
+      </div>
+      <div class="contact-card">
+        <div class="lbl">LinkedIn</div>
+        <a href="https://www.linkedin.com/in/xinrui-yi/" target="_blank" rel="noopener">in/xinrui-yi</a>
+      </div>
+      <div class="contact-card">
+        <div class="lbl">GitHub</div>
+        <a href="https://github.com/YillonMask" target="_blank" rel="noopener">@YillonMask</a>
+      </div>
+      <div class="contact-card">
+        <div class="lbl">Resume</div>
+        <a href="resume.pdf" target="_blank" rel="noopener">Download (PDF)</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <span>© 2026 Xinrui Yi</span>
+    <span>Built with care · No frameworks harmed</span>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle with localStorage-free in-memory + system preference detection
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const icon = document.getElementById('themeIcon');
+  const text = document.getElementById('themeText');
+
+  // Default to system preference
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let theme = prefersDark ? 'dark' : 'light';
+  applyTheme(theme);
+
+  toggle.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    applyTheme(theme);
+  });
+
+  function applyTheme(t) {
+    if (t === 'dark') {
+      root.setAttribute('data-theme', 'dark');
+      icon.textContent = '◑';
+      text.textContent = 'Light';
+    } else {
+      root.removeAttribute('data-theme');
+      icon.textContent = '◐';
+      text.textContent = 'Dark';
+    }
+  }
+
+  // Reveal on scroll (one-time intersection observer)
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+
+  // Initial hero reveal (since they're already visible at load)
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 100 + i * 120);
+    });
+  });
+</script>
+
+</body>
+</html>
