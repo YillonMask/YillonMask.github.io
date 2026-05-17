@@ -292,20 +292,17 @@ footer {
 footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
 /* audio player */
-.brief-audio { padding: 24px 0 0; }
+.brief-audio { padding: 0; }
 .brief-audio + main.prose { padding-top: 0; }
-.brief-audio + main.prose h2:first-of-type { margin-top: 24px; }
+.brief-audio-title {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
 .audio-card {
   background: var(--card); border: 1px solid var(--rule);
   border-radius: 8px; padding: 20px 24px;
-}
-.audio-label {
-  font-family: 'Geist Mono', monospace; font-size: 11px;
-  letter-spacing: 0.16em; color: var(--ink-muted);
-  margin: 0 0 14px; display: flex; align-items: center; gap: 12px;
-}
-.audio-label::before {
-  content: ""; width: 28px; height: 1px; background: var(--ink-muted);
 }
 .audio-controls {
   display: flex; align-items: center; gap: 14px;
@@ -502,8 +499,8 @@ FOOT = """<footer>
 AUDIO_BLOCK_TEMPLATE = """
 <section class="brief-audio" aria-label="Audio digest">
   <div class="container">
+    <h2 class="brief-audio-title">播客</h2>
     <div class="audio-card">
-      <div class="audio-label">播客</div>
       <div class="audio-controls">
         <button class="audio-btn audio-back" aria-label="Back 10 seconds" type="button">
           <span class="audio-icon">&#9194;</span><span class="audio-num">10</span>
