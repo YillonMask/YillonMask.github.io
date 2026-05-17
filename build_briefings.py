@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 BRIEF_DIR = ROOT / "briefings"
+AUDIO_DIR = BRIEF_DIR / "audio"
 
 # ----- inline markdown -----
 
@@ -290,6 +291,51 @@ footer {
 }
 footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
+/* audio player */
+.brief-audio { padding: 24px 0 8px; }
+.audio-card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 20px 24px;
+}
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.audio-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 13px; gap: 2px;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.audio-btn:hover, .audio-btn:focus-visible {
+  border-color: var(--accent); color: var(--accent); outline: none;
+}
+.audio-play { width: 48px; height: 48px; font-size: 16px; }
+.audio-num {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+}
+.audio-track {
+  flex: 1; height: 4px; background: var(--rule);
+  border-radius: 2px; position: relative; cursor: pointer;
+  min-width: 60px;
+}
+.audio-buffered, .audio-progress {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  border-radius: 2px; width: 0;
+}
+.audio-buffered { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.audio-progress { background: var(--accent); }
+.audio-time {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+.audio-caption {
+  font-size: 12px; font-style: italic;
+  color: var(--ink-muted); margin: 12px 0 0; line-height: 1.4;
+}
+.audio-el { display: none; }
+
 @media (max-width: 720px) {
   .container { padding: 0 22px; }
   .nav-inner { padding: 14px 22px; }
@@ -299,6 +345,9 @@ footer .container { display: flex; justify-content: space-between; flex-wrap: wr
   .prose h2 { font-size: 25px; }
   .prose h3 { font-size: 19px; }
   .brief-row { grid-template-columns: 1fr; gap: 6px; }
+  .audio-card { padding: 16px 18px; }
+  .audio-controls { flex-wrap: wrap; gap: 10px; }
+  .audio-time { flex-basis: 100%; text-align: right; margin-top: 4px; }
 }
 """
 
@@ -322,6 +371,77 @@ function applyTheme(t) {
     root.removeAttribute('data-theme');
     icon.textContent = '◐'; text.textContent = 'Dark';
   }
+}
+
+const audio = document.querySelector('.audio-el');
+if (audio) {
+  const playBtn = document.querySelector('.audio-play');
+  const playIcon = document.querySelector('.audio-icon-play');
+  const backBtn = document.querySelector('.audio-back');
+  const fwdBtn = document.querySelector('.audio-fwd');
+  const track = document.querySelector('.audio-track');
+  const progress = document.querySelector('.audio-progress');
+  const buffered = document.querySelector('.audio-buffered');
+  const curEl = document.querySelector('.audio-cur');
+  const durEl = document.querySelector('.audio-dur');
+
+  const fmt = (s) => {
+    if (!isFinite(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  };
+
+  const setPlaying = (isPlaying) => {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); }
+    else { audio.pause(); }
+  });
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+
+  backBtn.addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+  fwdBtn.addEventListener('click', () => {
+    const dur = isFinite(audio.duration) ? audio.duration : audio.currentTime + 10;
+    audio.currentTime = Math.min(dur, audio.currentTime + 10);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+    progress.style.width = (ratio * 100) + '%';
+    curEl.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    durEl.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('progress', () => {
+    if (audio.buffered.length && audio.duration) {
+      const end = audio.buffered.end(audio.buffered.length - 1);
+      buffered.style.width = ((end / audio.duration) * 100) + '%';
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+    else if (e.code === 'ArrowLeft') { backBtn.click(); }
+    else if (e.code === 'ArrowRight') { fwdBtn.click(); }
+  });
 }
 """
 
@@ -367,7 +487,43 @@ FOOT = """<footer>
 """
 
 
-def render_briefing(date_str: str, tags: str, body_html: str) -> str:
+AUDIO_BLOCK_TEMPLATE = """
+<section class="brief-audio" aria-label="Audio digest">
+  <div class="container">
+    <div class="audio-card">
+      <div class="audio-controls">
+        <button class="audio-btn audio-back" aria-label="Back 10 seconds" type="button">
+          <span class="audio-icon">&#9194;</span><span class="audio-num">10</span>
+        </button>
+        <button class="audio-btn audio-play" aria-label="Play" type="button">
+          <span class="audio-icon-play">&#9654;</span>
+        </button>
+        <button class="audio-btn audio-fwd" aria-label="Forward 10 seconds" type="button">
+          <span class="audio-num">10</span><span class="audio-icon">&#9193;</span>
+        </button>
+        <div class="audio-track" role="slider" aria-label="Seek">
+          <div class="audio-buffered"></div>
+          <div class="audio-progress"></div>
+        </div>
+        <div class="audio-time">
+          <span class="audio-cur">0:00</span> / <span class="audio-dur">--:--</span>
+        </div>
+      </div>
+      <p class="audio-caption">AI-generated audio digest &middot; Mandarin &middot; Voiced by Fish Audio TTS</p>
+      <audio class="audio-el" preload="metadata" src="audio/{audio_filename}"></audio>
+    </div>
+  </div>
+</section>
+"""
+
+
+def audio_block(audio_filename):
+    if not audio_filename:
+        return ""
+    return AUDIO_BLOCK_TEMPLATE.format(audio_filename=audio_filename)
+
+
+def render_briefing(date_str: str, tags: str, body_html: str, audio_filename: str | None) -> str:
     title = f"Morning Briefing — {date_str}"
     head = HEAD.format(
         title=f"{title} · Xinrui Yi",
@@ -390,6 +546,7 @@ def render_briefing(date_str: str, tags: str, body_html: str) -> str:
     <div class="brief-meta">{tag_html}</div>
   </div>
 </header>
+{audio_block(audio_filename)}
 <main class="prose">
   <div class="container">
     {body_html}
@@ -467,7 +624,9 @@ def main():
         date_str = fm.get("date", md_path.stem.replace("-briefing", ""))
         tags = fm.get("tags", "")
         body_html = md_to_html(body)
-        html = render_briefing(date_str, tags, body_html)
+        mp3_path = AUDIO_DIR / f"{date_str}-podcast.mp3"
+        audio_filename = f"{date_str}-podcast.mp3" if mp3_path.exists() else None
+        html = render_briefing(date_str, tags, body_html, audio_filename)
         out_path = md_path.with_suffix(".html")
         out_path.write_text(html, encoding="utf-8")
         print(f"  built {out_path.relative_to(ROOT)}")
