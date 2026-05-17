@@ -422,6 +422,7 @@ if (audio) {
   audio.addEventListener('timeupdate', () => {
     const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
     progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
     curEl.textContent = fmt(audio.currentTime);
   });
   audio.addEventListener('loadedmetadata', () => {
@@ -442,6 +443,7 @@ if (audio) {
   });
 
   document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
     const tag = e.target.tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
     if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }

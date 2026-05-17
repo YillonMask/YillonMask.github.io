@@ -416,6 +416,7 @@ if (audio) {
   audio.addEventListener('timeupdate', () => {
     const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
     progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
     curEl.textContent = fmt(audio.currentTime);
   });
   audio.addEventListener('loadedmetadata', () => {
@@ -436,6 +437,7 @@ if (audio) {
   });
 
   document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
     const tag = e.target.tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
     if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
@@ -501,7 +503,7 @@ AUDIO_BLOCK_TEMPLATE = """
         <button class="audio-btn audio-fwd" aria-label="Forward 10 seconds" type="button">
           <span class="audio-num">10</span><span class="audio-icon">&#9193;</span>
         </button>
-        <div class="audio-track" role="slider" aria-label="Seek">
+        <div class="audio-track" role="progressbar" aria-label="Audio progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
           <div class="audio-buffered"></div>
           <div class="audio-progress"></div>
         </div>
@@ -517,7 +519,7 @@ AUDIO_BLOCK_TEMPLATE = """
 """
 
 
-def audio_block(audio_filename):
+def audio_block(audio_filename: str | None) -> str:
     if not audio_filename:
         return ""
     return AUDIO_BLOCK_TEMPLATE.format(audio_filename=audio_filename)
