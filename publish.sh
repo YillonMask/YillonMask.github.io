@@ -24,6 +24,13 @@ fi
 /bin/cp -f "$SRC_FILE" "$REPO_DIR/briefings/"
 echo "  copied $(basename "$SRC_FILE") → briefings/"
 
+SRC_MP3="$SRC_DIR/podcast/${DATE}-podcast.mp3"
+if [[ -f "$SRC_MP3" ]]; then
+  mkdir -p "$REPO_DIR/briefings/audio"
+  /bin/cp -f "$SRC_MP3" "$REPO_DIR/briefings/audio/"
+  echo "  copied $(basename "$SRC_MP3") → briefings/audio/"
+fi
+
 cd "$REPO_DIR"
 python3 build_briefings.py
 
