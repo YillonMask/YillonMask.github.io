@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Briefing — 2026-05-18 · Xinrui Yi</title>
+<meta name="description" content="Daily AI/AEC/wearables briefing for 2026-05-18." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --bg-soft: #efeae2;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --rule: #d9d3c8;
+  --accent: #b8412c;
+  --accent-soft: #e8c5bc;
+  --card: #fbf9f5;
+}
+[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --bg-soft: #161614;
+  --ink: #f0ece4;
+  --ink-soft: #b8b3a8;
+  --ink-muted: #6e6a62;
+  --rule: #2a2926;
+  --accent: #e8a07a;
+  --accent-soft: #4a2a20;
+  --card: #14140f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Geist', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.mono { font-family: 'Geist Mono', monospace; }
+.container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+nav {
+  position: sticky; top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+}
+.nav-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 32px; max-width: 920px; margin: 0 auto;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px;
+  letter-spacing: -0.01em; color: var(--ink); text-decoration: none;
+}
+.nav-brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; align-items: center; font-size: 13px; }
+.nav-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--accent); }
+.theme-toggle {
+  background: none; border: 1px solid var(--rule); color: var(--ink-soft);
+  cursor: pointer; padding: 6px 10px; border-radius: 6px;
+  font-family: inherit; font-size: 12px; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* briefing page header */
+.brief-head {
+  padding: 80px 0 48px; border-bottom: 1px solid var(--rule);
+}
+.brief-eyebrow {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brief-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ink-muted); }
+.brief-head h1 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.1;
+  letter-spacing: -0.025em; margin-bottom: 16px;
+}
+.brief-head h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
+.brief-meta {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); display: flex; gap: 18px; flex-wrap: wrap;
+}
+.brief-meta .tag {
+  color: var(--ink-soft); border: 1px solid var(--rule);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* prose */
+.prose { padding: 56px 0 80px; }
+.prose h1 { display: none; } /* the markdown's title H1 — we render our own header */
+.prose h2 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.prose h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.prose h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 21px; letter-spacing: -0.015em;
+  margin: 40px 0 14px; color: var(--ink);
+}
+.prose p {
+  font-size: 16px; line-height: 1.75; color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.prose p strong { color: var(--ink); font-weight: 500; }
+.prose ul, .prose ol { margin: 0 0 22px 22px; }
+.prose li {
+  font-size: 16px; line-height: 1.7; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.prose li strong { color: var(--ink); font-weight: 500; }
+.prose a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.prose a:hover { color: var(--accent); border-color: var(--accent); }
+.prose code {
+  font-family: 'Geist Mono', monospace; font-size: 0.92em;
+  background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.prose hr {
+  border: none; border-top: 1px solid var(--rule); margin: 48px 0;
+}
+.prose em { font-style: italic; color: var(--ink-muted); }
+
+/* index page list */
+.brief-list { padding: 56px 0 80px; }
+.brief-row {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px; padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.brief-row:last-child { border-bottom: 1px solid var(--rule); }
+.brief-row .date {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); letter-spacing: 0.04em;
+}
+.brief-row a {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -0.015em; transition: color 0.15s;
+}
+.brief-row a:hover { color: var(--accent); }
+.brief-row .tags {
+  margin-top: 6px; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+}
+
+footer {
+  padding: 28px 0; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+  border-top: 1px solid var(--rule);
+}
+footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* audio player */
+.brief-audio { padding: 0; }
+.brief-audio + main.prose { padding-top: 0; }
+.brief-audio-title {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.audio-card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 20px 24px;
+}
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.audio-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 13px; gap: 2px;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.audio-btn:hover, .audio-btn:focus-visible {
+  border-color: var(--accent); color: var(--accent); outline: none;
+}
+.audio-play { width: 48px; height: 48px; font-size: 16px; }
+.audio-num {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+}
+.audio-track {
+  flex: 1; height: 4px; background: var(--rule);
+  border-radius: 2px; position: relative; cursor: pointer;
+  min-width: 60px;
+}
+.audio-buffered, .audio-progress {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  border-radius: 2px; width: 0;
+}
+.audio-buffered { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.audio-progress { background: var(--accent); }
+.audio-time {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+.audio-caption {
+  font-size: 12px; font-style: italic;
+  color: var(--ink-muted); margin: 12px 0 0; line-height: 1.4;
+}
+.audio-el { display: none; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 22px; }
+  .nav-inner { padding: 14px 22px; }
+  .nav-links { gap: 16px; font-size: 12px; }
+  .brief-head { padding: 56px 0 36px; }
+  .prose { padding: 40px 0 56px; }
+  .prose h2 { font-size: 25px; }
+  .prose h3 { font-size: 19px; }
+  .brief-row { grid-template-columns: 1fr; gap: 6px; }
+  .audio-card { padding: 16px 18px; }
+  .audio-controls { flex-wrap: wrap; gap: 10px; }
+  .audio-time { flex-basis: 100%; text-align: right; margin-top: 4px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">Xinrui Yi<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="index.html">Briefings</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">◐</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="brief-head">
+  <div class="container">
+    <div class="brief-eyebrow">Morning Briefing</div>
+    <h1>2026-05-18 <em>·</em> daily signal</h1>
+    <div class="brief-meta"><span class="tag">briefing</span><span class="tag">ai</span><span class="tag">market</span><span class="tag">aec</span><span class="tag">wearables</span></div>
+  </div>
+</header>
+
+<main class="prose">
+  <div class="container">
+    <h1>Morning Briefing — 2026-05-18 (Monday)</h1>
+<h2>重点</h2>
+<ol>
+<li><strong>本周双 catalyst</strong>：<a href="https://blog.google/products-and-platforms/products/google-health/google-health-fitbit/" target="_blank" rel="noopener">5/19 (周二) Fitbit app 切换为 Google Health + Fitbit Air ($99.99) 发售</a>；<a href="https://finance.yahoo.com/markets/stocks/live/stock-market-today-monday-may-18-earnings-nvidia-232705005.html" target="_blank" rel="noopener">5/20 周三 Nvidia 财报</a>。一个判 wearable 行业格局，一个判 AI 算力链条估值。</li>
+<li><strong>市场低开</strong>：<a href="https://www.thestreet.com/latest-news/stock-market-today-may-18-2026-updates" target="_blank" rel="noopener">周一开盘 S&P -0.48% / NASDAQ -0.97% / Russell -0.79%</a>，tech 板块跌近 2%；<a href="https://finance.yahoo.com/markets/stocks/live/stock-market-today-monday-may-18-earnings-nvidia-232705005.html" target="_blank" rel="noopener">10Y 美债收益率突破 4.60% 一年高位</a>；Brent 原油破 $110（UAE 核电站遭无人机袭击）。"利率 + 油价 + 地缘"三重压力。</li>
+<li><strong>AI 怀疑论再上 HN 头条</strong>：<a href="https://news.ycombinator.com/front" target="_blank" rel="noopener">\"I don't think AI will make your processes go faster\"</a> (641 pts)、<a href="https://news.ycombinator.com/front" target="_blank" rel="noopener">\"AI subscriptions are a ticking time bomb for enterprise\"</a> (406 pts)、<a href="https://news.ycombinator.com/front" target="_blank" rel="noopener">\"AI is a technology not a product\"</a> (445 pts) 全部上首页。<strong>连续第二个周末，HN 投票把"AI 反思类"文章顶到 400+ 档位</strong>，对应上周 OpenAI / Anthropic 平台层猛攻势。</li>
+<li><strong>Cursor 转向 "demos, not diffs"</strong>：<a href="https://www.startuphub.ai/ai-news/insights/2026/cursor-alternatives-ai-coding-tools-2026" target="_blank" rel="noopener">agent 现在能实际用自己写的软件，并把使用录像发给你</a>。Devin 2.2 同步发布 ——<a href="https://docs.devin.ai/release-notes/overview" target="_blank" rel="noopener">Devin Review 自动闭环回 Devin runs</a>，Cognition 企业客户已经包括 <strong>Goldman Sachs / Citi / NASA</strong>，企业用量同比 80x。</li>
+<li><strong>Parag Agrawal 的 Parallel Web Systems $100M</strong>：<a href="https://news.crunchbase.com/venture/biggest-funding-rounds-sierra-astrani-anagram-therapeutics/" target="_blank" rel="noopener">Sequoia 领投，累计 $230M</a>，做 AI agent 用的 search & research 基础设施。"agent 用的搜索"正在成为独立 infra layer。</li>
+</ol>
+<hr>
+<h2>笔记</h2>
+<h3>1. 📡 HN 信号</h3>
+<p><a href="https://news.ycombinator.com/front" target="_blank" rel="noopener">HN front page 今天</a>：</p>
+<ul>
+<li><a href="https://news.ycombinator.com/front" target="_blank" rel="noopener"><strong>I don't think AI will make your processes go faster</strong></a> — 641 pts，"AI 提速 ROI"实证性质疑。</li>
+<li><a href="https://news.ycombinator.com/front" target="_blank" rel="noopener"><strong>AI is a technology not a product</strong></a> — 445 pts，呼应近期"AI 是 infrastructure 不是 SKU"的产业讨论。</li>
+<li><a href="https://news.ycombinator.com/front" target="_blank" rel="noopener"><strong>Native all the way, until you need text</strong></a> — 440 pts，工程实践向 native 倒回的讨论。</li>
+<li><a href="https://news.ycombinator.com/front" target="_blank" rel="noopener"><strong>I turned a $80 RK3562 Android tablet into a Debian Linux workstation</strong></a> — 419 pts，便宜硬件 + 开源 OS DIY 风潮。</li>
+<li><a href="https://news.ycombinator.com/front" target="_blank" rel="noopener"><strong>AI subscriptions are a ticking time bomb for enterprise</strong></a> — 406 pts，企业 AI 订阅成本结构性 bomb 警告。</li>
+<li><a href="https://news.ycombinator.com/front" target="_blank" rel="noopener"><strong>GenCAD</strong></a> — 406 pts，自动化电路设计生成工具，硬件 EDA × AI 方向。</li>
+<li><a href="https://news.ycombinator.com/front" target="_blank" rel="noopener"><strong>Apple Silicon costs more than OpenRouter</strong></a> — 329 pts，<strong>本地推理 vs cloud router 成本算账</strong>，配合 LocalLLaMA 那边硬件投资热潮。</li>
+<li><a href="https://news.ycombinator.com/front" target="_blank" rel="noopener"><strong>Prolog Basics Explained with Pokémon</strong></a> — 269 pts。</li>
+<li><a href="https://news.ycombinator.com/front" target="_blank" rel="noopener"><strong>CUDA Books</strong></a> — 220 pts，GPU 编程教育资源整理。</li>
+</ul>
+<h3>2. 🔬 Reddit 脉搏</h3>
+<ul>
+<li><strong>r/LocalLLaMA</strong> 持续讨论：DeepSeek V4-Flash (284B/13B active, MIT, Haiku-tier 价格)、Qwen3.6-27B dense（"flagship-level agentic coding"），叠加 Anthropic 6/15 计费 → "switch to local"贴持续增多。</li>
+<li><strong>GLM-5 / Gemma 4</strong> 在 broad open-model 榜单稳居前列；Llama 4 Maverick 在 general knowledge + coding benchmark 上被超过；Meta 推 Muse Spark proprietary 模型让 Llama 路线被重新评估。</li>
+<li>社区情绪："看 demo"切到"算账"是过去一周最清晰的转向（<a href="https://dev.to/lura_cardena_7de06f82aacd/ai-agents-on-reddit-late-april-to-early-may-2026-ten-threads-about-cost-reliability-and-real-4f20" target="_blank" rel="noopener">reference</a>）。</li>
+</ul>
+<h3>3. 📄 AI Research（<a href="https://www.alphaxiv.org/" target="_blank" rel="noopener">alphaXiv trending</a>）</h3>
+<ul>
+<li><a href="https://arxiv.org/pdf/2506.02153" target="_blank" rel="noopener"><strong>Small Language Models are the Future of Agentic AI</strong></a> — 论点：2024 LLM API 市场 $5.6B vs 同年 hosting infra 投资 $57B，结构性失衡；SLM + 专用 fine-tune 是 agent 的更经济路径。</li>
+<li><a href="https://arxiv.org/abs/2605.08268" target="_blank" rel="noopener"><strong>Insider Attacks in Multi-Agent LLM Consensus Systems</strong></a> — 把"恶意 agent 想拖延 / 阻止共识"的问题正式化成 sequential decision 任务。Multi-agent 安全方向的第一篇可引用 baseline。</li>
+<li><a href="https://arxiv.org/html/2605.09128v1" target="_blank" rel="noopener"><strong>Internal vs. External: Comparing Deliberation and Evolution for Multi-Agent Constitutional Design</strong></a> — 协作 SE / 自主交易场景下，agent 的"宪法"是该靠内部 deliberation 还是外部 evolution 来设计。</li>
+<li><a href="https://arxiv.org/pdf/2601.13383" target="_blank" rel="noopener"><strong>AgentForge (lightweight modular framework)</strong></a> — 把"perceive → plan → act"显式拆开，对应 GraphBit / LangChain Engine 这一波"agent infra 编译器化"潮流。</li>
+<li><a href="https://arxiv.org/pdf/2503.19213" target="_blank" rel="noopener"><strong>A Survey of LLM Agents for Question Answering</strong></a> — agent 落到 QA 的系统综述，planning / understanding / retrieval / generation 四阶段拆解。</li>
+</ul>
+<h3>4. 💰 融资动态（近 72h）</h3>
+<ul>
+<li><a href="https://news.crunchbase.com/venture/biggest-funding-rounds-sierra-astrani-anagram-therapeutics/" target="_blank" rel="noopener"><strong>Parallel Web Systems $100M</strong></a> — Parag Agrawal（前 Twitter CEO）创办，Sequoia 领投，累计 $230M。<strong>AI agent 用的 search & research 基础设施作为独立品类。</strong></li>
+<li>上周尾巴：GovWell $25M Series A（gov AI OS）、Wirestock $23M Series A（创作 + AI）、Anomaly Insights $17M（payer intelligence，Sound Ventures）。</li>
+<li><strong>大背景</strong>：<a href="https://www.crescendo.ai/news/latest-vc-investment-deals-in-ai-startups" target="_blank" rel="noopener">Crunchbase Q1 2026 全球 VC $300B / ~6000 公司</a>，环比 + 同比都涨 ~150%；<a href="https://blog.mean.ceo/ai-startup-funding-news-may-2026/" target="_blank" rel="noopener">Dealroom 2025 以来 AI startup 已吸 $18.8B</a>。</li>
+<li><strong>风格</strong>：钱在投 frontier research / agent infra / 国防 / regulated vertical，不投 thin trend-chasing。</li>
+</ul>
+<h3>5. 📊 市场脉搏（5/18 开盘）</h3>
+<ul>
+<li><a href="https://www.thestreet.com/latest-news/stock-market-today-may-18-2026-updates" target="_blank" rel="noopener"><strong>S&P 500: -0.48%（盘中）</strong></a>、<a href="https://finance.yahoo.com/markets/stocks/live/stock-market-today-monday-may-18-earnings-nvidia-232705005.html" target="_blank" rel="noopener"><strong>NASDAQ -0.97% / Russell 2000 -0.79%</strong></a>。tech 板块 -1.9% 拖累指数。</li>
+<li><strong>10Y 美债收益率破 4.60%</strong>，一年高点；Brent 原油 $110+（UAE 核电站遭无人机袭击 + 美伊和谈进展不顺）。</li>
+<li><strong>本周看点</strong>：周三 <a href="https://finance.yahoo.com/markets/stocks/live/stock-market-today-monday-may-18-earnings-nvidia-232705005.html" target="_blank" rel="noopener">Nvidia + Target 财报</a>、周四 Walmart。Nvidia 是 AI 算力链估值锚。</li>
+</ul>
+<h3>6. 👀 Watchlist</h3>
+<ul>
+<li><strong>Anthropic</strong> — 周末相对安静；<a href="https://status.claude.com/" target="_blank" rel="noopener">5/18 早晨 Claude Haiku 4.5 一次 elevated error（08:07 UTC 修复）</a>。本周 5/20-21 <strong>Code w/ Claude London</strong> 是关键节点（6/5-6 还有 Tokyo 场）。6/15 Agent SDK / Claude Code CLI 单独 credit 制将正式生效。</li>
+<li><strong>OpenAI</strong> — <a href="https://www.buildfastwithai.com/blogs/ai-news-today-may-18-2026" target="_blank" rel="noopener">本周路透：在探索"AI-first device"</a>（取消传统 app 接口，always-on AI layer），与 Apple 硬件正面对线；同期 OpenAI Deployment Company ($4B 起步) 仍在招人。ChatGPT 个人理财 Plaid 集成扩展中。</li>
+<li><strong>Cursor</strong> — 转向 <a href="https://www.startuphub.ai/ai-news/insights/2026/cursor-alternatives-ai-coding-tools-2026" target="_blank" rel="noopener">"demos, not diffs"（agent 演示自己写的软件）</a>；ARR 跑 $6B+ 预期，估值仍指向 <a href="https://techcrunch.com/2026/04/17/sources-cursor-in-talks-to-raise-2b-at-50b-valuation-as-enterprise-growth-surges/" target="_blank" rel="noopener">$50B</a>。"高端 IDE 三分"（Cursor / Windsurf / Zed）成共识。</li>
+<li><strong>Devin / Cognition</strong> — <a href="https://docs.devin.ai/release-notes/overview" target="_blank" rel="noopener">Devin 2.2 上线</a>：Devin Review 自动闭环回 runs；企业客户 Goldman Sachs / Citi / NASA；enterprise usage 一年 80x。</li>
+<li><strong>LangChain</strong> — <a href="https://www.langchain.com/blog/interrupt-2026-overview" target="_blank" rel="noopener">Interrupt 2026 复盘文章正式发布</a>：LangSmith Engine public beta、SmithDB (Rust + DataFusion + Vortex)、Managed Deep Agents API-first runtime。</li>
+<li><strong>Omnara</strong> — 跳过。</li>
+</ul>
+<h3>7. 🏗️ AI × AEC</h3>
+<ul>
+<li><a href="https://www.autodesk.com/blogs/construction/autodesk-forma-march-2026-construction-releases-built-for-whats-next/" target="_blank" rel="noopener"><strong>Forma "Building Design" + 70+ Construction releases</strong></a>：Forma Board 把 BIM 内容（Revit views、设计变体）当 visual workspace；advanced filters、shortest distance 测量、PDF + 3D 模型 Hypermodel 对齐工具。AEC 的"统一 UI"逻辑越来越像 Figma。</li>
+<li><a href="https://aecmag.com/bim/hypars-big-bet-against-schema/" target="_blank" rel="noopener"><strong>Hypar 在 NXT BLD 立 "agentic + 对话级速度"主张</strong></a> — Ian Keough（Dynamo 原作者）认为 agentic AI 不新，2026 的新点是<strong>让 agent 跑在 conversational latency 内</strong>。</li>
+<li><strong>行业实战</strong>：<a href="https://www.equipmentjournal.com/tech-news/why-2026-will-be-a-critical-year-for-physical-ai-in-construction/" target="_blank" rel="noopener">Bechtel 用 Detect Technologies 在 18000 工人队伍中识别 PPE 不合规</a>；Skanska 用 Hakimo AI 做工地安防。这两个 case 把 "AI 用在工地"从 PoC 推到 SOP。</li>
+<li><a href="https://www.pbctoday.co.uk/news/digital-construction-news/construction-technology-news/2026-will-be-the-year-local-ai-emerges-in-aec/" target="_blank" rel="noopener"><strong>Local AI in AEC</strong></a> — 2026 主线是"AI 跑在更靠近设计师 / 项目数据 / 实际生产环境的地方"，背后是 cost / control / 责任三个驱动力。配合 LocalLLaMA 用户讨论的 "Dual Blackwell + 128GB Mac 替代 Claude Code"，是同一个底层趋势的 AEC 版本。</li>
+<li><strong>AI 估算</strong>：24% 美国建筑公司在用 AI 做 cost estimation，<strong>自动化估算精度 85–90%，原本半天的工作变几分钟</strong>。</li>
+</ul>
+<h3>8. ⌚ AI × Wearables</h3>
+<ul>
+<li><a href="https://blog.google/products-and-platforms/products/google-health/google-health-fitbit/" target="_blank" rel="noopener"><strong>5/19 (明天) Google Health app 正式上线</strong></a>：Fitbit app OTA → Google Health，4 tab（Today / Fitness / Sleep / Health），整合 wearable + Health Connect + Apple Health + 病历；Google Health Coach（Gemini 驱动）开放给全体 Premium；年订阅 $79.99 → $99.99。</li>
+<li><strong>Fitbit Air 同日开售</strong> $99.99 无屏 24/7 形态。<strong>Leonard Rinser 在 LinkedIn 总结</strong>："Don't sell the wristband. Own the health data layer." 这句直接道破 Google 的策略，开始在订阅型 wearable 公司内部传开。</li>
+<li><a href="https://the-gadgeteer.com/2026/03/25/ultrahumans-banned-smart-ring-is-back-with-a-point-to-prove/" target="_blank" rel="noopener"><strong>Ultrahuman Ring Pro 美国发货</strong></a>：$479（早鸟 $349），45 天续航 + 设备本地存 250 天数据 + PRO Charger 全年；接 120+ Blood Vision biomarkers + M1 CGM + Ultrahuman Home。同步发布 <strong>Jade</strong>，号称"世界首个 real-time biointelligence AI"。</li>
+<li><a href="https://athletechnews.com/how-wearables-are-evolving-from-fitness-trackers-to-health-systems/" target="_blank" rel="noopener"><strong>Oura 新功能</strong></a>：Cumulative Stress（长期 biomarker，混合心率 / 睡眠连续性 / 体温 / 运动）、investigational 血压 profile、app 重设计。</li>
+<li><a href="https://www.techbuzz.ai/articles/whoop-pivots-from-elite-athletes-to-mass-market" target="_blank" rel="noopener"><strong>Whoop</strong></a> — My Memory + Proactive Check-Ins + Navigator Band + HealthEx EHR + 真人医生（夏季）。已经从"精英运动员"转到"mass market + 临床"，Abbott 入股 $575M 后估值 $10.1B。</li>
+</ul>
+<hr>
+<h2>想法</h2>
+<ol>
+<li><strong>HN 的 AI 怀疑论已经从"情绪"变成"成本论证"</strong> — 这周 HN 顶上去的不是"AI 让我变傻"那种情绪贴，是"AI 订阅是企业的定时炸弹"、"AI 是 technology 不是 product"、"Apple Silicon 比 OpenRouter 贵"这种<strong>带可计算论据的怀疑</strong>。这种"会算账"的反弹，比情绪贴更难被一句"等模型变好"消解。配合 Anthropic 6/15 计费 + Cursor demos-not-diffs，<strong>接下来三个月，AI 公司的销售对话会变成"unit economics + ROI"主导</strong>。</li>
+<li><strong>Cognition 的真客户是 Goldman / Citi / NASA + 企业使用量 80x，是这个赛道最重要的真实信号</strong> — 不是"vibe coding"叙事，是大公司用 Devin 当 SWE workforce。Cursor 走"IDE 极致体验 + ARR $6B+"，Cognition 走"无人化任务执行 + 顶级金融 / 政府客户"，两条路第一次同时跑通。<strong>AI coding 的天花板，比一年前估高得多。</strong></li>
+<li><strong>Google Health 5/19 一上线，wearable 的"中间地带"就消失了</strong> — Leonard Rinser 那句 "Don't sell the wristband. Own the health data layer" 是产业级精确判词。接下来 6 个月看三件事：(a) Whoop × Abbott 能不能把 CGM + 真人医生 + EHR 跑通成医疗器械产品；(b) Oura × Dexcom 能不能把 menopause / 心血管预测拿到 FDA cleared；(c) Apple Ring 传闻什么时候落地。<strong>中间小品牌没活路，要么走医疗器械，要么被 Google Health 标准吞掉。</strong></li>
+<li><strong>AEC 的"AI 跑工地"已经过 PoC 阈值</strong> — Bechtel 18000 工人队伍跑 PPE 检测 + Skanska 跑 Hakimo 安防是"SOP 级"部署。配合 Xpanner $18M 和美国前 20 大 solar EPC 19 家合作的"机械自治化"，<strong>AEC × AI 实际 ROI 已经能算清楚</strong>：不是"用 AI 出图"那种概念，是"AI 替工人盯 PPE / 替机械跑 piling / 替造价员做估算"。CE 背景做 AI 切入的话，这周的三个 case 就是"先做哪条 vertical 最快变现"的天然 mapping。</li>
+<li><strong>本周判 AI 估值的真正 catalyst 是 Nvidia 周三财报</strong> — Sarah Friar 上周说"2026 算力不够"+ Iceotope 液冷 $系列 + Anthropic SpaceX 300MW 合作 + Anduril $5B，全部押在"算力是真稀缺"。如果 Nvidia data center segment 收入或指引不及预期，OpenAI Deployment Company / Anthropic 6/15 计费 / 各家 frontier 估值都要重新 reprice。这是这周最大的单点风险。</li>
+</ol>
+<hr>
+<h2>值得深入研究</h2>
+<ul>
+<li><strong>Cognition 在 Goldman Sachs / Citi / NASA 的实际部署模式</strong> — 决定 "autonomous engineering" 到底是个 vertical 产品还是平台产品。</li>
+<li><strong>Parallel Web Systems</strong> 的 search-for-agents 接口设计 — 决定 agent 时代的搜索 API 会不会是新生意。</li>
+<li><strong>Ultrahuman Jade</strong> 的 "real-time biointelligence AI" 技术栈 — 看 wearable + multi-modal biomarker 实时 fusion 是否真的跑通。</li>
+<li><strong>Forma Board</strong> 实战体验 — Autodesk 的"Figma for AECO"赌注能不能成立。</li>
+<li><strong>5/20 Code w/ Claude London</strong> 的产品发布 — 上次 SF 场 Anthropic 公布了 Opus 4.7 + Microsoft 365 集成；这次 London 大概率有新 vertical。</li>
+<li><strong>5/20 Nvidia 财报 + 指引</strong> — AI 算力链估值锚。</li>
+</ul>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <span>© 2026 Xinrui Yi · Briefings</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);">← All briefings</a></span>
+  </div>
+</footer>
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const text = document.getElementById('themeText');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+let theme = prefersDark ? 'dark' : 'light';
+applyTheme(theme);
+toggle.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  applyTheme(theme);
+});
+function applyTheme(t) {
+  if (t === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    icon.textContent = '◑'; text.textContent = 'Light';
+  } else {
+    root.removeAttribute('data-theme');
+    icon.textContent = '◐'; text.textContent = 'Dark';
+  }
+}
+
+const audio = document.querySelector('.audio-el');
+if (audio) {
+  const playBtn = document.querySelector('.audio-play');
+  const playIcon = document.querySelector('.audio-icon-play');
+  const backBtn = document.querySelector('.audio-back');
+  const fwdBtn = document.querySelector('.audio-fwd');
+  const track = document.querySelector('.audio-track');
+  const progress = document.querySelector('.audio-progress');
+  const buffered = document.querySelector('.audio-buffered');
+  const curEl = document.querySelector('.audio-cur');
+  const durEl = document.querySelector('.audio-dur');
+
+  const fmt = (s) => {
+    if (!isFinite(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  };
+
+  const setPlaying = (isPlaying) => {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); }
+    else { audio.pause(); }
+  });
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+
+  backBtn.addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+  fwdBtn.addEventListener('click', () => {
+    const dur = isFinite(audio.duration) ? audio.duration : audio.currentTime + 10;
+    audio.currentTime = Math.min(dur, audio.currentTime + 10);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+    progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
+    curEl.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    durEl.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('progress', () => {
+    if (audio.buffered.length && audio.duration) {
+      const end = audio.buffered.end(audio.buffered.length - 1);
+      buffered.style.width = ((end / audio.duration) * 100) + '%';
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+    else if (e.code === 'ArrowLeft') { backBtn.click(); }
+    else if (e.code === 'ArrowRight') { fwdBtn.click(); }
+  });
+}
+</script>
+</body>
+</html>
