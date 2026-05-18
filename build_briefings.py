@@ -279,6 +279,14 @@ nav {
   letter-spacing: -0.015em; transition: color 0.15s;
 }
 .brief-row a:hover { color: var(--accent); }
+.brief-row .audio-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Geist Mono', monospace; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-left: 12px;
+  padding: 2px 7px; border: 1px solid var(--accent-soft);
+  border-radius: 4px; vertical-align: 2px;
+}
 .brief-row .tags {
   margin-top: 6px; font-family: 'Geist Mono', monospace;
   font-size: 11px; color: var(--ink-muted);
@@ -568,7 +576,7 @@ def render_briefing(date_str: str, tags: str, body_html: str, audio_filename: st
 
 
 def render_index(entries):
-    """entries: list of (date_str, tags, filename)"""
+    """entries: list of (date_str, tags, filename, has_audio)"""
     head = HEAD.format(
         title="Briefings · Xinrui Yi",
         desc="Daily briefings on AI, AEC, wearables, markets.",
@@ -580,17 +588,18 @@ def render_index(entries):
         '<a href="index.html" style="color:var(--accent);">Briefings</a>',
     )
     rows = []
-    for date_str, tags, fname in entries:
+    for date_str, tags, fname, has_audio in entries:
         tag_str = ""
         if tags:
             cleaned = tags.strip().lstrip("[").rstrip("]")
             tag_list = [x.strip().strip('"').strip("'") for x in cleaned.split(",")]
             tag_str = " · ".join(t for t in tag_list if t)
+        audio_badge = '<span class="audio-badge" aria-label="Audio available">♫ Audio</span>' if has_audio else ""
         rows.append(
             f"""<div class="brief-row">
   <div class="date">{date_str}</div>
   <div>
-    <a href="{fname}">Morning Briefing — {date_str}</a>
+    <a href="{fname}">Morning Briefing — {date_str}</a>{audio_badge}
     <div class="tags">{tag_str}</div>
   </div>
 </div>"""
@@ -640,7 +649,7 @@ def main():
         out_path = md_path.with_suffix(".html")
         out_path.write_text(html, encoding="utf-8")
         print(f"  built {out_path.relative_to(ROOT)}")
-        entries.append((date_str, tags, out_path.name))
+        entries.append((date_str, tags, out_path.name, audio_filename is not None))
 
     index_html = render_index(entries)
     (BRIEF_DIR / "index.html").write_text(index_html, encoding="utf-8")
