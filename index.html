@@ -329,6 +329,22 @@
   .project-links a:hover { color: var(--accent); border-color: var(--accent); }
   .project-links a::after { content: " ↗"; }
 
+  .project-demo {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 18px 0;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+  .project-demo iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
   /* ---------- EXPERIENCE TIMELINE ---------- */
   .exp-item {
     display: grid;
@@ -551,6 +567,44 @@
       <div class="section-num">02 / Selected Work</div>
       <h2 class="section-title">Things I've <em>shipped</em>.</h2>
     </div>
+
+    <!-- PROJECT 0: FISH RECOVERY -->
+    <article class="project">
+      <div class="project-meta">
+        <span class="role">Personal Project</span>
+        Fish Recovery<br>
+        Voice Agent<br>
+        2026
+      </div>
+      <div>
+        <h3>Fish Recovery - real-time compliant voice agent</h3>
+        <p class="tagline">A LiveKit voice agent with Fish Audio TTS, LangGraph dialogue state, and FDCPA compliance gates.</p>
+        <p class="project-desc">
+          Built a browser-based <strong>debt-collection voice agent</strong> that can run a live call flow:
+          opening, identity verification, objection handling, payment-plan negotiation, recap, and close.
+          The Python worker connects to LiveKit, routes each user turn through a <strong>LangGraph state machine</strong>,
+          checks every generated response with a compliance layer, and streams speech through
+          <strong>Fish Audio TTS</strong>. The React interface shows transcript logs, call controls, and live
+          stage / emotion / verification chips from worker-published state instead of frontend heuristics.
+        </p>
+        <div class="project-demo">
+          <iframe
+            src="https://www.loom.com/embed/359a96a1f95e43c29f5975acba92dadf"
+            title="Fish Recovery demo video"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="stack">
+          <span>Python</span><span>React</span><span>TypeScript</span><span>LiveKit</span>
+          <span>Fish Audio TTS</span><span>Deepgram</span><span>LangGraph</span>
+          <span>Gemini</span><span>Express</span><span>Vite</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/YillonMask/voice-agent-test-fishaudio" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.loom.com/share/359a96a1f95e43c29f5975acba92dadf" target="_blank" rel="noopener">Demo Video</a>
+        </div>
+      </div>
+    </article>
 
     <!-- PROJECT 1: ASTREAS -->
     <article class="project">
