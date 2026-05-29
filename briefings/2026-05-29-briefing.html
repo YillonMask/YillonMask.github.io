@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Briefing — 2026-05-29 · Xinrui Yi</title>
+<meta name="description" content="Daily AI/AEC/wearables briefing for 2026-05-29." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --bg-soft: #efeae2;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --rule: #d9d3c8;
+  --accent: #b8412c;
+  --accent-soft: #e8c5bc;
+  --card: #fbf9f5;
+}
+[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --bg-soft: #161614;
+  --ink: #f0ece4;
+  --ink-soft: #b8b3a8;
+  --ink-muted: #6e6a62;
+  --rule: #2a2926;
+  --accent: #e8a07a;
+  --accent-soft: #4a2a20;
+  --card: #14140f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Geist', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.mono { font-family: 'Geist Mono', monospace; }
+.container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+nav {
+  position: sticky; top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+}
+.nav-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 32px; max-width: 920px; margin: 0 auto;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px;
+  letter-spacing: -0.01em; color: var(--ink); text-decoration: none;
+}
+.nav-brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; align-items: center; font-size: 13px; }
+.nav-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--accent); }
+.theme-toggle {
+  background: none; border: 1px solid var(--rule); color: var(--ink-soft);
+  cursor: pointer; padding: 6px 10px; border-radius: 6px;
+  font-family: inherit; font-size: 12px; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* briefing page header */
+.brief-head {
+  padding: 80px 0 48px; border-bottom: 1px solid var(--rule);
+}
+.brief-eyebrow {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brief-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ink-muted); }
+.brief-head h1 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.1;
+  letter-spacing: -0.025em; margin-bottom: 16px;
+}
+.brief-head h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
+.brief-meta {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); display: flex; gap: 18px; flex-wrap: wrap;
+}
+.brief-meta .tag {
+  color: var(--ink-soft); border: 1px solid var(--rule);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* prose */
+.prose { padding: 56px 0 80px; }
+.prose h1 { display: none; } /* the markdown's title H1 — we render our own header */
+.prose h2 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.prose h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.prose h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 21px; letter-spacing: -0.015em;
+  margin: 40px 0 14px; color: var(--ink);
+}
+.prose p {
+  font-size: 16px; line-height: 1.75; color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.prose p strong { color: var(--ink); font-weight: 500; }
+.prose ul, .prose ol { margin: 0 0 22px 22px; }
+.prose li {
+  font-size: 16px; line-height: 1.7; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.prose li strong { color: var(--ink); font-weight: 500; }
+.prose a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.prose a:hover { color: var(--accent); border-color: var(--accent); }
+.prose code {
+  font-family: 'Geist Mono', monospace; font-size: 0.92em;
+  background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.prose hr {
+  border: none; border-top: 1px solid var(--rule); margin: 48px 0;
+}
+.prose em { font-style: italic; color: var(--ink-muted); }
+
+/* index page list */
+.brief-list { padding: 56px 0 80px; }
+.brief-row {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px; padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.brief-row:last-child { border-bottom: 1px solid var(--rule); }
+.brief-row .date {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); letter-spacing: 0.04em;
+}
+.brief-row a {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -0.015em; transition: color 0.15s;
+}
+.brief-row a:hover { color: var(--accent); }
+.brief-row .audio-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Geist Mono', monospace; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-left: 12px;
+  padding: 2px 7px; border: 1px solid var(--accent-soft);
+  border-radius: 4px; vertical-align: 2px;
+}
+.brief-row .tags {
+  margin-top: 6px; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+}
+
+footer {
+  padding: 28px 0; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+  border-top: 1px solid var(--rule);
+}
+footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* audio player */
+.brief-audio { padding: 0; }
+.brief-audio + main.prose { padding-top: 0; }
+.brief-audio-title {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.audio-card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 20px 24px;
+}
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.audio-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 13px; gap: 2px;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.audio-btn:hover, .audio-btn:focus-visible {
+  border-color: var(--accent); color: var(--accent); outline: none;
+}
+.audio-play { width: 48px; height: 48px; font-size: 16px; }
+.audio-num {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+}
+.audio-track {
+  flex: 1; height: 4px; background: var(--rule);
+  border-radius: 2px; position: relative; cursor: pointer;
+  min-width: 60px;
+}
+.audio-buffered, .audio-progress {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  border-radius: 2px; width: 0;
+}
+.audio-buffered { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.audio-progress { background: var(--accent); }
+.audio-time {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+.audio-caption {
+  font-size: 12px; font-style: italic;
+  color: var(--ink-muted); margin: 12px 0 0; line-height: 1.4;
+}
+.audio-el { display: none; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 22px; }
+  .nav-inner { padding: 14px 22px; }
+  .nav-links { gap: 16px; font-size: 12px; }
+  .brief-head { padding: 56px 0 36px; }
+  .prose { padding: 40px 0 56px; }
+  .prose h2 { font-size: 25px; }
+  .prose h3 { font-size: 19px; }
+  .brief-row { grid-template-columns: 1fr; gap: 6px; }
+  .audio-card { padding: 16px 18px; }
+  .audio-controls { flex-wrap: wrap; gap: 10px; }
+  .audio-time { flex-basis: 100%; text-align: right; margin-top: 4px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">Xinrui Yi<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="index.html">Briefings</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">◐</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="brief-head">
+  <div class="container">
+    <div class="brief-eyebrow">Morning Briefing</div>
+    <h1>2026-05-29 <em>·</em> daily signal</h1>
+    <div class="brief-meta"><span class="tag">briefing</span><span class="tag">ai</span><span class="tag">market</span><span class="tag">aec</span><span class="tag">wearables</span></div>
+  </div>
+</header>
+
+<main class="prose">
+  <div class="container">
+    <h2>重点</h2>
+<ul>
+<li><strong>Anthropic 凭借超强吸金力正式登顶 AI 独角兽</strong>：Anthropic 宣布完成由 Sequoia 等领投的 65 亿美元 H 轮融资，投后估值高达 965 亿美元，一举超越 OpenAI，其 5 月年化营收（run-rate）也触及 47 亿美元高位。</li>
+<li><strong>美股主要指数再创历史收盘新高</strong>：虽然 PCE 通胀数据（同比升3.8%）创近三年新高，但在一季度 GDP 下修、美伊 60 天停火谈判以及 Dell（因 Pentagon 大单暴涨25%）等科技财报的共同催化下，S&P 500 与 NASDAQ 双双收创历史新高。</li>
+<li><strong>可穿戴健康硬件加速步入“无屏化与大模型”时代</strong>：Google 宣布将 Fitbit 全面并入 Google Health，并发布了售价 $99.99 的无屏手环 "Fitbit Air" 直面竞争 WHOOP，内置 Gemini 驱动的 AI 健康教练；与此同时，Oura 智能指环正秘密申请 IPO，主打心脑血管预测 AI。</li>
+<li><strong>AEC 行业迎统一云平台与“代理化（Agentic）”重构</strong>：Autodesk 将 ACC 平台正式更名为 Autodesk Forma，并在 5 月更新中全面上线 ArcGIS 深度集成与 AI API 接口，行业正从传统的碎片化点状工具向统一的 AI Agent 工作流演进。</li>
+</ul>
+<h2>笔记</h2>
+<h3>1. <strong>📡 HN 信号</strong></h3>
+<ul>
+<li><strong>Anthropic's Mega Round</strong>：Anthropic 获得 65 亿美元 H 轮融资，估值达 965 亿美元。社区对 hyperscalers（亚马逊等追加50亿）的生态绑定、47 亿 run-rate 带来的商业化压力以及与 OpenAI 的竞争格局展开了极其热烈的探讨。· <a href="https://news.ycombinator.com/" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Claude Opus 4.8 Released</strong>：Anthropic 趁热打铁推出 Claude Opus 4.8 升级模型，其在极长上下文长逻辑链推理以及多智能体协同开发上的测试表现，引发了数百位一线开发者的热烈讨论。· <a href="https://news.ycombinator.com/" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Google Employee Insider Trading Arrest</strong>：一名 Google 员工因涉嫌利用未公开的 AI 模型发布信息，在 Polymarket 上进行高达 100 万美元的内幕交易而被指控，引发了关于去中心化预测市场合规与企业数据防泄露的警示。· <a href="https://news.ycombinator.com/" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Shadow AI and Enterprise Risk</strong>：最新报告指出企业 AI 安全风险主要集中于少数“重度用户（Power Users）”，他们通过各种浏览器插件和 OAuth 授权的 API 接口私自接入模型，构建起大量脱离 IT 部门监管的“影子 AI 工作流”。· <a href="https://news.ycombinator.com/" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Show HN: Continue? Y/N</strong>：一款探讨 AI Agent 交互中“确认疲劳（Permission Fatigue）”的小游戏成为爆款，反映出在 Agent 自主性越来越高的当下，人机协作界面（Human-in-the-loop）设计所面临的真实阵痛。· <a href="https://news.ycombinator.com/" target="_blank" rel="noopener">来源</a></li>
+</ul>
+<h3>2. <strong>🔬 Reddit 脉搏</strong></h3>
+<ul>
+<li><strong>Local Agentic Ecosystem (r/LocalLLaMA)</strong>：社区热度完全向本地 Agent 基础设施偏斜。以 Claude Code CLI、Kimi Code CLI 及开源的 OpenClaw/Hermes 为代表的持久化 Agent 工具，配合 LM Studio 提供的 Model Context Protocol (MCP) 本地连接器，实现了本地模型对 Obsidian 笔记及 Git 库的无缝且安全的隐私调用。· <a href="https://www.reddit.com/r/LocalLLaMA" target="_blank" rel="noopener">来源</a></li>
+<li><strong>MiniMax M3 Architecture Discussion (r/LocalLLaMA)</strong>：社区对 MiniMax M3 架构的本地部署展开了硬核讨论。针对其庞大的 VRAM 需求（即便量化版也需 100GB+），开发者们在稀疏注意力引擎（Sparse Attention Engines）、动态内存分页以及 GGUF 的 Apple Silicon 优化上各显神通。· <a href="https://www.reddit.com/r/LocalLLaMA" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Agentic Progress & Suite Expansion (r/MachineLearning)</strong>：非营利评测机构 METR 扩大了其 Agent 测试任务集。讨论共识指出，虽然 AI 智能体在数学证明、软件工程等“强规则、可验证”的闭环场景中进展飞速，但在需要处理隐式上下文、多方博弈及政治协调的“混乱（messy）”现实任务中依然面临较大阻碍。· <a href="https://www.reddit.com/r/MachineLearning" target="_blank" rel="noopener">来源</a></li>
+</ul>
+<h3>3. <strong>📄 AI Research</strong></h3>
+<ul>
+<li><strong><a href="https://arxiv.org/" target="_blank" rel="noopener">SwarmHarness: Skill-Based Task Routing via Decentralized Incentive-Aligned AI Agent Networks</a></strong>：针对去中心化多智能体网络的最新研究。提出了一种基于技能匹配与博弈论激励相容（Incentive-Aligned）的路由机制，在不需要强中心化调度的情况下，使得数十个异构本地/云端 Agent 能够自组织地完成超长序列任务。</li>
+<li><strong><a href="https://arxiv.org/" target="_blank" rel="noopener">CORE: Contrastive Reflection Enables Rapid Improvements in Reasoning</a></strong>：介绍了一种名为“对比反思（Contrastive Reflection）”的 LLM 推理微调框架。通过让模型在思维链中对比“正确反思”与“偏误反思”的差值，显著降低了长上下文推理中的幻觉率，并大幅提升了多步规划任务的执行成功率。</li>
+</ul>
+<h3>4. <strong>💰 融资动态</strong></h3>
+<ul>
+<li><strong>Anthropic ($65B Series H)</strong>：估值攀升至 965 亿美元，由 Altimeter Capital, Greenoaks, Sequoia 等超一线资本领投，巩固了其作为大模型基础设施层无可争议的霸主之一地位。· <a href="https://www.crunchbase.com" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Cognition ($1B+ Series D)</strong>：Devin 的研发母公司 Cognition 逆势斩获超 10 亿美元 D 轮融资，投后估值达到 260 亿美元，由 Lux Capital 和 General Catalyst 等领投，印证了资本对自主 AI 软件工程师（Autonomous Engineers）赛道的长线重注。· <a href="https://www.crunchbase.com" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Luel ($31M Seed)</strong>：作为专注于高质量、人类生成式 AI 训练数据撮合市场的平台，获得了由 General Catalyst、Lightspeed 及 YC 联合注入的 3100 万美元种子轮资金，数据源的“脱水”与独特性正成为下一阶段训练的胜负手。· <a href="https://www.crunchbase.com" target="_blank" rel="noopener">来源</a></li>
+</ul>
+<h3>5. <strong>📊 市场脉搏</strong></h3>
+<ul>
+<li><strong>S&P 500 与 NASDAQ 双双创历史新高</strong>：S&P 500 指数上涨 0.6% 至 7,563.63 点，纳指攀升 0.9% 至 26,917.47 点。尽管 4 月 PCE 核心通胀率环比增长 0.4%（年化 3.8%）创下近三年最高，但整体数据落入市场预期区间内，舒缓了交易员对恶性通胀的担忧。· <a href="https://www.wsj.com/finance/stocks" target="_blank" rel="noopener">来源</a></li>
+<li><strong>地缘缓和与科技财报大捷</strong>：美伊达成的 tentative 60天停火协议有效稳定了能源与原油价格；同时，Dell Technologies (DELL) 凭借强劲的 AI 服务器出货以及与五角大楼的重大软件合约，股价狂飙逾 25%，为市场注入了强心针。· <a href="https://finance.yahoo.com" target="_blank" rel="noopener">来源</a></li>
+</ul>
+<h3>6. <strong>🏗️ AI × AEC (建筑/工程/施工)</strong></h3>
+<ul>
+<li><strong>Autodesk ACC 全面更名为 Autodesk Forma</strong>：欧特克完成了这一极具战略意义的品牌及架构重组。5 月发布的 55 项重磅更新中，Forma 实现了与 ArcGIS Enterprise 的原生深度数据集成，支持 16 种新语言，并推出了专门托管 AEC 行业垂直 AI 插件的 Design and Make 开发者集市。· <a href="https://www.autodesk.com/" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Higharc 获 Fast Company 年度创新大奖</strong>：专注于住宅建筑空间 AI 生成设计的 Higharc 被评为 2026 年度最具创新力企业，其 Connected Homebuilding Cloud 凭借将 3D 设计、成本概算与现场施工数据实时贯通的 AI 原生管线，与 ECI 等老牌软件展开深度联姻。· <a href="https://www.reddit.com/r/ConstructionTech" target="_blank" rel="noopener">来源</a></li>
+<li><strong>从“生成”向“预测性冲突检测”演进</strong>：传统的生成式 BIM 仅用于方案多排布，最新融入的预测性 AI 开始基于海量历史返工数据，在模型搭建的极早期就预测管线与结构碰撞并自动修正，使预制装配段设计阶段的效率翻倍。· <a href="https://www.reddit.com/r/civilengineering" target="_blank" rel="noopener">来源</a></li>
+</ul>
+<h3>7. <strong>⌚ AI × Wearables (健康可穿戴)</strong></h3>
+<ul>
+<li><strong>Google Fitbit 进化为 Google Health</strong>：Google 宣布启动针对 Fitbit 的终极整合。发布了售价仅为 $99.99 的 Fitbit Air 无屏健康手环，对标 WHOOP。其亮点在于无缝集成了基于 Gemini 驱动的 AI Health Coach，能够跨渠道分析用户的膳食拍照、体检 PDF 及心率数据以输出前瞻性运动指导。· <a href="https://ouraring.com" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Oura confidential IPO Filing & 预测性健康 AI</strong>：Oura 智能指环已被证实递交了秘密上市申请，估值高企。Oura 正联合顶级医学机构训练基于 HRV 与睡眠波动的早期心脑血管风险（中风、心梗）AI 预测模型，其女性健康板块亦将更年期与生理衰老征兆追踪作为本季亮点。· <a href="https://ouraring.com" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Apple watchOS 27 战略回撤</strong>：与同行大干快上 AI Coach 的激进策略相反，苹果将代号为 "Project Mulberry" 的 AI 健康教练项目推迟至 iOS 27 后续微版本中，本代 watchOS 27 仍将开发精力集中于提高硬件传感器精度和核心的底层算法沉淀。· <a href="https://www.reddit.com/r/wearables" target="_blank" rel="noopener">来源</a></li>
+</ul>
+<h2>想法</h2>
+<ol>
+<li><strong>“影子 AI (Shadow AI)”与本地 Agent 的交汇点</strong>：影子 AI 的泛滥源于员工对于生产力工具的迫切渴求，以及企业对数据资产外泄的严防死守。这为 LM Studio + MCP + 本地 Agent（如 Claude Code CLI）指明了清晰的方向——企业需要的不是绝对禁止，而是提供一个具有安全本地沙箱、仅通过受控协议与云端交互的“本地首站智能体”。</li>
+<li><strong>“无屏化”手环的降维打击</strong>：Google 推出 $99 的 Fitbit Air 直面竞争 WHOOP，表明在健康可穿戴领域，硬件本身正快速走向“免费化/低利润化”，未来的竞争完全是“数据重力层（Data Gravity）”和“主动预测级 AI 服务”的较量。谁能掌握用户的体检 PDF、日常饮食图像和连续 PPG 信号，谁就能卡住未来的预防医学入口。</li>
+<li><strong>AEC 行业中的 Swarm 潜力</strong>：BIM 软件整合为 Autodesk Forma 并开放 AI API 是一次生态解放。若结合本周《SwarmHarness》的思路，我们可以构想一个去中心化的“AI 建筑工程师集群”：一个 Agent 跑建筑规范合规检查，另一个 Agent 跑暖通（MEP）管路优化，第三个 Agent 跑成本概算，它们在 Forma API 的链条中通过技能路由自发组网，这将彻底颠覆传统的工程设计院工作模式。</li>
+</ol>
+<h2>深入研究清单</h2>
+<ul>
+<li><strong>论文</strong>：[SwarmHarness] (arXiv, 2026) - 深入研读其去中心化智能体协同路由算法，思考如何将其逻辑迁移至多软件协同的工程计算（如建筑结构设计）场景。</li>
+<li><strong>协议</strong>：Model Context Protocol (MCP) 规范 - 探讨其在构建企业内网数据防火墙时，如何定义资源权限边界，以遏制“Shadow AI”带来的合规风险。</li>
+<li><strong>公司</strong>：Higharc - 跟踪其 Connected Homebuilding Cloud 在大规模商业化工程设计中的真实渗透率和落地壁垒。</li>
+<li><strong>设备</strong>：Fitbit Air & Google Health Coach API - 评估其对多模态体检报告（PDF）和图像的解析保真度，寻找在个人健康管理方向上的开发或套壳契机。</li>
+</ul>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <span>© 2026 Xinrui Yi · Briefings</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);">← All briefings</a></span>
+  </div>
+</footer>
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const text = document.getElementById('themeText');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+let theme = prefersDark ? 'dark' : 'light';
+applyTheme(theme);
+toggle.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  applyTheme(theme);
+});
+function applyTheme(t) {
+  if (t === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    icon.textContent = '◑'; text.textContent = 'Light';
+  } else {
+    root.removeAttribute('data-theme');
+    icon.textContent = '◐'; text.textContent = 'Dark';
+  }
+}
+
+const audio = document.querySelector('.audio-el');
+if (audio) {
+  const playBtn = document.querySelector('.audio-play');
+  const playIcon = document.querySelector('.audio-icon-play');
+  const backBtn = document.querySelector('.audio-back');
+  const fwdBtn = document.querySelector('.audio-fwd');
+  const track = document.querySelector('.audio-track');
+  const progress = document.querySelector('.audio-progress');
+  const buffered = document.querySelector('.audio-buffered');
+  const curEl = document.querySelector('.audio-cur');
+  const durEl = document.querySelector('.audio-dur');
+
+  const fmt = (s) => {
+    if (!isFinite(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  };
+
+  const setPlaying = (isPlaying) => {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); }
+    else { audio.pause(); }
+  });
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+
+  backBtn.addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+  fwdBtn.addEventListener('click', () => {
+    const dur = isFinite(audio.duration) ? audio.duration : audio.currentTime + 10;
+    audio.currentTime = Math.min(dur, audio.currentTime + 10);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+    progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
+    curEl.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    durEl.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('progress', () => {
+    if (audio.buffered.length && audio.duration) {
+      const end = audio.buffered.end(audio.buffered.length - 1);
+      buffered.style.width = ((end / audio.duration) * 100) + '%';
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+    else if (e.code === 'ArrowLeft') { backBtn.click(); }
+    else if (e.code === 'ArrowRight') { fwdBtn.click(); }
+  });
+}
+</script>
+</body>
+</html>
