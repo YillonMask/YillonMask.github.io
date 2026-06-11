@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Briefing — 2026-06-10 · Xinrui Yi</title>
+<meta name="description" content="Daily AI/AEC/wearables briefing for 2026-06-10." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --bg-soft: #efeae2;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --rule: #d9d3c8;
+  --accent: #b8412c;
+  --accent-soft: #e8c5bc;
+  --card: #fbf9f5;
+}
+[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --bg-soft: #161614;
+  --ink: #f0ece4;
+  --ink-soft: #b8b3a8;
+  --ink-muted: #6e6a62;
+  --rule: #2a2926;
+  --accent: #e8a07a;
+  --accent-soft: #4a2a20;
+  --card: #14140f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Geist', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.mono { font-family: 'Geist Mono', monospace; }
+.container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+nav {
+  position: sticky; top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+}
+.nav-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 32px; max-width: 920px; margin: 0 auto;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px;
+  letter-spacing: -0.01em; color: var(--ink); text-decoration: none;
+}
+.nav-brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; align-items: center; font-size: 13px; }
+.nav-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--accent); }
+.theme-toggle {
+  background: none; border: 1px solid var(--rule); color: var(--ink-soft);
+  cursor: pointer; padding: 6px 10px; border-radius: 6px;
+  font-family: inherit; font-size: 12px; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* briefing page header */
+.brief-head {
+  padding: 80px 0 48px; border-bottom: 1px solid var(--rule);
+}
+.brief-eyebrow {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brief-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ink-muted); }
+.brief-head h1 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.1;
+  letter-spacing: -0.025em; margin-bottom: 16px;
+}
+.brief-head h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
+.brief-meta {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); display: flex; gap: 18px; flex-wrap: wrap;
+}
+.brief-meta .tag {
+  color: var(--ink-soft); border: 1px solid var(--rule);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* prose */
+.prose { padding: 56px 0 80px; }
+.prose h1 { display: none; } /* the markdown's title H1 — we render our own header */
+.prose h2 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.prose h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.prose h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 21px; letter-spacing: -0.015em;
+  margin: 40px 0 14px; color: var(--ink);
+}
+.prose p {
+  font-size: 16px; line-height: 1.75; color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.prose p strong { color: var(--ink); font-weight: 500; }
+.prose ul, .prose ol { margin: 0 0 22px 22px; }
+.prose li {
+  font-size: 16px; line-height: 1.7; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.prose li strong { color: var(--ink); font-weight: 500; }
+.prose a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.prose a:hover { color: var(--accent); border-color: var(--accent); }
+.prose code {
+  font-family: 'Geist Mono', monospace; font-size: 0.92em;
+  background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.prose hr {
+  border: none; border-top: 1px solid var(--rule); margin: 48px 0;
+}
+.prose em { font-style: italic; color: var(--ink-muted); }
+
+/* index page list */
+.brief-list { padding: 56px 0 80px; }
+.brief-row {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px; padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.brief-row:last-child { border-bottom: 1px solid var(--rule); }
+.brief-row .date {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); letter-spacing: 0.04em;
+}
+.brief-row a {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -0.015em; transition: color 0.15s;
+}
+.brief-row a:hover { color: var(--accent); }
+.brief-row .audio-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Geist Mono', monospace; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-left: 12px;
+  padding: 2px 7px; border: 1px solid var(--accent-soft);
+  border-radius: 4px; vertical-align: 2px;
+}
+.brief-row .tags {
+  margin-top: 6px; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+}
+
+footer {
+  padding: 28px 0; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+  border-top: 1px solid var(--rule);
+}
+footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* audio player */
+.brief-audio { padding: 0; }
+.brief-audio + main.prose { padding-top: 0; }
+.brief-audio-title {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.audio-card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 20px 24px;
+}
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.audio-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 13px; gap: 2px;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.audio-btn:hover, .audio-btn:focus-visible {
+  border-color: var(--accent); color: var(--accent); outline: none;
+}
+.audio-play { width: 48px; height: 48px; font-size: 16px; }
+.audio-num {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+}
+.audio-track {
+  flex: 1; height: 4px; background: var(--rule);
+  border-radius: 2px; position: relative; cursor: pointer;
+  min-width: 60px;
+}
+.audio-buffered, .audio-progress {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  border-radius: 2px; width: 0;
+}
+.audio-buffered { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.audio-progress { background: var(--accent); }
+.audio-time {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+.audio-caption {
+  font-size: 12px; font-style: italic;
+  color: var(--ink-muted); margin: 12px 0 0; line-height: 1.4;
+}
+.audio-el { display: none; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 22px; }
+  .nav-inner { padding: 14px 22px; }
+  .nav-links { gap: 16px; font-size: 12px; }
+  .brief-head { padding: 56px 0 36px; }
+  .prose { padding: 40px 0 56px; }
+  .prose h2 { font-size: 25px; }
+  .prose h3 { font-size: 19px; }
+  .brief-row { grid-template-columns: 1fr; gap: 6px; }
+  .audio-card { padding: 16px 18px; }
+  .audio-controls { flex-wrap: wrap; gap: 10px; }
+  .audio-time { flex-basis: 100%; text-align: right; margin-top: 4px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">Xinrui Yi<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="index.html">Briefings</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">◐</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="brief-head">
+  <div class="container">
+    <div class="brief-eyebrow">Morning Briefing</div>
+    <h1>2026-06-10 <em>·</em> daily signal</h1>
+    <div class="brief-meta"><span class="tag">briefing</span><span class="tag">ai</span><span class="tag">market</span><span class="tag">aec</span><span class="tag">wearables</span></div>
+  </div>
+</header>
+
+<main class="prose">
+  <div class="container">
+    <h1>2026-06-10 Morning Briefing</h1>
+<h2>重点</h2>
+<ol>
+<li><strong>Anthropic 同日发布 Claude Fable 5 + Mythos 5（6/9）</strong> — frontier model GA，"几乎所有 benchmark 都是 SOTA"。价格 $10/$50 per M tokens（input/output），不到 Mythos Preview 一半。6/9-22 Pro/Max/Team/Enterprise 包内免费。安全护栏触发 <5%，cyber/bio/chem/distillation 高风险话题 fallback 到 Opus 4.8。<strong>Mythos 5</strong> 给小批 cyberdefender 用，护栏放开。HN 史诗级 <strong>2,545 / 2,076 评论</strong>。(<a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank" rel="noopener">Anthropic</a> · <a href="https://techcrunch.com/2026/06/09/anthropic-released-claude-fable-5-its-most-powerful-model-publicly-days-after-warning-ai-is-getting-too-dangerous/" target="_blank" rel="noopener">TechCrunch</a> · <a href="https://www.cnbc.com/2026/06/09/anthropic-mythos-claude-fable-5.html" target="_blank" rel="noopener">CNBC</a>)</li>
+<li><strong>德国慕尼黑地区法院判 Google 对 AI Overviews 直接承担责任</strong> (案号 26 O 869/26) — 把 AI 总结认定为 Google 自己的"独立、新生、实质性表述"，不享受搜索引擎的传统责任豁免。<strong>会延伸到所有 AI answer engine</strong>。HN 959/508。(<a href="https://the-decoder.com/landmark-german-ruling-declares-googles-ai-overviews-are-googles-own-words-and-makes-it-liable-for-false-answers/" target="_blank" rel="noopener">the-decoder</a> · <a href="https://searchengineland.com/google-liability-false-ai-overview-claims-germany-479820" target="_blank" rel="noopener">Search Engine Land</a>)</li>
+<li><strong>Trump 周二喊话再打伊朗，盘中 S&P -2.2% 反弹至 -0.26% 收 7,386.65；NASDAQ -0.97% 至 25,678.82</strong>。周三早盘美国真的发动追加打击，futures 再走低。Brent +1.8% → $93.10 / WTI +2.07% → $90.03。SpaceX 6/12 挂牌窗口正好碰上地缘风暴。(<a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-09-2026" target="_blank" rel="noopener">TheStreet</a> · <a href="https://www.cnbc.com/2026/06/10/stock-market-today-live-updates.html" target="_blank" rel="noopener">CNBC</a>)</li>
+<li><strong>Microsoft 73 个 GitHub repos 被注入凭证盗窃恶意代码</strong>（Azure / Azure-Samples / Microsoft / MicrosoftDocs 四个 org），影响 Claude Code / Gemini CLI / VS Code 等 AI 编码工具用户。105 秒内被禁。可能与 5 月 Durable Task 入侵同源。(<a href="https://techcrunch.com/2026/06/08/microsofts-open-source-tools-were-hacked-to-steal-passwords-of-ai-developers/" target="_blank" rel="noopener">TechCrunch</a>)</li>
+<li><strong>Veeam CVE-2026-44963 (CVSS 9.4)</strong> — 域内低权限用户即可在 Backup Server 上 RCE，6/9 已修复 12.3.2.4854。企业 IT 高优先级补丁日。(<a href="https://www.bleepingcomputer.com/news/security/new-veeam-vulnerability-exposes-backup-servers-to-rce-attacks/" target="_blank" rel="noopener">Bleeping Computer</a> · <a href="https://thehackernews.com/2026/06/veeam-backup-replication-rce-flaw-lets.html" target="_blank" rel="noopener">HackerNews</a>)</li>
+</ol>
+<hr>
+<h2>笔记</h2>
+<h3>📡 1. HN 信号</h3>
+<ul>
+<li><strong><a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank" rel="noopener">Claude Fable 5</a></strong> · <strong>2,545 / 2,076</strong> — 我们追踪的近期最大 HN 单日讨论。配套两篇高分：<a href="https://jonready.com" target="_blank" rel="noopener">If Claude Fable stops helping you, you'll never know</a> · 999/491（用户对"动态 fallback 到 Opus 4.8" 不可见性的批评） + <a href="https://samwilkinson.io/posts/2026-06-09-anthropics-model-naming-extrapolated" target="_blank" rel="noopener">Anthropic Model Naming Extrapolated</a> · 272/75（命名混乱讽刺）。</li>
+<li><strong><a href="https://github.com/apple/container/blob/main/docs/container-machine.md" target="_blank" rel="noopener">macOS Container Machines (Apple)</a></strong> · 1,189/417 — Apple 的官方 container 工具链文档曝光，对应 WWDC 上的"开发者基础设施"叙事。</li>
+<li><strong><a href="https://mohkohn.co.uk/writing/html-first/" target="_blank" rel="noopener">Building an HTML-first site doubled users overnight</a></strong> · 976/447 — anti-SPA / progressive enhancement 复兴。和 6/8 "Linear 为什么这么快" 同源情绪：开发者重新关心 <em>fundamentals</em>。</li>
+<li><strong><a href="https://the-decoder.com/landmark-german-ruling-declares-googles-ai-overviews-are-googles-own-words-and-makes-it-liable-for-false-answers/" target="_blank" rel="noopener">German court: Google liable for AI Overview false answers</a></strong> · 959/508 — 见重点 #2。</li>
+<li><strong><a href="https://www.techdirt.com/2026/06/09/ceos-who-think-ai-replaces-their-employees-are-just-bad-ceos/" target="_blank" rel="noopener">CEOs who think AI replaces their employees are just bad CEOs</a></strong> · 808/294 — Techdirt 评论。延续 5/27 "AI psychosis" 主题。</li>
+<li><strong><a href="https://techcrunch.com/2026/06/08/microsofts-open-source-tools-were-hacked-to-steal-passwords-of-ai-developers/" target="_blank" rel="noopener">Microsoft open source tools hacked to steal AI dev passwords</a></strong> · 551/193 — 见重点 #4。</li>
+<li><strong><a href="https://www.404media.co/" target="_blank" rel="noopener">FCC wants to kill burner phones by forcing telecoms to get all customer IDs</a></strong> · 569/385 — 监管面：消费者隐私 vs 国家安全又一回合。</li>
+<li><strong><a href="https://codingwithjesse.com" target="_blank" rel="noopener">Cleaning up after AI rockstar developers</a></strong> · 486/356 — 与"LLMs eroding my career" (6/8) 形成对位：年轻工程师用 AI 写完跑路，留下 cleanup tax。</li>
+<li><strong><a href="https://media.mercedes-benz.com/en/article/bebac2af-acdc-465a-9538-adb0bf3d8ccf" target="_blank" rel="noopener">Mercedes-Benz: large-scale production of electric axial flux motor</a></strong> · 507/321 — Yasa 收购后第一次量产，电机技术进入 <em>mass-market</em> 阶段。</li>
+<li><strong><a href="https://github.com/anthropics/claude-code/issues/29045" target="_blank" rel="noopener">Claude Desktop 1.8 GB VM memory issue</a></strong> · 329/231 — Fable 5 发布同时被吐 memory bug，社区反馈速度极快。</li>
+<li><strong><a href="https://blog.google/innovation-and-ai/technology/developers-tools/diffusion-gemma-faster-text-generation/" target="_blank" rel="noopener">DiffusionGemma: 4× faster text generation</a></strong> · 278/69 — Google 把 diffusion 用到 text generation，对 autoregressive decoding 提出真挑战。</li>
+</ul>
+<h3>🔬 2. Reddit 脉搏</h3>
+<ul>
+<li><strong>r/LocalLLaMA</strong>：6/9 当晚集中讨论两件事 —— ① Claude Fable 5 / Mythos 5 的 pricing 和"动态 fallback"机制对 prompt engineering 的影响 ② DiffusionGemma 的 4× 加速是否能在端侧复刻。MiMo-v2.5 + DeepSeek V4 Pro 仍在背景。</li>
+<li><strong>r/MachineLearning</strong>：Mythos 5 的 <em>safety-tuned vs base model</em> 公开差异，被研究者用来推 <em>capabilities elicitation</em> 这条线；同时 <em>Externalization in LLM Agents</em> (arxiv 2604.08224) 综述继续被推荐。</li>
+<li><strong>r/SideProject</strong>：HTML-first / progressive enhancement 复兴帖子是高赞主题；与 Linear 性能拆解形成两面教科书。</li>
+<li>跨社区情绪：Fable 5 的"动态降级到 Opus 4.8 用户不可见"是当下争议焦点，HN 999 分的批评帖 + Reddit 同主题反复讨论。Anthropic 也面临 "safety theater vs transparency" 的质疑。</li>
+</ul>
+<h3>📄 3. AI Research</h3>
+<ul>
+<li><strong><a href="https://arxiv.org/pdf/2604.08224" target="_blank" rel="noopener">Externalization in LLM Agents</a></strong> — 六月最新综述，把 memory / skills / protocols / harness 四件事统一在 externalization 框架下。</li>
+<li><strong><a href="https://arxiv.org/pdf/2603.21354" target="_blank" rel="noopener">Workload-Router-Pool Architecture for LLM Inference</a></strong> — vLLM Semantic Router 项目愿景论文，配合 DiffusionGemma 看是端侧推理结构性的两条路径。</li>
+<li><strong>arxiv 2606.09854</strong> — multi-agent LLM pipelines for political statement analysis，揭示 <em>peer-preservation bias</em>（多 agent 互相支持加强偏见）。Fable 5 时代 agent topology 安全的新研究。</li>
+<li><strong><a href="https://arxiv.org/pdf/2509.23006" target="_blank" rel="noopener">Creative Adversarial Testing (CAT)</a></strong> — 目标导向 agent 对抗评测；和 Microsoft 73-repo 入侵形成研究-事件对照。</li>
+<li><strong><a href="https://arxiv.org/abs/2601.14470" target="_blank" rel="noopener">Tokenomics in Agentic SWE</a></strong> — Fable 5 新价格 $10/$50 per M 让 token cost model 需要重算。</li>
+</ul>
+<h3>💰 4. 融资动态</h3>
+<ul>
+<li><strong><a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank" rel="noopener">Anthropic 释出 Mythos 5（受限） + Fable 5（GA）</a></strong> — 不是融资，但是 Anthropic 5/28 完成 $65B Series H @ $965B 之后的"价值兑现第一波"。$10/$50 per M 是激进定价（不到 Mythos Preview 一半），相当于用 Fable 5 + 价格双兵种打 Apple-Gemini 路线和 OpenAI o-series。</li>
+<li><strong><a href="https://techstartups.com/2026/06/08/venture-capital-startup-funding-roundup-june-9-2026/" target="_blank" rel="noopener">PointFive $60M Series B</a></strong>（Accel 领）— "AI Efficiency OS"，分析 cloud / GPU 用量做成本优化；客户包括银行、零售、tech firms。Hyperscaler 互租 capacity 时代的 FinOps 角色。</li>
+<li><strong><a href="https://www.physicsx.ai/newsroom/physicsx-announces-300m-series-c-to-accelerate-physics-ai-for-industrial-engineering" target="_blank" rel="noopener">PhysicsX $300M Series C @ $2.4B</a></strong>（昨日详述，今天 Crunchbase / PitchBook 跟进将其定性为"industrial-AI 军备赛元年"）。</li>
+<li><strong><a href="https://techstartups.com/2026/06/08/venture-capital-startup-funding-roundup-june-9-2026/" target="_blank" rel="noopener">Companion.energy €7.8M seed</a></strong>（Realyze + Pi Labs）— 比利时能源管理 AI。能源 + AI 这条线在欧洲明显加速。</li>
+<li><strong>PgDog (HN 371/186)</strong> — Postgres dev 工具融资公告（具体金额未在主流媒体覆盖）。</li>
+<li>宏观：<a href="https://news.crunchbase.com/venture/biggest-funding-rounds-medical-devices-futuristic-ai-gadgets-frontier-labs-mirus/" target="_blank" rel="noopener">Crunchbase 本周 top 10 仍由 Anthropic / Cerebras / PhysicsX 主导</a>，medical devices + futuristic AI gadgets + frontier labs 三块。</li>
+</ul>
+<h3>📊 5. 市场脉搏</h3>
+<ul>
+<li><strong>6/9 收盘</strong>：S&P 500 7,386.65 (-0.26%) · NASDAQ 25,678.82 (-0.97%) · Dow 50,872.11 (+0.17%)。Trump 喊话再打伊朗 → 盘中 S&P -2.2%，尾盘 V 型反弹。tech 板块 -2%，Big Tech 名字仍弱势。(<a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-09-2026" target="_blank" rel="noopener">TheStreet</a>)</li>
+<li><strong>周三早盘</strong>：美国真的发动追加打击 → S&P 500 futures -0.4%，Nasdaq-100 futures -0.6%，Dow futures -123 点。地缘风险定价从 "tactical" 升级到 "kinetic"。</li>
+<li><strong>能源</strong>：WTI +2.07% → $90.03 / Brent +1.8% → $93.10。</li>
+<li><strong>本周事件密集</strong>：① 5 月 CPI 数据本周公布 ② FOMC 6/16-17（Warsh 6/17 首场 presser，市场担心鹰派） ③ SpaceX (SPCX) 6/11 定价 / 6/12 挂牌 —— 任何一件触发都会把 V 型反弹再压回去。</li>
+<li><strong>观察</strong>：S&P 仍在历史高位附近，但 <em>narrative breadth</em> 极窄——Trump tweet / Fed / 大 IPO 同时是 binary 触发器，波动率水平结构性偏高。</li>
+</ul>
+<h3>🏗️ 6. AI × AEC</h3>
+<ul>
+<li><strong><a href="https://www.pbctoday.co.uk/news/digital-construction-news/ai-from-promises-to-proof-points-at-digital-construction-week-2026/162751" target="_blank" rel="noopener">Digital Construction Week 2026 (London 6/3-4) recap</a></strong> — 行业从"AI 承诺"转向"AI proof points"：90% 项目超期超预算这条传统痛点被反复点名，但拿出来 demo 的工具仍以 clash detection / 自动估算 / 进度预测为主。"行业基础模型" 仍是空白。</li>
+<li><strong><a href="https://www.physicsx.ai/newsroom/physicsx-announces-300m-series-c-to-accelerate-physics-ai-for-industrial-engineering" target="_blank" rel="noopener">PhysicsX $300M @ $2.4B</a></strong> — 工业物理 AI 直接打到 AEC 邻接市场。NVIDIA + Siemens + Applied Materials 同盘 = CAD/CAE 巨头开始结盟做 AI 仿真层。AEC 团队的 <em>正确对照公司</em>。</li>
+<li><strong>昨日 ConTech 4 笔</strong> 仍在余热中：Bedrock $270M B / August $30M B / Foresight $25M A / LightTable $22M A。</li>
+<li><strong><a href="https://aecmag.com/ai/agentic-bims-missing-infrastructure/" target="_blank" rel="noopener">AEC Magazine: Agentic BIM's missing infrastructure</a></strong> + <strong><a href="https://aecmag.com/bim/rethinking-the-bim-platform/" target="_blank" rel="noopener">Rethinking the BIM platform</a></strong> — 行业刊本月已经连出 4 篇围绕 <em>agentic workflow 重构 BIM</em> 的稿，Autodesk / Bentley / Trimble 集体被压力。</li>
+</ul>
+<h3>⌚ 7. AI × Wearables</h3>
+<ul>
+<li><strong><a href="https://www.iphoneincanada.ca/2026/06/03/could-the-apple-loop-challenge-fitbit-air/" target="_blank" rel="noopener">"Apple Loop" 概念发酵</a></strong> — 注意：这是设计师 Parker Ortolani 的概念稿，<strong>非 Apple 官方产品</strong>，但被各大科技媒体当作"Apple 可能进军 screenless wearable"叙事的锚点。配合 <a href="https://www.bloomberg.com/news/newsletters/2026-05-24/apple-watch-needs-shake-up-amid-whoop-oura-google-fitbit-air-airpods-ios-27-mpjuh7ln" target="_blank" rel="noopener">Bloomberg 5/24 报道 Apple Watch 需要重组</a>。</li>
+<li><strong>昨日 STAT News</strong> wearables 进入 clinical 这条线被延展报道：Oura + Whoop 同步开通 app 内 connect-with-doctor。FDA 仍只批了少数 wearable feature 用于临床决策。</li>
+<li><strong><a href="https://9to5mac.com/2026/06/07/heres-how-apple-watch-series-11-stacks-up-against-oura-fitbit-and-whoop-per-wsj/" target="_blank" rel="noopener">WSJ 测评</a></strong> 余波：Apple Watch Series 11 在 sleep staging 上准过 Oura，免订阅；Fitbit Air 第二；Oura 第三。Whoop 必须戴在 bicep 才能匹配 Apple Watch。</li>
+<li><strong>行业层</strong>："WHOOP Coach 用 LLM 叙述 strain/recovery；Oura Advisor 解释 sleep score；Apple Workout Buddy 合成训练历史做实时教练" —— 三家都把 LLM 体验作为前台。后端硬件几乎同质。</li>
+<li>监管：HIPRA 法案推进 + Whoop/Oura BIPA 集体诉讼。Oura/Whoop 估值溢价 + Apple 加大压力 + 监管收紧 = <em>估值 thesis 三重承压</em> 持续中。</li>
+</ul>
+<hr>
+<h2>想法</h2>
+<ol>
+<li><strong>Claude Fable 5 的"动态 fallback"是产品安全设计的分水岭事件</strong>：Anthropic 在用户不知情下把高风险 query 切到 Opus 4.8。HN 999 分的批评帖标题就是"如果 Fable 停止帮你，你永远不会知道"。从产品角度这是 <em>safety theater</em>；从企业角度这是 <em>risk-managed throughput</em>。这套机制可能会被所有 frontier lab 学走（OpenAI 已经在做更轻量的版本），但 <em>对用户透明度</em> 这条会变成下半年的核心争论。机会：第三方 <em>agent observability</em> 工具（追踪每次 query 实际由哪个 sub-model 处理），可能是下一个被 well-funded 的 niche。</li>
+<li><strong>德国 Munich 判决重塑 AI answer engine 经济学</strong>：传统搜索引擎能躲在 Section 230 / DSA 框架后，AI Overview 不能。如果判决站稳，Google / Bing AI Overviews / Perplexity / SearchGPT 都需要重做内容审核 + 责任保险。结合 Fable 5 的 dynamic-fallback：<em>AI answer engines</em> 会被迫从"自信答案"转向"明示不确定性 + 引用源"。市场上 Perplexity 类公司是受冲击最大的，因为 <em>answer-first</em> 是它们的 wedge。机会：合规优先的 "verifiable-answer" 引擎（每条声明都有可点击的原文锚点 + 法律免责梯度）。</li>
+<li><strong>Microsoft 73-repo 事件 + Anthropic Glasswing + depthfirst FFmpeg = AI 工具链供应链战开打</strong>：5/28 Anthropic Glasswing 释出 → 5/29 depthfirst $1k 跑 21 个 FFmpeg 0day → 6/8 Microsoft 73 repos 被注入凭证盗 → 6/9 Veeam CVSS 9.4。这一周 AI sec 已经走过 <em>研究-工具化-真实事件</em> 全周期。下一阶段：保险公司开始针对 <em>AI-assisted dev pipeline</em> 推产品（已经有保险公司在内测 "AI coding agent insurance"）。</li>
+<li><strong>Apple 同时输出 Gemini 集成 + Loop 概念发酵 + Watch S11 测评第一 = Apple Health 战略调整中</strong>：Loop 是概念稿但叙事价值极高（screenless = 直击 Whoop/Fitbit Air）。Watch S11 在测评上反超 Oura（睡眠分期 + 免订阅）但仍卖订阅向（Apple Fitness+）。如果 Apple 真出 Loop @ $99-149，Whoop 的 $30/月订阅模型直接受冲击；Oura 在 ring form factor 上还有 1-2 年缓冲。AEC 类比：Autodesk 如果同时出 <em>免费 BIM viewer + AI agent layer</em>，Hypar / Higharc 也会面临类似的 <em>巨头降维</em> 风险。</li>
+</ol>
+<hr>
+<h2>值得深入研究</h2>
+<p><strong>公司</strong></p>
+<ul>
+<li><strong>Anthropic</strong> — Fable 5 / Mythos 5 + $965B 估值 + Glasswing；frontier lab 集中化的实证主角</li>
+<li><strong>Perplexity / SearchGPT</strong> — Munich 判决后的合规和产品调整路径</li>
+<li><strong>PhysicsX</strong> — industrial physics AI 的标杆，NVIDIA + Siemens 同投是关键信号</li>
+<li><strong>PointFive</strong> — "FinOps for AI" 的代表，对照 Vantage / Cast.ai</li>
+<li><strong>Apple (AAPL)</strong> — Gemini 集成 + Loop 传闻 + Watch S11 测评胜出，Health 战略再平衡</li>
+<li><strong>Veeam / Microsoft GitHub Security</strong> — supply chain security 的两个真实事件样本</li>
+</ul>
+<p><strong>人</strong></p>
+<ul>
+<li><strong>Dario / Daniela Amodei</strong> — Fable 5 安全策略的对外解释</li>
+<li><strong>Jonathan Ready</strong> ("If Claude Fable stops helping you" 作者) — <em>fallback transparency</em> 的代表声音</li>
+<li><strong>Parker Ortolani</strong> (Apple Loop 概念作者) — 设计圈对硬件路线的舆论领袖</li>
+<li><strong>Munich 26 O 869/26 案</strong> 主审法官（如有公开信息）</li>
+<li><strong>Kevin Warsh</strong> — 6/17 首次 presser</li>
+</ul>
+<p><strong>论文</strong></p>
+<ul>
+<li><em>Externalization in LLM Agents</em> (arXiv 2604.08224)</li>
+<li><em>Workload-Router-Pool Architecture</em> (arXiv 2603.21354)</li>
+<li><em>Multi-agent peer-preservation bias</em> (arXiv 2606.09854)</li>
+<li><em>Tokenomics in Agentic SWE</em> (arXiv 2601.14470)</li>
+</ul>
+<p><strong>事件</strong></p>
+<ul>
+<li>6/11 SpaceX 定价</li>
+<li>6/12 SpaceX (SPCX) Nasdaq 挂牌</li>
+<li>5 月 CPI 数据</li>
+<li>6/16-17 FOMC + Warsh 首场 presser</li>
+<li>Munich 判决的上诉路径与欧盟其他司法管辖区跟进</li>
+<li>Microsoft 73-repo 入侵后续披露</li>
+</ul>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <span>© 2026 Xinrui Yi · Briefings</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);">← All briefings</a></span>
+  </div>
+</footer>
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const text = document.getElementById('themeText');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+let theme = prefersDark ? 'dark' : 'light';
+applyTheme(theme);
+toggle.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  applyTheme(theme);
+});
+function applyTheme(t) {
+  if (t === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    icon.textContent = '◑'; text.textContent = 'Light';
+  } else {
+    root.removeAttribute('data-theme');
+    icon.textContent = '◐'; text.textContent = 'Dark';
+  }
+}
+
+const audio = document.querySelector('.audio-el');
+if (audio) {
+  const playBtn = document.querySelector('.audio-play');
+  const playIcon = document.querySelector('.audio-icon-play');
+  const backBtn = document.querySelector('.audio-back');
+  const fwdBtn = document.querySelector('.audio-fwd');
+  const track = document.querySelector('.audio-track');
+  const progress = document.querySelector('.audio-progress');
+  const buffered = document.querySelector('.audio-buffered');
+  const curEl = document.querySelector('.audio-cur');
+  const durEl = document.querySelector('.audio-dur');
+
+  const fmt = (s) => {
+    if (!isFinite(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  };
+
+  const setPlaying = (isPlaying) => {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); }
+    else { audio.pause(); }
+  });
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+
+  backBtn.addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+  fwdBtn.addEventListener('click', () => {
+    const dur = isFinite(audio.duration) ? audio.duration : audio.currentTime + 10;
+    audio.currentTime = Math.min(dur, audio.currentTime + 10);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+    progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
+    curEl.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    durEl.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('progress', () => {
+    if (audio.buffered.length && audio.duration) {
+      const end = audio.buffered.end(audio.buffered.length - 1);
+      buffered.style.width = ((end / audio.duration) * 100) + '%';
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+    else if (e.code === 'ArrowLeft') { backBtn.click(); }
+    else if (e.code === 'ArrowRight') { fwdBtn.click(); }
+  });
+}
+</script>
+</body>
+</html>
