@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Briefing — 2026-06-13 · Xinrui Yi</title>
+<meta name="description" content="Daily AI/AEC/wearables briefing for 2026-06-13." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --bg-soft: #efeae2;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --rule: #d9d3c8;
+  --accent: #b8412c;
+  --accent-soft: #e8c5bc;
+  --card: #fbf9f5;
+}
+[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --bg-soft: #161614;
+  --ink: #f0ece4;
+  --ink-soft: #b8b3a8;
+  --ink-muted: #6e6a62;
+  --rule: #2a2926;
+  --accent: #e8a07a;
+  --accent-soft: #4a2a20;
+  --card: #14140f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Geist', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.mono { font-family: 'Geist Mono', monospace; }
+.container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+nav {
+  position: sticky; top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+}
+.nav-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 32px; max-width: 920px; margin: 0 auto;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px;
+  letter-spacing: -0.01em; color: var(--ink); text-decoration: none;
+}
+.nav-brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; align-items: center; font-size: 13px; }
+.nav-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--accent); }
+.theme-toggle {
+  background: none; border: 1px solid var(--rule); color: var(--ink-soft);
+  cursor: pointer; padding: 6px 10px; border-radius: 6px;
+  font-family: inherit; font-size: 12px; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* briefing page header */
+.brief-head {
+  padding: 80px 0 48px; border-bottom: 1px solid var(--rule);
+}
+.brief-eyebrow {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brief-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ink-muted); }
+.brief-head h1 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.1;
+  letter-spacing: -0.025em; margin-bottom: 16px;
+}
+.brief-head h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
+.brief-meta {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); display: flex; gap: 18px; flex-wrap: wrap;
+}
+.brief-meta .tag {
+  color: var(--ink-soft); border: 1px solid var(--rule);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* prose */
+.prose { padding: 56px 0 80px; }
+.prose h1 { display: none; } /* the markdown's title H1 — we render our own header */
+.prose h2 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.prose h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.prose h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 21px; letter-spacing: -0.015em;
+  margin: 40px 0 14px; color: var(--ink);
+}
+.prose p {
+  font-size: 16px; line-height: 1.75; color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.prose p strong { color: var(--ink); font-weight: 500; }
+.prose ul, .prose ol { margin: 0 0 22px 22px; }
+.prose li {
+  font-size: 16px; line-height: 1.7; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.prose li strong { color: var(--ink); font-weight: 500; }
+.prose a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.prose a:hover { color: var(--accent); border-color: var(--accent); }
+.prose code {
+  font-family: 'Geist Mono', monospace; font-size: 0.92em;
+  background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.prose hr {
+  border: none; border-top: 1px solid var(--rule); margin: 48px 0;
+}
+.prose em { font-style: italic; color: var(--ink-muted); }
+
+/* index page list */
+.brief-list { padding: 56px 0 80px; }
+.brief-row {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px; padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.brief-row:last-child { border-bottom: 1px solid var(--rule); }
+.brief-row .date {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); letter-spacing: 0.04em;
+}
+.brief-row a {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -0.015em; transition: color 0.15s;
+}
+.brief-row a:hover { color: var(--accent); }
+.brief-row .audio-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Geist Mono', monospace; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-left: 12px;
+  padding: 2px 7px; border: 1px solid var(--accent-soft);
+  border-radius: 4px; vertical-align: 2px;
+}
+.brief-row .tags {
+  margin-top: 6px; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+}
+
+footer {
+  padding: 28px 0; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+  border-top: 1px solid var(--rule);
+}
+footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* audio player */
+.brief-audio { padding: 0; }
+.brief-audio + main.prose { padding-top: 0; }
+.brief-audio-title {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.audio-card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 20px 24px;
+}
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.audio-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 13px; gap: 2px;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.audio-btn:hover, .audio-btn:focus-visible {
+  border-color: var(--accent); color: var(--accent); outline: none;
+}
+.audio-play { width: 48px; height: 48px; font-size: 16px; }
+.audio-num {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+}
+.audio-track {
+  flex: 1; height: 4px; background: var(--rule);
+  border-radius: 2px; position: relative; cursor: pointer;
+  min-width: 60px;
+}
+.audio-buffered, .audio-progress {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  border-radius: 2px; width: 0;
+}
+.audio-buffered { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.audio-progress { background: var(--accent); }
+.audio-time {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+.audio-caption {
+  font-size: 12px; font-style: italic;
+  color: var(--ink-muted); margin: 12px 0 0; line-height: 1.4;
+}
+.audio-el { display: none; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 22px; }
+  .nav-inner { padding: 14px 22px; }
+  .nav-links { gap: 16px; font-size: 12px; }
+  .brief-head { padding: 56px 0 36px; }
+  .prose { padding: 40px 0 56px; }
+  .prose h2 { font-size: 25px; }
+  .prose h3 { font-size: 19px; }
+  .brief-row { grid-template-columns: 1fr; gap: 6px; }
+  .audio-card { padding: 16px 18px; }
+  .audio-controls { flex-wrap: wrap; gap: 10px; }
+  .audio-time { flex-basis: 100%; text-align: right; margin-top: 4px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">Xinrui Yi<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="index.html">Briefings</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">◐</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="brief-head">
+  <div class="container">
+    <div class="brief-eyebrow">Morning Briefing</div>
+    <h1>2026-06-13 <em>·</em> daily signal</h1>
+    <div class="brief-meta"><span class="tag">briefing</span><span class="tag">ai</span><span class="tag">market</span><span class="tag">aec</span><span class="tag">wearables</span></div>
+  </div>
+</header>
+
+<main class="prose">
+  <div class="container">
+    <h1>2026-06-13 Morning Briefing</h1>
+<h2>重点</h2>
+<ol>
+<li><strong>Elon Musk 成为史上第一个 $1.1T 身价的人</strong> — SPCX 首日 +19% 收 $160.95、市值 $2.11T；Musk 持 ~42% SpaceX → 个人净值跨过 trillionaire 门槛（NYT 估）。<a href="https://finance.yahoo.com/news/beyond-rockefeller-polymarket-traders-bet-183107029.html" target="_blank" rel="noopener">"Beyond Rockefeller"</a> 叙事正式落地。(<a href="https://variety.com/2026/biz/news/spacex-stock-ipo-shares-elon-musk-trillionaire-1236778893/" target="_blank" rel="noopener">Variety</a> · <a href="https://www.cnbc.com/2026/06/12/spacex-ipo-spcx-live-updates.html" target="_blank" rel="noopener">CNBC</a>)</li>
+<li><strong>Fable 5 / Mythos 5 撤回继续发酵</strong>：HN best 帖涨到 <strong>2,950 / 2,149 评论</strong>（48h 内翻倍）。Anthropic 公开点名 <em>"同一 jailbreak 技术对 GPT-5.5 等公开模型同样有效，那些却不在 export control 下"</em>，质疑监管 selective enforcement；<a href="https://venturebeat.com/technology/anthropic-blocks-all-public-access-to-claude-fable-5-mythos-5-following-us-government-order-what-enterprises-should-do" target="_blank" rel="noopener">MiniMax M3 开源新模型蹭热度强调 "开源不会被一纸通知关掉"</a>。"Open Source AI Must Win" 帖子也涨到 1,406/431。(<a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener">Anthropic 声明</a> · <a href="https://fortune.com/2026/06/13/anthropic-disables-fable-mythos-export-controls-national-security-threat/" target="_blank" rel="noopener">Fortune</a>)</li>
+<li><strong>Anthropic 10 月 2026 IPO 路径浮出水面</strong>：与 Goldman / JPMorgan / Morgan Stanley 早期接触，<strong>目标 $60B+ 募资</strong>。2 月估值 $380B、run-rate $19B+ ARR、承诺 $50B 自建 US 数据中心、2028 才 break-even。Fable 5 撤回事件之后 SEC 审查路径会更严。(<a href="https://techfundingnews.com/anthropic-ipo-october-raise-60-billion/" target="_blank" rel="noopener">Tech Funding News</a> · <a href="https://app.dealroom.co/news/note/anthropic-eyes-october-2026-ipo-that-could-raise-60b" target="_blank" rel="noopener">Dealroom</a>)</li>
+<li><strong>Ultrahuman 数据泄露真相披露</strong>：实际事件 <strong>3/27 发生</strong>，6/3 才通知用户（68 天延迟）。员工凭证被恶意软件盗 → 进 internal analytics 系统。约 0.1% 用户（≈700 人）wellness 数据被访问。无支付/密码泄露。和上周 HIPRA 法案 + Whoop/Oura BIPA 集体诉讼形成 <em>wearable 数据治理</em> 三重压力。(<a href="https://techcrunch.com/2026/06/03/ultrahuman-says-hackers-accessed-customers-wellness-data-via-internal-tool/" target="_blank" rel="noopener">TechCrunch</a> · <a href="https://the5krunner.com/2026/06/03/ultrahuman-data-breach/" target="_blank" rel="noopener">the5krunner</a>)</li>
+<li><strong>市场周收</strong>（6/12）：S&P +0.5% / NASDAQ +0.31% / Dow +0.7%。SPCX +19% 拉升风险偏好；Iran "deal 临近" 共识价格了 80% 的缓和路径。但下周 6/16-17 FOMC + Warsh 首场 presser 仍是 binary 触发器。(<a href="https://www.cnbc.com/2026/06/12/spacex-ipo-spcx-live-updates.html" target="_blank" rel="noopener">CNBC</a>)</li>
+</ol>
+<hr>
+<h2>笔记</h2>
+<h3>📡 1. HN 信号</h3>
+<ul>
+<li><strong><a href="https://www.anthropic.com/news/fable-mythos-access" target="_blank" rel="noopener">Statement on US government directive to suspend Fable 5 and Mythos 5</a></strong> · <strong>2,950 / 2,149</strong> — 见重点 #2，HN 近一个月单帖最高，48h 翻倍仍在累积。</li>
+<li><strong><a href="https://tombedor.dev/human-attention-and-human-effort/" target="_blank" rel="noopener">If you are asking for human attention, demonstrate human effort</a></strong> · 1,648/490 — 反 AI-spam 第六周连贯主线。</li>
+<li><strong><a href="https://lantian.pub/en/article/fun/ai-agent-bankrupted-their-operator-scan-dn42lantian.lantian/" target="_blank" rel="noopener">AI agent bankrupted operator scanning DN42</a></strong> · 1,432/522 — $6,531 AWS 账单，autonomous agent disaster 教科书案例。</li>
+<li><strong><a href="https://opensourceaimustwin.com/?share=v2" target="_blank" rel="noopener">Open source AI must win</a></strong> · <strong>1,406/431</strong> — Fable 5 事件直接推动开源 AI 宣言传播；24 小时分数翻倍。</li>
+<li><strong><a href="https://simonwillison.net/2026/Jun/11/fable-is-relentlessly-proactive/" target="_blank" rel="noopener">Claude Fable is relentlessly proactive</a></strong> · 756/654 — Simon Willison 拆 Fable 5 主动性过强问题。</li>
+<li><strong><a href="https://fablepool.com" target="_blank" rel="noopener">Show HN: FablePool</a></strong> · 513/273 — 集资让 Fable 5 公开 build；产品发布时 Fable 5 还在，第二天就被政府下架，讽刺感强。</li>
+<li><strong><a href="https://huggingface.co/moonshotai/Kimi-K2.7-Code" target="_blank" rel="noopener">Kimi K2.7-Code 开源 coding 模型 + 更优 token 效率</a></strong> · 440/231 — Moonshot 新一版，与 MiMo Code、DeepSeek 一起构成"中国开源 coding 模型矩阵"。</li>
+<li><strong><a href="https://12gramsofcarbon.com/p/tech-things-there-is-a-massive-shadow" target="_blank" rel="noopener">There is a shadow hanging over this Fable thing</a></strong> · 433/422 — Fable 5 事件第四篇 HN 高分。</li>
+<li><strong><a href="https://endorlabs.com/learn/claude-fable-5-mythos-grade-hype" target="_blank" rel="noopener">Claude Fable 5: mid-tier on coding tasks</a></strong> · 405/241 — 独立测评质疑 hype。</li>
+<li><strong><a href="https://www.renaultgroup.com/en/magazine/energy-and-powertrains/all-about-electric-motors-with-no-rare-earths/" target="_blank" rel="noopener">Electric motors with no rare earths (Renault)</a></strong> · 651/185 — 跟 6/10 Mercedes axial flux motor 一起看，欧洲车厂电机技术线集中突破。</li>
+<li><strong><a href="https://ikyle.me/blog/2026/how-to-setup-a-local-coding-agent-on-macos" target="_blank" rel="noopener">How to setup a local coding agent on macOS</a></strong> · 455/112 — 本地 coding agent 教程，Fable 5 撤回后实际需求。</li>
+<li><strong><a href="https://correresmidestino.com/dont-you-just-upload-it-to-chatgpt/" target="_blank" rel="noopener">"Don't You Just Upload It to ChatGPT?"</a></strong> · 449/354 — 用户面"AI 即默认工具"的反 narrative。</li>
+<li><strong><a href="https://www.eff.org" target="_blank" rel="noopener">H.R. 6028: 美国国会拟改 Copyright Office</a></strong> · 268/112 — AI 训练数据 + copyright 政策的下一站，EFF 反对。</li>
+<li><strong><a href="https://www.ft.com/content/7ffcace7-9dc0-4e7e-9912-895ac073f979" target="_blank" rel="noopener">Palantir loses Swiss libel case</a></strong> · 386/100 — 与 Palantir 进 AEC 形成 <em>扩张 vs 合规</em> 双线。</li>
+<li><strong><a href="https://twitter.com/jsrailton/status/2064661778978533571" target="_blank" rel="noopener">Malware developers added nuclear/biological weapons text to spyware</a></strong> · 436/229 — Citizen Lab 发现 spyware 内含 dual-use 关键词，可能被用做 export-control trigger。</li>
+</ul>
+<h3>🔬 2. Reddit 脉搏</h3>
+<ul>
+<li><strong>r/LocalLLaMA</strong>：政府 directive 撤 Fable 5 后情绪极度兴奋，本地化 + 开源叙事被 <em>制度化验证</em>；Kimi K2.7-Code / MiMo Code / Qwen / DeepSeek V4 Pro 同时被推。"frontier-only 是政策风险"成为社区共识。</li>
+<li><strong>r/MachineLearning</strong>：政府点名的具体 "narrow jailbreak technique" 是研究者讨论焦点；安全研究 vs export control 边界的辩论持续。</li>
+<li><strong>r/cybersecurity</strong>：本周补丁 + Atomic Arch + Ultrahuman 68 天迟报 + Chinese 十年潜伏 PAM/OpenSSH 后门 = "supply chain trust 全线告急"。</li>
+<li><strong>r/wearables / r/quantifiedself</strong>：Ultrahuman 68 天迟报通知 + Apple Watch 高管流失 + Apple Loop 概念 = 智能戒指赛道用户信任摇摆。</li>
+</ul>
+<h3>📄 3. AI Research</h3>
+<ul>
+<li><strong><a href="https://arxiv.org/pdf/2604.08224" target="_blank" rel="noopener">Externalization in LLM Agents (arXiv 2604.08224)</a></strong> — 本月最重要综述。</li>
+<li><strong><a href="https://arxiv.org/abs/2603.07670" target="_blank" rel="noopener">Memory for autonomous LLM agents (arXiv 2603.07670)</a></strong> — 自治 agent 记忆机制 + 评测 + 前沿。</li>
+<li><strong><a href="https://arxiv.org/abs/2603.04814" target="_blank" rel="noopener">Beyond the context window: fact-based memory vs long-context LLMs (arXiv 2603.04814)</a></strong> — long context 不如 fact-based memory 的成本/性能验证。</li>
+<li><strong><a href="https://arxiv.org/abs/2601.07190" target="_blank" rel="noopener">Active context compression (arXiv 2601.07190)</a></strong> — agent 自主内存管理。</li>
+<li><strong><a href="https://arxiv.org/abs/2510.20036" target="_blank" rel="noopener">ToolScope (arXiv 2510.20036)</a></strong> — tool merging + context-aware filtering。</li>
+<li><strong><a href="https://arxiv.org/abs/2602.17046" target="_blank" rel="noopener">Dynamic system instructions and tool exposure (arXiv 2602.17046)</a></strong> — agent 动态裁剪 prompt 表面。</li>
+<li><strong><a href="https://arxiv.org/abs/2502.11435" target="_blank" rel="noopener">SMART (arXiv 2502.11435)</a></strong> — self-aware agent，tool overuse mitigation；DN42 故事的研究背景。</li>
+<li><strong><a href="https://arxiv.org/pdf/2603.21354" target="_blank" rel="noopener">Workload-Router-Pool Architecture (arXiv 2603.21354)</a></strong> — vLLM Semantic Router，呼应 Fable 5 <em>动态降级到 Opus 4.8</em> 的架构思想。</li>
+</ul>
+<h3>💰 4. 融资动态</h3>
+<ul>
+<li><strong><a href="https://www.cnbc.com/2026/06/12/spacex-ipo-spcx-live-updates.html" target="_blank" rel="noopener">SPCX 首日 +19% / 市值 $2.11T</a></strong> — 美国第 6 大公司；Musk 个人净值 $1.1T，首位"trillionaire"。</li>
+<li><strong><a href="https://techfundingnews.com/anthropic-ipo-october-raise-60-billion/" target="_blank" rel="noopener">Anthropic 10 月 IPO @ $60B+ 募资</a></strong> — Goldman / JPM / Morgan Stanley 早期接触；2 月估值 $380B、ARR $19B+；$50B 自建数据中心计划；2028 才 break-even。Fable 5 事件后 SEC 审查路径更严。</li>
+<li><strong>OpenAI</strong> 同步在为 Q4 2026 listing 做准备，与华尔街投行非正式洽谈。</li>
+<li><strong><a href="https://www.crescendo.ai/news/latest-vc-investment-deals-in-ai-startups" target="_blank" rel="noopener">Cohere × Aleph Alpha 4 月已宣布合并</a></strong> — 背后 $600M 来自 Schwarz Group（德国零售巨头），欧洲 sovereign AI 整合。</li>
+<li><strong><a href="https://www.geekwire.com/2026/bezos-ai-startup-prometheus-raises-12b-at-41b-valuation-and-the-ceos-explain-what-theyre-doing/" target="_blank" rel="noopener">Prometheus (Bezos)</a></strong> — 6/11 $12B Series B @ $41B 仍在余热中。</li>
+<li><strong>昨日 Fable 5 / Mythos 5 商业化中止</strong> 直接利好：OpenAI / Gemini / 中国开源模型（DeepSeek / Kimi / MiMo / Qwen）。</li>
+</ul>
+<h3>📊 5. 市场脉搏</h3>
+<ul>
+<li><strong>6/12 收盘</strong>（周收）：S&P 500 7,431.46 (+0.5%) · NASDAQ 25,888.84 (+0.31%) · Dow 51,202.26 (+0.7%)。SPCX +19% / 市值 $2.11T。Iran "deal 临近"叙事 + SpaceX 历史 IPO 双引擎。(<a href="https://finance.yahoo.com/markets/live/stock-market-today-thursday-june-11-dow-sp-500-nasdaq-222511784.html" target="_blank" rel="noopener">Yahoo</a>)</li>
+<li><strong>本周波动结构</strong>：6/10 暴跌 → 6/11 反弹 → 6/12 SPCX 主导 → 周末平稳。VIX 显著回落，但 <em>underlying breadth</em> 仍极度集中。</li>
+<li><strong>下周事件密集</strong>：① 6/16-17 FOMC + Warsh 6/17 首场 presser（CPI 4.2% 之后市场对鹰派调子敏感） ② Fable 5 撤回后 SEC / Commerce 政策方向 ③ SPCX 第二周流动性测试。</li>
+<li><strong>油</strong>：Brent 从 6/10 高点 $93 区域回落，Iran 缓和 + OPEC+ 7 月增产对冲。</li>
+<li><strong>观察</strong>：本周 NASDAQ 5 个交易日累计仍 -1.5%，6/10 单日 -1.98% 是最大单日跌幅；SPCX 上市当天 absorb 了 <em>约 $11B 一级市场资金</em>，对其他流动性供给造成 短期挤压。</li>
+</ul>
+<h3>🏗️ 6. AI × AEC</h3>
+<ul>
+<li><strong><a href="https://aecmag.com/technology/aec-magazine-may-june-2026/" target="_blank" rel="noopener">AEC Magazine 6/12 新刊</a></strong> 头版三连：① <strong>NEXUS 构造 ERP 平台</strong>（agentic workflow 织入日常工具）② <strong>HVAKR</strong>：discipline-specific AI 切入 HVAC 工程 ③ Palantir 进 AEC。</li>
+<li><strong><a href="https://aecmag.com/construction/ai-powered-construction-erp-platform-launches/" target="_blank" rel="noopener">"Discipline-specific AI 在 engineering software 落地比通用 BIM 更快"</a></strong> — 行业刊明确点名：HVAC、结构、给排水各自的小 vertical 模型先跑通，再回到 BIM 整合。这条与 PhysicsX 的 <em>physics-trained foundation model</em> 路线一致 — 不做大而全，做行业-specific。</li>
+<li><strong>6/11 Prometheus + 6/9 PhysicsX + Palantir AEC 战略</strong> 形成 AEC AI 三种竞争模型同台对决（昨日笔记 #4 延续）。</li>
+<li><strong><a href="https://aecmag.com/bim/rethinking-the-bim-platform/" target="_blank" rel="noopener">"Rethinking the BIM Platform"</a></strong> + <a href="https://aecmag.com/features/the-agentic-future-of-bim/" target="_blank" rel="noopener">"Agentic future of BIM"</a> — 行业刊连续 5 期围绕 BIM 平台架构重构。</li>
+<li><strong>Concerns about agentic AI impact on design roles</strong> — 行业开始公开讨论 <em>AI 替代设计师</em> 的就业问题，对照 HN 主线 "LLMs eroding career"。</li>
+</ul>
+<h3>⌚ 7. AI × Wearables</h3>
+<ul>
+<li><strong><a href="https://techcrunch.com/2026/06/03/ultrahuman-says-hackers-accessed-customers-wellness-data-via-internal-tool/" target="_blank" rel="noopener">Ultrahuman 数据泄露 + 68 天迟报</a></strong> — 3/27 事件，6/3 通知。员工凭证被 malware 盗 → internal analytics → 700+ 用户 wellness 数据。无支付/密码泄露。<strong>68 天通知延迟会成 GDPR / HIPRA 触发器</strong>。</li>
+<li><strong><a href="https://www.mddionline.com/cardiovascular/what-role-do-apple-watches-wearables-play-in-detecting-cardiovascular-concerns-" target="_blank" rel="noopener">Stanford HRS 2026: Apple Watch AFib 86% accuracy</a></strong> — Dr. Marco Perez (Stanford Medicine) 发表 consumer wearable AFib 检测的临床证据。<strong>Apple Watch 仍是 consumer→clinical 路径上跑得最快的硬件</strong>。</li>
+<li><strong>昨日 Apple Watch 高管出走潮</strong>：Jay Blahnik（Fitness+ 因调查/诉讼离开）+ Stan Ng 退休 + Eric Charles 离 + Jeff Williams 退休 + Alan Dye 去 Meta + Katherine Adams 即将走。叠加 Project Mulberry 砍/延 + Siri 让位 Gemini = <em>Apple Health 战略 inflection</em>。</li>
+<li><strong>Oura Ring 5 (已发布)</strong>：体积 -40%，AI Advisor + Health Radar + GLP-1 Companion + 临床 AI chat 升级路径；2025 营收 $1B、估值 $11B、IPO 在路（5/21 confidential S-1）。</li>
+<li><strong>行业方向</strong>：硬件趋同 → LLM Advisor (Whoop Coach / Oura Advisor / Apple Workout Buddy) 是 moat → 下一步 "predicting health outcomes"。但 <em>Ultrahuman 事件再次暴露 data security 与 incident response 的 trust 缺口</em>。</li>
+</ul>
+<hr>
+<h2>想法</h2>
+<ol>
+<li><strong>Fable 5 事件正在催熟"AI 主权化"叙事</strong>：HN 24 小时内 ① Fable 5 撤回帖 1,838 → 2,950（+60%） ② Open Source AI Must Win 678 → 1,406（+107%） ③ Kimi K2.7-Code 开源新模型 440 ④ "Local coding agent on macOS" 教程 455。<strong>社区共识在 24 小时内完成切换</strong>：从"看 Anthropic 怎么响应" → "我必须有 fallback 路径"。机会窗口（短期 2-4 周）：① model-agnostic 路由产品（Cursor / Cline / Aider 这一层）会被反向利好 ② edge-AI 部署工具 ③ "open-weights guarantee" 这种 SLA 服务。从政策面看，<strong>OpenAI 等若没被同样 directive 影响，将获得短期巨大份额转移</strong>——这点 Anthropic 在声明里已经公开喊话不公平。</li>
+<li><strong>Musk = 第一个 trillionaire + SPCX $2.11T 是"个体资本权力"新水印</strong>：过去一年 ① Musk 用 SpaceX 收购 xAI ② Google 月付 SpaceX $920M ③ 现在 SPCX 让 Musk 个人净值 $1.1T。单个个人可调度 $1T 流动性 + 1+ 万亿市值的实体公司 + AI / 卫星 / 火箭三栈 = 治理结构史无前例。<strong>对比 Bezos $12B Prometheus + Berkshire 式工业并购</strong> = "trillionaire 时代的资本配置者用 AI + 实体合并方式重塑产业"。AEC / wearables 类垂直 vertical 都可能成为标的（Prometheus 已经明示）。</li>
+<li><strong>Wearable 监管 + 数据治理三重压力本周完成</strong>：① HIPRA 法案推进 ② Whoop / Oura BIPA 集体诉讼 ③ Ultrahuman 68 天迟报。三件事共同结论：<strong>当前 wearable 的 estimated CAC / LTV 模型基于 freemium + 第三方 SDK 变现 + 慢响应文化，将被强制重写</strong>。机会：① "Privacy-first wearable" positioning（自有 SDK、零第三方 tracker、24h 通知 SLA） ② 第三方 <em>wearable security audit</em> 服务 ③ HIPAA-grade 硬件（如 Sibel Health）会被重新估值。</li>
+<li>**AEC 的 <em>discipline-specific AI</em> 路径被 NEXUS + HVAKR + PhysicsX 同时验证**：上周笔记 "BIM-as-context MCP 原型" 现在有了三个独立同步的产业信号 — 不要做大而全的 BIM-AI 平台，做 HVAC / 结构 / 给排水 / 电气 各自的小 vertical 模型，再用 <em>MCP-style 协议</em> 串到 BIM。Autodesk Forma 在做大而全的路径会比这种 <em>分而治之</em> 路径慢。<strong>周末值得快速做的 prototype</strong>：选一个 sub-discipline（比如 HVAC duct sizing），用 IFC 数据 + Claude Code（外籍员工现在用不了 Fable 5）+ MCP 协议串一个 demo。</li>
+</ol>
+<hr>
+<h2>值得深入研究</h2>
+<p><strong>公司</strong></p>
+<ul>
+<li><strong>Anthropic</strong> — Fable 5 撤回 + 10 月 IPO 路径的双线影响</li>
+<li><strong>OpenAI / Google Gemini</strong> — Fable 5 缺位的直接受益方</li>
+<li><strong>MiniMax / Moonshot Kimi / DeepSeek / 小米 MiMo</strong> — 中国开源 coding 模型矩阵</li>
+<li><strong>Cursor / Cline / Aider / Continue</strong> — model-agnostic 路由层短期利好</li>
+<li><strong>Prometheus + Palantir + PhysicsX + NEXUS + HVAKR + Autodesk</strong> — AEC AI 同台</li>
+<li><strong>Ultrahuman</strong> — 68 天迟报对品牌长期影响 vs IPO 在即的 Oura 的 risk transfer</li>
+<li><strong>Sibel Health</strong> — 临床级 wearable 在 HIPRA 时代的相对价值</li>
+</ul>
+<p><strong>人</strong></p>
+<ul>
+<li><strong>Elon Musk</strong> — $1.1T 个人净值 + SPCX 后的资本配置方向</li>
+<li><strong>Jeff Bezos / Vik Bajaj</strong> — Prometheus 第一笔工业并购</li>
+<li><strong>Howard Lutnick</strong> — Commerce Sec / export-control AI 时代的关键人物</li>
+<li><strong>Dario Amodei</strong> — Fable 5 危机 + 10 月 IPO 双线沟通</li>
+<li><strong>Alex Karp</strong> — Palantir AEC 战略具体落地</li>
+<li><strong>Marco Perez (Stanford)</strong> — wearable→clinical 学术权威</li>
+<li><strong>Tom Hale (Oura)</strong> — IPO 临近 + HIPRA 风险并行</li>
+</ul>
+<p><strong>论文</strong></p>
+<ul>
+<li><em>Externalization in LLM Agents</em> (arXiv 2604.08224)</li>
+<li><em>Workload-Router-Pool Architecture</em> (arXiv 2603.21354)</li>
+<li><em>Memory for autonomous LLM agents</em> (arXiv 2603.07670)</li>
+<li><em>Beyond the context window: fact-based memory vs long-context</em> (arXiv 2603.04814)</li>
+<li><em>SMART: tool overuse mitigation</em> (arXiv 2502.11435)</li>
+</ul>
+<p><strong>事件</strong></p>
+<ul>
+<li>6/16-17 FOMC + Warsh 首场 presser</li>
+<li>Fable 5 撤回的具体 jailbreak technique 是否公开</li>
+<li>美国是否将 directive 扩展到 OpenAI / Google</li>
+<li>SPCX 第二周流动性测试</li>
+<li>Anthropic IPO S-1 公开时间表</li>
+<li>HIPRA 法案推进</li>
+<li>Apple 是否对 Watch / Health 做正式重组公告</li>
+</ul>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <span>© 2026 Xinrui Yi · Briefings</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);">← All briefings</a></span>
+  </div>
+</footer>
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const text = document.getElementById('themeText');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+let theme = prefersDark ? 'dark' : 'light';
+applyTheme(theme);
+toggle.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  applyTheme(theme);
+});
+function applyTheme(t) {
+  if (t === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    icon.textContent = '◑'; text.textContent = 'Light';
+  } else {
+    root.removeAttribute('data-theme');
+    icon.textContent = '◐'; text.textContent = 'Dark';
+  }
+}
+
+const audio = document.querySelector('.audio-el');
+if (audio) {
+  const playBtn = document.querySelector('.audio-play');
+  const playIcon = document.querySelector('.audio-icon-play');
+  const backBtn = document.querySelector('.audio-back');
+  const fwdBtn = document.querySelector('.audio-fwd');
+  const track = document.querySelector('.audio-track');
+  const progress = document.querySelector('.audio-progress');
+  const buffered = document.querySelector('.audio-buffered');
+  const curEl = document.querySelector('.audio-cur');
+  const durEl = document.querySelector('.audio-dur');
+
+  const fmt = (s) => {
+    if (!isFinite(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  };
+
+  const setPlaying = (isPlaying) => {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); }
+    else { audio.pause(); }
+  });
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+
+  backBtn.addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+  fwdBtn.addEventListener('click', () => {
+    const dur = isFinite(audio.duration) ? audio.duration : audio.currentTime + 10;
+    audio.currentTime = Math.min(dur, audio.currentTime + 10);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+    progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
+    curEl.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    durEl.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('progress', () => {
+    if (audio.buffered.length && audio.duration) {
+      const end = audio.buffered.end(audio.buffered.length - 1);
+      buffered.style.width = ((end / audio.duration) * 100) + '%';
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+    else if (e.code === 'ArrowLeft') { backBtn.click(); }
+    else if (e.code === 'ArrowRight') { fwdBtn.click(); }
+  });
+}
+</script>
+</body>
+</html>
