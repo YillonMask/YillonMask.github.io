@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Briefing — 2026-06-22 · Xinrui Yi</title>
+<meta name="description" content="Daily AI/AEC/wearables briefing for 2026-06-22." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --bg-soft: #efeae2;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --rule: #d9d3c8;
+  --accent: #b8412c;
+  --accent-soft: #e8c5bc;
+  --card: #fbf9f5;
+}
+[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --bg-soft: #161614;
+  --ink: #f0ece4;
+  --ink-soft: #b8b3a8;
+  --ink-muted: #6e6a62;
+  --rule: #2a2926;
+  --accent: #e8a07a;
+  --accent-soft: #4a2a20;
+  --card: #14140f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Geist', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.mono { font-family: 'Geist Mono', monospace; }
+.container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+nav {
+  position: sticky; top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+}
+.nav-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 32px; max-width: 920px; margin: 0 auto;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px;
+  letter-spacing: -0.01em; color: var(--ink); text-decoration: none;
+}
+.nav-brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; align-items: center; font-size: 13px; }
+.nav-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--accent); }
+.theme-toggle {
+  background: none; border: 1px solid var(--rule); color: var(--ink-soft);
+  cursor: pointer; padding: 6px 10px; border-radius: 6px;
+  font-family: inherit; font-size: 12px; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* briefing page header */
+.brief-head {
+  padding: 80px 0 48px; border-bottom: 1px solid var(--rule);
+}
+.brief-eyebrow {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brief-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ink-muted); }
+.brief-head h1 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.1;
+  letter-spacing: -0.025em; margin-bottom: 16px;
+}
+.brief-head h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
+.brief-meta {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); display: flex; gap: 18px; flex-wrap: wrap;
+}
+.brief-meta .tag {
+  color: var(--ink-soft); border: 1px solid var(--rule);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* prose */
+.prose { padding: 56px 0 80px; }
+.prose h1 { display: none; } /* the markdown's title H1 — we render our own header */
+.prose h2 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.prose h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.prose h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 21px; letter-spacing: -0.015em;
+  margin: 40px 0 14px; color: var(--ink);
+}
+.prose p {
+  font-size: 16px; line-height: 1.75; color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.prose p strong { color: var(--ink); font-weight: 500; }
+.prose ul, .prose ol { margin: 0 0 22px 22px; }
+.prose li {
+  font-size: 16px; line-height: 1.7; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.prose li strong { color: var(--ink); font-weight: 500; }
+.prose a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.prose a:hover { color: var(--accent); border-color: var(--accent); }
+.prose code {
+  font-family: 'Geist Mono', monospace; font-size: 0.92em;
+  background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.prose hr {
+  border: none; border-top: 1px solid var(--rule); margin: 48px 0;
+}
+.prose em { font-style: italic; color: var(--ink-muted); }
+
+/* index page list */
+.brief-list { padding: 56px 0 80px; }
+.brief-row {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px; padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.brief-row:last-child { border-bottom: 1px solid var(--rule); }
+.brief-row .date {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); letter-spacing: 0.04em;
+}
+.brief-row a {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -0.015em; transition: color 0.15s;
+}
+.brief-row a:hover { color: var(--accent); }
+.brief-row .audio-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Geist Mono', monospace; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-left: 12px;
+  padding: 2px 7px; border: 1px solid var(--accent-soft);
+  border-radius: 4px; vertical-align: 2px;
+}
+.brief-row .tags {
+  margin-top: 6px; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+}
+
+footer {
+  padding: 28px 0; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+  border-top: 1px solid var(--rule);
+}
+footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* audio player */
+.brief-audio { padding: 0; }
+.brief-audio + main.prose { padding-top: 0; }
+.brief-audio-title {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.audio-card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 20px 24px;
+}
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.audio-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 13px; gap: 2px;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.audio-btn:hover, .audio-btn:focus-visible {
+  border-color: var(--accent); color: var(--accent); outline: none;
+}
+.audio-play { width: 48px; height: 48px; font-size: 16px; }
+.audio-num {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+}
+.audio-track {
+  flex: 1; height: 4px; background: var(--rule);
+  border-radius: 2px; position: relative; cursor: pointer;
+  min-width: 60px;
+}
+.audio-buffered, .audio-progress {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  border-radius: 2px; width: 0;
+}
+.audio-buffered { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.audio-progress { background: var(--accent); }
+.audio-time {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+.audio-caption {
+  font-size: 12px; font-style: italic;
+  color: var(--ink-muted); margin: 12px 0 0; line-height: 1.4;
+}
+.audio-el { display: none; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 22px; }
+  .nav-inner { padding: 14px 22px; }
+  .nav-links { gap: 16px; font-size: 12px; }
+  .brief-head { padding: 56px 0 36px; }
+  .prose { padding: 40px 0 56px; }
+  .prose h2 { font-size: 25px; }
+  .prose h3 { font-size: 19px; }
+  .brief-row { grid-template-columns: 1fr; gap: 6px; }
+  .audio-card { padding: 16px 18px; }
+  .audio-controls { flex-wrap: wrap; gap: 10px; }
+  .audio-time { flex-basis: 100%; text-align: right; margin-top: 4px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">Xinrui Yi<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="index.html">Briefings</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">◐</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="brief-head">
+  <div class="container">
+    <div class="brief-eyebrow">Morning Briefing</div>
+    <h1>2026-06-22 <em>·</em> daily signal</h1>
+    <div class="brief-meta"><span class="tag">briefing</span><span class="tag">ai</span><span class="tag">market</span><span class="tag">aec</span><span class="tag">wearables</span></div>
+  </div>
+</header>
+
+<main class="prose">
+  <div class="container">
+    <h1>2026-06-22 Morning Briefing</h1>
+<h2>重点</h2>
+<ol>
+<li><strong>Nasdaq-100 AI-infra 大换血今天生效</strong>：<a href="https://ir.nasdaq.com/news-releases/news-release-details/nasdaq-100-indexr-june-2026-quarterly-changes" target="_blank" rel="noopener">Nasdaq IR</a> · <a href="https://sherwood.news/markets/astera-labs-coreweave-nebius-rocket-lab-teradyne-nasdaq-100-index-inclusion-announcement/" target="_blank" rel="noopener">Sherwood</a> — <strong>CoreWeave (CRWV) / Nebius (NBIS) / Astera Labs (ALAB) / Rocket Lab (RKLB) / Teradyne (TER)</strong> 进入 Nasdaq-100，<strong>Charter / Cognizant / Insmed / Verisk / Zscaler</strong> 出局。5 个进入者里 4 个是 AI 基建（neocloud + AI 半导体连接 + 芯片测试）。<strong>$1.4T 资产联动 QQQ 被动买盘</strong>——Nebius 自 6/11 公告以来 +34%、CoreWeave +24%。S&P 500 同步换入 <strong>Marvell (MRVL) + Flex (FLEX)</strong>。<strong>AI 基建首次大规模进入被动指数 = 万亿美元养老金 / 401k 自动 long AI infra</strong>。(<a href="https://www.foreignpolicyjournal.com/2026/06/19/nasdaq-100-adds-five-new-members-including-nasdaq-crwv-nasdaq-rklb-and-nasdaq-nbis-in-ai-heavy-june-rebalance/" target="_blank" rel="noopener">Foreign Policy Journal</a> · <a href="https://www.fool.com/investing/2026/06/19/the-nasdaq-100-is-getting-5-new-members-heres-the-list/" target="_blank" rel="noopener">Motley Fool</a>)</li>
+<li><strong>市场首日反应：换血当天 Nasdaq 反而 -0.27%</strong>：<a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-22-2026" target="_blank" rel="noopener">TheStreet</a> — S&P 500 +0.12% · Nasdaq Composite <strong>-0.27%</strong> · Dow +0.44% · <strong>Russell 2000 +2.12%</strong>（小盘领涨）。指数换血"buy-the-rumor sell-the-news"，<strong>资金从大盘 AI tech 流向 small-cap</strong>。配合上周五 FOMC 鹰派 dot plot，AI infra 估值再扩张面临短线消化。</li>
+<li><strong>Anthropic 7/8 起对 Claude Free/Pro/Max 强制 ID + 自拍 + 人脸几何</strong>：<a href="https://support.claude.com/en/articles/14328960-identity-verification-on-claude" target="_blank" rel="noopener">支持页面</a> · <a href="https://cybernews.com/ai-news/anthropic-privacy-policy-id-verification/" target="_blank" rel="noopener">Cybernews</a> · HN 头条 835 pts。<strong>身份验证由 Persona 第三方完成</strong>（Anthropic 不存原件，但可调阅）；Team / Enterprise / API 客户豁免。<strong>Consumer Claude 第一次正式踏入"人脸为门"</strong>——监管 / 滥用反制 / 17 岁未成年门槛三件套同时落地，<strong>消费 AI 隐私 narrative 的拐点</strong>。</li>
+<li><strong>CISA LiteLLM 联邦补丁死线 = 今天</strong>：<a href="https://dailysecurityreview.com/resources/litellm-cve-2026-42271-added-to-cisa-kev-ai-api-keys-at-risk/" target="_blank" rel="noopener">Daily Security Review</a> — CVE-2026-42271 (CVSS 8.8)，命令注入链到 unauth RCE，影响所有路由 OpenAI / Anthropic / Gemini / Bedrock / Azure 的 LiteLLM 实例。<strong>联邦机构今晚前必须升级到 1.83.7 + Starlette 1.0.1</strong>。<strong>SOC 周末加班峰值</strong>——AI gateway 这层第一次有"CISA KEV 强制级"漏洞，意味着<strong>多模型路由层正式被视为关键基础设施</strong>。</li>
+<li><strong>Apertus v1.1 4B Instruct 周末发布 + HN 头版 498 pts</strong>：<a href="https://apertvs.ai/" target="_blank" rel="noopener">apertvs.ai</a> — 瑞士 EPFL + ETH Zurich + CSCS 联合，<strong>完全开源（权重 + 代码 + 训练数据 + 方法）</strong>，1000+ 语言，<strong>EU AI Act / Swiss data 法 day-one 合规</strong>，ACL 2026 主会接收。<strong>主权 AI 第一次有真正可用 + 真正合规 + 真正开源的范例</strong>——继 DeepSeek (中国) / Mistral (法国) 之后，<strong>Switzerland 成为"国家级开源 AI"第三极</strong>。</li>
+</ol>
+<hr>
+<h2>笔记</h2>
+<h3>📡 1. HN 信号（6/21 周末延续到周一）</h3>
+<p><a href="https://news.ycombinator.com/front" target="_blank" rel="noopener">front page</a>：</p>
+<ul>
+<li><a href="https://support.claude.com/en/articles/14328960-identity-verification-on-claude" target="_blank" rel="noopener"><strong>Identity verification on Claude</strong></a> · 835 pts — Anthropic 7/8 起 ID + 自拍 + 人脸几何（Persona 第三方）。<strong>今天 HN 第一焦点</strong>。</li>
+<li><a href="https://github.com/mysk-research" target="_blank" rel="noopener"><strong>Loupe – iOS app that raises awareness about what native apps can see</strong></a> · 536 pts — iOS 隐私揭示工具，与 Anthropic ID 主题同情绪线。</li>
+<li><a href="https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction" target="_blank" rel="noopener"><strong>Prefer duplication over the wrong abstraction (2016)</strong></a> · 518 pts — Sandi Metz 经典又回归。<strong>AI 编码 wrapper 抽象崩塌后</strong>社区在重新寻找工程基础。</li>
+<li><a href="https://apertvs.ai/" target="_blank" rel="noopener"><strong>Apertus – Open Foundation Model for Sovereign AI</strong></a> · 498 pts — 瑞士全开源 SOTA 模型。</li>
+<li><a href="https://www.beyondallreason.info" target="_blank" rel="noopener"><strong>Beyond All Reason (Free Total Annihilation RTS)</strong></a> · 491 pts — 开源 RTS。</li>
+<li><a href="https://www.sciencedaily.com/releases/2026/06/260614012006.htm" target="_blank" rel="noopener"><strong>The brain was not designed for this much bad news</strong></a> · 437 pts — 持续 doomscrolling 神经学研究，<strong>AI-saturation 反弹情绪的延续</strong>。</li>
+<li><a href="https://blog.apnic.net/2026/04/28/google-hits-50-ipv6/" target="_blank" rel="noopener"><strong>Google Hits 50% IPv6</strong></a> · 415 pts — 网络基础设施 milestone。</li>
+<li><a href="https://www.cell.com/neuron/fulltext/S0896-6273(26" target="_blank" rel="noopener"><strong>Slow breathing modulates brain function and risk behavior (Cell Neuron)</strong></a>00339-9) · 395 pts — wearable HRV / 呼吸训练硬科学依据。</li>
+<li><a href="https://fosterelli.co/developers-dont-understand-cors" target="_blank" rel="noopener"><strong>Developers don't understand CORS (2019)</strong></a> · 382 pts — web 经典教程持续回潮。</li>
+<li><a href="https://alexkritchevsky.com" target="_blank" rel="noopener"><strong>Everything is logarithms</strong></a> · 286 pts — 数学美学长文。</li>
+<li><a href="https://sibexi.co" target="_blank" rel="noopener"><strong>Epoll vs. io_uring in Linux</strong></a> · 254 pts — Linux I/O 比较深度。</li>
+<li><a href="https://hawksley.dev" target="_blank" rel="noopener"><strong>JSON-LD explained for personal websites</strong></a> · 262 pts — 结构化数据 → AI agent 可读 web 走向。</li>
+</ul>
+<p><strong>主线</strong>：① <strong>AI 信任 / 监管落地</strong>（Identity verification + Loupe）② <strong>AI 反弹</strong> = 工程基础回归（Sandi Metz、CORS、io_uring）③ <strong>主权 AI</strong>（Apertus）④ <strong>认知 / 神经科学</strong>（bad news 大脑、慢呼吸）。</p>
+<h3>🔬 2. Reddit 脉搏</h3>
+<ul>
+<li><strong>r/LocalLLaMA</strong>：本周持续讨论 <a href="https://dev.to/danishashko/the-best-llms-for-agentic-coding-in-2026-real-world-not-just-benchmarks-96n" target="_blank" rel="noopener">DeepSeek V4 比 GPT-5.4 便宜 17×</a>、<strong>Qwen3-Coder + LM Studio 无 API key 自托管</strong>、Mac Studio / Strix Halo 上 throughput 实测分享。今天会被 Apertus 4B 全开源（含训练数据）刷屏。</li>
+<li><strong>r/MachineLearning</strong>：<a href="https://emasterlabs.com/llm-research-papers" target="_blank" rel="noopener">AtomMem</a> 长期记忆 + 图谱化 atomic fact、<a href="https://magazine.sebastianraschka.com/p/llm-research-papers-2026-part1" target="_blank" rel="noopener">S-AGENT</a> 空间智能 VLM、agentic RL 范式被多帖讨论。"long-context efficiency is king" 成为 2026 共识标签。</li>
+<li><strong>r/cybersecurity</strong>：今天的 <strong>CISA LiteLLM 6/22 死线</strong> 是讨论焦点。AI gateway / API proxy 这层突然被定义为"关键基础设施"——很多创业公司用 LiteLLM 做 multi-model routing，<strong>今天起需要在 SOC 流程里把 AI 网关纳入 KEV 监控</strong>。</li>
+<li><strong>r/wearables</strong>：Oura Ring 5 (6/4 起发货) 早期评测开始流出——Gizmodo / Tom's Guide / Medical Daily 都说<strong>最薄 + 最准 + 12 信号通路</strong>，但 <a href="https://support.ouraring.com/hc/en-us/articles/360025439494-Shipping-FAQs" target="_blank" rel="noopener">3 周排队</a> 是普遍体感。</li>
+<li><strong>r/SideProject</strong>：MCP server + Claude Code 自我赋能继续是热门 meme，"用 Claude 给 Claude 写工具"叙事不退潮。</li>
+</ul>
+<h3>📄 3. AI Research</h3>
+<ul>
+<li><strong><a href="https://emasterlabs.com/llm-research-papers" target="_blank" rel="noopener">AtomMem</a></strong> — agent 长期记忆，atomic fact 抽取 + 图谱化关联回忆，<strong>LoCoMo SOTA + ~61.4% API token 节省</strong>。Agent 走出"短记忆 + RAG 拼接"瓶颈的早期突破。</li>
+<li><strong><a href="https://emasterlabs.com/llm-research-papers" target="_blank" rel="noopener">S-AGENT</a></strong> — VLM 空间智能框架，分层 spatial tool + dual memory + 3D 环境推理。<strong>给 robotics / AEC 视觉 agent 一个可参照范式</strong>。</li>
+<li><strong><a href="https://arxiv.org/pdf/2505.22368" target="_blank" rel="noopener">AgentDNS (arXiv 2505.22368)</a></strong> — agent 的"根域名系统"：跨 agent 调度、发现、信任。<strong>MCP 的下一步</strong>——agent 协作层正在被工程化。</li>
+<li><strong><a href="https://arxiv.org/pdf/2505.19433" target="_blank" rel="noopener">Can Compressed LLMs Truly Act? (arXiv 2505.19433)</a></strong> — 量化 / 蒸馏后的 LLM 在 agent 场景的能力衰减——<strong>对 local Qwen3-Coder / Apertus 4B 自托管 narrative 的诚实压力测试</strong>。</li>
+<li>趋势：<strong>long-context efficiency + multi-agent 协作 + 主权可信</strong> 是 6 月 ACL / 周末 alphaXiv 的三大轴。</li>
+</ul>
+<h3>💰 4. 融资动态（最近一周回顾 + 6/22 视角）</h3>
+<ul>
+<li><strong>没有 6/22 当天大额融资公告</strong>——指数换血消化日，typical Monday quiet。</li>
+<li><strong>本周关键 backdrop</strong>：<a href="https://www.buildfastwithai.com/blogs/ai-news-today-june-21-2026" target="_blank" rel="noopener">Anthropic $65B Series H @ $965B</a>（5 月底）首次超 OpenAI 成为全球最贵 AI 创业公司，<strong>含 SpaceX 300MW + 220K Nvidia GPU 算力协议</strong>。</li>
+<li><strong>SPCX 第二周关键流动性测试</strong>：上周首周 +37% 后 周三 -5% / 周四 -3.6% = 两日累跌 -8.3%。S-1 披露 2025 净亏 $4.9B + 2026 Q1 再亏 $4.28B，Starlink 是唯一盈利分部。<strong>lockup 还未到 + shorts 缺位扭曲 debut</strong>，今天起进入第二周流动性 sense check。</li>
+<li><strong>OpenAI 秘密 S-1</strong>（9 月目标 / $730B / Goldman + MS）+ <strong>Anthropic 秘密 S-1</strong>（10 月目标 / $60B+ 募）排队中。SPCX 估值锚定下行修正风险持续。</li>
+<li><strong>Q1 2026 AI funding $255.5B</strong>（<a href="https://www.buildfastwithai.com/blogs/ai-news-today-june-21-2026" target="_blank" rel="noopener">PitchBook</a>）单季已超 2025 全年 AI 总量。Anthropic + OpenAI = 88% 美国 AI 资本（$319B）。</li>
+<li><strong>AEC 子赛道</strong>：上周（截至 6/1）5 家 contech 融资 + 3 出 stealth + Convective Capital 新 $85M 基金 + Autodesk 收购 MaintainX。<strong>NavigateAI $25M（field AI copilot）+ LightTable $22M Series A（AI preconstruction）+ ONESTRUCTION ¥9.1B / ~$58M（BIM 数据质量 AI）</strong>。(<a href="https://bricks-bytes.com/funding-ma/latest-construction-technology-funding-rounds-1st-jun-2026-contech-funding/" target="_blank" rel="noopener">Bricks & Bytes</a>)</li>
+</ul>
+<h3>📊 5. 市场脉搏（6/22 收盘）</h3>
+<ul>
+<li><strong>S&P 500: +0.12%</strong> · <strong>Nasdaq Composite: -0.27%</strong> · <strong>Dow: +0.44%</strong> · <strong>Russell 2000: +2.12%</strong>。(<a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-22-2026" target="_blank" rel="noopener">TheStreet</a>)</li>
+<li><strong>驱动</strong>：Nasdaq-100 季度换血生效日 = AI 基建被动买盘 vs 大盘 mega-cap tech 资金外流，<strong>净影响小盘 + 周期股领涨</strong>。Russell 2000 +2.12% 是"breadth 终于扩散"的早期信号。</li>
+<li><strong>AI 基建受益</strong>：进入 Nasdaq-100 的 CoreWeave / Nebius / Astera Labs / Rocket Lab / Teradyne，过去 11 天（6/11 公告至 6/22）已部分定价完毕——Nebius +34% / CoreWeave +24% / 2026 YTD Nebius +240%。<strong>今日是 QQQ 强制持仓的 D-Day</strong>。</li>
+<li><strong>被踢出</strong>：Charter (CHTR) / Cognizant (CTSH) / Insmed (INSM) / Verisk (VRSK) / <strong>Zscaler (ZS)</strong> ← 网络安全的被动配置规模缩水。</li>
+<li><strong>方法论变化</strong>：Nasdaq 5 月起改用"按 Full Market Cap（含未上市股）"季度排名，<strong>对快速增长的 AI 基建公司开门</strong> = 结构性偏好倾斜。</li>
+<li><strong>宏观警惕</strong>：① SPCX 第二周流动性 ② US-Iran 瑞士签约时间表 ③ CISA LiteLLM 死线后是否有联邦机构申请豁免 ④ FOMC 鹰派 dot plot 在 long-end yields 上的二次定价 ⑤ Trump 6/2 AI 行政令（<a href="https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/" target="_blank" rel="noopener">"Promoting Advanced AI Innovation and Security"</a>）网络安全 mandate 的实施。</li>
+</ul>
+<h3>🏗️ 6. AI × AEC</h3>
+<ul>
+<li><strong>AEC Magazine May/June 2026</strong> 双月刊主线：<a href="https://aecmag.com/ai/agentic-bims-missing-infrastructure/" target="_blank" rel="noopener">Agentic BIM 缺基础设施</a>。<strong>核心瓶颈：BIM 数据没有统一图谱 + 没有可程序化访问 API（= LLM 世界的 RAG / MCP 这层）+ 没有 agent 责任界面</strong>。</li>
+<li><strong>DIS/ISO 19650-1:2026 草案居然不提 agent / agentic AI</strong> — <a href="https://aecmag.com/features/the-agentic-future-of-bim/" target="_blank" rel="noopener">AEC Magazine</a>——<strong>标准慢于市场</strong>，vendor 已经在卖 agent 平台，标准还在 BIM 1.0 框架。</li>
+<li><strong>Graphisoft + Nemetschek AIA 2026 圣地亚哥 Design Intelligence Strategy</strong>：<a href="https://architosh.com/2026/06/aia26-graphisoft-advances-design-intelligence-strategy/" target="_blank" rel="noopener">Architosh</a> — agentic workflow 嵌入所有产品 + project intelligence + generative + optioneering + quality checking + simulation 六件套。<strong>BIM 软件巨头终于真正 ship agent</strong>。</li>
+<li><strong>Hypar 2.0</strong>：<a href="https://aecmag.com/features/hypar-2-0/" target="_blank" rel="noopener">AEC Magazine</a> "大赌注 against schema" — 空间规划 + 布局 AI，<strong>放弃 BIM schema 路线，押注 LLM-friendly 表达</strong>。和 Higharc / Augmenta 形成"discipline-specific FM"阵营。</li>
+<li><strong>6 月 contech 融资三件套</strong>：<a href="https://bricks-bytes.com/funding-ma/latest-construction-technology-funding-rounds-1st-jun-2026-contech-funding/" target="_blank" rel="noopener">NavigateAI $25M（AI field copilot）+ LightTable $22M Series A（AI preconstruction）+ ONESTRUCTION ¥9.1B（~$58M, BIM 数据质量 AI）</a> + Convective Capital 新 $85M 基金 + <strong>Autodesk 收购 MaintainX</strong> 进入 lifecycle "Operate" 阶段。</li>
+<li><strong>为什么重要</strong>：① 标准（19650）滞后市场 = 监管套利窗口 ② BIM 6 + agentic 同步演进 = 5 年内有 "MCP for BIM" 公认实现的空白机会 ③ Autodesk 收购 = lifecycle 端到端整合开始。<strong>Hypar / Augmenta / Higharc / NavigateAI / LightTable / ONESTRUCTION = 6 entrant</strong>，AEC AI 应用层已从 pilot 进入"市场认可阶段"。</li>
+</ul>
+<h3>⌚ 7. AI × Wearables</h3>
+<ul>
+<li><strong>Oura Ring 5 已 6/4 起发货</strong>：<a href="https://techcrunch.com/2026/05/28/oura-unveils-its-ring-5-with-a-thinner-lighter-design-starting-at-399/" target="_blank" rel="noopener">TechCrunch</a> · <a href="https://gizmodo.com/oura-ring-5-is-its-slimmest-and-most-accurate-smart-ring-yet-2000764256" target="_blank" rel="noopener">Gizmodo</a> · <a href="https://www.tomsguide.com/wellness/smart-rings/ive-worn-the-oura-ring-5-and-it-really-is-tiny-heres-why-i-think-its-the-wearable-to-beat-in-2026" target="_blank" rel="noopener">Tom's Guide</a> — <strong>更薄 + 更轻 + 12 信号通路 + 信号强度 100× 腕式 wearable</strong>，重新设计的传感器贴皮 + 更强 LED，<strong>$399 起</strong>。3 周排队是常态。</li>
+<li><strong>Whoop + Oura 进入 telehealth</strong>：<a href="https://www.statnews.com/2026/06/09/wearables-data-oura-whoop-clinical-integration/" target="_blank" rel="noopener">STAT News</a> · <a href="https://www.bostonglobe.com/2026/06/10/business/wearables-whoop-oura-clinic/" target="_blank" rel="noopener">BostonGlobe</a> — 两家<strong>直接 in-app 接通真人医生</strong>——长期 promise 的"消费健康数据进入临床"今天有了第一次正式接口。Experts 警告：临床决策对数据质量的 bar 远高于 wellness。</li>
+<li><strong>IPO 三连预备</strong>：<a href="https://businessmodelanalyst.com/oura-whoop-ipo-fitbit-warning/" target="_blank" rel="noopener">Oura ~$11B IPO 路线</a>（已秘密 S-1 5/21）+ Whoop（3 月 $10.1B 估值）+ 两家估值 ~10× 营收。<strong>Fitbit 警告</strong>：错过软件 / 算法 / 服务层就是被 Google 收购的下场。</li>
+<li><strong>Cell Neuron 慢呼吸研究</strong>（HN 395 pts）：<a href="https://www.cell.com/neuron/fulltext/S0896-6273(26" target="_blank" rel="noopener">Cell</a>00339-9) — <strong>呼吸模式调节大脑功能 + 风险行为</strong>——给 Whoop 呼吸训练 / Oura Stress Coach 提供了独立学术依据。</li>
+<li><strong>竞争生态</strong>：Ultrahuman Ring PRO 在 6 月加大营销 + 印度法庭专利战 reinstated；Garmin Q1 +42%；<a href="https://the5krunner.com/2026/06/11/whoop-killers-screenless-band/" target="_blank" rel="noopener">Whoop killers - screenless band 品牌全列</a>。</li>
+<li><strong>AI Coach 这一层</strong>：Whoop Coach（strain narration）+ Oura Advisor（HRV / Stress 30 天）+ Apple Workout Buddy 三件套已成标配。<strong>真正的护城河是数据 + 算法 + 临床信任三角</strong>——硬件竞争结束。</li>
+</ul>
+<hr>
+<h2>想法</h2>
+<ol>
+<li><strong>Nasdaq-100 换血 = AI 基建被动定价的拐点</strong>：QQQ 持有规模 $300B+，今天起被动配置必须长 CoreWeave / Nebius / Astera / Teradyne / Rocket Lab。<strong>这意味着 401k / 养老金 / 普通家庭组合都自动 long AI infra</strong>——AI 基建第一次真正进入"系统性 beta"层级，<strong>不再是 alpha trade</strong>。对个人投资者：① 短线套利空间被压缩 ② 长线倾向于"AI infra ETF + 反向监管 hedge"组合 ③ neocloud 第二梯队（Lambda、Coreweave 同行未入指数的）反而是 <em>被动遗漏的潜在 Beta</em>。</li>
+<li><strong>Anthropic ID + 人脸几何 = 消费 AI 隐私拐点</strong>：Persona 是第三方 = Anthropic 把 PII 风险外包，但<strong>用户感知是"Claude 要我的脸"</strong>——这是 ChatGPT / Gemini / Claude 三家中第一家踏过这道线。<strong>预测</strong>：① 7/8 后会有用户大规模流向无 ID 验证的开源模型（Apertus / Qwen / DeepSeek）= 主权 AI 第二波 ② 监管下一步是 ID 验证的"统一国家标准"（类似 KYC）③ 隐私 / 反 ID startup 反弹起来——E2EE LLM proxy / 匿名身份证明（ZK ID） / federated learning 在 consumer 端的回潮。</li>
+<li><strong>CISA 把 AI gateway 列入 KEV = LiteLLM/OpenRouter/Portkey 这层正式被定义为关键基础设施</strong>：今天起所有联邦机构必须能审计 / 监控 / 修补 AI proxy 层。这是 <strong>AI 治理"从模型层下沉到 plumbing 层"</strong> 的官方确认。<strong>机会</strong>：① AI gateway 的 SOC / SIEM 集成（Wiz / Snyk / Crowdstrike 应该已经在做）② Multi-LLM routing 的"合规版"（Portkey Enterprise / Helicone EU / 国家专用版本）③ 反向：开源 self-host 的 LiteLLM 部署即时变成监管负担——SaaS 化加速。</li>
+<li><strong>Apertus 全开源 + EU AI Act 合规 = 主权 AI 新范式</strong>：DeepSeek 是"开源但中国背景"、Llama 是"美国大厂背景 + 半开源"、Apertus 是<strong>"国家研究机构 + 完全开源 + 合规设计"</strong>——这才是真正的主权 AI 模板。<strong>预测</strong>：① 中欧 / 东南亚 / 拉美会出现"国家版 Apertus 复刻"（EPFL 是模板提供方）② 欧洲企业（特别是政府 / 医疗 / 金融）会优先选 Apertus over GPT/Claude ③ 这条路反过来逼 OpenAI / Anthropic 在合规和透明度上加码——Anthropic ID 验证就是 example。</li>
+<li><strong>AEC contech 进入"AI lifecycle 整合"阶段</strong>：Autodesk 收购 MaintainX 进入 Operate + Hypar 押注 LLM-friendly schema + NavigateAI / LightTable 拿 field / preconstruction + ONESTRUCTION 攻 BIM 数据质量——<strong>整个 AEC lifecycle 每个阶段都开始有 specialist AI 玩家</strong>。下一步是 <strong>integration broker</strong>（谁来把这些 specialist 编排成 agent workflow）= <strong>MCP for AEC</strong> 真正空白且最值钱的位置。<strong>对个人项目</strong>：如果想做 AEC × AI niche，<strong>不要做 Autodesk 已经在做的（design / BIM core），做 cross-stage 的数据 / 责任 / agent orchestration 才是 untapped</strong>。</li>
+</ol>
+<hr>
+<h2>值得深入研究</h2>
+<p><strong>公司</strong></p>
+<ul>
+<li><strong>CoreWeave / Nebius / Astera Labs / Rocket Lab / Teradyne</strong> — Nasdaq-100 新晋；被动买盘的真实流量 + 公司基本面 long-term 验证</li>
+<li><strong>Persona</strong> — Anthropic ID 验证的第三方身份合规层，可能是下一个 IPO 候选</li>
+<li><strong>Apertus (Swiss AI Initiative / EPFL / ETH Zurich)</strong> — 主权开源 AI 模板</li>
+<li><strong>LiteLLM (BerriAI)</strong> — AI gateway 关键基础设施定位变化</li>
+<li><strong>Hypar / Higharc / Augmenta / NavigateAI / LightTable / ONESTRUCTION</strong> — AEC AI 第二梯队</li>
+<li><strong>Ultrahuman / Whoop / Oura</strong> — 三家智能戒指 IPO 准备 + telehealth 进入</li>
+<li><strong>Anthropic / OpenAI / SPCX</strong> — Q3/Q4 IPO 三连后的定价锚定</li>
+</ul>
+<p><strong>人</strong></p>
+<ul>
+<li><strong>Dario Amodei + Demis Hassabis</strong> — G7 美主导 AI 联盟（6/19）后的政策动作</li>
+<li><strong>Sandi Metz</strong> — "wrong abstraction" 经典 vs AI 编码反思持续中心</li>
+<li><strong>Anthony Hauck + Ian Keough (Hypar)</strong> — schema-less AEC 押注</li>
+<li><strong>Marwa Maziz (Persona CEO)</strong> — ID 验证 → AI 时代 KYC 的新基础设施</li>
+</ul>
+<p><strong>论文</strong></p>
+<ul>
+<li><em>AtomMem</em> — agent 长期记忆 SOTA</li>
+<li><em>S-AGENT</em> — VLM 空间推理 + 双记忆</li>
+<li><em>AgentDNS (arXiv 2505.22368)</em> — agent 协作根域名</li>
+<li><em>Can Compressed LLMs Truly Act? (arXiv 2505.19433)</em> — 本地 / 量化 LLM 的诚实压力测试</li>
+<li><em>Slow breathing modulates brain function and risk behavior (Cell Neuron)</em> — wearable HRV 训练学术支撑</li>
+</ul>
+<p><strong>事件</strong></p>
+<ul>
+<li>6/22 收盘后：Nasdaq-100 第一天 vs ETF 流量数据</li>
+<li>7/8 Anthropic Claude ID + 自拍生效（17 天倒计时）</li>
+<li>6/22 CISA LiteLLM 死线：联邦机构合规率</li>
+<li>7/2-7 ACL 2026 圣地亚哥 Apertus 论文 + 主权 AI session</li>
+<li>SPCX 第二周 + lockup 期临近</li>
+<li>OpenAI / Anthropic IPO 时间表（9 月 / 10 月）</li>
+<li>DIS/ISO 19650-1:2026 是否在标准修订中纳入 agent 概念</li>
+</ul>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <span>© 2026 Xinrui Yi · Briefings</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);">← All briefings</a></span>
+  </div>
+</footer>
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const text = document.getElementById('themeText');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+let theme = prefersDark ? 'dark' : 'light';
+applyTheme(theme);
+toggle.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  applyTheme(theme);
+});
+function applyTheme(t) {
+  if (t === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    icon.textContent = '◑'; text.textContent = 'Light';
+  } else {
+    root.removeAttribute('data-theme');
+    icon.textContent = '◐'; text.textContent = 'Dark';
+  }
+}
+
+const audio = document.querySelector('.audio-el');
+if (audio) {
+  const playBtn = document.querySelector('.audio-play');
+  const playIcon = document.querySelector('.audio-icon-play');
+  const backBtn = document.querySelector('.audio-back');
+  const fwdBtn = document.querySelector('.audio-fwd');
+  const track = document.querySelector('.audio-track');
+  const progress = document.querySelector('.audio-progress');
+  const buffered = document.querySelector('.audio-buffered');
+  const curEl = document.querySelector('.audio-cur');
+  const durEl = document.querySelector('.audio-dur');
+
+  const fmt = (s) => {
+    if (!isFinite(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  };
+
+  const setPlaying = (isPlaying) => {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); }
+    else { audio.pause(); }
+  });
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+
+  backBtn.addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+  fwdBtn.addEventListener('click', () => {
+    const dur = isFinite(audio.duration) ? audio.duration : audio.currentTime + 10;
+    audio.currentTime = Math.min(dur, audio.currentTime + 10);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+    progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
+    curEl.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    durEl.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('progress', () => {
+    if (audio.buffered.length && audio.duration) {
+      const end = audio.buffered.end(audio.buffered.length - 1);
+      buffered.style.width = ((end / audio.duration) * 100) + '%';
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+    else if (e.code === 'ArrowLeft') { backBtn.click(); }
+    else if (e.code === 'ArrowRight') { fwdBtn.click(); }
+  });
+}
+</script>
+</body>
+</html>
