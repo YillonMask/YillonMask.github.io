@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Briefing — 2026-06-28 · Xinrui Yi</title>
+<meta name="description" content="Daily AI/AEC/wearables briefing for 2026-06-28." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --bg-soft: #efeae2;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --rule: #d9d3c8;
+  --accent: #b8412c;
+  --accent-soft: #e8c5bc;
+  --card: #fbf9f5;
+}
+[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --bg-soft: #161614;
+  --ink: #f0ece4;
+  --ink-soft: #b8b3a8;
+  --ink-muted: #6e6a62;
+  --rule: #2a2926;
+  --accent: #e8a07a;
+  --accent-soft: #4a2a20;
+  --card: #14140f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Geist', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.mono { font-family: 'Geist Mono', monospace; }
+.container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+nav {
+  position: sticky; top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+}
+.nav-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 32px; max-width: 920px; margin: 0 auto;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px;
+  letter-spacing: -0.01em; color: var(--ink); text-decoration: none;
+}
+.nav-brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; align-items: center; font-size: 13px; }
+.nav-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--accent); }
+.theme-toggle {
+  background: none; border: 1px solid var(--rule); color: var(--ink-soft);
+  cursor: pointer; padding: 6px 10px; border-radius: 6px;
+  font-family: inherit; font-size: 12px; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* briefing page header */
+.brief-head {
+  padding: 80px 0 48px; border-bottom: 1px solid var(--rule);
+}
+.brief-eyebrow {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brief-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ink-muted); }
+.brief-head h1 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.1;
+  letter-spacing: -0.025em; margin-bottom: 16px;
+}
+.brief-head h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
+.brief-meta {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); display: flex; gap: 18px; flex-wrap: wrap;
+}
+.brief-meta .tag {
+  color: var(--ink-soft); border: 1px solid var(--rule);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* prose */
+.prose { padding: 56px 0 80px; }
+.prose h1 { display: none; } /* the markdown's title H1 — we render our own header */
+.prose h2 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.prose h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.prose h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 21px; letter-spacing: -0.015em;
+  margin: 40px 0 14px; color: var(--ink);
+}
+.prose p {
+  font-size: 16px; line-height: 1.75; color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.prose p strong { color: var(--ink); font-weight: 500; }
+.prose ul, .prose ol { margin: 0 0 22px 22px; }
+.prose li {
+  font-size: 16px; line-height: 1.7; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.prose li strong { color: var(--ink); font-weight: 500; }
+.prose a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.prose a:hover { color: var(--accent); border-color: var(--accent); }
+.prose code {
+  font-family: 'Geist Mono', monospace; font-size: 0.92em;
+  background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.prose hr {
+  border: none; border-top: 1px solid var(--rule); margin: 48px 0;
+}
+.prose em { font-style: italic; color: var(--ink-muted); }
+
+/* index page list */
+.brief-list { padding: 56px 0 80px; }
+.brief-row {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px; padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.brief-row:last-child { border-bottom: 1px solid var(--rule); }
+.brief-row .date {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); letter-spacing: 0.04em;
+}
+.brief-row a {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -0.015em; transition: color 0.15s;
+}
+.brief-row a:hover { color: var(--accent); }
+.brief-row .audio-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Geist Mono', monospace; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-left: 12px;
+  padding: 2px 7px; border: 1px solid var(--accent-soft);
+  border-radius: 4px; vertical-align: 2px;
+}
+.brief-row .tags {
+  margin-top: 6px; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+}
+
+footer {
+  padding: 28px 0; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+  border-top: 1px solid var(--rule);
+}
+footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* audio player */
+.brief-audio { padding: 0; }
+.brief-audio + main.prose { padding-top: 0; }
+.brief-audio-title {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.audio-card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 20px 24px;
+}
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.audio-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 13px; gap: 2px;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.audio-btn:hover, .audio-btn:focus-visible {
+  border-color: var(--accent); color: var(--accent); outline: none;
+}
+.audio-play { width: 48px; height: 48px; font-size: 16px; }
+.audio-num {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+}
+.audio-track {
+  flex: 1; height: 4px; background: var(--rule);
+  border-radius: 2px; position: relative; cursor: pointer;
+  min-width: 60px;
+}
+.audio-buffered, .audio-progress {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  border-radius: 2px; width: 0;
+}
+.audio-buffered { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.audio-progress { background: var(--accent); }
+.audio-time {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+.audio-caption {
+  font-size: 12px; font-style: italic;
+  color: var(--ink-muted); margin: 12px 0 0; line-height: 1.4;
+}
+.audio-el { display: none; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 22px; }
+  .nav-inner { padding: 14px 22px; }
+  .nav-links { gap: 16px; font-size: 12px; }
+  .brief-head { padding: 56px 0 36px; }
+  .prose { padding: 40px 0 56px; }
+  .prose h2 { font-size: 25px; }
+  .prose h3 { font-size: 19px; }
+  .brief-row { grid-template-columns: 1fr; gap: 6px; }
+  .audio-card { padding: 16px 18px; }
+  .audio-controls { flex-wrap: wrap; gap: 10px; }
+  .audio-time { flex-basis: 100%; text-align: right; margin-top: 4px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">Xinrui Yi<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="index.html">Briefings</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">◐</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="brief-head">
+  <div class="container">
+    <div class="brief-eyebrow">Morning Briefing</div>
+    <h1>2026-06-28 <em>·</em> daily signal</h1>
+    <div class="brief-meta"><span class="tag">briefing</span><span class="tag">ai</span><span class="tag">market</span><span class="tag">aec</span><span class="tag">wearables</span></div>
+  </div>
+</header>
+
+<main class="prose">
+  <div class="container">
+    <h1>2026-06-28 Morning Briefing</h1>
+<h2>重点</h2>
+<ol>
+<li><strong>Anthropic Mythos 5 部分解禁：Lutnick 致信 Tom Brown — 100+ "trusted" 美国机构获访问权，Fable 5 仍封禁</strong>：<a href="https://www.semafor.com/article/06/27/2026/us-releases-powerful-anthropic-model-mythos-to-some-us-companies" target="_blank" rel="noopener">Semafor 独家</a> · <a href="https://edition.cnn.com/2026/06/26/tech/anthropic-mythos-release" target="_blank" rel="noopener">CNN</a> · <a href="https://www.cnbc.com/2026/06/26/us-government-anthropic-claude-mythos5-ai.html" target="_blank" rel="noopener">CNBC</a> · <a href="https://www.npr.org/2026/06/27/nx-s1-5871245/trump-administration-imposes-restrictions-for-anthropic-to-halt-access-to-2-ai-models" target="_blank" rel="noopener">NPR (Trump admin 上下文)</a> · HN 549 pts / 780 cmts — 周五傍晚 Commerce Secretary Howard Lutnick 致信 Anthropic CCO <strong>解除 Mythos 5 此前两周冻结</strong>，覆盖 <strong>100+ 美国"受信任"机构 + 其外籍员工</strong>；Anthropic 须与 USG 在 protocols / standards / releases 上合作。<strong>Fable 5 (最强模型) 仍处封禁</strong>。<strong>这是一周内第二个独立信号</strong>：上周 OpenAI GPT-5.6 Sol "customer-by-customer 白宫审批"、本周 Anthropic Mythos 5 "trusted-list 集体审批" — <em>frontier 模型的两家头部 lab 已经分别建立 USG-gated 分发管道</em>，<strong>"美国 AI 出口管制 v2.0" 实质成形</strong>，但执行形态是 <em>逐 customer / 逐 lab</em> 而非传统的"实体清单 + 类目"。</li>
+</ol>
+<ol>
+<li>**Semgrep × GLM-5.2 cyber benchmark：开源中国权重在真实漏洞挖掘上 <em>打败 Claude Code</em> / $0.17 per-vuln — "AI 出口管制首日失效"<strong>：<a href="https://semgrep.dev/blog/2026/we-have-mythos-at-home-glm-52-beats-claude-in-our-cyber-benchmarks/" target="_blank" rel="noopener">Semgrep blog 6/27</a> · <a href="https://www.techtimes.com/articles/319234/20260628/ai-export-controls-fail-their-first-real-test-glm-52-cybersecurity-benchmarks-expose-gap.htm" target="_blank" rel="noopener">TechTimes 6/28</a> · HN 373 pts / 179 cmts — </strong>GLM-5.2 (Zhipu / open weights / MIT) 在 IDOR 检测达 39% F1 / $0.17 per-vuln，超过 Claude Code 32%<strong>；Semgrep 完整 multimodal harness 仍领先 (53-61% F1)，但 </strong>"harness matters more than the model" 的结论同时也意味着 <em>frontier 闭源模型并不构成不可替代的能力护城河</em><strong>。配合 §1：</strong>Mythos / Sol 受合规阻挡的 cyber 用例正在被 GLM-5.2 + 自建 harness 替代<strong>，这条与 6/27 <a href="https://techcrunch.com/2026/06/27/asian-ai-startups-launch-mythos-like-models-as-anthropics-export-ban-drags-on/" target="_blank" rel="noopener"></strong>TechCrunch "Asian AI startups launch Mythos-like models"**</a> 同向。</li>
+</ol>
+<ol>
+<li><strong>BIS (国际清算银行) 年报：AI bust 与通胀 / 财政压力并列为全球繁荣顶级威胁</strong>：<a href="https://www.bloomberg.com/news/articles/2026-06-28/ai-bust-risks-ripple-effects-from-growth-to-credit-bis-says" target="_blank" rel="noopener">Bloomberg 6/28</a> · 配合 <a href="https://fortune.com/2026/06/27/big-short-hero-steve-eisman-spacex-ai-investing-what-to-buy-now/" target="_blank" rel="noopener">Fortune 6/27 Eisman 专访</a> · <a href="https://www.bloomberg.com/news/articles/2026-06-26/chinese-hedge-funds-warn-the-ai-super-bubble-is-ready-to-burst" target="_blank" rel="noopener">Bloomberg 6/26 中国对冲基金</a> — **BIS 是 <em>全球央行的央行</em>，首次把 AI bust 写进年报顶级风险清单**，与 <em>China hedge funds (Wealspring / Shanghai Banxia) "super bubble"</em> + <em>Steve Eisman "no moats in AI / 偏好 picks-and-shovels"</em> + <em>JPMorgan 交易台 6/26 备忘 "AI capex funding loop 风险"</em> 形成**一周内 4 个独立机构 / 资深空头同时确认 <em>AI 资本叙事的二阶风险</em><strong>。</strong>机构第一次把 AI bubble 从"科技板块论点"升级为"全球宏观风险论点"**。</li>
+</ol>
+<ol>
+<li><strong>Google 限制 Meta 对 Gemini API 使用量（FT scoop / Bloomberg 转载）— 6/28</strong>：<a href="https://www.bloomberg.com/news/articles/2026-06-28/google-caps-meta-s-use-of-gemini-ai-financial-times-reports" target="_blank" rel="noopener">Bloomberg 6/28</a> — Google 因<strong>算力短缺</strong>对 Meta 的 Gemini API 用量设上限，<strong>Meta 内部要求员工"更高效使用 AI tokens"</strong>。<strong>这条与 6/26-27 Qualcomm Dragonfly + Meta 2028 锚定客户公告完美互锁</strong>：Meta 在 <em>被 Google 节流的同时</em> 公开承诺采纳 Qualcomm CPU，<strong>说明 Meta chip diversification 不是产品策略，而是被供应链约束硬推的应急动作</strong>。同时与 §3 BIS 报告"AI bust 二阶风险"形成对比 — **超大厂 capex 没有放缓 (Meta FY26 $135B)，但 *算力市场已经实质性紧缺到要节流自家盟友***。</li>
+</ol>
+<ol>
+<li><strong>DeepSeek 据报融资 >$7.4B @ >$50B，员工翻倍 + DeepMind 第 6 位核心 Denny Zhou (Brain reasoning team 创始人) 离职</strong>：<a href="https://www.techtimes.com/articles/319219/20260628/google-deepminds-coding-pivot-lost-six-researchers-meta-openai-anthropic.htm" target="_blank" rel="noopener">TechTimes DeepMind exodus 6/28</a> · <a href="https://techstartups.com/2026/06/26/top-tech-news-today-june-26-2026/" target="_blank" rel="noopener">TechStartups 6/26 top tech news</a> — <strong>DeepSeek 一周内披露 $7.4B 巨额融资</strong>（中国一级市场 frontier AI 融资历史第一），同期 <strong>DeepMind 自 2 月以来累计流失 6 位核心（Shazeer / Jumper / Adler / Pritzel / +2 / Denny Zhou）</strong>。**资本与人才两条线 <em>同向流出 Google</em> 的同时也同向流入 Anthropic / OpenAI / DeepSeek<strong>，frontier lab 格局在 6 月底被市场用资金 + LinkedIn 公开定价为 </strong>"OpenAI + Anthropic + DeepSeek 三极"**，Google DeepMind 在产业叙事中正式滑出第一梯队。</li>
+</ol>
+<hr>
+<h2>笔记</h2>
+<h3>📡 1. HN 信号</h3>
+<p><strong>6/27 frontpage top stories</strong>：</p>
+<ul>
+<li><a href="https://github.com/bikini/exploitarium" target="_blank" rel="noopener"><strong>Anonymous GitHub account mass-dropping undisclosed 0-days</strong></a> · <strong>923 pts / 373 cmts</strong> — 与 §1 Mythos / §2 GLM cyber bench 同主线："frontier model = cyber weapon" 叙事工程化兑现。</li>
+<li><a href="https://github.com/deepseek-ai/DeepSpec/blob/main/DSpark_paper.pdf" target="_blank" rel="noopener"><strong>DSpark: Speculative decoding accelerates LLM inference</strong></a> · <strong>784 pts / 350 cmts</strong> — DeepSeek 论文继续登顶；与 §5 DeepSeek 巨额融资同步。</li>
+<li><a href="https://pluralistic.net/2026/06/27/zuckerstreisand-2/" target="_blank" rel="noopener"><strong>Zuckerberg's war on whistleblowers</strong></a> · <strong>749 pts / 283 cmts</strong> — Doctorow 长文，weekend 周末读物。</li>
+<li><a href="https://www.semafor.com/article/06/27/2026/us-releases-powerful-anthropic-model-mythos-to-some-us-companies" target="_blank" rel="noopener"><strong>U.S. allows Anthropic to release Mythos AI to "trusted" US orgs</strong></a> · <strong>549 pts / 780 cmts</strong> — 本周末头条（见 §1）。</li>
+<li><a href="https://techcrunch.com/2026/06/27/asian-ai-startups-launch-mythos-like-models-as-anthropics-export-ban-drags-on/" target="_blank" rel="noopener"><strong>Asian AI startups launch Mythos-like models</strong></a> · <strong>266 pts / 191 cmts</strong> — Zhipu / Qwen / Kimi 抢占合规真空。</li>
+<li><a href="https://spectrum.ieee.org/ai-radio-chip-design" target="_blank" rel="noopener"><strong>AI learns the "dark art" of RFIC design</strong></a> · <strong>260 pts / 170 cmts</strong> — IEEE Spectrum；ML 驱动 RF 电路设计。</li>
+<li><a href="https://cephalosec.com/blog/cybersecurity-in-the-post-mythos-era-keep-calm-and-carry-on/" target="_blank" rel="noopener"><strong>Post-Mythos Cybersecurity: Keep calm and carry on</strong></a> · <strong>169 pts / 64 cmts</strong> — 安全圈对 Mythos 解禁的内部反应。</li>
+</ul>
+<p><strong>6/28 周日新增 frontpage</strong>：</p>
+<ul>
+<li><a href="https://semgrep.dev/blog/2026/we-have-mythos-at-home-glm-52-beats-claude-in-our-cyber-benchmarks/" target="_blank" rel="noopener"><strong>GLM 5.2 beats Claude in our cyber benchmarks</strong></a> · <strong>373 pts / 179 cmts</strong> — 见 §2。</li>
+<li><a href="https://antoine.fi/mri-analysis-using-claude-code-opus" target="_blank" rel="noopener"><strong>I used Claude Code to get a second opinion on my MRI</strong></a> · <strong>320 pts / 430 cmts</strong> — wearable / 健康 AI 自助化的 personal-anecdote 版本；与 §7 wearable 临床化叙事互文。</li>
+<li><a href="https://12gramsofcarbon.com/p/agentics-tech-things-tokenmaxxing" target="_blank" rel="noopener"><strong>Tokenmaxxing is dead, long live tokenmaxxing</strong></a> · <strong>105 pts / 129 cmts</strong> — 与上周 CNBC "tokenmaxxing → efficiency" narrative 直接接续。</li>
+<li><a href="https://github.com/openai/codex/issues/2847" target="_blank" rel="noopener"><strong>A way to exclude sensitive files issue still open for OpenAI Codex</strong></a> · <strong>173 pts / 120 cmts</strong> — Codex 安全配置缺陷。</li>
+<li><a href="https://github.com/JustVugg/nanoeuler" target="_blank" rel="noopener"><strong>Show HN: NanoEuler – GPT-2 scale model in pure C/CUDA</strong></a> · <strong>36 pts</strong> — karpathy nanoGPT 衣钵；hobbyist / 教学。</li>
+</ul>
+<p><strong>主线</strong>（6/27-28 综合）：① <strong>Mythos 解禁 + GLM cyber bench 同周末叠加 = 美国 AI 出口管制的有效性受到第一次实证质疑</strong> ② <strong>DSpark + Tokenmaxxing 反思 + Codex 安全配置 = "agent 工程化 + 效率化"成为 weekend 主旋律</strong> ③ **MRI Claude Code 自助诊断 + RFIC 设计 = AI 在 <em>专业判断</em> 边缘渗透<strong>（医学 / 模拟电路）④ </strong>Doctorow / Daring Fireball / Dan Luu 三位 weekend 老牌评论员** 同期登榜，是 <em>科技中产舆论场</em> 集体在反思 AI 监管节奏。</p>
+<h3>🔬 2. Reddit 脉搏</h3>
+<ul>
+<li><strong>r/LocalLLaMA / r/MachineLearning</strong> 本周末未直接抓到 thread；通过 HN 与 Semgrep 间接代理判断，主线为 <strong>GLM-5.2 vs Claude / Mythos / DSpark 三件套</strong>。</li>
+<li><strong>r/singularity / r/OpenAI 类</strong>：Mythos 解禁后舆论分歧 — 一部分认为"白名单 = frontier lab 实质国有化"，一部分认为"白名单 = lab 与 USG 共谋以提升进入门槛"。这种二元叙事会在 7 月初 BIS 报告 + payrolls 数据双重确认中被进一步极化。</li>
+<li><em>注</em>：r/* 抓取受限，本节判断来自二级聚合站点。</li>
+</ul>
+<h3>📄 3. AI Research</h3>
+<p><strong>6/25-28 arxiv 主线</strong> = MoE 推理在 <em>边缘 / 消费级</em> 硬件可行性 + 长上下文 prefill/decode 评测 + reasoning under fog-of-war 战略 benchmark：</p>
+<ul>
+<li><a href="https://arxiv.org/html/2606.10493v1" target="_blank" rel="noopener"><strong>Cloud-Grade SLOs for Local MoE Inference via CPU-GPU Hybrid Design (2606.10493)</strong></a> — USENIX OSDI '26；诊断本地 MoE serving 四大瓶颈（容量缩减模型 / >30s TTFT / 弱 decode 吞吐 / 并发不足）。<strong>与 §2 GLM-5.2 自托管 cyber 用例的工程实证完美互补</strong>。</li>
+<li><a href="https://arxiv.org/html/2606.21428v1" target="_blank" rel="noopener"><strong>Does Mixture-of-Experts Actually Help Inference on Consumer and Edge Hardware? (2606.21428)</strong></a> — 质疑 MoE 在消费级硬件上的 FLOP / wall-clock 转换效率；**对 GLM-5.2 (744B MoE) edge / on-device 部署的 *负面信号***。</li>
+<li><a href="https://arxiv.org/abs/2606.14243v1" target="_blank" rel="noopener"><strong>Decoupled Mixture-of-Experts for Parametric Knowledge Injection (DMoE) (2606.14243)</strong></a> — 把外部语料库转成 <em>可独立更新的 expert 模块</em>；为 <em>知识热更新</em> 提供新路径，对 Anthropic / OpenAI 的"模型版本固化 → 知识 frozen"问题提供方向。</li>
+<li><a href="https://arxiv.org/abs/2606.24391" target="_blank" rel="noopener"><strong>Age of LLM: 1v1 Benchmark for Reasoning, Diplomacy and Reliability under Fog of War (2606.24391)</strong></a> — 战略博弈下的 reasoning benchmark；与 §1 frontier model 在 <em>cyber red-team / strategic deception</em> 边界的合规问题方法论相关。</li>
+<li><a href="https://arxiv.org/html/2606.17104v1" target="_blank" rel="noopener"><strong>Prefill/Decode-Aware Evaluation of LLM Inference on Emerging AI Accelerators (2606.17104)</strong></a> — Llama2-7B phase-aware benchmarking；<strong>与 §4 Qualcomm Dragonfly 等非 NVIDIA 加速器的真实部署评测形成对位</strong>。</li>
+</ul>
+<h3>💰 4. 融资动态（6/26 + 周末综合）</h3>
+<p><strong>6/26-28 关键披露</strong>：</p>
+<ul>
+<li><strong>DeepSeek (China)</strong>：据 <a href="https://techstartups.com/2026/06/26/top-tech-news-today-june-26-2026/" target="_blank" rel="noopener">TechStartups 6/26 top tech news</a> — <strong>>$7.4B 融资 @ >$50B 估值，员工翻倍</strong>。<strong>中国 frontier AI 一级市场历史最大单笔</strong>；时机选择在 §1 Mythos 解禁 + §2 GLM 击败 Claude 同一周末，<em>市场把中国 frontier lab 当作美国 USG-gated 体系的 hedge 押注</em>。</li>
+<li><strong>Baseten $1.5B Series F</strong>（<a href="https://news.crunchbase.com/venture/biggest-funding-rounds-ai-marketing-robotics-baseten/" target="_blank" rel="noopener">Crunchbase</a>）— 上周末美国最大 AI 融资；跨硬件 inference 路由。</li>
+<li><strong>SpaceX S-1 披露 Anthropic 算力承诺</strong>：300 MW @ $1.25B/月 至 2029 年 5 月（35 个月 ~$44B）。**SpaceX 同时也是 Anthropic 估值上行的 <em>已锁定 lifecycle</em> 锚定方**。</li>
+<li><strong>6/25 收尾</strong>：Alan €480M / Trase $107M / Runpod $100M / Scaled Cognition $100M / Sail Research $80M / Patronus AI $50M / Warp $60M / Arca $48.5M / Nebulock $25M — 10 笔中 9 笔 AI。</li>
+<li><strong>6/26 fresh</strong>：Patronus AI $50M (Greenfield Partners) 二次确认；Airwallex $320M @ $11B (+38%)；Quantifind $200M (Summit) — AML/fraud detection。</li>
+</ul>
+<p><strong>IPO 校准（6/27-28 周末更新）</strong>：</p>
+<ul>
+<li><strong>SK Hynix US ADR (NASDAQ: SKHY)</strong>：<a href="https://www.cnbc.com/2026/06/26/sk-hynix-us-listing-ipo-hsbc-price-target.html" target="_blank" rel="noopener">CNBC 6/26</a> HSBC 给出 +20% premium 目标价；预定 <strong>7/10 挂牌 / 募资 ~$29B</strong>；但 <strong>6/28 周日 KOSPI 开盘 -2.29%</strong> = 上市前最大风险窗口的"chip tape 敌意"。</li>
+<li><strong>Anthropic</strong>：10 月 Nasdaq 目标 / ~$965B；Mythos 解禁 + Fable 仍封禁 = 估值叙事被一分为二（已批准产品 + 待批准能力两条曲线）。</li>
+<li><strong>OpenAI</strong>：IPO 推迟至 2027 年 1 月，目标 $1T；CFO Sarah Friar 主推延期。</li>
+</ul>
+<h3>📊 5. 市场脉搏</h3>
+<p><strong>Friday 6/26 收盘 + 周末展望</strong>：</p>
+<ul>
+<li><strong>S&P 500: 7,354.02 (-0.05% / 周 -2.0%)</strong></li>
+<li><strong>Nasdaq: 25,297.62 (-0.24% / 周 -4.6% / 第 5 个连续下跌交易日)</strong></li>
+<li><strong>Dow: 51,876.11 (-0.09% / 周 +0.6%)</strong></li>
+<li><strong>Russell 2000: 3,010.08 (+0.07%)</strong> — Russell 重构日 / Nasdaq closing cross 录得历史成交量。</li>
+</ul>
+<p><strong>6/28 周日晚 / Asia 开盘信号</strong>（<a href="https://www.cnbc.com/2026/06/28/stock-futures-today-live-updates.html" target="_blank" rel="noopener">CNBC 6/28 futures</a>）：</p>
+<ul>
+<li><strong>S&P 500 futures: +0.4%</strong>（驱动是中东风险溢价 / 油价反弹，<em>不是</em> AI 缓和）</li>
+<li><strong>Nikkei 225: -0.35%</strong> / Topix +0.43%（broad index 与科技指数分化）</li>
+<li><strong>KOSPI: -2.29%</strong> / KOSDAQ +0.97% — <strong>SK Hynix 距 7/10 美 ADR 上市 12 天，但板块开盘敌意明显</strong>。</li>
+<li><strong>Brent: +0.8% → $72.57</strong> / <strong>WTI: +1.1% → $70.00</strong>。</li>
+</ul>
+<p><strong>Friday 6/26 关键个股</strong>：NVDA -1.64% / AMD -2.6% / Micron -2.1% / Intel -2.0% / Arm -4.0% / Marvell -3.4% / <strong>SoftBank -9.2%（OpenAI IPO 推迟直接折现）</strong> / Alphabet 周内累计 -5%+。</p>
+<p><strong>Week-ahead calendar (6/29 - 7/3，节假日缩短一日)</strong>：</p>
+<ul>
+<li><strong>Mon 6/29</strong>：无 top-tier 数据；Asia 开盘 + KOSPI 反应是首日主线。</li>
+<li><strong>Tue 6/30</strong>：June Consumer Confidence / May JOLTS / Nike + Constellation Brands 财报。</li>
+<li><strong>Wed 7/1</strong>：ADP June / 6 月 ISM 制造业 PMI / General Mills。</li>
+<li><strong>Thu 7/2</strong>：<strong>JUNE NONFARM PAYROLLS（共识 +172K）+ 失业率 + 时薪 + 工厂订单</strong>（因 7/4 假期前置一天）— 本周最大宏观事件。</li>
+<li><strong>Fri 7/3</strong>：美国市场闭市（独立日观察）。</li>
+<li><strong>无 Magnificent-7 财报</strong>；AI 主线本周交易 <em>宏观数据 + SK Hynix 路演噪音</em> 而非个股催化。</li>
+</ul>
+<p><strong>周末空头叙事 vs 多头叙事</strong>：</p>
+<ul>
+<li><strong>空头</strong>：BIS 报告 (§3) + Bloomberg China hedge funds + Eisman "no moats" + JPM 交易台 capex 备忘 = <em>四个独立机构在同一周内同步空</em>；</li>
+<li><strong>多头</strong>：Dan Ives "no cracks in armor / KOSPI 是消化非破裂" + 工业股 (CAT +6.3% / DE +5% 周内) 接住资金 = <em>轮动 / digestion</em> 论；</li>
+<li><strong>关键变量</strong>：Mythos 解禁后 Anthropic 收入恢复曲线 + OpenAI × Broadcom Jalapeño 推理成本节约 50% 路线图能否压住"capex / 现金流交叉"（Q3 2026 是 hyperscaler capex 首次超过 OCF 的节点 — <a href="https://epoch.ai/data-insights/hyperscaler-capex-vs-cash-flow" target="_blank" rel="noopener">Epoch AI 数据</a>）。</li>
+</ul>
+<h3>🏗️ 6. AI × AEC</h3>
+<ul>
+<li><strong>AEC Magazine: "Procore CDE 是 agentic AI 的基础"</strong>（<a href="https://aecmag.com/collaboration/procore-cde-lays-foundation-for-agentic-ai/" target="_blank" rel="noopener">AEC Mag</a>）— Procore 把 Datagrid 收购（1 月）后的 CDE 框架为 <strong>agentic AI coworkers 的执行底座</strong>（estimating / RFI / submittal 自动化），是 Procore 对 Autodesk Forma 数据层的 <em>直接答复</em>。</li>
+<li><strong>ENR: "Construction Platforms Are Already Fighting Over Data to Train AI Agents"</strong>（<a href="https://www.enr.com/articles/63122-construction-platforms-are-already-fighting-over-data-to-train-ai-agents" target="_blank" rel="noopener">ENR</a>）— <strong>Procore / Autodesk / Trimble / Bentley 各自锁定专有项目数据作为 agent stack 的训练燃料</strong>；<strong>Palantir × McCarthy 合作被定义为 "wildcard outsider"</strong>。这条与 6/27 AEC Magazine <a href="https://aecmag.com/ai/agentic-bims-missing-infrastructure/" target="_blank" rel="noopener"><strong>"Agentic BIM's missing infrastructure"</strong></a> 把 Arcol / Motif 标记为"重建 substrate"的两家挑战者形成完整叙事链。</li>
+<li><strong>ENR: "AI data centers becoming city-scale infrastructure"</strong>（<a href="https://www.enr.com/articles/63177-ai-data-centers-become-city-scale-infrastructure-prompting-new-industry-playbook" target="_blank" rel="noopener">ENR</a>）— 2026 ENR Top 400 营收 <strong>+11.8% → $671.4B</strong>，<strong>电力可获得性已经超过 site selection 成为 AI 数据中心的首要约束</strong>。与 §5 BIS 报告"AI bust"风险互成对位 — 即使在 capex 受质疑的同一周末，contech 业绩端依然在加速。</li>
+<li><strong>AEC Magazine: "Arcol's play for general contractors"</strong>（<a href="https://aecmag.com/bim/arcols-play-for-general-contractors/" target="_blank" rel="noopener">AEC Mag</a>）— Arcol 押注 <strong>multiplayer authoring environment — agents 可同时协作的 BIM</strong>，认为 <em>single-player Revit 永远是 agentic 工作流的瓶颈</em>。GC 把行业 know-how 商品化为 agent-delivered marketplace 产品。</li>
+<li><strong>Motif "Building Intelligence Modeling"</strong>（<a href="https://aecmag.com/technology/aec-magazine-may-june-2026/" target="_blank" rel="noopener">AEC Mag May/June 2026 issue</a>）— Amar Hanspal 把 BIM 中的 "I" 重新定义为 <em>encoded firm judgement as queryable institutional asset</em>。Motif / Arcol / Palantir 三家成为本月 AEC Mag 反复打的"substrate challenger"组合拳。</li>
+<li><strong>为什么重要</strong>：① 本周末 AEC 无新 product 发布，但 <strong>"who owns the AEC agent data layer"</strong> 的产业级辩论第一次被 ENR / AEC Mag 写成头条；② <strong>Palantir 在 AEC 的位置从"narrative"升级到"wildcard outsider"</strong> — McCarthy 之后下一家（Skanska / Bechtel / Fluor）签下将成为 Procore / Autodesk 的真叙事威胁；③ <strong>ENR Top 400 +11.8% / electricity > site selection</strong> 是 contech AI 的"硬数据"反例 — 即便宏观叙事走弱，AEC 端的资本开支驱动力仍强。</li>
+</ul>
+<h3>⌚ 7. AI × Wearables</h3>
+<ul>
+<li><strong>Whoop × HealthEx EHR 集成 + on-demand 临床视频问诊 + AI "My Memory" / "Proactive Check-Ins"</strong>（<a href="https://www.mobihealthnews.com/news/whoop-launches-clinician-video-visits-ehr-integration-healthex" target="_blank" rel="noopener">MobiHealthNews 6/17 + 周内续解</a> · <a href="https://www.whoop.com/us/en/press-center/whoop-expands-health-platform-with-on-demand-clinician-access-and-new-ai-features/" target="_blank" rel="noopener">WHOOP press</a> · <a href="https://www.beckershospitalreview.com/digital-health/whoop-rolls-out-virtual-clinician-visits-ehr-integration/" target="_blank" rel="noopener">Becker's Hospital Review</a>）— <strong>WHOOP 美国会员可在 app 内连接 EHR (诊断 / 处方 / 操作记录) + 预约 on-demand 临床视频问诊</strong>；临床医生可在一个界面同时看到 <em>biometric + bloodwork + medical history</em>。配套 AI 新功能 <strong>"My Memory" + "Proactive Check-Ins"</strong>。<strong>这是本周 wearable AI 最具结构性的"消费 → 临床数据层"落地，比 §1 FDA Whoop closeout 更接近商业兑现</strong>。</li>
+<li><strong>FDA × Whoop BP closeout 续解</strong>（<a href="https://www.statnews.com/2026/06/23/fda-drops-enforcement-against-wearable-maker-whoop/" target="_blank" rel="noopener">STAT 6/23</a> · <a href="https://www.statnews.com/2026/05/28/fda-wellness-guidance-unvetted-blood-pressure-tech-floods-market/" target="_blank" rel="noopener">STAT 5/28 "BP tech floods market post-deregulation"</a> · <a href="https://www.statnews.com/2026/06/09/wearables-data-oura-whoop-clinical-integration/" target="_blank" rel="noopener">STAT 6/9 "wearables data inches into clinic"</a>）— Whoop closeout 后市场上 cuffless BP 功能快速涌现（Oura / Samsung 等），临床专家警告 <em>misinterpretation</em> 风险继续发酵。</li>
+<li><strong>HN: "I used Claude Code to get a second opinion on my MRI"</strong>（<a href="https://antoine.fi/mri-analysis-using-claude-code-opus" target="_blank" rel="noopener">antoine.fi</a> · 320 pts / 430 cmts）— 6/28 周日上榜；个人 anecdote 但**展示了 frontier model 直接做 <em>影像二次解读</em> 的 personal-anecdote 范式<strong>。</strong>配合 Whoop × HealthEx 的 EHR + 视频问诊，wearable AI 临床化的"自助通道"已经事实存在** — 监管未必能阻挡。</li>
+<li><strong>TechRepublic Samsung × Alcedis 续解</strong>（<a href="https://www.techrepublic.com/article/news-samsung-alcedis-galaxy-watch-clinical-trials/" target="_blank" rel="noopener">TechRepublic</a>）— 试验 opt-in 管道（HR / sleep / SpO2 / 体成分）<strong>Q3 2026 在美 / 德 / 韩 / 英推出</strong> — 这是与 Apple ResearchKit 的代际竞争。</li>
+<li><strong>Athletech 行业拐点综述</strong>（<a href="https://athletechnews.com/how-wearables-are-evolving-from-fitness-trackers-to-health-systems/" target="_blank" rel="noopener">Athletech</a>）— 2026 头部 wearable 公司整体转入 AI-driven 软件智能比拼；点名 Apple Workout Buddy + Samsung Health 6/8 重设计（Sleep / Activity / Nutrition / Mindfulness / Vitals + AI Energy Score 首屏）。</li>
+<li><strong>为什么重要</strong>：① **Whoop × HealthEx 是 <em>"消费 wearable + EHR + AI memory + 临床医生 on-demand" 四合一</em> 的首例完整商业组合<strong> — 比 FDA closeout 的"合规"信号更接近消费端兑现；② </strong>Claude Code MRI 自助解读 HN 周日上榜** 是 wearable AI 临床化的 <em>消费侧 self-service 范式</em> — <em>监管层尚未对"frontier model 直接读医学影像"做出明确指引</em>；③ Samsung Q3 四国市场同步推出 Alcedis 数据管道，<strong>Apple ResearchKit 的 incumbent 位置首次出现实质性挑战</strong>。</li>
+</ul>
+<hr>
+<h2>想法</h2>
+<ol>
+<li>**"frontier 模型 USG-gated 分发"在两周内成型为 <em>并行制度</em>（Sol customer-by-customer / Mythos trusted-list）— 但 Semgrep GLM bench 同周末证明开源前沿可以替代受合规阻挡的 cyber 用例<strong> — 这是 6 月最大的合规悖论。</strong>值得追踪**：(a) Mythos 100+ trusted list 的行业分布（金融 / 国防 / 学术 / 生物）将定义 frontier model 的"许可证经济"形态 — Northeastern 类 R1 大学是否进入名单是 <em>Boston AI 研究生态</em> 的关键变量 (b) **如果 GLM-5.2 / Qwen / DeepSeek 在 <em>cyber + agentic coding</em> 两条线持续追平闭源前沿<strong>，USG-gating 反而会</strong>加速企业把 critical workload 自托管化<strong> — 这是 OpenAI / Anthropic 闭源策略最被低估的反向风险 (c) Anthropic Fable 5 持续封禁 = </strong>frontier "最强模型"在监管真空中**，对 Anthropic IPO 估值会形成"已批 + 未批"两条曲线，10 月路演定价会很难。</li>
+</ol>
+<ol>
+<li><strong>BIS 年报 + Bloomberg China hedge funds + Eisman + JPM 交易台 4 个独立机构在 7 天内同步空 AI</strong> — 这是 2022 年加密寒冬启动前最后一次类似密度的机构空头集合。<strong>值得思考</strong>：(a) <strong>Q3 2026 hyperscaler capex 超过 OCF</strong>（<a href="https://epoch.ai/data-insights/hyperscaler-capex-vs-cash-flow" target="_blank" rel="noopener">Epoch AI</a>）这条"现金流交叉"被市场理解为 <em>AI bubble 结构性证伪窗口</em> 的概率正在升高 — 但 §6 ENR Top 400 +11.8% 与 §4 Meta FY26 capex $135B 是反向硬数据 (b) <strong>如果 Mythos 解禁 + Jalapeño 推理成本 -50% 路线图被市场吸收为 "Anthropic / OpenAI 资本效率改善信号"</strong>，BIS 警告将被推迟到 Q4；反之，<strong>SK Hynix 7/10 上市定价跌破 IPO 价</strong>将是 AI bull 派的第一次实质性失败 (c) Eisman "no moats" 论与 §2 GLM 击败 Claude 在底层逻辑上 <em>完美一致</em> — 这种"空头叙事 ↔ 工程实证"的双向印证在 2024-2025 年没有出现过。</li>
+</ol>
+<ol>
+<li><strong>AEC "data layer 战争"在本周末被 ENR / AEC Mag 写成头条 — Procore / Autodesk / Trimble / Bentley 锁专有项目数据 vs Arcol / Motif / Palantir "重建 substrate"</strong> — 这是 contech AI 下半场的真正主战场。<strong>值得思考</strong>：(a) <strong>Palantir 在 AEC 的"wildcard outsider"位置</strong> = 它既不是 BIM 厂商也不是 CDE 厂商，而是 <em>决策层数据 ontology</em>；如果 Skanska / Bechtel / Fluor 下一家签下 Palantir，将形成 <em>Foundry for AEC</em> 的事实标准 (b) <strong>Arcol "multiplayer authoring environment" 论</strong>实质等于"否定 Revit 是 agentic 时代的承载层" — 这是 Autodesk 在 H2 必须直接回应的方法论挑战 (c) ENR Top 400 +11.8% + 电力 > site selection = **contech AI 的需求端 <em>不受</em> §3 BIS 报告 AI bust 风险影响** — AEC 端的资本开支驱动是 <em>真实物理基础设施需求</em>，与 frontier lab 资本叙事弱挂钩；这一条对 Northeastern 类侧重 <em>物理 AI / 城市基础设施</em> 的研究方向是利好。</li>
+</ol>
+<ol>
+<li>**wearable 临床化在本周末出现 <em>消费侧自助通道</em> 的关键 anecdote — Claude Code MRI 二次解读 HN 320 pts / 430 cmts** — 与 Whoop × HealthEx 的 <em>合规通道</em> 形成上下夹击。<strong>值得思考</strong>：(a) **如果消费侧"frontier model 直接读医学影像"的 anecdote 在 H2 形成规模化，FDA 必须对 <em>generalist frontier model 用于临床决策辅助</em> 做出明确表态** — 这一表态会反过来定义 Anthropic Mythos / OpenAI Sol 的 cleared list 是否扩展到 <em>个人医疗用户</em> (b) Whoop × HealthEx + Samsung × Alcedis + Oura × LillyDirect = 三家头部 wearable <strong>本月分别走通 EHR / 临床终点 / 处方药依从性三条不同合规路径</strong> — 这是过去 18 个月 wearable 商业模式"硬件 → 健康服务"转型的最完整一周路标 (c) Northeastern 在 Boston 医学中心 + PAIR (Physical AI Research) 初见的双重位置，可以在 H2 围绕 <strong>"on-device wearable AI + frontier model 临床辅助 + 患者数据所有权"</strong> 做一个跨学科 sandbox。</li>
+</ol>
+<ol>
+<li>**DeepMind 5 个月内累计流失 6 位核心 + Alphabet 周内 -5%+ + DeepSeek 同周末 $7.4B 融资 = AI 实验室格局在 <em>资本与人才双侧</em> 被市场重定价为 "OpenAI / Anthropic / DeepSeek 三极"<strong> — Google 在产业叙事中临时滑出第一梯队。</strong>值得思考<strong>：(a) Denny Zhou 离开 Google Brain reasoning 团队意味着 </strong>Google 在 reasoning post-training 的关键工程经验流失<strong> — Gemini 3.5 Pro 延期可能是直接后果 (b) DeepSeek $7.4B = 中国 frontier lab 第一次资本规模与 Anthropic / OpenAI 后期轮可比 — 在 §1 Mythos / Sol USG-gating 同期形成 </strong>"主权 AI 三极 ↔ Anthropic / OpenAI / DeepSeek frontier 三极"两套三角并存<strong> (c) </strong>Google 真正的反击窗口可能是 <em>2027 年 Q1 Gemini 4 + Tensor processing units 5</em> 同步发布** — 如果再次延期，Alphabet 在产业叙事中的 <em>第三极地位</em> 可能被市场永久折现掉。</li>
+</ol>
+<hr>
+<p><strong>值得深入研究</strong>（不自动建文件，备忘）：</p>
+<ul>
+<li><strong>公司</strong>：DeepSeek (新一轮融资细节 / 员工翻倍后产品节奏 / 与 GLM / Qwen / Kimi 的市场分配) / Zhipu/Z.ai（Open Fable EOY 与 HK$1T 估值后的国际化路径）/ Semgrep（agent harness 商业化曲线 + Claude / GLM-5.2 多模型支持）/ Arcol + Motif（AEC multiplayer authoring 与 BIM substrate 重建）/ Palantir AEC 下一家签约客户 / Whoop × HealthEx（EHR 集成 + 临床问诊的商业兑现速度） / Baseten（跨硬件 inference 路由 + $1.5B 后扩张）/ Sail Research（agent stateful sandbox 与 Anthropic Computer Use 运行时承载关系）</li>
+<li><strong>人</strong>：Howard Lutnick (Commerce Secretary，USG-gated 分发设计者 — Mythos + Sol 两套规则都出自他手) / Tom Brown (Anthropic CCO，与 USG 接口) / Sarah Friar (OpenAI CFO，IPO 推迟决策核心) / Kevin Warsh (联储新主席，AI capex 通胀传导政策定价) / Denny Zhou (Google Brain reasoning 创始人，新去向影响 reasoning post-training 格局) / Liang Wenfeng (DeepSeek CEO，$7.4B 后的产品 / 国际化路径) / Steve Eisman (空头观点是否在 Q3 被市场验证) / Cristiano Amon (Qualcomm Dragonfly + Meta 2028 锚定的执行节奏) / Tooey Courtemanche (Procore CEO 在 Palantir AEC 进攻下的应对)</li>
+<li><strong>论文 / 报告</strong>：<a href="https://www.bloomberg.com/news/articles/2026-06-28/ai-bust-risks-ripple-effects-from-growth-to-credit-bis-says" target="_blank" rel="noopener">BIS Annual Report 2026 (AI bust risk section)</a> · <a href="https://arxiv.org/html/2606.10493v1" target="_blank" rel="noopener">Local MoE Cloud-Grade SLO (2606.10493)</a> · <a href="https://arxiv.org/html/2606.21428v1" target="_blank" rel="noopener">MoE on Consumer Hardware (2606.21428)</a> · <a href="https://arxiv.org/abs/2606.14243v1" target="_blank" rel="noopener">DMoE Knowledge Injection (2606.14243)</a> · <a href="https://arxiv.org/abs/2606.24391" target="_blank" rel="noopener">Age of LLM 1v1 Benchmark (2606.24391)</a> · <a href="https://arxiv.org/html/2606.17104v1" target="_blank" rel="noopener">Prefill/Decode-Aware Inference (2606.17104)</a> · <a href="https://semgrep.dev/blog/2026/we-have-mythos-at-home-glm-52-beats-claude-in-our-cyber-benchmarks/" target="_blank" rel="noopener">Semgrep GLM-5.2 cyber benchmark</a> · <a href="https://epoch.ai/data-insights/hyperscaler-capex-vs-cash-flow" target="_blank" rel="noopener">Epoch AI hyperscaler capex vs cash flow</a> · <a href="https://www.enr.com/articles/63122-construction-platforms-are-already-fighting-over-data-to-train-ai-agents" target="_blank" rel="noopener">ENR "Construction Platforms Are Already Fighting Over Data to Train AI Agents"</a></li>
+</ul>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <span>© 2026 Xinrui Yi · Briefings</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);">← All briefings</a></span>
+  </div>
+</footer>
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const text = document.getElementById('themeText');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+let theme = prefersDark ? 'dark' : 'light';
+applyTheme(theme);
+toggle.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  applyTheme(theme);
+});
+function applyTheme(t) {
+  if (t === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    icon.textContent = '◑'; text.textContent = 'Light';
+  } else {
+    root.removeAttribute('data-theme');
+    icon.textContent = '◐'; text.textContent = 'Dark';
+  }
+}
+
+const audio = document.querySelector('.audio-el');
+if (audio) {
+  const playBtn = document.querySelector('.audio-play');
+  const playIcon = document.querySelector('.audio-icon-play');
+  const backBtn = document.querySelector('.audio-back');
+  const fwdBtn = document.querySelector('.audio-fwd');
+  const track = document.querySelector('.audio-track');
+  const progress = document.querySelector('.audio-progress');
+  const buffered = document.querySelector('.audio-buffered');
+  const curEl = document.querySelector('.audio-cur');
+  const durEl = document.querySelector('.audio-dur');
+
+  const fmt = (s) => {
+    if (!isFinite(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  };
+
+  const setPlaying = (isPlaying) => {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); }
+    else { audio.pause(); }
+  });
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+
+  backBtn.addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+  fwdBtn.addEventListener('click', () => {
+    const dur = isFinite(audio.duration) ? audio.duration : audio.currentTime + 10;
+    audio.currentTime = Math.min(dur, audio.currentTime + 10);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+    progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
+    curEl.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    durEl.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('progress', () => {
+    if (audio.buffered.length && audio.duration) {
+      const end = audio.buffered.end(audio.buffered.length - 1);
+      buffered.style.width = ((end / audio.duration) * 100) + '%';
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+    else if (e.code === 'ArrowLeft') { backBtn.click(); }
+    else if (e.code === 'ArrowRight') { fwdBtn.click(); }
+  });
+}
+</script>
+</body>
+</html>
