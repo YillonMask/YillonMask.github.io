@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Briefing — 2026-06-30 · Xinrui Yi</title>
+<meta name="description" content="Daily AI/AEC/wearables briefing for 2026-06-30." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --bg-soft: #efeae2;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --rule: #d9d3c8;
+  --accent: #b8412c;
+  --accent-soft: #e8c5bc;
+  --card: #fbf9f5;
+}
+[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --bg-soft: #161614;
+  --ink: #f0ece4;
+  --ink-soft: #b8b3a8;
+  --ink-muted: #6e6a62;
+  --rule: #2a2926;
+  --accent: #e8a07a;
+  --accent-soft: #4a2a20;
+  --card: #14140f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Geist', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.mono { font-family: 'Geist Mono', monospace; }
+.container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+nav {
+  position: sticky; top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+}
+.nav-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 32px; max-width: 920px; margin: 0 auto;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px;
+  letter-spacing: -0.01em; color: var(--ink); text-decoration: none;
+}
+.nav-brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; align-items: center; font-size: 13px; }
+.nav-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--accent); }
+.theme-toggle {
+  background: none; border: 1px solid var(--rule); color: var(--ink-soft);
+  cursor: pointer; padding: 6px 10px; border-radius: 6px;
+  font-family: inherit; font-size: 12px; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* briefing page header */
+.brief-head {
+  padding: 80px 0 48px; border-bottom: 1px solid var(--rule);
+}
+.brief-eyebrow {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brief-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ink-muted); }
+.brief-head h1 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.1;
+  letter-spacing: -0.025em; margin-bottom: 16px;
+}
+.brief-head h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
+.brief-meta {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); display: flex; gap: 18px; flex-wrap: wrap;
+}
+.brief-meta .tag {
+  color: var(--ink-soft); border: 1px solid var(--rule);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* prose */
+.prose { padding: 56px 0 80px; }
+.prose h1 { display: none; } /* the markdown's title H1 — we render our own header */
+.prose h2 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.prose h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.prose h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 21px; letter-spacing: -0.015em;
+  margin: 40px 0 14px; color: var(--ink);
+}
+.prose p {
+  font-size: 16px; line-height: 1.75; color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.prose p strong { color: var(--ink); font-weight: 500; }
+.prose ul, .prose ol { margin: 0 0 22px 22px; }
+.prose li {
+  font-size: 16px; line-height: 1.7; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.prose li strong { color: var(--ink); font-weight: 500; }
+.prose a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.prose a:hover { color: var(--accent); border-color: var(--accent); }
+.prose code {
+  font-family: 'Geist Mono', monospace; font-size: 0.92em;
+  background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.prose hr {
+  border: none; border-top: 1px solid var(--rule); margin: 48px 0;
+}
+.prose em { font-style: italic; color: var(--ink-muted); }
+
+/* index page list */
+.brief-list { padding: 56px 0 80px; }
+.brief-row {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px; padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.brief-row:last-child { border-bottom: 1px solid var(--rule); }
+.brief-row .date {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); letter-spacing: 0.04em;
+}
+.brief-row a {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -0.015em; transition: color 0.15s;
+}
+.brief-row a:hover { color: var(--accent); }
+.brief-row .audio-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Geist Mono', monospace; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-left: 12px;
+  padding: 2px 7px; border: 1px solid var(--accent-soft);
+  border-radius: 4px; vertical-align: 2px;
+}
+.brief-row .tags {
+  margin-top: 6px; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+}
+
+footer {
+  padding: 28px 0; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+  border-top: 1px solid var(--rule);
+}
+footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* audio player */
+.brief-audio { padding: 0; }
+.brief-audio + main.prose { padding-top: 0; }
+.brief-audio-title {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.audio-card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 20px 24px;
+}
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.audio-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 13px; gap: 2px;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.audio-btn:hover, .audio-btn:focus-visible {
+  border-color: var(--accent); color: var(--accent); outline: none;
+}
+.audio-play { width: 48px; height: 48px; font-size: 16px; }
+.audio-num {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+}
+.audio-track {
+  flex: 1; height: 4px; background: var(--rule);
+  border-radius: 2px; position: relative; cursor: pointer;
+  min-width: 60px;
+}
+.audio-buffered, .audio-progress {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  border-radius: 2px; width: 0;
+}
+.audio-buffered { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.audio-progress { background: var(--accent); }
+.audio-time {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+.audio-caption {
+  font-size: 12px; font-style: italic;
+  color: var(--ink-muted); margin: 12px 0 0; line-height: 1.4;
+}
+.audio-el { display: none; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 22px; }
+  .nav-inner { padding: 14px 22px; }
+  .nav-links { gap: 16px; font-size: 12px; }
+  .brief-head { padding: 56px 0 36px; }
+  .prose { padding: 40px 0 56px; }
+  .prose h2 { font-size: 25px; }
+  .prose h3 { font-size: 19px; }
+  .brief-row { grid-template-columns: 1fr; gap: 6px; }
+  .audio-card { padding: 16px 18px; }
+  .audio-controls { flex-wrap: wrap; gap: 10px; }
+  .audio-time { flex-basis: 100%; text-align: right; margin-top: 4px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">Xinrui Yi<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="index.html">Briefings</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">◐</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="brief-head">
+  <div class="container">
+    <div class="brief-eyebrow">Morning Briefing</div>
+    <h1>2026-06-30 <em>·</em> daily signal</h1>
+    <div class="brief-meta"><span class="tag">briefing</span><span class="tag">ai</span><span class="tag">market</span><span class="tag">aec</span><span class="tag">wearables</span></div>
+  </div>
+</header>
+
+<main class="prose">
+  <div class="container">
+    <h1>2026-06-30 Morning Briefing</h1>
+<h2>重点</h2>
+<ol>
+<li><strong>Meituan </strong>LongCat-2.0** 开源 1.6T MoE / 48B active 上线 HN — <em>中国国产 ASIC 集群</em> 完成全部训练 + 推理，无回滚 / 无不可恢复 loss spike<strong>：<a href="https://www.longcatai.org/news/longcat-2" target="_blank" rel="noopener">longcatai.org 新闻稿</a> · <a href="https://news.ycombinator.com/item?id=48727116" target="_blank" rel="noopener">HN 233 pts</a> · <a href="https://tech.yahoo.com/ai/articles/china-longcat-2-0-becomes-134258951.html" target="_blank" rel="noopener">Yahoo Tech</a> · <a href="https://x.com/testingcatalog/status/2071864999799058768" target="_blank" rel="noopener">TestingCatalog X</a> — </strong>这是首个 <em>trillion-param</em> 级别 <em>完全脱离 Nvidia 硬件</em> 训练完成的 frontier 模型**；预览版已在 OpenRouter 以 <em>Owl Alpha</em> 化名跑到 <em>全球月 token 调用前三</em>（<a href="https://www.kucoin.com/news/flash/owl-alpha-on-openrouter-revealed-as-meituan-s-longcat-2-0-preview-with-11t-monthly-token-throughput" target="_blank" rel="noopener">KuCoin 报道</a>）。**与上周末 §3 Lindy 切换 DeepSeek + §1 Anthropic Economic Index "API automation > augmentation" 共同构成 <em>frontier 替代主线 + PRC 开源前沿主线</em> 的连续三周证据链**。Nvidia / CUDA 在 2026H2 的护城河预期将被 reprice。</li>
+</ol>
+<ol>
+<li>**6/30 美股：Dow 站上 52,000 历史新高 / Nasdaq +1.28% 领涨 / 但 Comcast 宣布 <em>NBCUniversal + Sky 全分拆 → +22%</em> 是 conglomerate-discount 重新定价的最大单日案例<strong>：<a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-30-2026" target="_blank" rel="noopener">TheStreet 6/30</a> · <a href="https://finance.yahoo.com/markets/stocks/articles/stock-market-news-jun-30-133900372.html" target="_blank" rel="noopener">Yahoo Finance 6/30</a> · <a href="https://www.themiddlemarket.com/latest-news/comcast-to-spin-off-nbcuniversal-and-sky" target="_blank" rel="noopener">Comcast 分拆官告 themiddlemarket</a> · <a href="https://seekingalpha.com/article/4918502-wall-street-lunch-comcast-soars-on-plan-to-spin-off-nbcuniversal-and-sky" target="_blank" rel="noopener">Seeking Alpha 6/30</a> — </strong>CMCSA 单日 +22-23% 是 <em>tax-free spinoff</em> 重新被市场视为价值释放工具的首发信号**；与 §1 / 上周末 <em>Alphabet 入 Dow + Meta / Reality Labs / DeepMind 分拆叙事</em> 形成对位 — <em>H2 conglomerate breakup 主题正式进入投资者议程</em>。配合 <em>Rocket Lab → Iridium $8B 收购</em>（<a href="https://www.sec.gov/Archives/edgar/data/0001819994/000175392626001085/g085783_ex99-1.htm" target="_blank" rel="noopener">Form 8-K SEC</a>），<strong>"小整合 + 大分拆" 同日并存</strong> 是 H2 资本市场最具结构性的转折。</li>
+</ol>
+<ol>
+<li><strong>Qualcomm 正式 close $3.92B 收购 Modular（Mojo + MAX）+ Meta CPU 合作同日宣布</strong>：<a href="https://www.cnbc.com/2026/06/24/qualcomm-ai-chip-modular-software.html" target="_blank" rel="noopener">CNBC 6/24</a> · <a href="https://www.techtimes.com/articles/319166/20260626/qualcomm-closes-39-billion-modular-deal-meta-validates-full-stack-cuda-challenge.htm" target="_blank" rel="noopener">TechTimes 6/26</a> · <a href="https://nand-research.com/qualcomm-acquires-modular-for-its-hardware-agnostic-ai-software-layer/" target="_blank" rel="noopener">NAND Research</a> — Qualcomm 用 19.2M 股 <em>全股票</em> 换 <em>Mojo 语言 + MAX 跨硬件编译器 + ~150 工程师 + 已验证跨 Nvidia/AMD/Intel/Arm 的开发者社区</em>。**这是 <em>full-stack non-CUDA</em> 第一次在 <em>硬件厂买软件栈</em> 维度落地，配合 §1 LongCat-2.0 在中国 ASIC 上完成 trillion-param 训练**，<em>"去 CUDA" 主线在 6 月底完成 美 / 中 / 软件栈 三向证据闭环</em>。Nvidia 7-9 月 GTC / Q2 earnings 将是首次正面回应窗口。</li>
+</ol>
+<ol>
+<li>**Higharc $95M Series C 由 Insight Partners 领投 — <em>AEC AI</em> 单月（6 月）罕见的 <em>住宅垂直生成式设计</em> 大额融资 + 与全美最大私营建材分销商 US LBM 战略合作<strong>：<a href="http://www.prnewswire.com/news-releases/higharc-raises-95m-series-c-to-scale-ai-for-homebuilding-302814598.html" target="_blank" rel="noopener">PRNewswire 6/30</a> — 累计融资突破 $170M；同时发布 </strong>AI Estimating 产品 给 US LBM 经销商 / dealer 体系做 <em>自动 takeoff</em><strong>。</strong>意义**：上周 §6 <em>Buildots Intelligence Lab 公开数据中心 MEP benchmark</em> + 本周 <em>Higharc 端到端 </em>生成式住宅 + 建材供应链 AI<em> 商业模式</em>，**AEC AI 在 6 月 <em>单家垂直整合 + 跨项目 benchmark + 大公司供应链</em>三向同步**。配合 <em>Augmenta ACP 2.0</em>（<a href="https://www.globenewswire.com/news-release/2026/06/17/3313424/0/en/Augmenta-Releases-ACP-2-0-the-Complete-AI-Native-Design-Environment-Built-to-Multiply-Electrical-VDC-Team-Output-and-Capacity.html" target="_blank" rel="noopener">GlobeNewswire 6/17</a>）= MEP 自动协调，**generative design × 电气 / 结构 / 住宅 *三个子模 ception<strong> 同月集中爆发</strong>。</li>
+</ol>
+<ol>
+<li>**Oura Ring 5 <em>Lab Uploads</em> 功能 6/30 正式 GA — <em>任意第三方实验室 PDF → Oura App 与生物指标合并视图</em><strong>：<a href="https://ouraring.com/blog/health-panels/" target="_blank" rel="noopener">ouraring.com/blog</a> · <a href="https://femtechinsider.com/oura-launches-in-app-blood-testing-integration-with-health-panels-feature/" target="_blank" rel="noopener">Femtech Insider</a> · <a href="https://insider.fitt.co/wearables-integrate-bloodwork-oura-health-panels/" target="_blank" rel="noopener">Fitt Insider</a> — 同期 </strong>Health Panels × Quest Diagnostics<strong> 已 GA（50+ 生物标志物 $99 / 2000+ Quest 网点）。</strong>这是 wearable 第一次把 <em>任意第三方实验室结果</em> 作为 <em>first-class data type</em> 嵌入消费 app**；与上周末 <em>Whoop 临床医生 50% 折扣 + Oura Counsel Health 虚拟问诊</em> 同向，<strong>wearable → personal health record（PHR） 的合并路径 6 月底完成第一次产品级落地</strong>。下一步是 <em>insurer / employer 报销机制</em> 接入 — H2 wearable 商业模式拐点。</li>
+</ol>
+<hr>
+<h2>笔记</h2>
+<h3>📡 1. HN 信号</h3>
+<p><strong>6/30 新增 frontpage</strong>：</p>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=48727116" target="_blank" rel="noopener"><strong>LongCat-2.0, a large-scale MoE model with 1.6T total and 48B Active</strong></a> · <strong>233 pts / 64 cmts</strong> — Meituan 完全在国产 ASIC 集群上完成训练 + 推理；见 §1。<strong>与 §3 Qualcomm × Modular 同日构成 "去 CUDA" 主线的双向证据</strong>。</li>
+<li><a href="https://thereallo.dev" target="_blank" rel="noopener"><strong>Claude Code Is Steganographically Marking Requests</strong></a> · <strong>348 pts / 113 cmts</strong> — 安全研究披露 <em>Claude Code 的请求被嵌入隐写标记</em>（具体形式与 Anthropic 官方表态待确认）。<strong>与 6 月初 Codex sensitive-files / GitHub Copilot metered billing 抗议同向</strong> — <em>AI coding agent 信任层正在被多线侵蚀</em>。</li>
+<li><a href="https://moondream.ai/blog/popping-the-gpu-bubble" target="_blank" rel="noopener"><strong>Popping the GPU Bubble</strong></a> · <strong>186 pts / 46 cmts</strong> — Moondream 团队拆解 <em>pipelined decoding</em> 的 GPU bubble；本质是把 <em>CPU 端 next-token 准备工作</em> 与 <em>GPU 端当前 forward pass</em> 重叠。**与 §3 Qualcomm × Modular 在 <em>软件栈榨干硬件</em> 层面同向 — 都是"用更聪明的软件减少对 Nvidia 的依赖"**。</li>
+<li><a href="https://opensourcelowtech.org" target="_blank" rel="noopener"><strong>Open Source Low Tech</strong></a> · <strong>507 pts / 108 cmts</strong> — 主张 <em>低技术 / 低能耗 / 长寿命</em> 工程实践；与 <em>AI 数据中心 capex 主线</em> 形成对位舆论场。</li>
+<li><a href="https://mgdubiel.com" target="_blank" rel="noopener"><strong>Building a custom octocopter from scratch with no prior hardware experience</strong></a> · <strong>241 pts / 53 cmts</strong> — 业余者从零造八旋翼；<strong>LLM 工具大幅压缩硬件入门曲线</strong> 的具体证据。</li>
+<li><a href="https://newyorkfed.org" target="_blank" rel="noopener"><strong>The labor share of income in the US is at its lowest post-war level</strong></a> · <strong>306 pts / 259 cmts</strong> — NY Fed 数据；与 §1 Anthropic "API automation > augmentation" 在劳动经济层形成宏观对偶。</li>
+<li><a href="https://fil-c.org" target="_blank" rel="noopener"><strong>Memory Safe Context Switching (fil-c.org)</strong></a> · <strong>185 pts / 28 cmts</strong> — 内存安全 + 上下文切换的工程化讨论。</li>
+<li><a href="https://github.com/linuxmd" target="_blank" rel="noopener"><strong>Linux for the Sega MegaDrive</strong></a> · <strong>190 pts / 48 cmts</strong> — <em>retro-systems × 现代 Linux 内核</em> 工程奇观。</li>
+</ul>
+<p><strong>6/29 周一延续 top（结合 best 48h）</strong>：</p>
+<ul>
+<li><a href="https://quesma.com/blog/qwen-36-is-awesome/" target="_blank" rel="noopener"><strong>Qwen 3.6 27B is the sweet spot for local development</strong></a> · <strong>1,083 pts / 691 cmts</strong> — 持续登顶；但 <a href="https://github.com/deepreinforce-ai/Ornith-1" target="_blank" rel="noopener">Ornith-1.0 (deepreinforce-ai)</a> · <strong>248 pts / 48 cmts</strong> 同期被多位 X 用户（<a href="https://x.com/AlexFinn/status/2070536579459035426" target="_blank" rel="noopener">Alex Finn</a> / <a href="https://x.com/WescheNex1q/status/2070234735763243493" target="_blank" rel="noopener">WescheNex</a> / <a href="https://x.com/McGrewSecurity/status/2070477135647494499" target="_blank" rel="noopener">McGrew</a>）实测 <em>35B-MoE / 3B-active 在 TrueScore 反超 Qwen 3.6-27B 34 点</em>。<strong>poisoned-context 测试中 Ornith 拒绝伪造前提而 Qwen 妥协（<a href="https://x.com/no_stp_on_snek/status/2070562896732356751" target="_blank" rel="noopener">Tom Turney</a>）</strong> — <em>open-weight 前沿的</em>分叉点<em>从 </em>性能领先<em> 进化到 </em>对抗性鲁棒性*。</li>
+<li><a href="https://danunparsed.com/p/hackerrank-open-source-ats" target="_blank" rel="noopener"><strong>HackerRank open sourced its ATS — my resume scored 90/100. Oh wait 74. No – 88</strong></a> · <strong>993 pts / 424 cmts</strong> — 持续讨论 <em>LLM ATS 评分非确定性</em>；与 §1 NY Fed 劳动收入份额低位形成 <em>AI × 劳动力</em> 双层议题。</li>
+<li><a href="https://english.elpais.com/education/2026-06-28/ai-fraud-at-brown-university-academic-integrity-is-at-risk.html" target="_blank" rel="noopener"><strong>Professor denounces mass AI fraud on an exam at Brown</strong></a> · <strong>545 pts / 715 cmts</strong> — 学界 AI 滥用首次进入 elite 大学公开声讨；与 §1 / §3 <em>AI 自动化</em> 路径相比是 <em>AI 替代</em> 的反面教育市场 case。</li>
+<li><a href="https://fergusfinn.com/blog/what-happens-when-you-run-a-gpu-kernel/" target="_blank" rel="noopener"><strong>What happens when you run a CUDA kernel?</strong></a> · <strong>279 pts / 31 cmts</strong> — CUDA 通路解析；与 §3 Qualcomm × Modular <em>绕开 CUDA</em> 主线在 <em>知识工程化</em> 反面成对。</li>
+<li><a href="https://htmx.org/essays/working-with-ai/" target="_blank" rel="noopener"><strong>Working With AI: A concrete example</strong></a> · <strong>181 pts / 64 cmts</strong> — htmx 作者 (Carson Gross) 第一手 AI 协作工程实践。</li>
+<li><a href="https://arxiv.org/abs/2606.22283" target="_blank" rel="noopener"><strong>Apple Neural Engine: Architecture, Programming, and Performance</strong></a> · <strong>222 pts / 27 cmts</strong> — Apple NE 编程细节。</li>
+</ul>
+<p><strong>6/28-29 周末延续讨论</strong>：</p>
+<ul>
+<li><a href="https://semgrep.dev/blog/2026/we-have-mythos-at-home-glm-52-beats-claude-in-our-cyber-benchmarks/" target="_blank" rel="noopener"><strong>GLM 5.2 beats Claude in our benchmarks</strong></a> · <strong>1,092 pts / 504 cmts</strong> — Semgrep 报告持续登顶。</li>
+<li><a href="https://news.ycombinator.com/item?id=" target="_blank" rel="noopener"><strong>Mag 7 starting to underperform</strong></a> (Apollo Slok PDF) — Apollo 卖方备忘持续讨论中。</li>
+</ul>
+<p><strong>主线（6/29-30 综合）</strong>：① <strong>frontier "去 CUDA"</strong> 在 <em>§1 LongCat-2.0 国产 ASIC</em> + <em>§3 Qualcomm × Modular</em> + <em>Popping GPU Bubble 软件层</em> 三向同时落地；② <strong>AI agent 信任层</strong> 在 <em>Claude Code 隐写</em> + <em>HackerRank ATS 非确定性</em> + <em>Brown AI 作弊</em> 三件事同期被侵蚀；③ <strong>conglomerate breakup</strong>（Comcast 分拆 +22% / Rocket Lab × Iridium 整合 / Alphabet 入 Dow）形成 <em>H2 资本市场结构性主题</em>；④ <strong>open-weight 前沿</strong> 进入 <em>对抗性鲁棒性</em> 分叉点（Ornith vs Qwen 3.6 poisoned-context 测试）。</p>
+<h3>🔬 2. Reddit 脉搏</h3>
+<p><strong>r/MachineLearning</strong>（hot, limit 10）：</p>
+<ul>
+<li>主线持续是 <strong>Qwen-AgentWorld（语言世界模型）/ Red Queen Gödel Machine（co-evolving 评估器 + agent）</strong> —— 两篇 arxiv 都在本周 trending。</li>
+<li><strong>Qwen-AgentWorld-397B-A17B</strong> 在 AgentWorldBench 上 58.71 <em>边际</em> 击败 GPT-5.4（58.25）与 Claude Opus 4.8（<a href="https://arxiv.org/abs/2606.24597" target="_blank" rel="noopener">Qwen 官方 paper</a> · <a href="https://medium.com/data-science-in-your-pocket/qwen-agentworld-language-world-models-for-general-agents-ef6d2acdacf6" target="_blank" rel="noopener">Medium</a>）—— 但讨论中多人指出 <em>benchmark 由 Qwen 自家定义 + 自家评分</em>，**所谓 "language world model" 是 <em>agent simulator</em> 而不是 agent 本体**。</li>
+<li><strong>RQGM</strong>（Cambridge × NVIDIA · <a href="https://arxiv.org/abs/2606.26294" target="_blank" rel="noopener">arxiv 2606.26294</a>）在 r/ML 引发关于 <em>recursive self-improvement</em> 是否 <em>回到 1990s Gödel Machine 老路</em> 的争论 — 关键创新是 <em>评估器与 agent 共进化</em>（之前 Darwin / Huxley Gödel Machine 评估器静态），co-evolved writers 在 agent-as-a-judge 面板上提升 1.78-1.86× 接受率。</li>
+<li>方法学侧 thread：<strong>MoE 推理时扩展（Dynamic Experts Search / RoE / FlexMoE）</strong> 持续被提及为 H2 <em>LongCat-2.0 / GLM-5.2 / DeepSeek V4-Pro</em> 自托管成本曲线的优化路径。</li>
+</ul>
+<p><strong>r/SideProject</strong>（hot, limit 10）：</p>
+<ul>
+<li>与上周整体节奏一致 — <strong>MRR 公开打卡 / Product Hunt launch 经验</strong>（<a href="https://www.redditmaster.com/reddit-growth-for/indie-hackers" target="_blank" rel="noopener">redditmaster</a>）是高赞主线；6 月 Product Hunt winners 集中在 <em>AI coding agents / no-code 自动化 / notetakers / voice agents</em>（<a href="https://blog.mean.ceo/product-hunt-launches-news-june-2026/" target="_blank" rel="noopener">blog.mean.ceo</a>）。</li>
+<li><strong>Framer "Agents on the canvas"</strong> 同期发布（连接 Claude Code / Codex）是 <em>设计工具 × LLM agent</em> 的最热单项；与 §3 Qualcomm × Modular <em>软件栈中性</em> 同向 — <em>agent 入侵传统 SaaS 不再受单一模型厂束缚</em>。</li>
+</ul>
+<p><em>注</em>：Reddit 直接 API/页面抓取仍受限，本节为 X + 二级 trending 站点综合判断。</p>
+<h3>📄 3. AI Research</h3>
+<p><strong>6/24-29 arxiv 主线</strong> = <strong>language world models / co-evolving 自评估器 / 去 CUDA & MoE 推理时扩展 / 多智能体记忆</strong>：</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2606.24597" target="_blank" rel="noopener"><strong>Qwen-AgentWorld: Language World Models for General Agents (2606.24597)</strong></a> — Qwen-AgentWorld-35B-A3B / 397B-A17B；MCP / Search / Terminal / SWE / Android / Web / OS <em>7 个 agent 环境的可微仿真器</em>。<strong>意义</strong>：<em>agent training 不再依赖真实环境 rollout — RL with verifiable rewards 的 </em>仿真器供给侧<em> 形成</em> — 与 6 月 §3 主线（reasoning post-training）互补。</li>
+</ul>
+<ul>
+<li><a href="https://arxiv.org/abs/2606.26294" target="_blank" rel="noopener"><strong>The Red Queen Gödel Machine: Co-Evolving Agents and Their Evaluators (2606.26294)</strong></a> — Cambridge × NVIDIA；评估器与 agent 共进化，evaluator 在 epoch 边界可被替换（条件：在 held-out 人工 ground-truth 上跑赢 incumbent）。<strong>意义</strong>：<em>递归自改进</em> 历史上最大的 unsolved 问题是 <em>评估器静态 → 过拟合到固定指标</em>，RQGM 在 <em>coding / paper writing / proof generation</em> 三个 reward-fuzzy 任务上首次给出 <em>动态评估器 + 防止 collapse</em> 的工程证据。</li>
+</ul>
+<ul>
+<li><a href="https://arxiv.org/html/2606.19911v1" target="_blank" rel="noopener"><strong>Multi-Agent Transactive Memory (2606.19911)</strong></a> — 异构 agent 群共享 <em>分布式 transactive memory</em>；6 月最被低估的多智能体方法学论文 — 直接对应 §1 LongCat-2.0 + DeepSeek 多 agent 编排的 <em>知识共享</em> 缺口。</li>
+</ul>
+<ul>
+<li>[<strong>BitsMoE: Spectral Energy-Guided Bit Allocation for MoE LLM Quantization</strong>] · 见 <a href="https://arxiv.org/list/cs.LG/current" target="_blank" rel="noopener">arxiv cs.LG current</a> — <em>MoE 推理时按 expert spectral energy 自适应分配位宽</em>；H2 frontier 自托管成本曲线的关键工程开关。</li>
+</ul>
+<ul>
+<li><a href="https://arxiv.org/pdf/2509.22572" target="_blank" rel="noopener"><strong>Dynamic Experts Search (2509.22572)</strong></a> — <em>test-time 在 MoE 内做 expert search</em> 提升推理；与 <em>FlexMoE / RoE</em> 共同形成 <em>MoE 推理时扩展</em> 子方向。</li>
+</ul>
+<ul>
+<li><em>方法学元论文</em>：<a href="https://arxiv.org/html/2503.16416v2" target="_blank" rel="noopener"><strong>Survey on Evaluation of LLM-based Agents (2503.16416)</strong></a> 持续被引用为 agent benchmark 设计的基准 — 与 RQGM 评估器演化路径互补。</li>
+</ul>
+<h3>💰 4. 融资动态（6/30 + 周末综合）</h3>
+<p><strong>6/30 当日重磅披露</strong>：</p>
+<ul>
+<li><strong>Higharc $95M Series C</strong>（<a href="http://www.prnewswire.com/news-releases/higharc-raises-95m-series-c-to-scale-ai-for-homebuilding-302814598.html" target="_blank" rel="noopener">PRNewswire</a>）— Insight Partners 领投，累计融资突破 $170M。同步发布 <strong>AI Estimating × US LBM 战略合作</strong>（美国最大私营建材分销商）。见 §6。</li>
+</ul>
+<p><strong>6/29 重磅披露</strong>（<a href="https://techstartups.com/2026/06/29/venture-capital-startup-funding-roundup-june-29-2026/" target="_blank" rel="noopener">Tech Startups 6/29</a>）：</p>
+<ul>
+<li><strong>8090 Solutions $135M Series A</strong> — Salesforce Ventures 领投；Chamath Palihapitiya 2024 创立，<em>AI 软件工厂 (Software Factory)</em> + <em>8090 Enterprise 托管模式</em>（<a href="https://siliconangle.com/2026/06/29/ai-software-development-startup-8090-nabs-135m-funding-round/" target="_blank" rel="noopener">SiliconANGLE</a>）。受众 = healthcare / 保险 / 生命科学 / 航空航天 / 能源 / 制造 / 金融 / <em>美国联邦政府</em>；**Salesforce Ventures 领投 <em>AI coding</em> 是企业 SaaS 巨头给 AI-native coding 公司的最大背书 之一**。</li>
+<li><strong>Straiker $64M Series A</strong> — Marathon Management Partners 领投（Citi Ventures / Illuminate Financial / Workday Ventures / Bain Capital Ventures / Lightspeed 参投），累计 $85M。enterprise AI agent 安全 — <em>agent governance</em> 一个月内 ~$170M Series A/B 第 5 笔。</li>
+<li><strong>Baz $9M Extended Seed</strong> — Battery + Boldstart 领投；<em>AI-generated code 漏洞捕获</em>；与 8090 + Straiker 形成 <em>AI 写代码 + 治理代码漏洞</em> 配套。</li>
+<li><strong>Pocket $11M Early Venture</strong> — Accel 领投；<em>信用卡尺寸 LLM 录音 + 自动跟进</em> 硬件；与 Whoop / Oura → PHR 路径在 <em>可穿戴/便携 AI 数据采集层</em> 同向。</li>
+<li><strong>Proception $11M Seed</strong> — First Round 领投；<em>高灵巧机器手 + 手套训练数据系统</em>；具身 AI 训练数据供给侧。</li>
+<li><strong>Nebex $30M Seed</strong> — GV 领投（前 Axiom Space CEO Tejpaul Bhatia 创立）；<em>太空主权连接基础设施</em>；与 6/29 <em>Rocket Lab × Iridium $8B</em> 在同一主线（<a href="https://www.sec.gov/Archives/edgar/data/0001819994/000175392626001085/g085783_ex99-1.htm" target="_blank" rel="noopener">Form 8-K</a>）。</li>
+<li><strong>X Square Robot Series C @ $2.8B+ valuation</strong> — IDG / HongShan / Xiaomi / Meituan / Alibaba / ByteDance 几乎全集齐；中国具身 AI 主权资本。</li>
+<li><strong>Wultra €6.8M Series A</strong> — Seventure Partners 领投；<em>后量子认证 + 数字身份</em>；EU regulator-friendly 与 §1 LongCat-2.0 中国主权 AI 在 <em>主权技术栈</em> 双线对位。</li>
+</ul>
+<p><strong>6/30 当日其他大事</strong>：</p>
+<ul>
+<li><strong>Alphabet $84.75B 股权募资</strong>（<a href="https://www.cnbc.com/2026/06/01/alphabet-to-raise-80-billion-from-stock-sales-to-fund-ai-buildout.html" target="_blank" rel="noopener">CNBC 6/1</a> · <a href="https://www.techtimes.com/articles/317699/20260603/alphabet-prices-8475-billion-equity-raise-berkshire-hathaway-doubles-down-ai-infrastructure.htm" target="_blank" rel="noopener">TechTimes 6/3</a>）— 6/1 启动，<em>超额认购</em>（$30B 承销 + $40B ATM + $10B Berkshire 私募 + 实际 ~$85B 完成）。Berkshire $10B × Alphabet 是 Buffett <em>直接押注 AI 基础设施 capex</em> 的最大单笔。</li>
+<li><strong>Qualcomm × Modular $3.92B all-stock close</strong>（见 §3）。</li>
+<li><strong>BMW i Ventures $300M AI Fund</strong>（agentic AI / physical AI / 工业软件）— 制造业巨头主动 <em>资本部署上游</em>。</li>
+</ul>
+<p><strong>IPO 校准</strong>：</p>
+<ul>
+<li><strong>OpenAI</strong> IPO 倾向 2027/1，$1T 目标（<a href="https://www.bloomberg.com/news/articles/2026-06-26/openai-weighs-ipo-in-2027-after-expected-anthropic-public-debut" target="_blank" rel="noopener">Bloomberg 6/26</a>）— 上周 NYT 称 OpenAI 考虑 <em>延后至 2027</em>（"SpaceX 上市后表现不佳 + AI 板块波动"）。</li>
+<li><strong>Anthropic 10 月路演</strong> 预计 <em>Economic Index June 2026 报告</em> 是核心 <em>自证 ARR 韧性</em> 材料（见 §1）。</li>
+<li><strong>SK Hynix 7/10 ADR</strong> — 17.79M 新股 / ~$29B / 主承 BofA + Citi + GS + JPM；距上市 10 个交易日。</li>
+</ul>
+<h3>📊 5. 市场脉搏</h3>
+<p><strong>Tuesday 6/30 US 盘中 / 收盘</strong>（<a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-30-2026" target="_blank" rel="noopener">TheStreet 6/30</a> · <a href="https://finance.yahoo.com/markets/stocks/articles/stock-market-news-jun-30-133900372.html" target="_blank" rel="noopener">Yahoo Finance 6/30</a> · <a href="https://www.schwab.com/learn/story/stock-market-update-open" target="_blank" rel="noopener">Schwab 6/30</a>）：</p>
+<ul>
+<li><strong>Dow: 52,217+ (creating fresh ATH)</strong> — Dow 首次站上 52,000 线（周一 6/29 已破，6/30 持续）</li>
+<li><strong>S&P 500: +0.03 to +0.4%</strong>（early trading 微涨）</li>
+<li><strong>Nasdaq: +1.28%（领涨）</strong> — tech recovery 持续</li>
+<li><strong>关键个股</strong>：</li>
+<li><strong>Comcast (CMCSA) +22-23%</strong> — <em>NBCUniversal + Sky tax-free spinoff</em> 官宣（<a href="https://www.themiddlemarket.com/latest-news/comcast-to-spin-off-nbcuniversal-and-sky" target="_blank" rel="noopener">themiddlemarket</a> · <a href="https://www.tikr.com/blog/cmcsa-comcast-nasdaq-stock-surges-23-as-company-plans-tax-free-spinoff-of-nbcuniversal-and-sky" target="_blank" rel="noopener">TIKR</a>）— <strong>2026 年最大单日 conglomerate-breakup 重估事件</strong>。</li>
+<li><strong>Rocket Lab (RKLB) +11%</strong> — 宣布 $8B 收购 Iridium Communications（<a href="https://www.sec.gov/Archives/edgar/data/0001819994/000175392626001085/g085783_ex99-1.htm" target="_blank" rel="noopener">SEC Form 8-K</a>）。</li>
+<li><strong>Iridium (IRDM)</strong> 盘中跳涨至 ~$54/股 收购对价。</li>
+<li><strong>GOOGL</strong> 延续 Dow 首日 +4% / 6 月底总累计 +5-6%。</li>
+<li><strong>Strategy (MSTR)</strong> -8% — 比特币宏观弱化 + 杠杆 BTC 头寸压力。</li>
+</ul>
+<p><strong>Macro / 利率 / 商品</strong>：</p>
+<ul>
+<li><strong>10Y UST: ~4.38%</strong>（持稳 4.37-4.40% 区间；<a href="https://www.federalreserve.gov/releases/h15/" target="_blank" rel="noopener">FRB H.15</a> · <a href="https://www.cnbc.com/quotes/US10Y" target="_blank" rel="noopener">CNBC US10Y</a>）</li>
+<li><strong>Brent: ~$73.74 (-4.33% 8 月合约) / WTI: ~$70.34 (-3.92%)</strong>（<a href="https://www.cnbc.com/2026/06/24/treasury-yields-oil-falls-pre-war-levels.html" target="_blank" rel="noopener">CNBC 6/24 reference</a>）—— 伊朗停火 + 霍尔木兹海峡通航预期恢复</li>
+<li><strong>黄金: ~$4,586</strong>（<a href="https://www.schwab.com/learn/story/fixed-income-outlook" target="_blank" rel="noopener">Schwab 报告参考</a>）</li>
+<li><strong>加密总市值: -1% → $2.04T</strong>（risk-off 边际 + MSTR 杠杆压力）</li>
+</ul>
+<p><strong>结构信号</strong>：① **Dow 第三次 / Nasdaq 首次同日双 ATH 但领涨结构出自 <em>分拆与并购</em> 而非 *AI capex 龙头*** — 标志 <em>广度收益 + 公司治理重定价 + 物理 AI 整合</em> 三主线在 H2 资金分流加速；② <strong>Brent / WTI -4% 但 10Y 持稳 4.38%</strong> = 市场押注 <em>油价回归 + 通胀放缓 但 Fed 不急于降息</em>；③ <strong>Strategy 单日 -8%</strong> 显示 <em>AI capex 主线持续吸金 + 杠杆比特币 narrative 出资金</em> 的 <em>新旧 risk asset 替代</em> 在 6 月底加速；④ <strong>Comcast +22% 是 conglomerate-discount 重新被市场重视的最大 case</strong> — Meta / Alphabet 自身的"Reality Labs 分拆 / DeepMind 分拆"叙事将在 Q3 财报季加速。</p>
+<h3>🏗️ 6. AI × AEC</h3>
+<p><strong>6/30 当日</strong>：</p>
+<ul>
+<li><strong>Higharc $95M Series C × US LBM 战略合作</strong>（<a href="http://www.prnewswire.com/news-releases/higharc-raises-95m-series-c-to-scale-ai-for-homebuilding-302814598.html" target="_blank" rel="noopener">PRNewswire 6/30</a>）— Insight Partners 领投，累计融资 $170M。<strong>Higharc spatial AI</strong> 把 <em>floor plan → 结构化数据</em>；新发布 <em>AI Estimating</em> 让 <em>US LBM 经销商 / dealer 直接从 builder 蓝图生成精准 takeoff</em>。<strong>意义</strong>：**Higharc 是 <em>AEC vertical AI</em> 第一次完成 <em>软件层 + 供应链 + 经销商</em> 端到端整合**；与 §1 Anthropic <em>API automation > augmentation</em> 在 <em>住宅市场</em> 形成具体对应 — <em>建材 takeoff 这个传统 quants/estimators 工作正在被 </em>自动化<em> 而不是 </em>辅助**。</li>
+<li><strong>Oracle 同期 launching AI-powered preconstruction 工作流 webinar 6/30</strong>（<a href="https://www.enr.com/articles/62245-2026-oracle-construction-predictions-cloud-as-the-foundation-ai-the-brain-data-the-lifeblood" target="_blank" rel="noopener">ENR 文章</a> · <a href="https://www.enr.com/" target="_blank" rel="noopener">ENR 6/30 webinar</a>）— Oracle 把 <em>centralized project data + AI-powered document review + connected workflows</em> 打包推 GC 客户；与 <em>Procore Datagrid acquisition / Trimble × Document Crunch / Autodesk × Rhumbix</em> 形成 <em>4 大 contech 软件商</em> AI 武装赛跑。</li>
+</ul>
+<p><strong>6 月延续主线</strong>：</p>
+<ul>
+<li><strong>Augmenta ACP 2.0 GA</strong>（<a href="https://www.globenewswire.com/news-release/2026/06/17/3313424/0/en/Augmenta-Releases-ACP-2-0-the-Complete-AI-Native-Design-Environment-Built-to-Multiply-Electrical-VDC-Team-Output-and-Capacity.html" target="_blank" rel="noopener">GlobeNewswire 6/17</a>）— <em>Augmenta Construction Platform 2.0</em> 让 BIM + VDC 团队 <em>并行 plan / route / coordinate / iterate</em>；**MEP 协调从 <em>几周</em> → *几小时***。与 <em>Higharc 6/30</em> 同向 — <em>generative design × 电气 / 住宅</em> 双子模块成熟。</li>
+<li><strong>OpenSpace 数据中心项目 > 1,000 个</strong>（<a href="https://www.prnewswire.com/news-releases/openspace-surpasses-1-000-data-center-projects-defining-the-construction-intelligence-standard-for-ai-infrastructure-302786566.html" target="_blank" rel="noopener">PRNewswire 6/1</a>）— <strong>41% fewer claims / 5× quality issues captured / 10× faster docs / 5-week payback</strong>；与 Suffolk / Sweet Projects 等 GC 已规模化采用。<strong>意义</strong>：AEC AI 在 <em>数据中心 critical infra</em> 子赛道完成 <em>标杆 ROI 数据集</em>；与上周 §6 <em>Buildots Intelligence Lab MEP -20-50%</em> 同向。</li>
+<li><strong>Procore AI Agents（Submittal / RFI / Daily Log / Contract Review）</strong> + <strong>Datagrid 收购整合</strong> + <strong>6/17 Innovation Summit</strong>（<a href="https://www.engineering.com/procore-expands-ai-tools-with-construction-workflow-agents/" target="_blank" rel="noopener">engineering.com</a> · <a href="https://www.enr.com/articles/62387-procore-acquires-construction-agentic-ai-platform-datagrid" target="_blank" rel="noopener">ENR 文章</a>）— Procore <em>agent 化</em> 步伐与上周末 §6 Procore CDE 公开 evolution 一致。</li>
+<li><strong>Trimble × Document Crunch 并购</strong>（<a href="https://www.constructiondive.com/news/trimble-acquire-document-crunch-contech/816630/" target="_blank" rel="noopener">Construction Dive</a>）— AI 扫描合同 <em>critical risk provisions / 付款争议 / 规范不合规 / 通知失败</em>；与 Procore Datagrid 同期，**Top 3 contech (Autodesk / Procore / Trimble) 在 6 月集中 <em>small-cap AI 收购</em> 完成自身 AI 武装**。</li>
+<li><strong>Xpanner $18M Series B bridge</strong>（<a href="https://news.crunchbase.com/real-estate-property-tech/xpanner-automation-as-a-service-for-construction-sites-startup-funding-physical-ai-robotics/" target="_blank" rel="noopener">Crunchbase</a>）— 韩国 KIP 领投；<em>automation-as-a-service for construction sites</em>；具身 AI × 工地。</li>
+</ul>
+<p><strong>为什么重要</strong>：① **Higharc $95M × US LBM 是 <em>AEC vertical AI 首次跨过 </em>软件 → 供应链* 的整合*** — 比 Procore / Autodesk / Trimble 任一家收购的 <em>软件 + 软件</em> 整合更进一步；②  **Top 3 contech 同月集中 *小型 AI 收购 + agent 化*** = AEC 软件层 30 年没改变的封闭生态正式被 <em>AI agent</em> 武装重写；③ <strong>OpenSpace 1000 数据中心 / Buildots Intelligence Lab benchmark</strong> = <em>数据中心 critical infra 的 AEC AI ROI 已经是上市公司决策级别</em> — 与 §5 <em>Meta Prometheus / Louisiana Hyperion 5GW</em> 在 <em>实际可执行性</em> 层面对应 — 与上周末 §5 <em>AI capex 690B 不放缓</em> 一致。</p>
+<h3>⌚ 7. AI × Wearables</h3>
+<p><strong>6/30 当日</strong>：</p>
+<ul>
+<li><strong>Oura Lab Uploads GA</strong>（<a href="https://ouraring.com/blog/health-panels/" target="_blank" rel="noopener">ouraring.com 博客</a> · <a href="https://femtechinsider.com/oura-launches-in-app-blood-testing-integration-with-health-panels-feature/" target="_blank" rel="noopener">Femtech Insider</a> · <a href="https://insider.fitt.co/wearables-integrate-bloodwork-oura-health-panels/" target="_blank" rel="noopener">Fitt Insider</a>）— <em>从任意第三方实验室 PDF 上传 → 与 Oura 生物指标合并视图</em>；同期 <strong>Health Panels × Quest Diagnostics（50+ 生物标志物 $99 / 2000+ Quest 网点）</strong> 仍 GA。**这是 wearable 第一次把 <em>任意 PDF 化的临床实验室结果</em> 作为 <em>first-class data type</em><strong> — 配合 6/26 Whoop 临床医生 50% 折扣 + Oura Counsel Health 虚拟医生，</strong>wearable → personal health record (PHR) 通路第一次完成产品级闭环**。</li>
+<li><strong>Oura Ring 5 starting to ship</strong>（<a href="https://ouraring.com/blog/introducing-oura-ring-5/" target="_blank" rel="noopener">ouraring.com</a> · <a href="https://techcrunch.com/2026/05/28/oura-unveils-its-ring-5-with-a-thinner-lighter-design-starting-at-399/" target="_blank" rel="noopener">TechCrunch 5/28</a> · <a href="https://www.wareable.com/wearable-tech/oura-ring-5-announcement-official-features-design-pricing-availability" target="_blank" rel="noopener">Wareable</a>）— 6/4 起发货；<em>40% 更小 / 2.8mm 厚 / 一周续航</em>；<strong>Health Radar 持续监测血压 + 夜间呼吸 30 天滚动</strong>；$399 起。</li>
+</ul>
+<p><strong>6/26-30 周末延续</strong>：</p>
+<ul>
+<li><strong>Whoop 临床医生 50% 折扣 + Whoop 5.0 FDA-cleared ECG + BPI</strong>（<a href="https://athletechnews.com/oura-whoop-push-deeper-into-healthcare/" target="_blank" rel="noopener">Athletech 6/26</a> · <a href="https://www.statnews.com/2026/06/09/wearables-data-oura-whoop-clinical-integration/" target="_blank" rel="noopener">STAT 6/9</a>）— Whoop <em>主动 seed clinician</em> + FDA 6/17 closeout letter 解除对 BPI 的执法；Whoop 5.0 加入 14 天续航。</li>
+<li><strong>Oura / Whoop 双双 In-app 虚拟医生</strong>（<a href="https://athletechnews.com/oura-whoop-push-deeper-into-healthcare/" target="_blank" rel="noopener">Athletech 6/26</a>）— Oura 用 Counsel Health（AI chatbot + 实际医师双轨）。</li>
+<li><strong>Google Health 替代 Fitbit App（5/19）</strong> + Gemini-powered AI Health Coach + 计划支持 Apple Watch（<a href="https://www.cnn.com/2026/05/07/tech/google-ai-health-fitbit" target="_blank" rel="noopener">CNN 5/7</a>）— **Google 选择 *跨家数据互通 + AI Coach 多设备覆盖*** 主动避开自家硬件 lock-in。</li>
+<li><strong>Apple Health+ AI Coach 延后 / 实际可能被取消</strong>（<a href="https://www.techradar.com/health-fitness/smartwatches/apples-fitbit-air-rivaling-ai-health-coach-is-delayed-new-report-claims-and-thats-bad-news-for-fitness-fans" target="_blank" rel="noopener">TechRadar</a> · <a href="https://www.techradar.com/health-fitness/smartwatches/apples-rumored-health-subscription-tier-with-ai-features-is-doomed-to-repeat-garmins-failure" target="_blank" rel="noopener">TechRadar 2</a>）— **Apple 首次在 <em>AI × 健康</em> 大主线上落后**。</li>
+<li><strong>Clair Health $11.6M（女性激素 wearable）</strong>（<a href="https://www.mobihealthnews.com/news/clair-health-raises-116m-womens-hormone-monitoring-wearable-and-more-funding-news" target="_blank" rel="noopener">MobiHealthNews</a>）— Khosla 领投；<em>估计 LH/FSH/PdG + voice biomarker 自动识别周期</em>。</li>
+<li><strong>CGM 一年长效 Eversense 365 FDA 批准 + Dexcom Stelo OTC 儿科批准</strong>（<a href="https://www.cardiometabolichealth.org/fda-approves-first-year-long-continuous-glucose-monitoring-sensor-for-diabetes/" target="_blank" rel="noopener">FDA cardiometabolic 报道</a> · <a href="https://www.fda.gov/news-events/press-announcements/fda-clears-first-over-counter-continuous-glucose-monitor-children" target="_blank" rel="noopener">FDA Stelo</a>）— CGM 进一步 OTC 化 + 长效化。</li>
+<li><strong>Whoop Series G $575M @ $10.1B</strong>（<a href="https://news.crunchbase.com/venture/wearable-fitness-tech-ai-whoop-seriesg-funding/" target="_blank" rel="noopener">Crunchbase</a>）— 6 月初已确认；<strong>Whoop 现是 wearable AI 健康市场唯一 $10B+ 私募公司</strong>。</li>
+<li><strong>Cala Health $50M（FDA-cleared 神经调控 wearable）</strong> — 治疗震颤的 Cala kIQ 系统。</li>
+</ul>
+<p><strong>为什么重要</strong>：① <strong>Oura Lab Uploads (6/30 GA) + Whoop 临床医生 50% 折扣 (6/26)</strong> 在 7 天内同时完成 <em>wearable → PHR</em> 通路 — <em>wearable 真正进入 EHR/insurance/employer 报销</em> 是 H2 最大的商业模式拐点；② **Apple AI Health Coach 被认为 *将重蹈 Garmin 订阅失败覆辙*** 是 <em>Apple 健康主线第一次在 AI 时代被认为掉队</em>（<a href="https://www.techradar.com/health-fitness/smartwatches/apples-rumored-health-subscription-tier-with-ai-features-is-doomed-to-repeat-garmins-failure" target="_blank" rel="noopener">TechRadar</a>）— Apple Watch 在 <em>跨家数据互通 + AI Coach</em> 维度的 <em>硬件 + 闭源生态</em> 思路在 <em>Google Health × Apple Watch + Oura Counsel Health + Whoop EHR</em> 的 <em>cross-platform 思路</em> 面前显得僵硬；③ <strong>CGM OTC + 长效化 + 女性激素 + 神经调控 wearable</strong> 同期 <em>新场景品类</em> 进入 wearable AI 资本叙事 — <em>Oura / Whoop 双寡头</em> 之外的 <em>vertical wearable 市场</em> 在 H2 是 <em>tuck-in M&A 主战场</em>。</p>
+<hr>
+<h2>想法</h2>
+<ol>
+<li>**"去 CUDA" 主线 6/30 完成美中软件栈三向证据闭环 — H2 Nvidia 估值开始计入 *单一供应链溢价收敛风险*** —— <em>§1 LongCat-2.0 在国产 ASIC 上完成 trillion-param 训练 + §3 Qualcomm × Modular $3.92B 全股票拿下 Mojo / MAX + Moondream 软件层 pipelined decoding</em> 是 <em>硬件 / 跨家软件栈 / 软件优化</em> 三向同时落地。<strong>值得思考</strong>：(a) Nvidia 7-9 月 GTC + Q2 earnings 是 <em>第一次</em> 必须对外回答 <em>CUDA 三向受压</em> 的窗口；如果 <em>Mag-7 Apollo underperformance 备忘</em> + <em>Anthropic API automation > augmentation</em> + <em>Qualcomm × Modular full-stack 非 CUDA</em> 三条线 共同被卖方研究 <em>打包重估</em>，Nvidia 估值需要计入 <em>单一供应链溢价收敛</em>；(b) **对 Northeastern / Boston 这种 <em>学术 + 早期 AI 硬件创业生态</em> 的研究人员**，<em>Mojo / MAX 现在归 Qualcomm</em> 的 <em>跨厂可编译</em> 工具栈是 H2 <em>学术 GPU + edge 推理</em> 实验的最大基础设施变化 — 比 <em>CUDA 学习曲线</em> 早一步切换可能是合理的 hedge；(c) <em>LongCat-2.0 / DeepSeek V4-Pro / GLM-5.2</em> 是否会 <em>主动给美国 agent 公司 (Lindy / 类似) 提供主权-中性的 EU / Asia 区域副本服务</em>，是 H2 <em>frontier 客户出走</em> 的关键观察点。</li>
+</ol>
+<ol>
+<li><strong>conglomerate-breakup 主线 6/30 进入资本市场议程 — Comcast / Rocket Lab / Alphabet 同一周三向出现</strong> —— <em>Comcast NBCUniversal + Sky 分拆 +22% 单日 / Rocket Lab 收购 Iridium $8B 完成空间整合 / Alphabet 入 Dow 同期 DeepMind / Reality Labs 分拆讨论加速</em>。<strong>值得思考</strong>：(a) **Alphabet 入 Dow 是 <em>指数 mechanical buying + DeepMind 流失基本面分子</em> 双重定价的临界点** — Q2 earnings (7 月底) 是市场决定 <em>是要 Dow 纳入的 +5%</em> 还是 <em>基本面分子的 -5-10%</em> 的真正分水岭；(b) **Meta Reality Labs 是否 <em>主动 spinoff</em> 把 <em>Quest VR + AI Glasses + Wearables</em> 装入独立公司？** 上周末 §1 / §5 <em>Meta capex $135B 上限 + Mag-7 underperformance</em> 已经把 Meta 的 <em>core ads 现金牛与 metaverse 长期赌注</em> 的估值分裂推到临界点 — <em>Comcast 分拆 +22% 是 case study</em>；(c) <strong>物理 AI 整合（Rocket Lab × Iridium）+ 实业分拆（Comcast）+ 算力分拆（Alphabet）同期</strong> 是 <em>2026H2 公司治理重新被资本市场视为 </em>阿尔法源<em> 的强信号</em> — 这是过去 5 年 AI 主线下 <em>被低估</em> 的反向价值机会。</li>
+</ol>
+<ol>
+<li>**AEC AI 在 6 月底完成 <em>软件 + 供应链 + 数据中心 + agent 化</em> 四向集合 — <em>Higharc × US LBM + OpenSpace 1000 数据中心 + Procore / Trimble / Autodesk 集中收购 + Augmenta ACP 2.0 + Buildots Intelligence Lab benchmark</em><strong> —— </strong>6 月单月 AEC AI 完成了 ML 行业 <em>2012-2015 年</em> 完成的 <em>foundation 模型 + 公开 benchmark + 工具链 + capital</em> 的 <em>并行进化</em><strong>。</strong>值得思考<strong>：(a) </strong>Higharc × US LBM 路径** = <em>住宅垂直 AI software → 建材分销 SaaS 整合</em>，是 <em>AEC vertical AI 最先达到 software + supply chain 闭环</em> 的路径，**接下来 <em>商业建筑 / 数据中心 / 基础设施</em> 三个 vertical 谁先完成同类闭环<strong> 是 H2 contech 投资主线；(b) </strong>Procore / Trimble / Autodesk 在 6 月集中收购 + agent 化** = <em>AEC 软件层 30 年 stagnation 终于在 </em>AI agent<em> 这个抽象层被打破</em>；如果 H2 <em>Procore Agent SDK / Autodesk Forma Agent / Trimble × Document Crunch agent</em> 任一家做 <em>开放 agent marketplace</em>，AEC SaaS 30 年没改变的封闭 ecosystem 将正式 <em>cloud-era + agent-era</em> 化；(c) <strong>OpenSpace 1000 数据中心 + Buildots MEP benchmark + Higharc 住宅 + Meta Louisiana Hyperion 5GW</strong> 共同证实 <em>AI capex 真正的物理瓶颈是 </em>劳动力 + 建造软件<em> 而不是 </em>GPU / 资本** — <em>劳动力</em> 是 §6 的 Meta $115M / NABTU × Microsoft 1700 工会培训中心方向；<em>建造软件</em> 是 6/30 集中爆发的方向。**Northeastern × Boston 在 <em>labor + construction software</em> 双轴都有 deep stake 的研究机会**。</li>
+</ol>
+<ol>
+<li><strong>wearable → PHR 通路 6/30 完成产品级闭环 — Oura Lab Uploads + Whoop 临床医生 seeding + Counsel Health AI 问诊 7 天内三向 GA</strong> —— **wearable 的真正商业模式拐点 <em>不是消费品</em> 而是 <em>PHR 中介机构</em><strong>。</strong>值得思考<strong>：(a) </strong>Oura Lab Uploads** (任意 PDF 实验室 → wearable 数据合并) 是 <em>消费 wearable 第一次把 EHR 数据通过 </em>用户主动上传<em> 绕开 </em>医院 → 保险 → 病人<em> 的传统通路</em> — 这种 <em>consumer-first 的 PHR</em> 比 Mayo Clinic / Cleveland Clinic 的 <em>医院 EHR</em> 更具 <em>跨保险 / 跨州 / 跨工作</em> 的 portability；(b) <strong>Apple Health Coach 延后 + Apple Health+ AI 订阅可能取消</strong> 是 Apple 在 <em>跨家数据 + AI Coach 软件层</em> 的 <em>决策性掉队</em> — 接下来 12 个月 Apple Watch 硬件优势能否抵消软件主线被 Google Health / Oura / Whoop 跨平台路径包围 是 <em>消费电子最大不确定性</em>；(c) <strong>Northeastern × Boston 医学中心 × wearable</strong>：在 <em>Whoop 临床医生 50% 折扣 + Oura Lab Uploads + Counsel Health AI 问诊</em> 三向已开放的 6 月底，**做 <em>clinician-facing wearable dashboard 的 longitudinal 学术研究</em> 几乎不需要任何 vendor 谈判摩擦<strong> — 直接对接 Whoop / Oura discount + lab upload + Counsel Health 联系即可设计 12 个月 cohort，</strong>这是 <em>2026H2 wearable + 临床 AI</em> 学术研究的 pareto 最优 setup**。</li>
+</ol>
+<hr>
+<p><strong>值得深入研究</strong>（不自动建文件，备忘）：</p>
+<ul>
+<li><strong>公司</strong>：Meituan / LongCat-2.0 团队（首个 trillion-param 国产 ASIC 训练成功 — 训练 stack 细节如何公开 / 是否复现）/ Qualcomm + Modular（Mojo / MAX 在 Qualcomm 路线图上的具体节点）/ Higharc + US LBM（住宅 + 建材整合的 H2 路线 — Procore / Autodesk 是否反应）/ Augmenta（MEP 协调 <em>几小时</em> 实测数据 — Bechtel / Skanska 试点）/ DeepReinforce Ornith-1.0 (35B 反超 Qwen 3.6 在 poisoned-context — 训练方法学是否开放) / OpenSpace（1000 数据中心 ROI 数据是否扩展到 ENR / Bloomberg 标杆）/ 8090 Solutions（Salesforce Ventures 领投 enterprise AI coding 与 Anthropic / OpenAI / DeepSeek 的客户重叠）/ Straiker（agent governance 类目第 5 笔 Series A 后竞合）/ Pocket（信用卡尺寸录音设备 vs Oura / Whoop 在 <em>便携 AI 数据采集</em> 重叠）/ Clair Health（女性激素 wearable 是否被 Oura / Whoop tuck-in）/ Counsel Health（AI chatbot + 医师双轨 — clinician seeding 转化率）</li>
+</ul>
+<ul>
+<li><strong>人</strong>：Sergey Brin（Google AI coding strike team 改组，midtraining 阶段扩张）/ Sundar Pichai（Q2 财报对 DeepMind 流失 + Dow 纳入 + Gemini 3.5 延期的解释）/ Cristiano Amon（Qualcomm + Modular full-stack 战略落地节奏）/ Chamath Palihapitiya（8090 Solutions 政府 / 受监管行业 vertical 推进）/ Will Ahmed（Whoop 临床医生 seeding 转化率与 GTM）/ Tom Hale（Oura Lab Uploads 后 PHR 商业模式）/ Sho Yamanaka（Buildots Intelligence Lab 公开数据集开放路径）/ Marc Minor（Higharc CEO — US LBM 整合后是否扩展到 commercial vertical）/ Tushar Atre（Modular CEO 在 Qualcomm 内部角色）/ Flo Crivello（Lindy → DeepSeek 切换若属实的一手声明等待）</li>
+</ul>
+<ul>
+<li><strong>论文 / 报告</strong>：<a href="https://arxiv.org/abs/2606.24597" target="_blank" rel="noopener">Qwen-AgentWorld (2606.24597)</a> · <a href="https://arxiv.org/abs/2606.26294" target="_blank" rel="noopener">Red Queen Gödel Machine (2606.26294)</a> · <a href="https://arxiv.org/html/2606.19911v1" target="_blank" rel="noopener">Multi-Agent Transactive Memory (2606.19911)</a> · <a href="https://arxiv.org/pdf/2509.22572" target="_blank" rel="noopener">Dynamic Experts Search (2509.22572)</a> · <a href="https://www.anthropic.com/research/economic-index-june-2026-report" target="_blank" rel="noopener">Anthropic Economic Index June 2026</a> · <a href="https://www.longcatai.org/news/longcat-2" target="_blank" rel="noopener">LongCat-2.0 技术报告</a> · <a href="https://moondream.ai/blog/popping-the-gpu-bubble" target="_blank" rel="noopener">Moondream "Popping the GPU Bubble"</a> · <a href="https://arxiv.org/abs/2606.22283" target="_blank" rel="noopener">Apple Neural Engine: Architecture, Programming, Performance (2606.22283)</a></li>
+</ul>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <span>© 2026 Xinrui Yi · Briefings</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);">← All briefings</a></span>
+  </div>
+</footer>
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const text = document.getElementById('themeText');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+let theme = prefersDark ? 'dark' : 'light';
+applyTheme(theme);
+toggle.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  applyTheme(theme);
+});
+function applyTheme(t) {
+  if (t === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    icon.textContent = '◑'; text.textContent = 'Light';
+  } else {
+    root.removeAttribute('data-theme');
+    icon.textContent = '◐'; text.textContent = 'Dark';
+  }
+}
+
+const audio = document.querySelector('.audio-el');
+if (audio) {
+  const playBtn = document.querySelector('.audio-play');
+  const playIcon = document.querySelector('.audio-icon-play');
+  const backBtn = document.querySelector('.audio-back');
+  const fwdBtn = document.querySelector('.audio-fwd');
+  const track = document.querySelector('.audio-track');
+  const progress = document.querySelector('.audio-progress');
+  const buffered = document.querySelector('.audio-buffered');
+  const curEl = document.querySelector('.audio-cur');
+  const durEl = document.querySelector('.audio-dur');
+
+  const fmt = (s) => {
+    if (!isFinite(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  };
+
+  const setPlaying = (isPlaying) => {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); }
+    else { audio.pause(); }
+  });
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+
+  backBtn.addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+  fwdBtn.addEventListener('click', () => {
+    const dur = isFinite(audio.duration) ? audio.duration : audio.currentTime + 10;
+    audio.currentTime = Math.min(dur, audio.currentTime + 10);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+    progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
+    curEl.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    durEl.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('progress', () => {
+    if (audio.buffered.length && audio.duration) {
+      const end = audio.buffered.end(audio.buffered.length - 1);
+      buffered.style.width = ((end / audio.duration) * 100) + '%';
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+    else if (e.code === 'ArrowLeft') { backBtn.click(); }
+    else if (e.code === 'ArrowRight') { fwdBtn.click(); }
+  });
+}
+</script>
+</body>
+</html>
