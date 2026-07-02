@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Briefing — 2026-07-02 · Xinrui Yi</title>
+<meta name="description" content="Daily AI/AEC/wearables briefing for 2026-07-02." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --bg-soft: #efeae2;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --rule: #d9d3c8;
+  --accent: #b8412c;
+  --accent-soft: #e8c5bc;
+  --card: #fbf9f5;
+}
+[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --bg-soft: #161614;
+  --ink: #f0ece4;
+  --ink-soft: #b8b3a8;
+  --ink-muted: #6e6a62;
+  --rule: #2a2926;
+  --accent: #e8a07a;
+  --accent-soft: #4a2a20;
+  --card: #14140f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Geist', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.mono { font-family: 'Geist Mono', monospace; }
+.container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+nav {
+  position: sticky; top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+}
+.nav-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 32px; max-width: 920px; margin: 0 auto;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px;
+  letter-spacing: -0.01em; color: var(--ink); text-decoration: none;
+}
+.nav-brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; align-items: center; font-size: 13px; }
+.nav-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--accent); }
+.theme-toggle {
+  background: none; border: 1px solid var(--rule); color: var(--ink-soft);
+  cursor: pointer; padding: 6px 10px; border-radius: 6px;
+  font-family: inherit; font-size: 12px; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* briefing page header */
+.brief-head {
+  padding: 80px 0 48px; border-bottom: 1px solid var(--rule);
+}
+.brief-eyebrow {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brief-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ink-muted); }
+.brief-head h1 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.1;
+  letter-spacing: -0.025em; margin-bottom: 16px;
+}
+.brief-head h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
+.brief-meta {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); display: flex; gap: 18px; flex-wrap: wrap;
+}
+.brief-meta .tag {
+  color: var(--ink-soft); border: 1px solid var(--rule);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* prose */
+.prose { padding: 56px 0 80px; }
+.prose h1 { display: none; } /* the markdown's title H1 — we render our own header */
+.prose h2 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.prose h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.prose h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 21px; letter-spacing: -0.015em;
+  margin: 40px 0 14px; color: var(--ink);
+}
+.prose p {
+  font-size: 16px; line-height: 1.75; color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.prose p strong { color: var(--ink); font-weight: 500; }
+.prose ul, .prose ol { margin: 0 0 22px 22px; }
+.prose li {
+  font-size: 16px; line-height: 1.7; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.prose li strong { color: var(--ink); font-weight: 500; }
+.prose a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.prose a:hover { color: var(--accent); border-color: var(--accent); }
+.prose code {
+  font-family: 'Geist Mono', monospace; font-size: 0.92em;
+  background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.prose hr {
+  border: none; border-top: 1px solid var(--rule); margin: 48px 0;
+}
+.prose em { font-style: italic; color: var(--ink-muted); }
+
+/* index page list */
+.brief-list { padding: 56px 0 80px; }
+.brief-row {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px; padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.brief-row:last-child { border-bottom: 1px solid var(--rule); }
+.brief-row .date {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); letter-spacing: 0.04em;
+}
+.brief-row a {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -0.015em; transition: color 0.15s;
+}
+.brief-row a:hover { color: var(--accent); }
+.brief-row .audio-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Geist Mono', monospace; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-left: 12px;
+  padding: 2px 7px; border: 1px solid var(--accent-soft);
+  border-radius: 4px; vertical-align: 2px;
+}
+.brief-row .tags {
+  margin-top: 6px; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+}
+
+footer {
+  padding: 28px 0; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+  border-top: 1px solid var(--rule);
+}
+footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* audio player */
+.brief-audio { padding: 0; }
+.brief-audio + main.prose { padding-top: 0; }
+.brief-audio-title {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.audio-card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 20px 24px;
+}
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.audio-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 13px; gap: 2px;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.audio-btn:hover, .audio-btn:focus-visible {
+  border-color: var(--accent); color: var(--accent); outline: none;
+}
+.audio-play { width: 48px; height: 48px; font-size: 16px; }
+.audio-num {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+}
+.audio-track {
+  flex: 1; height: 4px; background: var(--rule);
+  border-radius: 2px; position: relative; cursor: pointer;
+  min-width: 60px;
+}
+.audio-buffered, .audio-progress {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  border-radius: 2px; width: 0;
+}
+.audio-buffered { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.audio-progress { background: var(--accent); }
+.audio-time {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+.audio-caption {
+  font-size: 12px; font-style: italic;
+  color: var(--ink-muted); margin: 12px 0 0; line-height: 1.4;
+}
+.audio-el { display: none; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 22px; }
+  .nav-inner { padding: 14px 22px; }
+  .nav-links { gap: 16px; font-size: 12px; }
+  .brief-head { padding: 56px 0 36px; }
+  .prose { padding: 40px 0 56px; }
+  .prose h2 { font-size: 25px; }
+  .prose h3 { font-size: 19px; }
+  .brief-row { grid-template-columns: 1fr; gap: 6px; }
+  .audio-card { padding: 16px 18px; }
+  .audio-controls { flex-wrap: wrap; gap: 10px; }
+  .audio-time { flex-basis: 100%; text-align: right; margin-top: 4px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">Xinrui Yi<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="index.html">Briefings</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">◐</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="brief-head">
+  <div class="container">
+    <div class="brief-eyebrow">Morning Briefing</div>
+    <h1>2026-07-02 <em>·</em> daily signal</h1>
+    <div class="brief-meta"><span class="tag">briefing</span><span class="tag">ai</span><span class="tag">market</span><span class="tag">aec</span><span class="tag">wearables</span></div>
+  </div>
+</header>
+
+<main class="prose">
+  <div class="container">
+    <h1>2026-07-02 Morning Briefing</h1>
+<h2>重点</h2>
+<ol>
+<li>**Meta Compute 官宣冲上 AWS/Azure/GCP 正面战场 —— Meta 单日 +9% / +~$150B 市值，AI infra 从 <em>纯 capex 黑洞</em> 被重估为 <em>第二收入曲线</em><strong>：<a href="https://www.bloomberg.com/news/articles/2026-07-01/meta-is-building-a-cloud-business-to-sell-excess-ai-compute" target="_blank" rel="noopener">Bloomberg 7/1（原稿）</a> · <a href="https://techcrunch.com/2026/07/01/meta-like-spacex-looks-to-turn-excess-ai-compute-into-cash/" target="_blank" rel="noopener">TechCrunch 7/1</a> · <a href="https://www.cnbc.com/2026/07/01/meta-stock-cloud-ai-compute.html" target="_blank" rel="noopener">CNBC 7/1</a> · <a href="https://sherwood.news/markets/meta-surges-report-entering-into-cloud-business-excess-compute/" target="_blank" rel="noopener">Sherwood Markets</a> · <a href="https://247wallst.com/investing/2026/07/01/meta-platforms-jumps-9-on-potential-plans-to-sell-ai-compute-challenging-amazon-microsoft-google/" target="_blank" rel="noopener">24/7 Wall St</a> — "Meta Compute" 由 </strong>Santosh Janardhan（Infra Head）+ Daniel Gross（Meta Superintelligence Labs）+ Dina Powell McCormick（President）** 三人挂帅，双产品线：<em>原始 AI compute 出租（CoreWeave 模式）+ 托管模型 API（含 Muse Spark）</em>，全年 AI capex 指引 <strong>$145B</strong>（Q1 已花 $19B）。<strong>意义</strong>：<strong>上周 §3 Alphabet 入 Dow + 昨天 §3 Q2 收官 (S&P +14.9% / NASDAQ +21.4%) + 今天 Meta Cloud pivot</strong>，<em>hyperscaler 从 5 家 → 6 家</em> 的行业地图第一次被市场以估值重定价；<strong>neocloud 板块（CoreWeave / Nebius / Lambda）</strong> 首当其冲：昨日盘中 AI compute 相关标的 <a href="https://finance.yahoo.com/technology/ai/articles/meta-compute-launch-sends-ai-015258040.html" target="_blank" rel="noopener">出现全线下挫</a>。<strong>深挖</strong>：Ohio 数据中心（"曼哈顿大小"）今年内 online + $145B capex 的 <em>折旧曲线</em> 会在 Q3 earnings 首次真正被压力测试。</li>
+</ol>
+<ol>
+<li>**Together AI $800M Series C @ $8.3B —— <em>open-source 前沿 API</em> 首次被 <em>主权基金 + PE 巨头</em> 联合定价 = frontier lab 商品化倒计时开跑<strong>：<a href="https://www.together.ai/blog/announcing-our-series-c" target="_blank" rel="noopener">Together 官告 7/1</a> · <a href="https://techcrunch.com/2026/07/01/neocloud-together-ai-raises-800m-leaps-to-8-3b-valuation/" target="_blank" rel="noopener">TechCrunch 7/1</a> · <a href="https://siliconangle.com/2026/07/01/together-ai-raises-800m-grow-ai-optimized-public-cloud/" target="_blank" rel="noopener">SiliconANGLE</a> · <a href="https://www.pymnts.com/news/artificial-intelligence/2026/together-ai-raises-800-million-to-scale-cheaper-open-source-models/" target="_blank" rel="noopener">PYMNTS</a> · <a href="https://finimize.com/content/together-ais-800-million-round-put-open-models-on-notice" target="_blank" rel="noopener">Finimize 评论</a> — </strong>Aramco Ventures 领投 + Vista Equity + General Catalyst + Emergence + Nvidia + March + Pegatron<strong>，另拿 </strong>500+ MW compute commitment** 单独 SPV 融资。Together 客户跑 <em>DeepSeek / Nemotron / MiniMax / Kimi</em> 等开源模型，<strong>推理成本比闭源低 6-60x</strong>，年 bookings 已过 <strong>$1.15B</strong>；计划 5 年内 compute 容量放大 <strong>~50x</strong>。<strong>与昨天 §1 Anthropic Sonnet 5 定价 downshift ($2/$10) + 今天 §笔记 Kimi K2.7 在 Copilot GA + ZCode/GLM 5.2 harness</strong> 构成 <em>"闭源 lab 降价 + 开源 lab 上桌"</em> 双侧夹逼；<strong>H2 一次 hyperscaler → open-source vendor 大额采购公告</strong> 就能把叙事推到 topple point。</li>
+</ol>
+<ol>
+<li><strong>7/1 美股 Q3 开局 pullback：S&P -0.22% 收 7,483.23 / NASDAQ -0.66% 收 26,040.03 —— 半导体获利了结 + Meta 独扛门面</strong>：<a href="https://www.thestreet.com/stock-market-today/stock-market-today-july-1-2026-nasdaq-futures-slip-after-strongest-quarter-since-2020" target="_blank" rel="noopener">TheStreet 7/1</a> · <a href="https://www.cnbc.com/2026/07/02/metas-push-into-cloud-excites-wall-street-despite-lower-margins.html" target="_blank" rel="noopener">CNBC 7/2 post-mortem</a> · <a href="https://www.kucoin.com/news/flash/u-s-stock-markets-rise-on-july-1-2026-led-by-nasdaq-gains" target="_blank" rel="noopener">KuCoin 亚洲盘</a> — H1 2026 结算：Dow <strong>+8.9%（2021 以来最好）</strong> / S&P <strong>+9.6%</strong> / NASDAQ <strong>+12.8%</strong>；Q2 单季 S&P +14.9% / NASDAQ +21.4%（2020 Q2 以来最强）；**7/1 是 <em>半导体 H1 涨 80%+ 后的第一次</em> 明显获利了结<strong>，Meta +9% 撑住指数不至崩盘。</strong>与 §1 关联**：<em>Meta Compute 抢肉</em> 直接冲击 CoreWeave / Nebius 等 neocloud 定价预期 → Q3 首个交易日 AI infra 板块出现内部再分配。<strong>观察点</strong>：<strong>7/29 FOMC + 8/1 大厂 earnings</strong>，若 hyperscaler capex 指引再上修，<em>折旧压力 vs. Meta Cloud 边际收入</em> 的估值故事就要走一遍。</li>
+</ol>
+<ol>
+<li>**Kimi K2.7 Code GA 进 GitHub Copilot —— <em>五大 lab roster 首次纳入 open-weights</em> + Copilot CLI 引入 auto model-selection 路由<strong>：<a href="https://github.blog/changelog/2026-07-01-kimi-k2-7-is-now-available-in-github-copilot/" target="_blank" rel="noopener">GitHub Changelog 7/1</a> · <a href="https://github.blog/changelog/2026-07-01-copilot-cli-auto-model-selection-routes-based-on-task/" target="_blank" rel="noopener">Copilot CLI auto model-selection Changelog 7/1</a> · <a href="https://news.ycombinator.com/item?id=48756602" target="_blank" rel="noopener">HN 319 pts / 132 cmts</a> · <a href="https://chatforest.com/builders-log/kimi-k2-7-code-github-copilot-ga-five-lab-roster-july-2026-builder-guide/" target="_blank" rel="noopener">ChatForest 分析</a> · <a href="https://tokenmix.ai/blog/github-copilot-july-2026-update-kimi-browser-ai-credits" target="_blank" rel="noopener">TokenMix 7/1</a> — 由 </strong>GitHub 自托管在 Azure**，先向 Copilot Pro / Pro+ / Max 分批推送，之后扩至 Business / Enterprise；billing 走 <em>provider list pricing under usage-based billing</em>。<strong>意义</strong>：<strong>微软官方 IDE roster 第一次收 Chinese open-weights model</strong>（此前 5 lab = OpenAI / Anthropic / Google / xAI / Meta），与今日 §笔记 z.ai <strong>ZCode 官方 GLM-5.2 harness</strong> 上线 HN 484 pts + 昨日 Meituan LongCat 2.0 训练闭环 形成 <em>"开源前沿三向合围 Anthropic + OpenAI 的 code agent 市场"</em> 完整三段式。<strong>衍生观察</strong>：Copilot CLI 的 auto model-selection = <em>IDE 侧的自动 model routing</em> 首次由大厂官方产品化 —— <em>下沉到 IDE 层</em> 的 model 路由会让 API 定价对个人开发者的可见度归零，<strong>API 定价战的 second-order 效应从 subscription pricing 转移到 SKU mix</strong>。</li>
+</ol>
+<ol>
+<li><strong>AEC 高信号一击：</strong>Build**（Heatherwick 建筑师 + AI 研究者创立）$8.5M Seed，Index Ventures 领投 + OpenAI CFO Sarah Friar / Blackstone CTO John Stecher 天使 —— <em>AI × 基建 due-diligence</em> 声称减少 <strong>95%</strong> 时间线<strong>：<a href="https://aecmag.com/ai/build-raises-8-5m-seed-for-ai-driven-infrastructure-due-diligence-platform" target="_blank" rel="noopener">AEC Magazine 7/1</a> — 平台从 </strong>1,600+** 数据源并行评估 <em>规划 / 环境 / 电力 / 政治</em> 约束（vs. 传统人肉串行）；<strong>商业模式极其反常</strong>：不卖 SaaS 授权，卖 <em>"agentic real estate"</em> 完成的 deliverable，人工 QA 每份产物再交付 —— 已在 <strong>100+ 项目 / 15 国</strong> 落地，客户含 Fortune 500 + Tishman Speyer 等机构地产。<strong>与昨天 §4 Higharc $95M Series C（住宅生成式设计 + US LBM 建材供应链）</strong> 呼应：<em>住宅 (Higharc) + 基建 due-diligence (Build) + 数据中心 MEP (Omen AI + Buildots Intelligence Lab)</em> —— <strong>AEC AI 6 月末 - 7 月初连续三向融资</strong>，<em>基建 AI due-diligence</em> 是新增的第三个 vertical。<strong>深挖</strong>：Build 的 <em>deliverable-selling 而非 SaaS-licensing</em> 模式若跑通，会重塑 AEC AI <em>toC vs. toB</em> 商业模式选择 —— 尤其对 hyperscaler 数据中心选址（<strong>Meta Ohio 曼哈顿大小 data center</strong> 正是 §1 副产品）。</li>
+</ol>
+<hr>
+<h2>笔记</h2>
+<h3>📡 1. HN 信号（HN best 48h；front 7/2 因 429 未直接获取）</h3>
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=46297348" target="_blank" rel="noopener"><strong>Claude Sonnet 5</strong></a> · anthropic.com · <strong>1,251 pts / 776 cmts</strong> — 昨天 §1 主线继续。</li>
+<li><a href="https://claude.com/product/claude-science" target="_blank" rel="noopener"><strong>Claude Science</strong></a> · <strong>559 pts / 173 cmts</strong> — 昨天 §1；讨论从 <em>功能</em> 转向 <em>科研 workbench 是否会挤压 SciSpace / Elicit / Consensus</em>。</li>
+<li><a href="https://zcode.z.ai/en" target="_blank" rel="noopener"><strong>ZCode – Harness for GLM-5.2</strong></a> · z.ai · <strong>484 pts / 322 cmts</strong>（<a href="https://news.ycombinator.com/item?id=48753715" target="_blank" rel="noopener">HN item</a>）— Zhipu 官方 <em>GLM-5.2 coding harness</em> 桌面 App（Mac / Win / Linux beta），$18/mo 起 GLM Coding Plan；带 <strong>本地文件管理器 + terminal + Git panel + live browser + MCP + 并行多 agent + 微信/Feishu 远程操控</strong>。<strong>中国开源第一次把 IDE 完整 stack 打包成官方产品</strong>（相当于 Anthropic Claude Code + Cursor 的合体但 open-weight）。参考 <a href="https://www.scmp.com/tech/tech-trends/article/3359170/zhipu-ai-releases-harness-glm-52-model-chinese-firm-takes-aim-anthropic" target="_blank" rel="noopener">SCMP 报道</a> —— <em>"DeepSeek 时刻"</em> 的说法在硅谷内部再度被翻起。</li>
+<li><a href="https://news.ycombinator.com/item?id=48756602" target="_blank" rel="noopener"><strong>Kimi K2.7 Code in GitHub Copilot</strong></a> · github.blog · <strong>319 pts / 132 cmts</strong> — 见 §4。</li>
+<li><a href="https://deepmind.google/models/gemini-image/flash-lite/" target="_blank" rel="noopener"><strong>Nano Banana 2 Lite</strong></a> · <strong>433 pts / 192 cmts</strong> — 昨天 §笔记 424 pts 延续。</li>
+<li><a href="https://f-droid.org" target="_blank" rel="noopener"><strong>Android Developer Verification</strong></a> · <strong>1,305 pts / 540 cmts</strong> — F-Droid 抗议 <em>Google 声称的 "反恶意软件" 开发者验证</em> 实际上是 <em>侧载生态终结</em>；与 §4 微软 Copilot 打开 open-weights roster 形成 <em>平台开放性</em> 反面对偶。</li>
+<li><a href="https://www.pcgamer.com/gaming-industry/open-source-game-engine-godot-will-no-longer-accept-ai-authored-code-contributions/" target="_blank" rel="noopener"><strong>Godot Rejects AI-Authored Code</strong></a> · <strong>546 pts / 389 cmts</strong> — 昨天 §笔记 508 pts 继续放大。</li>
+<li><a href="https://asahilinux.org/2026/06/progress-report-7-1/" target="_blank" rel="noopener"><strong>Asahi Linux 7.1</strong></a> · <strong>560 pts / 214 cmts</strong> — Apple Silicon Linux 里程碑。</li>
+<li><a href="https://box2d.org/posts/2026/06/announcing-box3d/" target="_blank" rel="noopener"><strong>Box3D</strong></a> · <strong>500 pts / 120 cmts</strong> — 开源 3D 物理引擎。</li>
+<li><a href="https://hydrogenaudio.org" target="_blank" rel="noopener"><strong>FFmpeg 9.1 AAC Encoder</strong></a> · <strong>429 pts / 138 cmts</strong> — 音频压缩改进。</li>
+<li><a href="https://www.quantamagazine.org/" target="_blank" rel="noopener"><strong>Synthetic Cell Grows and Divides</strong></a> · <strong>906 pts / 282 cmts</strong> — 昨天 §1 Claude Science 与 wet-lab AI 叙事继续放大。</li>
+<li><a href="https://mynintendonews.com" target="_blank" rel="noopener"><strong>Nintendo Raises Base Salary 10%</strong></a> · <strong>542 pts / 334 cmts</strong> — 昨天延续。</li>
+<li><a href="https://ngrok.com/blog/i-ported-kubernetes-to-the-browser" target="_blank" rel="noopener"><strong>I Ported Kubernetes to the Browser</strong></a> · <strong>331 pts / 102 cmts</strong> — 延续。</li>
+<li><a href="https://workerowned.info" target="_blank" rel="noopener"><strong>Worker-Owned Co-ops Directory</strong></a> · <strong>383 pts / 76 cmts</strong> — 22k+ 工人所有制产品目录；<em>post-VC 商业模式</em> 的反面舆论场。</li>
+<li><a href="https://makerspet.com" target="_blank" rel="noopener"><strong>Oomwoo DIY Robot Vacuum</strong></a> · <strong>431 pts / 84 cmts</strong> — 开源机器人吸尘器；<em>硬件 open-source × AI 边缘设备</em> 三向缝合。</li>
+</ul>
+<p><strong>没能取到 HN front 7/2 的具体页面（HN 429 rate-limit）—— 以上以 best 48h 为主。</strong></p>
+<h3>🔬 2. Reddit / 讨论层脉搏</h3>
+<p>Reddit 直连仍被限，用 HN + X 讨论替代 signal。今日主线：</p>
+<ul>
+<li><strong>Meta Compute</strong> —— r/AAM (accounts anyway) / r/investing 讨论集中在 <em>Meta 是否会碾压 CoreWeave / Nebius 估值 / capex 折旧的 Q3 earnings 冲击</em>。</li>
+<li><strong>Kimi K2.7 in Copilot</strong> —— r/OpenAI / r/LocalLLaMA 讨论 <em>Copilot 首个 open-weight 的 provider markup 结构 + 是否引发 Cursor / Continue / Aider 的连锁 SKU 更新</em>。</li>
+<li><strong>ZCode + GLM 5.2</strong> —— HN 322 条讨论集中在 <em>是否会像 DeepSeek R1 一样成为 workflow 分水岭 + 中英 IDE localization 的意外优势</em>。</li>
+</ul>
+<h3>📄 3. AI Research</h3>
+<ul>
+<li><a href="https://arxiv.org/list/cs.AI/current" target="_blank" rel="noopener"><strong>arXiv cs.AI current</strong></a> — 7 月首周 trending 主题：</li>
+<li><strong>A-Mem: Agentic memory for LLM agents</strong>（NeurIPS 2026）— <em>长上下文替代方案</em> 讨论进入主流；对 Sonnet 5 的 "browser + terminal 长任务" 是必要 counterpart。</li>
+<li><strong>RareDxR1</strong>（IEEE ICME 2026）— 罕见病自主医学 reasoning system —— 与 §1 上周 Claude Science 同向；<em>垂直 reasoning 模型</em> 的 wet-lab 起量。</li>
+<li><strong>"Why reasoning fails to plan"</strong>（昨天已 flag，7 月讨论量持续放大）—— 与 §4 Copilot auto-routing 直接构成 <em>agent 应用层 vs. planning 层</em> 断层。</li>
+<li><strong>alphaXiv trending 昨天延续</strong>：<em>Qwen-Image-2.0-RL</em> 和 <em>Un-0 (Kuramoto oscillator 视觉生成)</em> 讨论继续。</li>
+</ul>
+<h3>💰 4. 融资 / 发布（7/1 完整名单）</h3>
+<p>来源：<a href="https://techstartups.com/2026/07/01/venture-capital-startup-funding-roundup-july-1-2026/" target="_blank" rel="noopener">Tech Startups roundup 7/1</a></p>
+<p><strong>AI Infra / SaaS</strong>：</p>
+<ul>
+<li><strong>Together AI</strong> — <strong>$800M Series C</strong>（Aramco Ventures + Vista Equity）@ <strong>$8.3B</strong> valuation · 见 §2；另 500+ MW SPV。</li>
+<li><strong>TwelveLabs</strong> — <strong>$100M Series B</strong>（NEA + NAVER Ventures）· 视频理解 AI；<strong>韩国 SI + 美国 top-tier VC 联合</strong> 首次在 video understanding 落定。</li>
+<li><strong>Omen AI</strong> — <strong>$31M Series A</strong>（Nava Ventures + CRV）· 数据中心 fluid-analysis / MEP；昨天 §笔记延续。</li>
+<li><strong>Probook</strong> — <strong>$40M Series A</strong>（a16z + Sequoia）· <em>dispatch SaaS + AI</em>，垂直调度物流。</li>
+<li><strong>Oxmiq Labs</strong> — <strong>$35M Series A</strong>（Samsung Catalyst Fund + Fudomo）· <strong>GPU + CPU + TPU 单一架构</strong> 芯片设计新玩家。</li>
+</ul>
+<p><strong>Defense / Deep Tech</strong>：</p>
+<ul>
+<li><strong>Dominion Dynamics</strong> — <strong>$100M Series A</strong>（Georgian Group + RBC + Valor Equity）· defense tech；<em>美防务再工业化</em> 主题继续。</li>
+</ul>
+<p><strong>AEC</strong>：</p>
+<ul>
+<li><strong>Build</strong> — <strong>$8.5M Seed</strong>（Index Ventures）· 见 §5。</li>
+</ul>
+<p><strong>生物医药</strong>：</p>
+<ul>
+<li><strong>Beeline Medicine</strong> $126.3M Series A ext.（Bain / CPP）· <strong>Flare Therapeutics</strong> $85M Series C（Third Rock / Nextech）· <strong>Queue</strong> $12.6M Seed（AlleyCorp，药房自主机器人）继续走。</li>
+</ul>
+<p><strong>行业总量</strong>：<strong>H1 2026 全球 VC $510B</strong>（<a href="https://news.crunchbase.com/venture/global-startup-exits-ipo-ma-soar-ai-q2-h1-2026/" target="_blank" rel="noopener">Crunchbase H1 综述</a>）—— 超过 2025 全年 $440B；<strong>OpenAI + Anthropic 合计吸收 >40%</strong> 上半年 VC 资金 —— <em>frontier lab 定价权集中</em> 是 Together AI $8.3B / Hark $6B / Modal $4.65B 等 <em>中层 AI infra</em> 估值的直接支撑。</p>
+<h3>📊 5. 市场脉搏</h3>
+<ul>
+<li><strong>7/1 收盘</strong>（<a href="https://www.thestreet.com/stock-market-today/stock-market-today-july-1-2026-nasdaq-futures-slip-after-strongest-quarter-since-2020" target="_blank" rel="noopener">TheStreet</a>）：<strong>S&P 500 7,483.23（-0.22%），NASDAQ 26,040.03（-0.66%），Dow +小幅</strong>。<strong>Meta +~9% → +$150B 市值</strong> 独立支撑 Dow / S&P；<em>半导体获利了结</em>（H1 涨 80%+）拖累 NASDAQ。</li>
+<li><strong>H1 2026 结算</strong>：Dow <strong>+8.9%（2021 以来最强 H1）</strong> / S&P <strong>+9.6%</strong> / NASDAQ <strong>+12.8%</strong>（<a href="https://www.thestreet.com/stock-market-today/stock-market-today-july-1-2026-nasdaq-futures-slip-after-strongest-quarter-since-2020" target="_blank" rel="noopener">TheStreet</a> / <a href="https://www.schwab.com/learn/story/stock-market-update-open" target="_blank" rel="noopener">Schwab</a>）。</li>
+<li><strong>neocloud 板块</strong> —— <a href="https://finance.yahoo.com/technology/ai/articles/meta-compute-launch-sends-ai-015258040.html" target="_blank" rel="noopener">Meta Compute → AI compute 全球回调</a>；<strong>CoreWeave / Nebius / Lambda</strong> 需在 Q3 answer <em>"Meta 供给冲击 vs. hyperscaler 需求" 的定价压力</em>。</li>
+<li><strong>观察点</strong>：<strong>7/29 FOMC 首次 Q3 会议 + 8/1 大厂 earnings</strong> —— Meta $145B capex 折旧曲线首次被 sell-side 用 <em>Meta Compute revenue offset</em> 建模；hyperscaler 大厂 capex 指引再上修的概率不低。</li>
+</ul>
+<h3>🏗️ 6. AI × AEC</h3>
+<ul>
+<li><strong>Build</strong> — 见 §5；<strong>基建 AI due-diligence 首个显性化玩家</strong>。</li>
+<li><strong>Higharc</strong> — 昨天 §4 主线继续；市场焦点在 <em>US LBM 建材供应链 API 化</em> 之后的 M&A 空间。</li>
+<li><strong>Omen AI</strong> $31M（Nava Ventures + CRV）— <em>数据中心 fluid-analysis / MEP predictive maintenance</em> 与 §1 Meta Compute + <a href="https://www.openspace.ai/press-releases/openspace-surpasses-1000-data-center-projects-defining-the-construction-intelligence-standard-for-ai-infrastructure/" target="_blank" rel="noopener">OpenSpace 1,000 数据中心项目</a> 形成 <em>"AI 数据中心 = AEC AI 首要 GTM"</em> 的第三次证据落地。</li>
+<li><strong>BuiltWorlds 2026 名单</strong>（<a href="https://builtworlds.com/news/40-ai-driven-aec-solutions-to-know-in-2026/" target="_blank" rel="noopener">40 AI-Driven AEC Solutions</a>）— 上榜从 Higharc / OpenSpace / Buildots / Doxel 到 Alice Technologies / Autodesk Forma / Hypar / Augmenta / Nplan / Concreit —— <strong>半年内出现 M&A 的高置信度目标</strong>：<em>Higharc / Augmenta / Hypar / Doxel / Buildots</em> 五家。</li>
+<li><strong>市场规模</strong>（<a href="https://buildcheck.ai/insights-case-studies/ai-investment-booms-50b-surge-in-construction-tech-growth" target="_blank" rel="noopener">BuildCheck 深度</a>）—— AI × Construction 累计吸金 <strong>$50B</strong> 门槛跨越；北美领先，亚太 CAGR 33.1%。</li>
+</ul>
+<h3>⌚ 7. AI × Wearables</h3>
+<ul>
+<li><strong>Oura Ring 5 → Gen 3/4 功能反向下推</strong> —— <a href="https://gadgetsandwearables.com/2026/07/01/oura-ring-5-features/" target="_blank" rel="noopener">Gadgets and Wearables 7/1</a> — <em>Health Radar / Live Activity / Locate / GLP-1 Insights / Lab Uploads / Oura Labs</em> 一次性向老款推送，<strong>7/7 结束</strong> rollout。<strong>Lab Uploads GA 从 6/30 消费级 → 7/1 全用户矩阵</strong>，是昨天 §5 主线的直接执行。</li>
+<li><strong>Health Radar</strong> — <em>夜间呼吸 + 血压 + 循环系统</em> 变化的 proactive notification —— <em>FDA 未认证</em> 依然是最大空缺（昨天已 flag）。</li>
+<li><strong>Whoop 5.0 / MG（Medical Grade）</strong> — <a href="https://allymonews.ca/whoop-vs-oura-ring-the-ultimate-2026-battle-of-the-screenless-wearables/" target="_blank" rel="noopener">Allymo 对比</a> —— <em>ECG + 血压</em> 由 MG 系列承担，<em>longevity-obsessed</em> 消费者是新买家画像。<strong>Whoop 首次显式分层 SKU</strong> —— <em>athlete band vs. medical-grade</em> —— 是 wearable 行业首次 <em>消费级 vs. 医疗级</em> 明码分离的产品结构。</li>
+<li><strong>观察点</strong>：<em>insurer / employer 报销闭环</em>，尤其 <strong>Optum + Aetna + Whoop MG / Oura Ring 5</strong> 三方声明；FDA 血压 pathway 更新是 H2 最大单点催化 / 单点风险。</li>
+</ul>
+<hr>
+<h2>想法</h2>
+<ol>
+<li>**Meta Compute 是 <em>AI infra 二次分层</em> 的转折点<strong> —— 从 "5 家 hyperscaler + 一堆 neocloud" 变成 "6 家 hyperscaler + neocloud 洗牌"。</strong>深挖**：<em>CoreWeave / Nebius / Lambda 的 revenue mix 中 hyperscaler 反卖 (reseller) 占比</em>。若 Meta Compute 6-12 个月内做出 <em>inference API + 原始 compute</em> 双 SKU，则 <strong>neocloud 中层公司 (< $10B valuation) 会在 2027 出现整合潮</strong>。<strong>副线</strong>：Meta 有 Ohio "曼哈顿大小" 数据中心 → 直接采购 §5 Build 的 due-diligence 平台不是不可能，<em>hyperscaler 采购 AEC AI toolchain</em> 是 H2 最容易被忽略的整合方向。</li>
+</ol>
+<ol>
+<li>**Copilot 收 open-weights 是 <em>IDE model routing</em> 从工程 stack 下沉到消费 stack 的分水岭<strong>。</strong>观察**：微软是否把 <em>auto model-selection</em> API 化 → 让 Cursor / Windsurf / Cline / Aider 变成 <em>前端 skin</em>，<em>底层 model routing 由微软官方产品化</em>。<strong>如果发生</strong>，<em>consumer developer 层的 API 定价</em> 会被 microsoft-managed subscription 完全吸收 —— OpenAI / Anthropic / Google 的 API 收入的 <em>IDE 直接终端占比</em> 会显著下降；<strong>这是昨天 §笔记 Claude Code steganography 事件的 second-order 结局线</strong>（<em>信任层危机 → 平台层收编</em>）。<strong>副线</strong>：中国开源 (ZCode + GLM / Kimi) 是否会推出 <em>自主 model routing 层</em>，避免被 Copilot 收编。</li>
+</ol>
+<ol>
+<li>**AEC AI 的 <em>deliverable-selling 商业模式（Build）</em> 是重要 wedge**。相比 Higharc（SaaS / 供应链 API）+ OpenSpace（jobsite monitoring SaaS）+ Buildots（SaaS + benchmark data pool），Build 卖 <em>完成的 due-diligence 交付物</em>（+ 人 QA）—— **本质是 <em>AI-native services firm</em> 而非 AI-native software firm<strong>。</strong>观察**：McKinsey / BCG / Bain 是否会 <em>孵化 / 收购</em> 这类 <em>AI-augmented services micro-firm</em>，抢占 <em>AI × 咨询</em> market share。<strong>副线</strong>：如果 Build 6-12 个月内客户扩展到 hyperscaler 数据中心选址（Meta / AWS / Google / Microsoft），估值会跳到 $150-300M 区间。</li>
+</ol>
+<ol>
+<li><strong>wearable 从消费 → 医疗 SKU 分层完成第一阶段</strong>（Whoop 5.0 vs. MG，Oura Ring 5 全功能下推）。<strong>观察点</strong>：<em>FDA blood pressure pathway</em> 首个通过是 H2 最大单点催化；<em>Aetna / Optum / UnitedHealth 首个 rebate 公告</em> 是 wearable 商业模式二阶段起爆点。<strong>副线</strong>：<strong>Apple 若无 AI Health Coach 落地（延期已确认），Apple Watch 在 medical-grade wearable 竞赛中会首次落后 Whoop / Oura</strong>。</li>
+</ol>
+<hr>
+<h2>值得深入研究</h2>
+<p><strong>公司 / 组织</strong>：</p>
+<ul>
+<li><strong>Meta Compute (Meta Platforms)</strong> — Ohio 数据中心 online 时点、Muse Spark 生态定价、Neocloud 反应链。</li>
+<li><strong>Together AI</strong> — 500+ MW SPV 结构 + 5 年 50x compute 扩张路径 + $1.15B ARR 客户列表。</li>
+<li><strong>Zhipu AI (Z.ai) / ZCode / GLM-5.2</strong> — Copilot / Cursor 相邻定位的中国开源全栈 stack；企业销售策略。</li>
+<li><strong>Build</strong> — hyperscaler 数据中心选址是否成为主战场；<em>AI-native services</em> 商业模式跑通验证。</li>
+<li><strong>Higharc</strong> — US LBM 集成后的 M&A 空间。</li>
+<li><strong>Oxmiq Labs</strong> — <em>GPU + CPU + TPU 一体架构</em> 芯片路线（Samsung Catalyst 领投的隐含供应链信号）。</li>
+</ul>
+<p><strong>人</strong>：</p>
+<ul>
+<li><strong>Santosh Janardhan / Daniel Gross / Dina Powell McCormick</strong> — Meta Compute 三驾马车 —— <em>Daniel Gross 从 individual investor → Meta Superintelligence Labs Head → Meta Compute co-lead</em> 的路径是硅谷 2026 最快 promotion。</li>
+<li><strong>Erik Bernhardsson (Modal Labs)</strong> — 昨天 §笔记；Modal $4.65B 估值与 Together AI $8.3B 的战略差异。</li>
+<li><strong>Vipul Ved Prakash (Together AI)</strong> — 开源 API 定价权代言人。</li>
+<li><strong>James Stirrat-Ellis / Ben McClusky (Build)</strong> — <em>Heatherwick 建筑师 + AI 研究者</em> 复合背景是 AEC AI 创始团队新典型。</li>
+</ul>
+<p><strong>论文</strong>：</p>
+<ul>
+<li><strong>A-Mem: Agentic memory for LLM agents</strong>（NeurIPS 2026）— 长上下文替代的 agent memory 架构。</li>
+<li><strong>RareDxR1</strong> — 垂直医学 reasoning 的 wet-lab 用例。</li>
+<li><strong>"Why reasoning fails to plan"</strong> — agent long-horizon 断层的 planning-centric 分析。</li>
+</ul>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <span>© 2026 Xinrui Yi · Briefings</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);">← All briefings</a></span>
+  </div>
+</footer>
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const text = document.getElementById('themeText');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+let theme = prefersDark ? 'dark' : 'light';
+applyTheme(theme);
+toggle.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  applyTheme(theme);
+});
+function applyTheme(t) {
+  if (t === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    icon.textContent = '◑'; text.textContent = 'Light';
+  } else {
+    root.removeAttribute('data-theme');
+    icon.textContent = '◐'; text.textContent = 'Dark';
+  }
+}
+
+const audio = document.querySelector('.audio-el');
+if (audio) {
+  const playBtn = document.querySelector('.audio-play');
+  const playIcon = document.querySelector('.audio-icon-play');
+  const backBtn = document.querySelector('.audio-back');
+  const fwdBtn = document.querySelector('.audio-fwd');
+  const track = document.querySelector('.audio-track');
+  const progress = document.querySelector('.audio-progress');
+  const buffered = document.querySelector('.audio-buffered');
+  const curEl = document.querySelector('.audio-cur');
+  const durEl = document.querySelector('.audio-dur');
+
+  const fmt = (s) => {
+    if (!isFinite(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  };
+
+  const setPlaying = (isPlaying) => {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); }
+    else { audio.pause(); }
+  });
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+
+  backBtn.addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+  fwdBtn.addEventListener('click', () => {
+    const dur = isFinite(audio.duration) ? audio.duration : audio.currentTime + 10;
+    audio.currentTime = Math.min(dur, audio.currentTime + 10);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+    progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
+    curEl.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    durEl.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('progress', () => {
+    if (audio.buffered.length && audio.duration) {
+      const end = audio.buffered.end(audio.buffered.length - 1);
+      buffered.style.width = ((end / audio.duration) * 100) + '%';
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+    else if (e.code === 'ArrowLeft') { backBtn.click(); }
+    else if (e.code === 'ArrowRight') { fwdBtn.click(); }
+  });
+}
+</script>
+</body>
+</html>
