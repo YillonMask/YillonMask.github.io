@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Briefing — 2026-07-15 · Xinrui Yi</title>
+<meta name="description" content="Daily AI/AEC/wearables briefing for 2026-07-15." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --bg-soft: #efeae2;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --rule: #d9d3c8;
+  --accent: #b8412c;
+  --accent-soft: #e8c5bc;
+  --card: #fbf9f5;
+}
+[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --bg-soft: #161614;
+  --ink: #f0ece4;
+  --ink-soft: #b8b3a8;
+  --ink-muted: #6e6a62;
+  --rule: #2a2926;
+  --accent: #e8a07a;
+  --accent-soft: #4a2a20;
+  --card: #14140f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Geist', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.mono { font-family: 'Geist Mono', monospace; }
+.container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+nav {
+  position: sticky; top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+}
+.nav-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 32px; max-width: 920px; margin: 0 auto;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px;
+  letter-spacing: -0.01em; color: var(--ink); text-decoration: none;
+}
+.nav-brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; align-items: center; font-size: 13px; }
+.nav-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--accent); }
+.theme-toggle {
+  background: none; border: 1px solid var(--rule); color: var(--ink-soft);
+  cursor: pointer; padding: 6px 10px; border-radius: 6px;
+  font-family: inherit; font-size: 12px; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* briefing page header */
+.brief-head {
+  padding: 80px 0 48px; border-bottom: 1px solid var(--rule);
+}
+.brief-eyebrow {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brief-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ink-muted); }
+.brief-head h1 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.1;
+  letter-spacing: -0.025em; margin-bottom: 16px;
+}
+.brief-head h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
+.brief-meta {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); display: flex; gap: 18px; flex-wrap: wrap;
+}
+.brief-meta .tag {
+  color: var(--ink-soft); border: 1px solid var(--rule);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* prose */
+.prose { padding: 56px 0 80px; }
+.prose h1 { display: none; } /* the markdown's title H1 — we render our own header */
+.prose h2 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.prose h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.prose h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 21px; letter-spacing: -0.015em;
+  margin: 40px 0 14px; color: var(--ink);
+}
+.prose p {
+  font-size: 16px; line-height: 1.75; color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.prose p strong { color: var(--ink); font-weight: 500; }
+.prose ul, .prose ol { margin: 0 0 22px 22px; }
+.prose li {
+  font-size: 16px; line-height: 1.7; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.prose li strong { color: var(--ink); font-weight: 500; }
+.prose a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.prose a:hover { color: var(--accent); border-color: var(--accent); }
+.prose code {
+  font-family: 'Geist Mono', monospace; font-size: 0.92em;
+  background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.prose hr {
+  border: none; border-top: 1px solid var(--rule); margin: 48px 0;
+}
+.prose em { font-style: italic; color: var(--ink-muted); }
+
+/* index page list */
+.brief-list { padding: 56px 0 80px; }
+.brief-row {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px; padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.brief-row:last-child { border-bottom: 1px solid var(--rule); }
+.brief-row .date {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); letter-spacing: 0.04em;
+}
+.brief-row a {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -0.015em; transition: color 0.15s;
+}
+.brief-row a:hover { color: var(--accent); }
+.brief-row .audio-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Geist Mono', monospace; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-left: 12px;
+  padding: 2px 7px; border: 1px solid var(--accent-soft);
+  border-radius: 4px; vertical-align: 2px;
+}
+.brief-row .tags {
+  margin-top: 6px; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+}
+
+footer {
+  padding: 28px 0; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+  border-top: 1px solid var(--rule);
+}
+footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* audio player */
+.brief-audio { padding: 0; }
+.brief-audio + main.prose { padding-top: 0; }
+.brief-audio-title {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.audio-card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 20px 24px;
+}
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.audio-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 13px; gap: 2px;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.audio-btn:hover, .audio-btn:focus-visible {
+  border-color: var(--accent); color: var(--accent); outline: none;
+}
+.audio-play { width: 48px; height: 48px; font-size: 16px; }
+.audio-num {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+}
+.audio-track {
+  flex: 1; height: 4px; background: var(--rule);
+  border-radius: 2px; position: relative; cursor: pointer;
+  min-width: 60px;
+}
+.audio-buffered, .audio-progress {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  border-radius: 2px; width: 0;
+}
+.audio-buffered { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.audio-progress { background: var(--accent); }
+.audio-time {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+.audio-caption {
+  font-size: 12px; font-style: italic;
+  color: var(--ink-muted); margin: 12px 0 0; line-height: 1.4;
+}
+.audio-el { display: none; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 22px; }
+  .nav-inner { padding: 14px 22px; }
+  .nav-links { gap: 16px; font-size: 12px; }
+  .brief-head { padding: 56px 0 36px; }
+  .prose { padding: 40px 0 56px; }
+  .prose h2 { font-size: 25px; }
+  .prose h3 { font-size: 19px; }
+  .brief-row { grid-template-columns: 1fr; gap: 6px; }
+  .audio-card { padding: 16px 18px; }
+  .audio-controls { flex-wrap: wrap; gap: 10px; }
+  .audio-time { flex-basis: 100%; text-align: right; margin-top: 4px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">Xinrui Yi<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="index.html">Briefings</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">◐</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="brief-head">
+  <div class="container">
+    <div class="brief-eyebrow">Morning Briefing</div>
+    <h1>2026-07-15 <em>·</em> daily signal</h1>
+    <div class="brief-meta"><span class="tag">briefing</span><span class="tag">ai</span><span class="tag">market</span><span class="tag">aec</span><span class="tag">wearables</span></div>
+  </div>
+</header>
+
+<main class="prose">
+  <div class="container">
+    <h1>2026-07-15 Morning Briefing</h1>
+<h2>重点</h2>
+<ol>
+<li>**OpenAI 提议向 US 政府赠予 5% 股权 ($42.6B @ $852B 估值) + Anthropic 与 Samsung 谈定制 AI 芯片 + 传 Anthropic 10 月 IPO S-1 —— <em>frontier lab 资本市场 + 治理博弈同期上桌，Altman 呼吁所有 AI 巨头效仿 Alaska Permanent Fund 模型</em><strong> ：<a href="https://www.cnbc.com/2026/07/02/openai-proposes-us-government-own-5percent-stake-to-address-political-blowback.html" target="_blank" rel="noopener">CNBC · OpenAI 5% 提案</a> · <a href="https://www.forbes.com/sites/siladityaray/2026/07/02/openai-reportedly-pitches-granting-us-government-5-stake/" target="_blank" rel="noopener">Forbes · $42.6B 拆解</a> · <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/openai-floats-5-percent-government-stake-days-after-washington-delayed-gpt-5-6" target="_blank" rel="noopener">Tom's Hardware · Alaska Fund 模型</a> · <a href="https://www.bloomberg.com/news/articles/2026-07-02/anthropic-in-talks-with-samsung-for-custom-ai-chip-information-mr3l34t4" target="_blank" rel="noopener">Bloomberg · Anthropic × Samsung 芯片</a> · <a href="https://techcrunch.com/2026/07/02/anthropic-is-discussing-a-new-custom-chip-with-samsung/" target="_blank" rel="noopener">TechCrunch · Anthropic 芯片</a> · <a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-14-2026" target="_blank" rel="noopener">BuildFast 7/14 §1+§4</a> — </strong>OpenAI 提案关键**：<em>Altman 亲自 pitch Trump + cabinet</em>，<em>OpenAI 5% ≈ $42.6B</em> + <em>Anthropic / Google / Meta 匹配 5% 也进入 sovereign fund</em> + <em>可能需要 Act of Congress</em>；紧接 <em>GPT-5.6 broad release White House 延期</em> + Apple v. OpenAI 诉讼；意在把 <em>AI IPO 政治阻力</em> 转成 <em>"citizens dividend 型 AI 财富治理"</em>。<strong>Anthropic × Samsung</strong>：<em>2nm 制程 + 高级封装</em> 早期讨论，<em>power / server 形态尚未确定</em>；对 Anthropic <em>$47B ARR + 2026 profitable + 10 月 IPO S-1 传闻</em> 是完整 stack (model + revenue + hardware + capital markets) 的最后一块拼图。<strong>战略含义</strong>：<em>7/14 一天内 OpenAI 政府股权提案 + Anthropic 芯片 + Anthropic UST 20K 工程师认证</em> 三事件叠加 —— <em>Anthropic 走 enterprise + hardware + IPO 独立路线，OpenAI 走 sovereign wealth + IPO politically-cushioned 路线</em>，两条路径首次清晰分野；<strong>69% US workers 支持 AI 公司捐 50% 股权到 sovereign fund</strong>（PPI 民调）意味着 sovereign AI 已进入 mainstream 政治可行性区间。</li>
+</ol>
+<ol>
+<li>**Google 因算力不足限制 Meta 使用 Gemini API + TSMC Q2 $39.6B / 6 月 YoY +68% + N3/CoWoS 全年售罄 —— <em>"compute > model" 主线在同一周从 SK Hynix ADR 传导到 fab 层，AI capex bottleneck 从 GPU 变成 wafer 层</em><strong>：<a href="https://www.eweek.com/news/google-limits-meta-ai-model-capacity/" target="_blank" rel="noopener">eWeek · Google 限 Meta</a> · <a href="https://www.forbes.com/sites/jonmarkman/2026/06/29/google-limits-metas-gemini-usage-over-compute-shortages/" target="_blank" rel="noopener">Forbes · Google 限 Meta 深度</a> · <a href="https://www.cnbc.com/2026/07/13/tsmc-june-revenue-rises-percent-ahead-second-quarter.html" target="_blank" rel="noopener">CNBC · TSMC 6 月</a> · <a href="https://finance.yahoo.com/markets/stocks/articles/tsmc-q2-revenue-beats-guidance-115145349.html" target="_blank" rel="noopener">Yahoo Finance · TSMC Q2 68% 拆解</a> · <a href="https://www.thestreet.com/investing/stocks/tsmc-june-revenue-seasonal-pattern" target="_blank" rel="noopener">TheStreet · TSMC 破 4 年季节性</a> · <a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-14-2026" target="_blank" rel="noopener">BuildFast 7/14 §2</a> — </strong>Google → Meta 关键**：<em>Google Cloud 企业客户 SLA + Search/Gmail/YouTube 自用</em> 已吃满 Gemini 推理算力；<em>Meta 请求提配额被拒</em>，<em>Meta AI safety / 反诈 / 内容审核 workloads 被迫更节省或迁到 Muse Spark 内模型</em>；Google 自己承压到 <em>付 SpaceX $920M/月租 110K GPU 作 bridge capacity</em>。<strong>TSMC 数字</strong>：<em>Q2 revenue NT$1.27T (~$39.6B, +36% YoY) + 6 月 NT$442.68B (+67.9% YoY) 打破 4 年季节性规律</em> + <em>H1 NT$2.40T (+35.6% YoY)</em>；<em>SemiAnalysis 全年 AI-related revenue 预计破 $40B (~25% 总营收)</em>；<strong>N3 + CoWoS 全年售罄</strong> —— <em>bottleneck 从模型层 (谁做 SOTA) 到 GPU 层 (Nvidia 供货) 再传到 fab 层 (TSMC N3 wafer)</em>，<em>7 月单周 TSMC + SK Hynix ADR + Nvidia $5T 三事件</em> 构成 AI infra rerating 完整 chain。<strong>观察</strong>：Meta Iris 9 月投产 + Anthropic × Samsung 定制芯片 + OpenAI/Anthropic sovereign fund 提案 —— <em>"每家 frontier lab 都要有自己的 silicon + capital + 政治叙事 stack"</em> 已成为 late-2026 标配。</li>
+</ol>
+<ol>
+<li>**市场 7/14 收盘 + 6 月 CPI 意外偏冷 (-0.4% MoM / +3.5% YoY) + JPM/GS Q2 财报开局分裂 —— S&P 500 7,543.59 (+0.38%) / Nasdaq 26,107.01 (+0.9%) / Dow 52,508.27 (+0.02%)，<em>CPI 冷 + 银行季报开门首日多空信号并存</em><strong>：<a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-july-14-2026" target="_blank" rel="noopener">TheStreet 7/14 收盘</a> · <a href="https://www.schwab.com/learn/story/stock-market-update-open" target="_blank" rel="noopener">Schwab · CPI 反应</a> · <a href="https://finance.yahoo.com/video/bank-earnings-cpi-investors-watch-220000042.html" target="_blank" rel="noopener">Yahoo Finance · 银行季报 + CPI 预告</a> · <a href="https://www.cnbc.com/2026/07/13/stock-market-today-live-updates.html" target="_blank" rel="noopener">CNBC · 7/14 live</a> · <a href="https://www.alainguillot.com/stock-market-recap-july-14-2026/" target="_blank" rel="noopener">Alain Guillot 7/14 recap</a> — </strong>CPI 主线**：<em>月度 -0.4% (预期 -0.2%) + core CPI 环比 flat + 头条 YoY 3.5%</em>；意外偏冷降低 Fed 9 月降息概率下行门槛；美债 10 年利率同步走低。<strong>银行季报开局</strong>：**JPM 净利 $21.2B / $7.70 EPS，<em>季度最好利润</em> 但股价 -3%<strong>（Jamie Dimon "sticky inflation + geopolitical tensions" 措辞 + higher cost projections）；</strong>GS +3%**（承销业务爆发驱动 beat）；<em>Wells Fargo / Citi / BAC 同日发布</em> 未整体消化。<strong>周三 (7/15) 关键</strong>：<strong>BlackRock + Morgan Stanley + J&J + GE Aerospace + UnitedHealth + Netflix (盘后)</strong> 联合发布 —— <em>AI capex vs consumer/healthcare EPS</em> 分层最集中一日；同时 <em>7/17 Gemini 3.5 Pro GA + 上海 WAIC 习近平出席</em> 是本周最大 catalyst。</li>
+</ol>
+<ol>
+<li>**HN 双极端：Bonsai 27B 塞进 iPhone 3.9GB (PrismML) HN 670 pts + Cursor 0day 未修 7 个月 (Mindgard) HN 428 pts —— <em>设备端 AI 能力上限 vs IDE 供应链信任下限</em> 同日 top-10 齐现，dev-tools 层的两条对偶主线*<strong>：<a href="https://prismml.com/news/bonsai-27b" target="_blank" rel="noopener">PrismML 官宣</a> · <a href="https://9to5mac.com/2026/07/14/prismml-releases-bonsai-27b-claiming-first-major-ai-model-of-its-size-fit-for-iphone/" target="_blank" rel="noopener">9to5Mac · 首个 iPhone 27B</a> · <a href="https://gigazine.net/gsc_news/en/20260715-bonsai-27b/" target="_blank" rel="noopener">Gigazine · Qwen3.6 压 3.9GB</a> · <a href="https://aijourn.com/prismml-announces-1-bit-bonsai-27b-the-first-27b-model-to-run-on-a-phone/" target="_blank" rel="noopener">AI Journal · 1-bit 拆解</a> · <a href="https://mindgard.ai/blog/cursor-0day-when-full-disclosure-becomes-the-only-protection-left" target="_blank" rel="noopener">Mindgard · Cursor 0day 全披露</a> · <a href="https://thehackernews.com/2026/07/cursor-flaw-lets-malicious-cloned.html" target="_blank" rel="noopener">HackerNews · Cursor CVE</a> · <a href="https://www.darkreading.com/application-security/cursor-ide-malicious-code-poisoned-repos" target="_blank" rel="noopener">Dark Reading · git.exe 恶意仓库</a> · <a href="https://gigazine.net/gsc_news/en/20260715-cursor-0day-disclosure/" target="_blank" rel="noopener">Gigazine · 7 个月未修</a> — </strong>Bonsai 27B 关键**：<em>Qwen3.6 27B 蒸馏到 1-bit 精度 (effective 1.125 bit/weight) + 3.9GB 内存占用</em> → <em>iPhone 17 Pro 本地跑 + 保持 90% 原模型性能</em>；<em>Apple M5 Max 87 tok/s + RTX 5090 163 tok/s</em>；<em>Apache 2.0 License 公开权重 + MLX (Apple) + CUDA (NVIDIA) 双端 kernel</em>。<strong>Cursor 0day 关键</strong>：<em>Windows-only, 打开 poisoned repo 自动执行仓库根目录 <code>git.exe</code></em> —— 无点击 / 无提示 / 无审批；Mindgard <em>2025-12-15 上报, 2026-01-15 Cursor CISO 回应 HackerOne 自动化流程失败, 2-4 月 Cursor 沉默, 6/1 Mindgard 通报公开披露, 7/14 (7 个月 + 70+ releases 后) 公开全披露</em>；Cursor 7/13 回应 Dark Reading 已修复；影响面 <em>7M+ MAU / 1M+ DAU / 50K+ 企业</em>，<em>Mac/Linux 不受影响</em>。<strong>dev-tools 结构信号</strong>：<em>一天内</em> 本地模型可用性上限被打通 (端侧不再需要云 API) + 主流 IDE 供应链信任崩塌 —— <em>对 Anthropic Claude Code 上周 <a href="https://systima.ai/blog/claude-code-vs-opencode-token-overhead" target="_blank" rel="noopener">system prompt overhead 4.7×</a> + <a href="https://gist.github.com/cereblab/dc9a40bc26120f4540e4e09b75ffb547" target="_blank" rel="noopener">xAI Grok CLI wire-level 上传整仓</a></em> 加成 IDE 战 H2 新变量：<em>端侧 + 开源 + 可审计</em>。</li>
+</ol>
+<ol>
+<li>**Boston Dynamics × Gemini Robotics-ER 1.6 集成 Spot + Unitree $619M Shanghai STAR IPO 获批 + Chai Discovery $400M Series C $3.8B 估值 —— <em>物理 AI (工业机器人) + 生物 AI (drug design) 同期跨入 tier-1 资本市场，foundation model 已从 chat interface 完成向"embodied + molecular"两大新战场的迁移</em><strong>：<a href="https://www.therobotreport.com/boston-dynamics-and-google-deepmind-are-using-gemini-to-make-spot-smarter/" target="_blank" rel="noopener">The Robot Report · Spot × Gemini</a> · <a href="https://spectrum.ieee.org/boston-dynamics-spot-google-deepmind" target="_blank" rel="noopener">IEEE Spectrum · 更聪明 Spot</a> · <a href="https://bostondynamics.com/blog/aivi-learning-now-powered-google-gemini-robotics/" target="_blank" rel="noopener">Boston Dynamics · AIVI-Learning</a> · <a href="https://finance.yahoo.com/technology/articles/chinese-robot-maker-unitree-wins-approval-for-052743978.html" target="_blank" rel="noopener">Yahoo Finance · Unitree $619M STAR</a> · <a href="https://www.cryptopolitan.com/chinas-unitree-hanghai-ipo-worth-619-million/" target="_blank" rel="noopener">Cryptopolitan · Unitree 51.5% 人形收入</a> · <a href="https://siliconangle.com/2026/07/14/chai-discovery-nabs-400m-series-c-ai-designed-antibodies-reach-big-pharma/" target="_blank" rel="noopener">SiliconANGLE · Chai Discovery $400M</a> · <a href="https://hitconsultant.net/2026/07/14/chai-discovery-raises-400-million-series-c/" target="_blank" rel="noopener">HIT Consultant · Chai-3 分子设计</a> · <a href="https://www.businesswire.com/news/home/20260713849009/en/Chai-Discovery-Announces-$400M-Series-C-to-Advance-AI-Driven-Molecular-Design" target="_blank" rel="noopener">BusinessWire · Chai 400M 官宣</a> — </strong>Spot × Gemini**：<em>Gemini Robotics-ER 1.6 (4/14 发布) → Boston Dynamics Orbit / AIVI-Learning</em>，新增<em>仪表读取 (analog gauge / pressure meter / sight glass / 数字读数)</em> + <em>多视角空间推理</em> + <em>任务完成判断</em>；工业巡检 + 危险碎片 / 泄漏自主识别。<strong>Unitree</strong>：<em>Shanghai STAR 上市获批筹 ¥4.2B ($619M)</em>；<em>FY25 revenue ¥1.699B ($250M) + net profit ¥278M</em> + <em>人形机器人营收占比 27.6% (2024) → 51.5% (2025 Q3)</em>；用途包含 <em>robot AI model + robot body 研究 + 智能制造基地</em>。<strong>Chai Discovery</strong>：<em>$3.8B valuation (估值 3×)</em>，Index Ventures 领投；<em>Chai-3 提升 target success rate + binding affinity</em>；<em>Lilly + Pfizer 生产用户</em> + Thrive/OpenAI/Menlo/General Catalyst 等续投；累计融资 ~$630M。<strong>战略含义</strong>：<em>Spot + Gemini Robotics-ER 1.6 (工业) + Unitree STAR IPO (消费/服务) + Chai (drug)</em> → <em>"physical + biological AI 双引擎"</em> 是 2026 H2 vs H1 最大结构差异；对 §笔记 6 AEC Buildroid/Bedrock 是同一 physical AI 潮向 tier-1 上下延伸；<em>OEM × foundation model (Cat × NVIDIA / Spot × Gemini)</em> 组合首次形成量产型可复制模式。</li>
+</ol>
+<hr>
+<h2>笔记</h2>
+<h3>📡 1. HN 信号（7/14 front）</h3>
+<p>来源：<a href="https://news.ycombinator.com/front" target="_blank" rel="noopener">HN front</a></p>
+<p><strong>AI / dev-tools 主线</strong>：</p>
+<ul>
+<li><a href="https://danq.me/" target="_blank" rel="noopener"><strong>Your 'app' could have been a webpage (so I fixed it for you)</strong></a> · <strong>852 pts / 515 cmts</strong> — <em>SPA 反思潮</em>；<em>web platform 复兴</em> signal 延续。</li>
+<li><a href="https://supercarblondie.com/" target="_blank" rel="noopener"><strong>Japan develops a method to recover up to 90% of lithium from used EV batteries</strong></a> · <strong>737 pts / 194 cmts</strong> — <em>电池闭环回收</em> 提升到 90%；对 §笔记 5 能源 / EV / battery 板块是隐性 supply signal。</li>
+<li><a href="https://prismml.com/news/bonsai-27b" target="_blank" rel="noopener"><strong>Bonsai 27B: A 27B-Class Model That Runs on a Phone (PrismML)</strong></a> · <strong>670 pts / 240 cmts</strong> — 见 §重点 4；<em>1-bit + 3.9GB + iPhone 17 Pro 端侧</em>；Apache 2.0 权重；对 Apple Intelligence + Gemini Nano 是压力测试。</li>
+<li><a href="https://jola.dev/posts/how-to-stop-claude-from-saying-load-bearing" target="_blank" rel="noopener"><strong>How to stop Claude from saying "load-bearing"</strong></a> · <strong>579 pts / 590 cmts</strong> — <em>Claude Code 频繁使用 "load-bearing" 4-7 次/800-word</em>；<a href="https://github.com/anthropics/claude-code/issues/53454" target="_blank" rel="noopener">GitHub issue #53454</a> 已跟进；同一 HN 讨论区映射到 <a href="https://nautil.us/i-asked-claude-why-it-wont-stop-flattering-me-1279510" target="_blank" rel="noopener">sycophancy 主线 + "You're absolutely right!" 计数器</a>；<em><a href="https://www.transparencycoalition.ai/news/how-to-tone-down-the-sycophancy-in-claude-chatgpt-and-other-ai-chatbots" target="_blank" rel="noopener">Nature 5 月研究</a> 说 sycophancy 越强错误率越高</em>；Anthropic 语言产品化质量已成为 IDE 战 UX 层新变量。</li>
+<li><a href="https://artfish.ai/" target="_blank" rel="noopener"><strong>Are We Offloading Too Much of Our Thinking to AI? (Art Fish)</strong></a> · <strong>505 pts / 458 cmts</strong> — <em>元认知外包</em> 反思潮；对 <a href="https://terrytao.wordpress.com/2026/07/11/old-and-new-apps-via-modern-coding-agents/" target="_blank" rel="noopener">Terry Tao 上周正向 endorsement</a> + <a href="https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html" target="_blank" rel="noopener">geohot 反 hype</a> 构成学术侧 vs 系统黑客 vs 教育侧 三方对撞。</li>
+<li><a href="https://pocoo.org/" target="_blank" rel="noopener"><strong>The Tower Keeps Rising (Armin Ronacher / pocoo.org)</strong></a> · <strong>527 pts / 249 cmts</strong> — <em>软件复杂度不断累加</em> 反思；对 §重点 4 Cursor 0day 7 个月未修 是同一主线。</li>
+<li><a href="https://mindgard.ai/blog/cursor-0day-when-full-disclosure-becomes-the-only-protection-left" target="_blank" rel="noopener"><strong>Cursor 0day: When Full Disclosure Becomes the Only Protection Left</strong></a> · <strong>428 pts / 199 cmts</strong> — 见 §重点 4；<em>Windows-only git.exe 恶意仓库 auto-exec</em> + Mindgard 7 个月披露时间线；对 <em>IDE 供应链攻击面</em> 首个 major CVE 级案例。</li>
+<li><a href="https://lalitm.com/" target="_blank" rel="noopener"><strong>The git history command</strong></a> · <strong>446 pts / 313 cmts</strong> — dev-tool 生产力主线延续。</li>
+<li><a href="https://github.com/juggler-ai" target="_blank" rel="noopener"><strong>Show HN: Juggler – an open-source GUI coding agent, by the creator of JUCE</strong></a> · <strong>269 pts / 113 cmts</strong> — <em>开源 IDE + GUI agent</em>；对 Cursor/Windsurf/OpenCode 是 open-source 端补位。</li>
+<li><a href="https://github.blog" target="_blank" rel="noopener"><strong>Dependabot version updates introduce default package cooldown</strong></a> · <strong>199 pts / 134 cmts</strong> — GitHub 平台层给依赖更新加冷却期，<em>供应链攻击面缓和默认策略</em>，对 Cursor 0day 是隔月对偶信号。</li>
+</ul>
+<p><strong>平台 / 治理 / 硬件</strong>：</p>
+<ul>
+<li><a href="https://9to5google.com/2026/07/13/samsung-health-ai-training-data-consent/" target="_blank" rel="noopener"><strong>Samsung Health app threatens data deletion if users opt out AI training</strong></a> · 高热度 HN 主打头条 — 后续 Samsung 澄清 <em>仅删 AI 训练用分离数据</em>（<a href="https://www.androidauthority.com/samsung-health-ai-training-opt-out-3687480/" target="_blank" rel="noopener">Android Authority 更新</a>）；但 <em>Galaxy Unpacked 前的黑暗模式</em> 定性成立；对 §笔记 7 wearable 数据合规 + Google SensorFM 是同期镜像。</li>
+<li><a href="https://lenergy.com.au/" target="_blank" rel="noopener"><strong>Australian energy retailers must offer three hours of free daytime electricity</strong></a> · <strong>280 pts / 385 cmts</strong> — <em>市场 rooftop solar 过剩</em>；对全球 grid × AI datacenter co-siting 是 supply 侧长信号。</li>
+</ul>
+<h3>🔬 2. Reddit / 讨论层脉搏</h3>
+<p><em>Reddit 直连本次跳过</em>（按用户约定）。核心讨论线映射：</p>
+<ul>
+<li><strong>OpenAI 5% 政府股权 (§重点 1)</strong> —— r/openai / r/technology / r/politics 主线：<em>"Alaska Fund 模型是否可扩展到 AI"</em> + <em>"Anthropic / Google / Meta 是否会跟进 5%"</em> + <em>"Act of Congress 时间线"</em> + <a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-14-2026" target="_blank" rel="noopener">PPI 民调 69% 工人支持 50% 股权入 sovereign fund</a> 是关键 legitimacy 数据。</li>
+<li><strong>Anthropic × Samsung 芯片 + 10 月 IPO 传闻 (§重点 1)</strong> —— r/anthropic / r/hardware / r/investing 主线：<em>"Samsung 2nm vs TSMC N3 vs Broadcom + TSMC (Meta Iris) 路线选择"</em> + <em>"Anthropic $47B ARR + profitable 是否会打破 OpenAI 估值锚"</em>。</li>
+<li><strong>Google 限 Meta + TSMC N3 售罄 (§重点 2)</strong> —— r/hardware / r/investing / r/StableDiffusion 主线：<em>"Meta 从 Gemini 迁到 Muse Spark 是否会加速 open-source foundation 崛起"</em> + <em>"TSMC $40B AI revenue = SMIC/Samsung 追赶空间是否会引发新一轮 CHIPS Act 类政策"</em>。</li>
+<li><strong>Bonsai 27B (§重点 4)</strong> —— r/LocalLLaMA / r/apple / r/singularity 主线：<em>"1-bit 精度 90% retention 是否会重写 mobile AI 部署经济学"</em> + <em>"Apple Intelligence + Bonsai 27B 是否可组合替代 Gemini Nano/Claude Haiku 云调用"</em>。</li>
+<li><strong>Cursor 0day (§重点 4)</strong> —— r/programming / r/netsec / r/cursor 主线：<em>"CISO 7 个月未响应 + 70 release 未修 = 是否所有 AI IDE 都应强制 SBOM + third-party audit"</em> + <em>"Anthropic Claude Code manual permission 昨月转向是先见之明"</em>。</li>
+<li><strong>Claude "load-bearing" 沉溺 + sycophancy (§笔记 1)</strong> —— r/ClaudeAI / r/OpenAI 主线：<em>"language product quality 是 IDE 战 UX 新变量"</em> + <em><a href="https://www.transparencycoalition.ai/news/how-to-tone-down-the-sycophancy-in-claude-chatgpt-and-other-ai-chatbots" target="_blank" rel="noopener">Nature 研究</a>: sycophancy 越强错误率越高</em>。</li>
+</ul>
+<h3>📄 3. AI Research</h3>
+<p><strong>arxiv / alphaxiv 主题</strong>（7/13-7/15）：</p>
+<ul>
+<li><a href="https://arxiv.org/list/cs.AI/current" target="_blank" rel="noopener"><strong>PyVision-RL: Forging Open Agentic Vision Models via RL</strong></a> —— <em>agentic RL 在多模态视觉的开源版本</em>；对齐 Boston Dynamics × Gemini Robotics-ER 1.6 是理论侧 open-source 对应。</li>
+<li><a href="https://arxiv.org/list/cs.LG/current" target="_blank" rel="noopener"><strong>Ragen-2: Reasoning Collapse in Agentic RL</strong></a> —— <em>长链推理 RL 崩塌</em> 现象研究；对 §重点 4 Bonsai 27B 端侧推理 90% retention 是理论侧参照物。</li>
+<li><a href="https://arxiv.org/list/cs.LG/current" target="_blank" rel="noopener"><strong>LAPO: Length-Adaptive Policy Optimization (Reasoning Efficiency)</strong></a> —— <em>长度自适应 policy</em> 内化推理效率；对 GPT-5.6 Sol 750 tok/s + Cerebras 是理论方向对偶。</li>
+<li><a href="https://arxiv.org/list/cs.MA/current" target="_blank" rel="noopener"><strong>SkillRL: Evolving Agents via Recursive Skill-Augmented RL</strong> (ICLR 2026 Memory for Agentic Systems)</a> —— agent skill reuse + memory 结构，<em>technical debt of agent skill reuse</em> 首篇系统研究；对 Claude Code / Cursor 的 CLAUDE.md / .cursorrules 迭代模式有直接借鉴。</li>
+<li><a href="https://arxiv.org/list/cs.LG/current" target="_blank" rel="noopener"><strong>ARCHER: Training Language Model Agents via Hierarchical Multi-Turn RL</strong></a> —— <em>多轮 hierarchical RL</em>；GPT-5.6 sol 长任务 (ploy.ai 案例 8m00s → 3m42s) 底层机理参考。</li>
+<li><a href="https://arxiv.org/pdf/2512.13974" target="_blank" rel="noopener"><strong>Autonomous Construction-Site Safety Inspection Using Mobile Robots: A Multilayer VLM-LLM Pipeline (2512.13974)</strong></a> —— <em>多层 VLM-LLM pipeline 做工地安全巡检</em>；对 §笔记 6 AEC AI × 安全 (每 99 分钟一起工亡的行业) 是最直接学术 anchor。</li>
+<li><a href="https://arxiv.org/pdf/2511.15720" target="_blank" rel="noopener"><strong>Automated Hazard Detection in Construction Sites Using Large Language and Vision-Language Models (2511.15720)</strong></a> —— 同主题续作；<em>大模型 + VLM</em> 组合做 hazard 识别是本季度 AEC AI research 最热子领域。</li>
+</ul>
+<h3>💰 4. 融资 / 发布（7/13-7/15）</h3>
+<p>来源：<a href="https://techstartups.com/2026/07/14/venture-capital-startup-funding-roundup-july-14-2026-blackstone-general-catalyst-index-ventures-kleiner-perkins-lightspeed-sequoia/" target="_blank" rel="noopener">TechStartups · VC roundup 7/14</a> · <a href="https://fundup.ai/recently-funded-startups" target="_blank" rel="noopener">Fundup AI · 近期</a> · <a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-14-2026" target="_blank" rel="noopener">BuildFast 7/14</a></p>
+<p><strong>Frontier / API 层</strong>：</p>
+<ul>
+<li><strong>OpenAI 5% 政府股权提案 + $852B 估值</strong> + <strong>9 月 IPO 路演路径</strong>（见 §重点 1）—— <em>Alaska Permanent Fund 模型 + Act of Congress 或需</em>。</li>
+<li><strong>Anthropic × Samsung 定制 AI 芯片</strong> + <strong>10 月 IPO S-1 传闻</strong> + <strong>$47B ARR + 2026 profitable</strong>（见 §重点 1）—— 与 <a href="https://www.prnewswire.com/apac/news-releases/ust-partners-with-anthropic-to-bring-claude-into-usts-platforms-engineering-and-operations-and-train-20-000-ust-employees-globally-302820760.html" target="_blank" rel="noopener">UST × Anthropic × 20K 工程师认证 (7/9)</a> 组合，<em>硬件 + 企业规模化 + IPO</em> 三线同期。</li>
+<li><strong>Gemini 3.5 Pro 7/17 GA</strong> —— <em>2M context + Deep Think reasoning + $1.25/$10</em>；本周最大 model launch catalyst。</li>
+<li><strong>上海 WAIC 2026 (7/17-)</strong> —— 习近平首次出席（<a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-14-2026" target="_blank" rel="noopener">BuildFast 7/14 §15</a>）；对 §重点 5 Unitree Shanghai IPO 是同期政策 tailwind。</li>
+<li><strong>ByteDance Seedream 5.0 Pro</strong> —— 中国图像生成第 5 代；对齐上周 Meta Muse Image + 全球 image race。</li>
+<li><strong>Google Cloud Gemini Enterprise Agents 平台</strong>（BuildFast 7/14 §5）—— 统一 agent 构建 + 治理平台；对 Anthropic Claude Cowork + ChatGPT Work + Cursor Sand 三家 general-agent 主线 Google 补位。</li>
+</ul>
+<p><strong>基础设施 / 应用 / IPO</strong>：</p>
+<ul>
+<li><strong>TSMC Q2 $39.6B (+36% YoY) + 6 月 +67.9% + N3/CoWoS 售罄</strong>（见 §重点 2）—— <em>SemiAnalysis 全年 AI-related $40B (25%)</em>。</li>
+<li><strong>Unitree Shanghai STAR IPO 获批 $619M</strong>（见 §重点 5）—— <em>人形机器人营收占比 27.6% → 51.5%</em>；1 年内跨越消费/服务级 tier-1 上市。</li>
+<li><strong>Chai Discovery $400M Series C @ $3.8B</strong>（见 §重点 5）—— Index 领投 + Kleiner/Sequoia/Dimension + Bain BCap/Battery/Baillie Gifford/BDT&MSD/Sapphire/Avra；OpenAI + Thrive + General Catalyst 续投；<em>Chai-3 用户含 Lilly + Pfizer</em>。</li>
+<li><strong>Chinese robot maker Unitree ¥1.699B ($250M) FY25 revenue / ¥278M net profit</strong> —— <em>humanoid 已到盈利期</em>；对齐上周 Agility Robotics SPAC $2.5B。</li>
+<li><strong>InstaLILY AI $60M Series B</strong> (Enegize Capital lead) —— 行业 AI 应用层。</li>
+<li><strong>Flex $70M Series B</strong> (Halo Fund) —— fintech × AI 中间层。</li>
+<li><strong>TerraFirma $100M Series A</strong> (Kleiner Perkins lead) —— 未细分披露。</li>
+<li><strong>AWS $1B 内部 AI 部署组织</strong> + <strong>OpenAI Deployment Company</strong> 收购 Northslope + <strong>Anthropic $1.5B consortium</strong> (Goldman + Blackstone)（BuildFast 7/14 §10）—— <em>Microsoft Frontier Company $2.5B + 6,000 工程师</em> 是 enterprise deployment arms race 最强对标；<strong>MIT NANDA "95% enterprise generative AI pilots deliver zero measurable impact"</strong> 是四家共同押注的 anchor 数据。</li>
+<li><strong>H1 2026 全球 startup 融资 $510B 创历史 + 高度集中于 AI 巨头</strong> ——（BuildFast 7/14 §9）<em>capital 集中度史高</em>。</li>
+</ul>
+<p><strong>监管 / 政策</strong>：</p>
+<ul>
+<li><strong>OpenAI 5% government stake + PPI 民调 69% 支持 sovereign fund</strong>（见 §重点 1）—— <em>sovereign AI 政治可行性首次超 60% 门槛</em>。</li>
+<li><strong>Google 因算力不足限 Meta Gemini API + Google 付 SpaceX $920M/月 bridge capacity</strong>（见 §重点 2）—— 反垄断视角新命题：<em>算力供应即 API 供应能否成为 essential facilities</em>。</li>
+<li><strong>University of Chicago Law 禁止 1L 课堂电子设备</strong>（<a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-14-2026" target="_blank" rel="noopener">BuildFast 7/14 §12</a>）—— <em>AI-native education</em> 争议进入 top-tier law school 政策层。</li>
+<li><strong>Senate Judiciary AI patent eligibility 听证</strong>（<a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-14-2026" target="_blank" rel="noopener">BuildFast 7/14 §13</a>）—— <em>AI-generated invention 是否可授予专利</em> 立法窗口。</li>
+<li><strong>UNESCO South Asia AI gender gap 报告</strong>（<a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-14-2026" target="_blank" rel="noopener">BuildFast 7/14 §14</a>）—— <em>AI 教育 / 研究 / 创业性别失衡</em>；发展中经济体不平等风险。</li>
+</ul>
+<h3>📊 5. 市场脉搏（7/14 收盘）</h3>
+<p>来源：<a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-july-14-2026" target="_blank" rel="noopener">TheStreet 7/14</a> · <a href="https://www.schwab.com/learn/story/stock-market-update-open" target="_blank" rel="noopener">Schwab · CPI open</a> · <a href="https://finance.yahoo.com/video/bank-earnings-cpi-investors-watch-220000042.html" target="_blank" rel="noopener">Yahoo Finance · 银行 + CPI</a> · <a href="https://www.alainguillot.com/stock-market-recap-july-14-2026/" target="_blank" rel="noopener">Alain Guillot 7/14 recap</a> · <a href="https://investrade.com/morning-preview-july-13-2026/" target="_blank" rel="noopener">Investrade 7/13 morning</a></p>
+<ul>
+<li><strong>S&P 500 7,543.59 (+0.38%)</strong> / <strong>Nasdaq 26,107.01 (+0.9%)</strong> / <strong>Dow 52,508.27 (+0.02%, +9.63 pts)</strong>；<em>Nasdaq 单日跑赢 Dow ~90bp</em> —— <em>科技板块吸收 CPI 偏冷利好</em>。</li>
+<li><strong>6 月 CPI</strong>：<em>月度 -0.4% (预期 -0.2%) + core 环比 flat + YoY 3.5%</em> —— <em>通胀降温超预期</em>；美债 10Y 走低；Fed 9 月降息概率上修。</li>
+<li><strong>JPM Q2</strong>：<em>净利 $21.2B / EPS $7.70</em>（<em>季度最高利润</em>）+ <em>equity trading +86% YoY</em> —— <em>但股价 -3%</em>：Dimon "sticky inflation + geopolitical tensions" + higher cost projections。</li>
+<li><strong>GS Q2</strong>：<em>股价 +3%</em>，<em>underwriting 业务大幅 beat</em>；与 JPM 分裂 —— <em>交易/承销 vs 消费/信贷</em> 两条子板块首日分层。</li>
+<li><strong>周三 (7/15) 财报</strong>：<strong>BlackRock + Morgan Stanley + J&J + GE Aerospace + UnitedHealth + Intuitive Surgical + Netflix (盘后)</strong>；<em>consumer/healthcare EPS 均值 vs AI capex 指引</em> 首次集中对比。</li>
+<li><strong>本周 catalyst 收官</strong>：<em>7/17 Gemini 3.5 Pro GA + 上海 WAIC 习近平出席</em> 是全球最大 model + geopolitical 事件双叠日。</li>
+<li><strong>观察</strong>：<em>7/22-7/23 hyperscaler capex 指引</em> 前，<em>compute + fab bottleneck (TSMC N3 售罄 + Google 限 Meta + Nvidia $5T + SK Hynix +14%)</em> 已完成 AI infra 估值分层；<em>model economics (OpenAI $25-33B vs Anthropic $47B ARR)</em> 分歧点被 §重点 1 的 sovereign fund 提案 politically-cushioned。</li>
+</ul>
+<h3>🏗️ 6. AI × AEC（建筑/工程/施工）</h3>
+<p>来源：<a href="https://www.therobotreport.com/boston-dynamics-and-google-deepmind-are-using-gemini-to-make-spot-smarter/" target="_blank" rel="noopener">The Robot Report · Spot × Gemini</a> · <a href="https://bostondynamics.com/blog/aivi-learning-now-powered-google-gemini-robotics/" target="_blank" rel="noopener">Boston Dynamics · AIVI-Learning</a> · <a href="https://www.pymnts.com/artificial-intelligence-2/2026/construction-embraces-ai-agents-safety-systems-and-robotics-as-labor-pressures-mount/" target="_blank" rel="noopener">PYMNTS · Construction AI Agents + 安全 + Robotics</a> · <a href="https://www.compscience.com/blog/how-ai-is-transforming-construction-site-safety-in-2026/" target="_blank" rel="noopener">CompScience · 2026 AI 工地安全</a> · <a href="https://www.viact.ai/post/computer-vision-based-safety-solution-2026-buyers-guide" target="_blank" rel="noopener">Viact · CV 安全 2026 采购指南</a> · <a href="https://finance.yahoo.com/news/buildroid-ai-launches-u-bringing-140000756.html" target="_blank" rel="noopener">Yahoo Finance · Buildroid US</a> · <a href="https://www.therobotreport.com/buildroid-ai-expands-simulation-first-robotics-platform-u-s-sites/" target="_blank" rel="noopener">The Robot Report · Buildroid 深度</a></p>
+<ul>
+<li><strong>Spot × Gemini Robotics-ER 1.6</strong>（见 §重点 5）—— <em>工业巡检 + 仪表读取 + 危险识别</em>；<em>OEM (Boston Dynamics) × foundation model (Gemini)</em> 组合首次进入 real-world industrial 部署；<em>同一模型可支持工地感知 + gauge 读取</em>，与 <a href="https://buildcheck.ai/insights-case-studies/physical-ai-construction-from-pilots-to-autonomous-operations" target="_blank" rel="noopener">OpenSpace / Buildots / Doxel</a> 感知层是能力上位可选替代。</li>
+<li><strong>Unitree Shanghai STAR IPO $619M</strong>（见 §重点 5）—— <em>humanoid + quadruped + parts</em>；对 <em>AEC 现场重活 / 巡检 / 高危工序</em> 有直接产业延伸；中国 physical AI 供应链首次进入公开资本市场。</li>
+<li><strong>AEC AI + 工地安全 (2026 主题深化)</strong> —— <em>每 99 分钟一起工亡 + ILO 3M 工亡/年</em>；<em>AI-enhanced PPE + CV 监测</em> 采纳率显著上升；<em>fully autonomous masonry + rebar-tying 机器人</em> 已在 large-scale commercial 项目部署；<a href="https://www.compscience.com/blog/how-ai-is-transforming-construction-site-safety-in-2026/" target="_blank" rel="noopener">2025 中国研究</a> <em>auto robots 减 90% 重复劳动 + 72% 危险暴露</em>。</li>
+<li><strong>arxiv 2 篇 AEC 安全 pipeline</strong> ——<a href="https://arxiv.org/pdf/2512.13974" target="_blank" rel="noopener">VLM-LLM 工地安全巡检 (2512.13974)</a> + <a href="https://arxiv.org/pdf/2511.15720" target="_blank" rel="noopener">Hazard Detection with LLM + VLM (2511.15720)</a> —— <em>学术界 AEC AI research 集中在 CV + 大模型融合的 hazard detection</em>；对 <a href="https://www.therobotreport.com/buildroid-ai-expands-simulation-first-robotics-platform-u-s-sites/" target="_blank" rel="noopener">Bedrock Robotics $270M Series B (Waymo 系创始人) + Buildroid US 首启</a> 双执行层是学术侧感知补位。</li>
+<li><strong>BIM copilot 层稳定</strong> —— <em>Trimble Tekla 2026 AI Cloud Fabrication Drawings + Trimble Agent Studio pilot</em> + <em>Bentley MicroStation 2026 Copilot</em> + <em>Autodesk Assistant</em> 三 vendor stack 落地；本周无新 vendor 大动作。</li>
+<li><strong>信号</strong>：<em>4 层 stack (BIM copilot / perception / execution / foundation)</em> 中，<strong>foundation 层因 Spot × Gemini Robotics-ER 1.6 首次落地</strong> —— <em>AEC-specific foundation model</em> 与 <em>industrial-general foundation model (Gemini Robotics)</em> 出现路线分野；观察 <em>Mistral Robostral Navigate + Gemini Robotics-ER 1.6</em> 谁先在 AEC 现场获得第一个 anchor 部署 (Bechtel/AECOM/Skanska 官方 partnership)。</li>
+</ul>
+<h3>⌚ 7. AI × Wearables（健康可穿戴）</h3>
+<p>来源：<a href="https://9to5google.com/2026/07/13/samsung-health-ai-training-data-consent/" target="_blank" rel="noopener">9to5Google · Samsung Health 数据威胁</a> · <a href="https://www.androidauthority.com/samsung-health-ai-training-opt-out-3687480/" target="_blank" rel="noopener">Android Authority · Samsung 澄清</a> · <a href="https://www.techtimes.com/articles/320412/20260714/samsung-health-deletes-medical-records-if-users-refuse-ai-training-before-galaxy-unpacked.htm" target="_blank" rel="noopener">TechTimes · Galaxy Unpacked 前</a> · <a href="https://www.whoop.com/us/en/thelocker/new-ai-guidance-from-whoop/" target="_blank" rel="noopener">Whoop · My Memory + Proactive Check-ins</a> · <a href="https://wwd.com/beauty-industry-news/wellness/wearable-wellness-devices-oura-whoop-artificial-intelligence-coaching-1236562338/" target="_blank" rel="noopener">WWD · Oura/Whoop AI 教练</a> · <a href="https://research.google/blog/sensorfm-towards-a-general-intelligence-and-interface-for-wearable-health-data/" target="_blank" rel="noopener">Google Research · SensorFM</a></p>
+<ul>
+<li><strong>Samsung Health "opt-out = 删数据" 争议 → 官方澄清</strong>（HN #1 7/14）—— <em>初始条款</em> 要求 opt out AI 训练必须删数据（<em>step + sleep + medication + cycle + 完整健康档案</em>）；<em>Samsung 后续澄清仅删 AI 训练专用分离数据，主数据保留</em>。<em>Galaxy Unpacked 前的 dark pattern</em> 定性成立；对齐 §重点 2 Google 限 Meta —— <em>大公司在 AI 数据 / 算力供应双侧</em> 加强 gatekeeper 姿态。</li>
+<li><strong>Whoop AI 增强：My Memory + Proactive Check-Ins</strong> —— <em>用户可管理 / 编辑 / 删除 personal context</em>；<em>Proactive Check-Ins 主动推送 personalized recommendation</em>；<em>AI coach 从 pull → push 首次落地</em>；对齐上周 SensorFM 的 Personal Health Agent 是同一 push 方向。</li>
+<li><strong>Oura Advisor 7 月推出 (Oura Labs)</strong> —— <em>insight 单向 → coaching 双向对话</em>；与 Whoop clinical + EHR 直连、SensorFM 底座三者构成 <em>"AI wearable 从 dashboard 到 agent 教练"</em> 的三方并行落地。</li>
+<li><strong>Google Fitbit 2026 新品 + Gemini 集成传闻</strong> —— <em>personal coach 建议 (rest / workout)</em>；与 SensorFM 是 stack 内一体化补位；<em>Fitbit 数据护城河 + Gemini 大模型 + Google Search AI 化</em> 三条 tailwind 汇聚。</li>
+<li><strong>Even Realities $1B 独角兽 (7/6)</strong> 与 §重点 5 Unitree STAR IPO 组合意味着 <em>中国 AI 硬件 (智能眼镜 + humanoid)</em> 同月分别进入 tier-1 私募 + 公开资本市场。</li>
+<li><strong>信号</strong>：<em>Samsung Health opt-out 争议 + Whoop My Memory/Proactive + Oura Advisor + SensorFM Personal Health Agent</em> 组合 —— <em>AI wearable 的产品化拐点是 "agent 化 UX + 数据合规"</em> 双变量；<em>"数据出境 (中国 AI 眼镜) + Samsung 数据威胁 + Google 数据护城河" × HIPAA 立法讨论</em> 首次形成清晰 4 面棱镜。</li>
+</ul>
+<hr>
+<h2>想法</h2>
+<ol>
+<li>**OpenAI 5% sovereign fund + Anthropic × Samsung 芯片 + Anthropic 10 月 IPO —— *frontier lab 从 "revenue engine" 演变到 "sovereign AI 资本 + 硬件 + 政治叙事" 三位一体新形态***：sovereign fund 提案表面上是 IPO 政治阻力缓冲，实质是 <em>"AI-generated wealth 首次进入公共财富治理框架"</em>，<em>69% workers 民调支持 50% 分成</em> 意味着 mainstream 政治可行性；对个人 workflow：<em>enterprise SLA / model provider selection</em> 未来 6-12 个月要开始考虑 <em>lab 是否有 sovereign / hardware / political stack 完整覆盖</em>。<strong>值得深挖</strong>：<em>Alaska Fund 分红机制 + AI 生产率红利分配</em> 学术研究 (关注 Brookings / AEI / NBER 相关论文)；<em>Anthropic Samsung 2nm vs Meta Iris Broadcom+TSMC vs OpenAI 自研传闻</em> 三条路线 12-24 个月 tape-out 时间轴。</li>
+</ol>
+<ol>
+<li>**Google 限 Meta Gemini + TSMC N3 售罄 + SK Hynix ADR + Nvidia $5T —— *AI capex 瓶颈从模型 → GPU → fab 完整迁移路径完成，"model economics" 让位 "compute economics"***：<em>Meta 从 Gemini 迁到 Muse Spark 内部模型</em> + <em>Google 付 SpaceX $920M/月</em> + <em>Anthropic 谈 Samsung 定制芯片</em> + <em>Meta Iris 9 月投产</em> → <em>H2 2026 每家 frontier lab 都在打自建硅的仗</em>；同时 <em>TSMC N3 全年售罄 = 有钱也未必买到 wafer</em>。<strong>对个人 / 团队</strong>：<em>本地端侧 (Bonsai 27B on iPhone) + open-weight (Chai-3 / Mistral / Muse) + region-specific (中国系 ByteDance/Unitree) 三条对冲路径</em> 是 H2 model provider 选型三大 axis。<strong>值得看</strong>：<em>hyperscaler capex 7/22-7/23</em> 中 <em>fab / capacity 相关的 memo language</em> —— 会不会首次出现 "wafer allocation risk" 明说；以及 <em>SMIC / Samsung foundry / Rapidus (日) / Intel Foundry</em> 的新一轮政策补贴节奏。</li>
+</ol>
+<ol>
+<li>**Bonsai 27B (设备端 27B 3.9GB) + Cursor 0day (供应链 7 个月零响应) —— <em>"设备端能力上限 + IDE 供应链信任下限"</em> 同日 HN top-10 = 2026 H2 dev-tools 战最锋利的产品切面***：<em>本地 27B + Apache 2.0 权重 = 端侧完整替代云 API 变成可能</em>；<em>Cursor CVE 7 个月未修 + 70+ release 蒙混过关 = IDE 供应商 CISO 层信任成本首次显性可测</em>。<strong>结构性推论</strong>：<em>IDE 战下一步的胜出者需要同时具备：(1) 端侧模型能力 + (2) 可审计的供应链 + (3) 端云混合的默认路径</em>；这精确对上 Claude Code 手动 permission + OpenCode 低 overhead + Anthropic UST 20K 认证 三条 signal。<strong>对个人</strong>：<em>Windows 用户如果使用 Cursor 应立即检查已 clone 的第三方仓库是否含根目录 git.exe</em>；同时 <em>开始尝试端侧模型部署 (Bonsai / Ollama / MLX) 做敏感任务</em> 是 H2 值得投入的 workflow 升级。</li>
+</ol>
+<ol>
+<li>**Spot × Gemini + Unitree STAR + Chai Discovery $3.8B —— <em>physical AI + molecular AI 同期进入 tier-1 资本市场，"foundation model 从 chat interface 迁到 embodied + biological" 三面已齐</em><strong>：与上周 SensorFM (wearable) + Buildroid US + Bedrock Robotics 组合，形成 </strong>"foundation model 的 6 大部署新面向：chat interface + agent workflow + wearable sensing + industrial embodied + molecular design + BIM/AEC"** —— <em>AI 应用面</em> 首次可以按<em>物理 embodiment</em> 分类而不再按 modality。<strong>值得深入</strong>：<em>Boston Dynamics × Gemini Robotics-ER 1.6</em> 在 AEC 现场是否会先于 Buildroid / Bedrock 获得 Bechtel/AECOM 官方 partnership；<em>Chai-3 与 Isomorphic Labs / Xaira / Recursion / Insilico Medicine</em> 的 target success rate 横向对比是否会在 H2 出现首个 industry benchmark。</li>
+</ol>
+<hr>
+<h2>值得深入研究的公司 / 人 / 论文</h2>
+<ul>
+<li><strong>OpenAI</strong> —— <em>5% sovereign fund 提案 + $852B 估值 + Sept IPO 目标</em>；关注 Act of Congress 时间轴 + Anthropic / Google / Meta 是否跟进。</li>
+<li><strong>Anthropic</strong> —— <em>Samsung 2nm 定制芯片谈判 + 10 月 IPO S-1 传闻 + $47B ARR + 2026 profitable + UST 20K 认证</em>；stack 完整度已超 OpenAI 单季度。</li>
+<li><strong>TSMC (2330.TW)</strong> —— <em>Q2 $39.6B + 6 月 +67.9% + N3/CoWoS 全年售罄 + AI 相关全年 $40B (25%)</em>；<em>fab 层 bottleneck</em> 全球 tier-1 anchor。</li>
+<li><strong>PrismML (Bonsai 27B)</strong> —— <em>1-bit + iPhone 端侧 27B + Apache 2.0</em>；<em>端侧本地 AI</em> 商业模式和商业化路径第一象征。</li>
+<li><strong>Mindgard (Cursor 0day 披露)</strong> —— <em>IDE 供应链 CVE 披露专门厂商</em>；agent security 板块继 Noma / HiddenLayer / Robust Intelligence / Protect AI 后新观察对象。</li>
+<li><strong>Chai Discovery</strong> —— <em>$3.8B / $400M / Chai-3 model + Lilly + Pfizer 部署</em>；drug design AI tier-1；对齐 Isomorphic Labs / Xaira / Recursion。</li>
+<li><strong>Unitree Robotics</strong> —— <em>Shanghai STAR $619M IPO 获批 + FY25 $250M revenue + humanoid 51.5% 占比</em>；中国 physical AI 供应链首个公开资本市场入口。</li>
+<li><strong>Boston Dynamics</strong> —— <em>Spot × Gemini Robotics-ER 1.6 集成完成，仪表读取 + 空间推理落地</em>；<em>OEM × foundation model</em> 组合首例。</li>
+<li><strong>UST + Anthropic 20K 认证</strong> —— <em>enterprise deployment arms race</em> 的 partner 侧代理指标；对 Microsoft Frontier Company + AWS $1B + Anthropic $1.5B (GS + Blackstone) + OpenAI Deployment Company 是渠道层 anchor。</li>
+<li><strong>论文</strong>：<em>PyVision-RL + Ragen-2 + LAPO + SkillRL + ARCHER (agent RL & reasoning)</em> + <em>arxiv 2512.13974 & 2511.15720 (AEC 安全 VLM-LLM pipeline)</em> + <em>SensorFM (wearable foundation)</em> —— <em>agent RL + physical AI + molecular AI</em> 三线组合读。</li>
+<li><strong>Simon Willison</strong> —— <em>frontier-tooling 观察者</em>；持续跟踪其对 Bonsai 27B + Cursor 0day + Anthropic Samsung 芯片 的评论。</li>
+<li><strong>Trend tracker 建议</strong>：</li>
+<li><em>sovereign AI capital</em>: OpenAI 5% + Anthropic 跟进 + PPI 民调走势</li>
+<li><em>fab bottleneck</em>: TSMC 月度 revenue + N3 分配 signal + SMIC/Samsung 追赶节奏</li>
+<li><em>device-side AI + open weights</em>: Bonsai 27B + Apple Intelligence + Gemini Nano + Muse Spark</li>
+<li><em>IDE supply chain security</em>: Mindgard + Noma + Cursor / OpenCode / Claude Code CVE 披露节奏</li>
+<li><em>physical AI IPO</em>: Unitree + Agility Robotics + Tesla Optimus 商业化数据</li>
+<li><em>molecular AI</em>: Chai-3 vs Isomorphic vs Xaira target success rate 首个 industry benchmark</li>
+</ul>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <span>© 2026 Xinrui Yi · Briefings</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);">← All briefings</a></span>
+  </div>
+</footer>
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const text = document.getElementById('themeText');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+let theme = prefersDark ? 'dark' : 'light';
+applyTheme(theme);
+toggle.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  applyTheme(theme);
+});
+function applyTheme(t) {
+  if (t === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    icon.textContent = '◑'; text.textContent = 'Light';
+  } else {
+    root.removeAttribute('data-theme');
+    icon.textContent = '◐'; text.textContent = 'Dark';
+  }
+}
+
+const audio = document.querySelector('.audio-el');
+if (audio) {
+  const playBtn = document.querySelector('.audio-play');
+  const playIcon = document.querySelector('.audio-icon-play');
+  const backBtn = document.querySelector('.audio-back');
+  const fwdBtn = document.querySelector('.audio-fwd');
+  const track = document.querySelector('.audio-track');
+  const progress = document.querySelector('.audio-progress');
+  const buffered = document.querySelector('.audio-buffered');
+  const curEl = document.querySelector('.audio-cur');
+  const durEl = document.querySelector('.audio-dur');
+
+  const fmt = (s) => {
+    if (!isFinite(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  };
+
+  const setPlaying = (isPlaying) => {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); }
+    else { audio.pause(); }
+  });
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+
+  backBtn.addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+  fwdBtn.addEventListener('click', () => {
+    const dur = isFinite(audio.duration) ? audio.duration : audio.currentTime + 10;
+    audio.currentTime = Math.min(dur, audio.currentTime + 10);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+    progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
+    curEl.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    durEl.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('progress', () => {
+    if (audio.buffered.length && audio.duration) {
+      const end = audio.buffered.end(audio.buffered.length - 1);
+      buffered.style.width = ((end / audio.duration) * 100) + '%';
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+    else if (e.code === 'ArrowLeft') { backBtn.click(); }
+    else if (e.code === 'ArrowRight') { fwdBtn.click(); }
+  });
+}
+</script>
+</body>
+</html>
