@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Briefing — 2026-07-17 · Xinrui Yi</title>
+<meta name="description" content="Daily AI/AEC/wearables briefing for 2026-07-17." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --bg-soft: #efeae2;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --rule: #d9d3c8;
+  --accent: #b8412c;
+  --accent-soft: #e8c5bc;
+  --card: #fbf9f5;
+}
+[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --bg-soft: #161614;
+  --ink: #f0ece4;
+  --ink-soft: #b8b3a8;
+  --ink-muted: #6e6a62;
+  --rule: #2a2926;
+  --accent: #e8a07a;
+  --accent-soft: #4a2a20;
+  --card: #14140f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Geist', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.mono { font-family: 'Geist Mono', monospace; }
+.container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+nav {
+  position: sticky; top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+}
+.nav-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 32px; max-width: 920px; margin: 0 auto;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px;
+  letter-spacing: -0.01em; color: var(--ink); text-decoration: none;
+}
+.nav-brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; align-items: center; font-size: 13px; }
+.nav-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--accent); }
+.theme-toggle {
+  background: none; border: 1px solid var(--rule); color: var(--ink-soft);
+  cursor: pointer; padding: 6px 10px; border-radius: 6px;
+  font-family: inherit; font-size: 12px; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* briefing page header */
+.brief-head {
+  padding: 80px 0 48px; border-bottom: 1px solid var(--rule);
+}
+.brief-eyebrow {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brief-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ink-muted); }
+.brief-head h1 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.1;
+  letter-spacing: -0.025em; margin-bottom: 16px;
+}
+.brief-head h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
+.brief-meta {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); display: flex; gap: 18px; flex-wrap: wrap;
+}
+.brief-meta .tag {
+  color: var(--ink-soft); border: 1px solid var(--rule);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* prose */
+.prose { padding: 56px 0 80px; }
+.prose h1 { display: none; } /* the markdown's title H1 — we render our own header */
+.prose h2 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.prose h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.prose h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 21px; letter-spacing: -0.015em;
+  margin: 40px 0 14px; color: var(--ink);
+}
+.prose p {
+  font-size: 16px; line-height: 1.75; color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.prose p strong { color: var(--ink); font-weight: 500; }
+.prose ul, .prose ol { margin: 0 0 22px 22px; }
+.prose li {
+  font-size: 16px; line-height: 1.7; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.prose li strong { color: var(--ink); font-weight: 500; }
+.prose a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.prose a:hover { color: var(--accent); border-color: var(--accent); }
+.prose code {
+  font-family: 'Geist Mono', monospace; font-size: 0.92em;
+  background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.prose hr {
+  border: none; border-top: 1px solid var(--rule); margin: 48px 0;
+}
+.prose em { font-style: italic; color: var(--ink-muted); }
+
+/* index page list */
+.brief-list { padding: 56px 0 80px; }
+.brief-row {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px; padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.brief-row:last-child { border-bottom: 1px solid var(--rule); }
+.brief-row .date {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); letter-spacing: 0.04em;
+}
+.brief-row a {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -0.015em; transition: color 0.15s;
+}
+.brief-row a:hover { color: var(--accent); }
+.brief-row .audio-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Geist Mono', monospace; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-left: 12px;
+  padding: 2px 7px; border: 1px solid var(--accent-soft);
+  border-radius: 4px; vertical-align: 2px;
+}
+.brief-row .tags {
+  margin-top: 6px; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+}
+
+footer {
+  padding: 28px 0; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+  border-top: 1px solid var(--rule);
+}
+footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* audio player */
+.brief-audio { padding: 0; }
+.brief-audio + main.prose { padding-top: 0; }
+.brief-audio-title {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.audio-card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 20px 24px;
+}
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.audio-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 13px; gap: 2px;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.audio-btn:hover, .audio-btn:focus-visible {
+  border-color: var(--accent); color: var(--accent); outline: none;
+}
+.audio-play { width: 48px; height: 48px; font-size: 16px; }
+.audio-num {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+}
+.audio-track {
+  flex: 1; height: 4px; background: var(--rule);
+  border-radius: 2px; position: relative; cursor: pointer;
+  min-width: 60px;
+}
+.audio-buffered, .audio-progress {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  border-radius: 2px; width: 0;
+}
+.audio-buffered { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.audio-progress { background: var(--accent); }
+.audio-time {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+.audio-caption {
+  font-size: 12px; font-style: italic;
+  color: var(--ink-muted); margin: 12px 0 0; line-height: 1.4;
+}
+.audio-el { display: none; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 22px; }
+  .nav-inner { padding: 14px 22px; }
+  .nav-links { gap: 16px; font-size: 12px; }
+  .brief-head { padding: 56px 0 36px; }
+  .prose { padding: 40px 0 56px; }
+  .prose h2 { font-size: 25px; }
+  .prose h3 { font-size: 19px; }
+  .brief-row { grid-template-columns: 1fr; gap: 6px; }
+  .audio-card { padding: 16px 18px; }
+  .audio-controls { flex-wrap: wrap; gap: 10px; }
+  .audio-time { flex-basis: 100%; text-align: right; margin-top: 4px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">Xinrui Yi<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="index.html">Briefings</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">◐</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="brief-head">
+  <div class="container">
+    <div class="brief-eyebrow">Morning Briefing</div>
+    <h1>2026-07-17 <em>·</em> daily signal</h1>
+    <div class="brief-meta"><span class="tag">briefing</span><span class="tag">ai</span><span class="tag">market</span><span class="tag">aec</span><span class="tag">wearables</span></div>
+  </div>
+</header>
+
+<main class="prose">
+  <div class="container">
+    <h1>2026-07-17 Morning Briefing</h1>
+<h2>重点</h2>
+<ol>
+<li>**Moonshot Kimi K3 上线 (7/16) —— <em>2.8T MoE + 1M context + 7/27 全量权重开源 + Arena 盲测 front-end coding 击败 Anthropic Fable 5 与 OpenAI GPT-5.6 Sol + Artificial Analysis Intelligence Index 57 分 (超 Opus 4.8 56 / GPT-5.6 Terra 55 / 与 Gemini 3.1 Pro 并列)</em> —— <em>中国开源模型首次在同一 tier 上打进 US frontier lab 阵营，"open-weight frontier" 首个真正兑现</em> + HN #1 1,927 pts / 1,126 cmts*<strong>：<a href="https://www.kimi.com/blog/kimi-k3" target="_blank" rel="noopener">Kimi 官宣</a> · <a href="https://www.axios.com/2026/07/16/moonshot-kimi-ai-china-model-openai-anthropic" target="_blank" rel="noopener">Axios · 惊艳 AI 界</a> · <a href="https://venturebeat.com/technology/chinas-moonshot-ai-releases-kimi-k3-the-largest-open-source-model-ever-rivaling-top-u-s-systems" target="_blank" rel="noopener">VentureBeat · 史上最大开源 rivaling US</a> · <a href="https://techcrunch.com/2026/07/16/moonshots-upcoming-kimi-3-is-expected-to-close-the-gap-with-anthropics-opus-4-8/" target="_blank" rel="noopener">TechCrunch · 缩差 Opus 4.8</a> · <a href="https://www.trendingtopics.eu/kimi-k3-china-shocker/" target="_blank" rel="noopener">Trending Topics · China shocker</a> · <a href="https://www.technology.org/2026/07/17/moonshot-kimi-k3-open-weight-ai-model/" target="_blank" rel="noopener">Technology.org · 2.8T open-weight</a> · <a href="https://news.ycombinator.com/item?id=48938091" target="_blank" rel="noopener">HN #1</a> — </strong>技术数字**：<em>2.8T 总参 (~1.75× DeepSeek V4 Pro 1.6T) + 1M-token context + text + image 多模态</em>；<em>7/16 Kimi Code + Kimi App 上线</em>；<em>7/27 全量权重开源</em>。<strong>Benchmark 关键</strong>：<strong>Arena 盲测 front-end coding 用户偏好 Kimi K3 > Fable 5、Sol、Opus 4.8</strong>；<strong>AA Intelligence Index 57 分</strong> vs Fable 5 (~60) / Sol (~59) / Opus 4.8 (~56) / Terra (~55) / Gemini 3.1 Pro (57 并列)。<strong>战略含义</strong>：<em>7 天内 open-weight 三重叠加</em> —— <em>Thinking Machines Inkling (975B/41B MoE)</em> + <em>xAI Grok Build 全量开源 (Rust)</em> + <em>今日 Kimi K3 (2.8T + 权重 7/27)</em> → <strong>US lab 首个真 open + xAI open + 中国最大开源 tier-1</strong> 同期发生，直接呼应 §重点 2 上海 WAIC 的中国系全球 AI 治理主张；对 Anthropic closed + OpenAI closed 两条路径构成 H2 最尖锐反命题。<strong>注意</strong>：<em>Fable 5 Sol 仍在 tier 之上，且训练/服务体量差距未消</em>；但 <em>价格 + 可 fine-tune + 可自托管</em> 三维度已让 Kimi K3 成 enterprise 部署新默认候选。</li>
+</ol>
+<ol>
+<li>**上海 WAIC 2026 开幕 + 习近平首次亲临主旨演讲 + WAICO (World AI Cooperation Organization) 29 国签约 (含俄 / 巴 / 古 / 委 / 巴 / 印尼 均无西方民主国) + Huawei Atlas 950 SuperPoD 首展 (8,192 Ascend 950DT / 1 EFLOPS FP8 / 6.7× Nvidia NVL144) —— <em>中国系全球 AI 治理反命题 + 全栈国产算力体系首次公开对标 Nvidia，一日之内政治 + 硬件 + 产品 (300 debut) 三线合璧</em><strong>：<a href="https://www.bloomberg.com/news/articles/2026-07-17/xi-vows-to-make-ai-for-all-in-debut-at-china-s-top-tech-summit" target="_blank" rel="noopener">Bloomberg · Xi 首次亲临 "AI for all"</a> · <a href="https://www.cnbc.com/2026/07/17/x-china-ai-summit-risks-security.html" target="_blank" rel="noopener">CNBC · Xi 反 "safety 过度"</a> · <a href="https://socialistchina.org/2026/07/17/xi-jinping-outlines-chinas-vision-for-the-future-of-artificial-intelligence/" target="_blank" rel="noopener">Socialist China · 演讲全文</a> · <a href="https://www.techtimes.com/articles/320812/20260717/china-launches-rival-ai-governance-bloc-waic-2026-opens-300-product-debuts.htm" target="_blank" rel="noopener">TechTimes · WAICO 29 国 + 300 产品 debut</a> · <a href="https://en.sedaily.com/international/2026/07/17/huawei-unveils-atlas-950-superpod-linking-thousands-of-ai" target="_blank" rel="noopener">Seoul Economic Daily · Atlas 950 SuperPoD 8,192 chips</a> · <a href="https://www.huaweicentral.com/huawei-atlas-950-superpod/" target="_blank" rel="noopener">HuaweiCentral · 6.7× NVL144</a> · <a href="https://news.cgtn.com/news/2026-07-13/Xi-to-attend-and-address-opening-ceremony-of-2026-World-AI-Conference-1OKgsIkkofu/p.html" target="_blank" rel="noopener">CGTN · Xi 议程</a> — </strong>Xi 主旨要点**：<em>"AI 发展不应是单一国家 solo，应是国际合作 symphony"</em> + <em>"safety 风险必须遏制"</em> + <em>给发展中国家提供 5,000 名 AI 培训与研讨机会</em> + <em>与 ASEAN / 阿拉伯联盟 / 非盟</em> 建立 AI 合作；宣布 <em>中国将主导全球 AI 治理协作</em>。<strong>WAICO 组织</strong>：<em>29 国签署创始协议</em>，总部上海；<em>俄 / 巴西 / 古巴 / 委 / 巴基斯坦 / 印尼 / 哈萨克 / 柬 / 泰</em> 等发展中国家 + <em>联合国 SG Guterres</em> 出席，<em>无美 / 欧 / 日 / 韩 tier-1 民主国签约</em>。<strong>Huawei Atlas 950 SuperPoD</strong>：<em>8,192 Ascend 950DT NPU + UnifiedBus 2.0</em> + <em>1 EFLOPS FP8 + 2 EFLOPS FP4 + 256 TB 全局可寻址内存 + 3μs RTT 延迟</em> + <em>TB 级 NPU 互联带宽</em> + <em>全无美系元件</em>；<em>"industry's largest AI computing supernode"</em>。<strong>300 产品 debut</strong>：ZTE AI Agent Phone / 各 humanoid / 医疗 AI 落地。<strong>战略含义</strong>：<em>7/16-17 一日双击</em>：Kimi K3 在模型层打进 US frontier tier + WAICO 政治层建全球治理反命题 + Atlas 950 在硬件层公开对标 Nvidia → <strong>中国 AI stack 三层 (model + governance + hardware) 首次全部到位</strong>；对 §重点 5 Apple Intelligence 中国获批走 Qwen + Baidu 是同一叙事的分销侧兑现。</li>
+</ol>
+<ol>
+<li>**Gemini 3.5 Pro 今日 (7/17) GA 目标 —— <em>完整重构后首发 + 2M context + Deep Think 推理层 + Ultra $250/月 tier 门槛 + $1.25/$10 定价</em> —— <em>但 Google 官方尚未确认 spec，与 WAIC + Kimi K3 同日对撞，是 Google 全季度最大 make-or-break 事件</em><strong>：<a href="https://www.techtimes.com/articles/320308/20260713/gemini-35-pro-targets-july-17-after-full-rebuild-every-spec-remains-unconfirmed.htm" target="_blank" rel="noopener">TechTimes · 完整重构后 spec 未证</a> · <a href="https://finance.biggo.com/news/6f0c6bb2-795f-4c57-9d09-6db691d7638a" target="_blank" rel="noopener">BigGo Finance · 完整重构 + 新架构</a> · <a href="https://www.geeky-gadgets.com/google-gemini-3-5-pro-leaks/" target="_blank" rel="noopener">Geeky Gadgets · Deep Think 泄露</a> · <a href="https://enterprisedna.co/resources/news/gemini-35-pro-july-17-rebuild-vs-deepseek-v4-2026/" target="_blank" rel="noopener">Enterprise DNA · 对标 DeepSeek V4</a> · <a href="https://centraljersey.com/2026/07/17/google-gemini-3-5-pro-launch-what-to-expect/" target="_blank" rel="noopener">CentralJersey · what to expect</a> · <a href="https://memeburn.com/gemini-3-5-pro-targets-july-17-with-2m-token-context/" target="_blank" rel="noopener">Memeburn · 2M tok</a> · <a href="https://hackernoon.com/google-delays-gemini-35-pro-to-july-17-the-strategic-play-behind-the-scrapped-base-model" target="_blank" rel="noopener">HackerNoon · 战略路径</a> — </strong>重构关键**：<em>Google DeepMind 5 月发现 original 3.5 Pro 在 recursive tool-calling + SVG 生成上结构性失败</em>，判定 <em>"post-training pipeline 无法救"</em>，<em>scrapped base model + 完整重构</em>；<em>6 周延期</em>。<strong>泄露 spec</strong>：<em>2M token context (Flash 1M 双倍) + Deep Think 推理层多步逻辑 + 自主多文件 coding + tool chain</em>；<em>Deep Think 仅限 Ultra $250/月</em>；<em>API $1.25/$10 per 1M tok</em>。<strong>同日撞点</strong>：<em>Gemini 3.5 Pro GA (美西时间) + WAIC 开幕 (北京时间) + Kimi K3 权重路径 (7/27)</em> → <strong>一日之内 Google DeepMind 展 Ultra + Moonshot 展 open + WAIC 展 governance</strong>，<em>"三种 AI 分发范式"</em> 在 24 小时窗口内同时出场。<strong>结构性观察</strong>：<em>Gemini 3.5 Pro 若成功 = frontier 层 4 家 (Anthropic Fable 5 / OpenAI Sol / SpaceXAI Grok 4.5 / Google Gemini 3.5 Pro) 首次同时到位</em>；若失败 (进一步延期或 benchmark 未达预期) = <em>closed 阵营首次结构性动摇</em>。</li>
+</ol>
+<ol>
+<li>**市场 7/16 收盘：S&P 500 7,533.77 (-0.51%) / Nasdaq 25,881.95 (-1.47%) / Dow 52,552.97 (-0.20%) —— <em>TSMC 2026 capex 上调 $52-56B → $60-64B (+15%) + Arizona 追加 $100B</em> 半导体板块领跌 + Netflix Q2 盘后 -8.58% —— <em>"AI capex 无止境 + AI 消费股增长放缓" 首次同日显性化</em><strong>：<a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-july-16-2026" target="_blank" rel="noopener">TheStreet 7/16</a> · <a href="https://www.cnbc.com/2026/07/16/stock-market-today-live-updates.html" target="_blank" rel="noopener">CNBC 7/16 · 芯片股拖累</a> · <a href="https://finance.yahoo.com/markets/live/stock-market-today-thursday-july-16-dow-sp-500-nasdaq-103116735.html" target="_blank" rel="noopener">Yahoo Finance 7/16 · Alphabet + chip 跌</a> · <a href="https://finance.yahoo.com/technology/articles/tsmc-targets-40-sales-growth-194152888.html" target="_blank" rel="noopener">Yahoo Finance · TSMC 40%+ 增长 + $64B capex</a> · <a href="https://finance.biggo.com/news/5784aaf1-fcbc-4f76-8856-491b9e7175f6" target="_blank" rel="noopener">BigGo Finance · TSMC 但 margin caution</a> · <a href="https://www.investing.com/news/transcripts/earnings-call-transcript-tsmc-lifts-2026-outlook-as-ai-demand-stays-hot-in-q2-2026-93CH-4797109" target="_blank" rel="noopener">Investing.com · TSMC 上调 outlook</a> · <a href="https://www.cnbc.com/2026/07/16/netflix-nflx-earnings-q2-2026.html" target="_blank" rel="noopener">CNBC · NFLX Q2</a> · <a href="https://www.investing.com/news/transcripts/earnings-call-transcript-netflix-posts-slight-q2-2026-beat-shares-sink-after-hours-93CH-4797109" target="_blank" rel="noopener">Investing.com · NFLX 盘后 -8.58%</a> — </strong>TSMC 关键**：<em>2026 capex $60-64B (较前 $52-56B +15% 上调) + Arizona 追加 $100B</em>；<em>70-80% 高级制程 + 10-20% 先进封装 (CoWoS bottleneck)</em>；<em>40%+ 全年营收增长指引</em>；但 <em>Q2 毛利率 caution</em> → premarket 股价反跌。<strong>Netflix Q2</strong>：<em>EPS $0.80 (预期 $0.79) 微 beat + revenue $12.56B (预期 $12.58B) 微 miss + FX-neutral +11% YoY (Q1 12%) 微降</em> + <em>Q2 单季史上最大回购 $4.7B + Q3 revenue guidance +12% + 2026 revenue 区间 $51.0-51.4B (前 $50.7-51.7B 收窄)</em>；股价盘中 +0.91% $74.35 → 盘后 -8.58% $67.97；<em>跌破 52-week low</em>。<strong>S&P 500 87% 已报 beat 预期 (40 家)</strong> 数据反差 —— 明面 EPS 强但 tech / consumer stream 单点 selloff 抵消。<strong>观察</strong>：<em>7/22-7/23 hyperscaler capex 指引</em> 前，<em>TSMC $64B capex + Meta $145B + Anthropic Samsung 芯片</em> 三条 supply-side 数据点已把 <em>"AI compute super-cycle"</em> 定型；但 <em>Netflix 消费者用户增长首次多季度放缓</em> 是首个 AI-adjacent consumer stock rerating 信号。</li>
+</ol>
+<ol>
+<li>**Apple Intelligence 中国获批 (Alibaba Qwen + Baidu) + Hyundai 韩国 3 天罢工 (7/13-15) 首次明确针对 humanoid AI + LM Studio Bionic 开源模型 agent + Meta Compute + Anthropic Karpathy/Blomfield 补齐 —— <em>"AI 生态碎片化" 4 个面向 (地缘 + 劳工 + 端侧 + talent) 同期发生</em><strong>：<a href="https://techcrunch.com/2026/07/16/apple-intelligence-approved-for-launch-in-china-with-alibabas-qwen-ai/" target="_blank" rel="noopener">TechCrunch · Apple × Alibaba + Baidu</a> · <a href="https://seekingalpha.com/news/4613870-apple-intelligence-gets-china-nod-to-use-alibaba-ai-models" target="_blank" rel="noopener">Seeking Alpha · China 获批</a> · <a href="https://www.bloomberg.com/news/articles/2026-07-13/hyundai-hymtf-workers-strike-over-bonuses-ai-robot-job-security" target="_blank" rel="noopener">Bloomberg · Hyundai 罢工 humanoid</a> · <a href="https://www.carscoops.com/2026/07/hyundai-workers-strike-robots/" target="_blank" rel="noopener">Carscoops · 韩系工人首罢 AI</a> · <a href="https://www.eweek.com/news/hyundai-workers-robot-strike-apac-south-korea/" target="_blank" rel="noopener">eWeek · Atlas 25K 部署前保护</a> · <a href="https://lmstudio.ai/blog/introducing-lm-studio-bionic" target="_blank" rel="noopener">LM Studio · Bionic 官宣</a> · <a href="https://9to5mac.com/2026/07/16/lm-studio-expands-beyond-chat-with-bionic-a-new-ai-agent-app-for-open-models/" target="_blank" rel="noopener">9to5Mac · Bionic 端侧 agent</a> — </strong>Apple × 中国**：<em>Cyberspace Administration 7/15 获批</em> + <em>Alibaba Qwen 为大脑 + Baidu 未指明二辅角色</em> + <em>iOS/iPadOS/macOS/visionOS 集成</em>；<em>仍需 security review + engineering adaptation + OS 更新</em> → 商业化尚未定档；Apple 22 个月 中国 AI gap 首次填补。<strong>Hyundai 罢工</strong>：<em>7/13-15 三天轮班 (日夜各减 2h)</em>，<em>明确写入诉求：AI/自动化 job security + humanoid 部署前正式协议</em>；<em>Hyundai 目标全球 Hyundai + Kia 工厂部署 25,000 台 Atlas，2028 从 US Georgia 起步</em>；<em>Atlas 由 Hyundai 全资 Boston Dynamics 制造</em> → <strong>蓝领工人首次针对 humanoid 具名罢工</strong> = <em>"AI × 劳工 political economy"</em> 从软 rhetoric 变实质 industrial action。<strong>LM Studio Bionic</strong>：<em>端侧优先 agent app</em>，<em>本地 / LM Link / Secure Cloud 三档模型</em> + <em>inline diff 代码 + agentic code search + document 生成 + 本地语音</em> + <em>Zero Data Retention + 永不训练用户数据</em>；对 §重点 1 Kimi K3 + Bonsai 27B + Grok Build 是同期 dev-tools 端侧信任 stack 完善。<strong>Anthropic</strong> (see 7/16 §重点 5 延续)：<em>Karpathy + Jumper + Boyd + Blomfield 五部门齐全 + Samsung 2nm</em> 组合本周仍是 model provider 内部结构最完整信号。<strong>Meta Compute</strong> (7/16 官宣, <a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-15-2026" target="_blank" rel="noopener">BuildFast 7/15</a>) 出售 spare AI infra 与 §重点 2 Huawei Atlas 950 是 hyperscaler 硬件层同期对称事件。</li>
+</ol>
+<hr>
+<h2>笔记</h2>
+<h3>📡 1. HN 信号（7/16 front）</h3>
+<p>来源：<a href="https://news.ycombinator.com/front" target="_blank" rel="noopener">HN front</a> · <a href="https://news.ycombinator.com/item?id=48938091" target="_blank" rel="noopener">Kimi K3 讨论 HN #1</a></p>
+<p><strong>AI / 开源 / dev-tools 主线</strong>：</p>
+<ul>
+<li><a href="https://www.kimi.com/blog/kimi-k3" target="_blank" rel="noopener"><strong>Kimi K3: Open Frontier Intelligence</strong></a> · <strong>HN #1 1,927 pts / 1,126 cmts</strong> — 见 §重点 1。</li>
+<li><a href="https://opensource.microsoft.com/blog/2026/07/16/microsoft-comic-chat-is-now-open-source/" target="_blank" rel="noopener"><strong>Microsoft Comic Chat is now open source</strong></a> · <strong>774 pts / 165 cmts</strong> — MS 1996 IRC-comic 客户端源码释出；文化侧强 signal 但也是 <em>legacy code 通过 modern coding agent 复活</em> 主题（延续 Terry Tao 主线）。</li>
+<li><a href="https://lmstudio.ai/blog/introducing-lm-studio-bionic" target="_blank" rel="noopener"><strong>LM Studio Bionic: the AI agent for open models</strong></a> · <strong>313 pts / 114 cmts</strong> — 见 §重点 5；<em>本地 + LM Link + Secure Cloud 三档 + inline diff + Zero Data Retention</em>；对 Cursor / Windsurf / Claude Code / Grok Build (open) 是 open-model-first IDE 补位。</li>
+<li><a href="https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/" target="_blank" rel="noopener"><strong>NotebookLM is now Gemini Notebook</strong></a> · <strong>353 pts / 174 cmts</strong> — Google 品牌统一到 Gemini；对齐 §重点 3 Gemini 3.5 Pro GA 前品牌整合。</li>
+<li><a href="https://www.tryai.dev/blog/ai-music-video-arena-claude-vs-gpt-5.6" target="_blank" rel="noopener"><strong>$100 AI Music Video: Claude Fable 5 vs. GPT-5.6 Sol</strong></a> · <strong>366 pts / 488 cmts</strong> — <em>闭源 frontier 直接横向对比</em> + 音乐视频生成价格首次到 $100 门槛。</li>
+<li><a href="https://blog.lyc8503.net/en/post/llm-classifier/" target="_blank" rel="noopener"><strong>Detecting LLM-Generated Texts with "Classical" Machine Learning</strong></a> · <strong>230 pts / 172 cmts</strong> — LLM 检测的 pre-transformer 方法回归；signal 对 §笔记 4 教育 / 学术 / 版权侧连续争议。</li>
+<li><a href="https://www.theocharis.dev/blog/llm-critics-are-right-i-use-llms-anyway/" target="_blank" rel="noopener"><strong>The LLM Critics Are Right. I Use LLMs Anyway</strong></a> · <strong>277 pts / 281 cmts</strong> — <a href="https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html" target="_blank" rel="noopener">geohot 反 hype (7/12)</a> 延续；<em>criticism + adoption</em> 并存首次成为主流姿态。</li>
+<li><a href="https://www.zhinit.dev/blog/training-a-kick-drum-diffusion-model" target="_blank" rel="noopener"><strong>How to Train a Gen AI Kick Drum Model on Your Old Linux Desktop with 6GB VRAM</strong></a> · <strong>151 pts / 78 cmts</strong> — <em>低门槛领域小 model DIY</em>，端侧 AI 民主化侧文化 signal。</li>
+</ul>
+<p><strong>平台 / 硬件 / 治理</strong>：</p>
+<ul>
+<li><a href="https://community.oneplus.com/thread/2170715118587871237" target="_blank" rel="noopener"><strong>OnePlus halts operations in USA and Europe</strong></a> · <strong>582 pts / 358 cmts</strong> — 中国系硬件品牌撤出西方市场；对 §重点 2 WAIC + 中国 AI 治理阵营是同一 geopolitical decoupling 信号。</li>
+<li><a href="https://www.techdirt.com/2026/07/15/sony-deletes-a-bunch-more-movies-from-the-accounts-of-people-who-bought-them/" target="_blank" rel="noopener"><strong>Sony deletes more movies from the accounts of people who 'bought' them</strong></a> · <strong>675 pts / 427 cmts</strong> — <em>数字所有权</em> 主题延续；与 §笔记 7 Samsung Health opt-out (上周) 是同一 platform gatekeeper 主线。</li>
+<li><a href="https://rtfeldman.com/rust-to-zig" target="_blank" rel="noopener"><strong>How Our Rust-to-Zig Rewrite Is Going</strong></a> · <strong>512 pts / 283 cmts</strong> — <em>反向选择 (Bun 上周 Rust rewrite 反例)</em>；系统 lang 迁移哲学论辩。</li>
+<li><a href="https://www.mixfont.com/experiments/decoy-font" target="_blank" rel="noopener"><strong>Decoy Font</strong></a> · <strong>658 pts / 148 cmts</strong> — <em>anti-AI-scraping font</em>；LLM detection 反面工具。</li>
+<li><a href="https://www.pigeonsandplanes.com/read/music-piracy-what-cd-oink-nine-inch-nails-streaming" target="_blank" rel="noopener"><strong>The lost joy of music piracy</strong></a> · <strong>806 pts / 572 cmts</strong> — 与 Netflix Q2 用户增长放缓是同一 <em>"streaming era 拐点"</em> 广泛焦虑。</li>
+</ul>
+<h3>🔬 2. Reddit / 讨论层脉搏</h3>
+<p><em>Reddit 直连本次跳过</em>（按用户约定）。核心讨论线映射：</p>
+<ul>
+<li><strong>Kimi K3 (§重点 1)</strong> —— r/LocalLLaMA / r/MachineLearning / r/singularity / r/China 主线：<em>"2.8T 权重 7/27 全量开源 + Arena 盲测超 Fable 5 / Sol / Opus 4.8" = "中国开源终于跨过 US frontier 门槛"</em> + <em>"Moonshot vs DeepSeek vs Qwen vs Kimi 中国四强战"</em> + <em>"self-hostable 2.8T 推理成本经济学"</em>。</li>
+<li><strong>WAIC + Huawei Atlas 950 (§重点 2)</strong> —— r/china / r/hardware / r/investing / r/geopolitics 主线：<em>"WAICO 29 国 = 全球 AI 治理二元化正式落地"</em> + <em>"Atlas 950 6.7× NVL144 数字真实性 vs 集群实测性能"</em> + <em>"US export control 是否会因 Atlas 加码"</em>。</li>
+<li><strong>Gemini 3.5 Pro GA (§重点 3)</strong> —— r/Bard / r/singularity / r/OpenAI 主线：<em>"完整重构是策略胜利还是危机公关"</em> + <em>"Deep Think Ultra $250 分层是否会流失中低价段"</em> + <em>"同日撞 WAIC 是否为地缘信号"</em>。</li>
+<li><strong>Apple × Alibaba/Baidu (§重点 5)</strong> —— r/apple / r/china / r/privacy 主线：<em>"22 个月 gap 让 Apple 在中国错失 Apple Intelligence 首波 → 现在等 iOS 更新 + security review"</em> + <em>"Qwen 大脑 + Baidu 辅角是首次 tier-1 US 硬件商完全依赖中国 model 的样本"</em>。</li>
+<li><strong>Hyundai 罢工 (§重点 5)</strong> —— r/labor / r/technology / r/robotics 主线：<em>"首个 humanoid-specific 蓝领罢工"</em> + <em>"Atlas 25K 部署前工会协议要求是否会成为全球模板"</em> + <em>"$32M Monumental (Khosla) + Hyundai Atlas 25K 供需双向拉起 humanoid 产业市场"</em>。</li>
+<li><strong>LM Studio Bionic (§笔记 1)</strong> —— r/LocalLLaMA / r/programming 主线：<em>"端侧 IDE-like agent + Zero Data Retention 是 Cursor 0day 直接反命题"</em> + <em>"能否成为 Kimi K3 / Bonsai 27B / Grok Build (open) 三个 open model 的统一前端"</em>。</li>
+</ul>
+<h3>📄 3. AI Research</h3>
+<p><strong>arxiv / alphaxiv 主题</strong>（7/15-7/17，world model / embodied 主线）：</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2606.00133" target="_blank" rel="noopener"><strong>World Models: A Comprehensive Survey of Architectures, Methodologies, Reasoning Paradigms, and Applications (2606.00133)</strong></a> —— <em>world model 综述</em>；对 BAAI Wujie Physis-v0.1 + Huawei Atlas × Ascend robotics 是理论侧完整梳理。</li>
+<li><a href="https://arxiv.org/pdf/2606.19990" target="_blank" rel="noopener"><strong>Reward as An Agent for Embodied World Models (2606.19990)</strong></a> —— <em>reward-driven embodied world model</em>；对齐 §笔记 6 Hyundai Atlas + Boston Dynamics × Gemini。</li>
+<li><a href="https://arxiv.org/pdf/2606.18208" target="_blank" rel="noopener"><strong>Looped World Models (2606.18208)</strong></a> —— <em>loop 结构的 world model</em>；robotics policy 长程 rollout 参考。</li>
+<li><a href="https://arxiv.org/pdf/2604.22748" target="_blank" rel="noopener"><strong>Agentic World Modeling: Foundations, Capabilities, Laws, and Beyond (2604.22748)</strong></a> —— <em>agent + world model 交叉</em>；Blomfield 加入 Anthropic 提及 "recursive self-improvement" 是理论侧对应。</li>
+<li><a href="https://arxiv.org/abs/2607.13560" target="_blank" rel="noopener"><strong>Grounded world models in biological organisms and future embodied AI (2607.13560)</strong></a> —— <em>生物侧 grounded world model</em>；对 Neko Health + SensorFM Personal Health Agent 是跨领域桥接。</li>
+<li><a href="https://arxiv.org/pdf/2603.14523" target="_blank" rel="noopener"><strong>VLA-Thinker: Boosting Vision-Language-Action Models through Thinking-with-Image Reasoning (2603.14523)</strong></a> —— <em>VLA + thinking-with-image</em>；对 Spot × Gemini Robotics-ER 1.6 + BAAI Wujie 是理论对应。</li>
+<li><a href="https://arxiv.org/pdf/2606.15032" target="_blank" rel="noopener"><strong>How Should World Models Be Evaluated for Embodied Decision-Making? (2606.15032)</strong></a> —— <em>world model evaluation</em>；agent RL 阵营 (Ragen-2 / LAPO / SkillRL) 补位。</li>
+<li><a href="https://arxiv.org/pdf/2512.13974" target="_blank" rel="noopener"><strong>AEC 安全 VLM-LLM pipeline 2 篇 (2512.13974 + 2511.15720)</strong></a> —— AEC 安全巡检学术侧本季度最热子领域，延续上周入选。</li>
+</ul>
+<h3>💰 4. 融资 / 发布（7/15-7/17）</h3>
+<p>来源：<a href="https://techstartups.com/2026/07/15/venture-capital-startup-funding-roundup-july-15-2026-accel-crv-greylock-goldman-sachs-khosla-ventures-m13-and-nava-ventures/" target="_blank" rel="noopener">TechStartups · VC roundup 7/15</a> · <a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-16-2026" target="_blank" rel="noopener">BuildFast 7/16</a></p>
+<p><strong>Frontier / API 层</strong>：</p>
+<ul>
+<li><strong>Moonshot Kimi K3 上线 + 7/27 权重开源</strong>（见 §重点 1）—— <em>2.8T MoE + 1M context + 多模态 + Arena 盲测领先</em>。</li>
+<li><strong>Gemini 3.5 Pro GA (今日目标)</strong>（见 §重点 3）—— <em>2M context + Deep Think + Ultra $250/月 + $1.25/$10 API</em>；官方 spec 未确认。</li>
+<li><strong>上海 WAIC + Huawei Atlas 950 SuperPoD</strong>（见 §重点 2）—— <em>8,192 Ascend 950DT / 1 EFLOPS FP8 / 6.7× NVL144</em>；同期 <em>ZTE AI Agent Phone</em> + <em>300 debut</em>。</li>
+<li><strong>Apple Intelligence 中国获批 (Alibaba Qwen + Baidu)</strong>（见 §重点 5）。</li>
+<li><strong>LM Studio Bionic</strong> —— <em>端侧 open-model agent app + inline diff + 语音 + Zero Data Retention</em>（见 §重点 5）。</li>
+<li><strong>Liquid AI Antidoom</strong> (BuildFast 7/16 §3) —— <em>Qwen3.5-4B 失败率 22.9% → 1%</em>；<em>小模型可靠性技术</em>；对 Bonsai 27B on iPhone 是同 stack 补位。</li>
+<li><strong>OpenAI Codex Micro $230 coding keypad</strong> (BuildFast 7/16 §5) —— OpenAI 首次进入 developer 硬件；<em> Work Louder 合作</em>；对 Anthropic × Samsung 芯片 / Meta Iris 是消费/开发端硬件补位。</li>
+<li><strong>Meta Compute</strong> (7/16, <a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-15-2026" target="_blank" rel="noopener">BuildFast 7/15 §3</a>) —— <em>对外出售 spare AI infra</em>；Meta 首次以 hyperscaler 供货角色对外。</li>
+<li><strong>Meta Business Agent Platform 全球铺开</strong>（延续上周）—— <em>1M+ businesses on WhatsApp/Messenger</em>。</li>
+</ul>
+<p><strong>基础设施 / 融资 / IPO</strong>：</p>
+<ul>
+<li><strong>TSMC 2026 capex $60-64B (+15%) + Arizona 追加 $100B</strong>（见 §重点 4）—— <em>70-80% 高级制程 + 10-20% 先进封装 CoWoS</em>；<em>40%+ 全年营收增长</em>；margin caution。</li>
+<li><strong>Netflix Q2 -8.58% 盘后</strong>（见 §重点 4）—— <em>EPS $0.80 微 beat + revenue $12.56B 微 miss + 单季史上最大 buyback $4.7B</em>；跌破 52-week low。</li>
+<li><strong>Spectro Cloud $100M Series D @ $1B+</strong> (AMD + LG) —— <em>Kubernetes / edge infra 管理</em>；<em>edge AI 部署 stack</em>。</li>
+<li><strong>Zeroth $73.6M Series A</strong> (Ant Group 领投) —— <em>humanoid robots</em>；亚洲资本 humanoid 主线延续。</li>
+<li><strong>Hemispheric $52M</strong> —— <em>以色列 brain-activity AI + neural signal 医学</em>；neural AI 中间层。</li>
+<li><strong>KredosAI $7M Series A</strong> (BMW i Ventures) —— <em>AI 债务催收</em>；vertical AI 应用层。</li>
+<li><strong>QuantumDiamonds €91M + Qolab $54.2M</strong> (延续上周) —— <em>quantum chip inspection + superconducting</em>。</li>
+<li><strong>Intel Ireland €5B fab 扩产</strong> (延续上周)。</li>
+<li><strong>Neko Health $700M / ~$7B</strong> (7/15，Daniel Ek，延续上周) —— <em>preventive imaging + AI + in-house hardware + Manhattan 首店</em>。</li>
+<li><strong>Helsing €1.8B / €18B Series E</strong> (延续上周) —— 欧洲防务 AI anchor。</li>
+<li><strong>Chai Discovery $400M / $3.8B</strong> (延续上周) —— molecular AI。</li>
+</ul>
+<p><strong>监管 / 政策 / 治理</strong>：</p>
+<ul>
+<li><strong>WAICO 29 国 (中 + 俄 + 巴 + 古 + 委 + 巴 + 印尼 + 联合国 SG)</strong>（见 §重点 2）—— 中国系全球 AI 治理反命题。</li>
+<li><strong>Hyundai 韩国罢工 humanoid-specific job security</strong>（见 §重点 5）—— 首个 humanoid-specific 蓝领 industrial action；对 Mews 15% 裁员 (AI 归因) 是同一 political economy 主线。</li>
+<li><strong>TikTok Shop AI creator = $23.4B US 销售</strong> (BuildFast 7/16 §12) —— <em>合成 influencer + AI 内容</em> transparency 争议扩大。</li>
+<li><strong>China 中国要求外资 AI 用中国 model in China</strong> (BuildFast 7/16 §14) —— <em>Apple × Alibaba/Baidu</em> 是首个 tier-1 案例。</li>
+</ul>
+<h3>📊 5. 市场脉搏（7/16 收盘）</h3>
+<p>来源：<a href="https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-july-16-2026" target="_blank" rel="noopener">TheStreet 7/16</a> · <a href="https://www.cnbc.com/2026/07/16/stock-market-today-live-updates.html" target="_blank" rel="noopener">CNBC 7/16</a> · <a href="https://finance.yahoo.com/markets/live/stock-market-today-thursday-july-16-dow-sp-500-nasdaq-103116735.html" target="_blank" rel="noopener">Yahoo Finance 7/16</a> · <a href="https://investrade.com/market-review-july-16-2026/" target="_blank" rel="noopener">Investrade 7/16 review</a></p>
+<ul>
+<li><strong>S&P 500 7,533.77 (-0.51%)</strong> / <strong>Nasdaq 25,881.95 (-1.47%)</strong> / <strong>Dow 52,552.97 (-0.20%)</strong>；<em>Nasdaq 跑输 S&P 96bp</em> → <em>半导体板块结构性拖累</em>。</li>
+<li><strong>TSMC 2026 capex $60-64B (+15%) + Arizona +$100B</strong>（见 §重点 4）—— <em>AI compute super-cycle 再确认</em>；但 <em>Q2 margin caution + capex 上调</em> 组合 = 半导体板块 -1.47%；<em>Nvidia -3% / AVGO -2% / AMD -3%</em> 领跌。</li>
+<li><strong>Netflix Q2 盘后 -8.58%</strong>（见 §重点 4）—— <em>EPS 微 beat + FX-neutral +11% YoY (前 12%)</em>；<em>首波 AI-era 消费流媒 rerating</em>。</li>
+<li><strong>8/11 板块 S&P 500 正涨</strong>：<em>financial + defensive 板块</em> 抵消 tech 弱势；<em>40 家 S&P 500 已报 87% beat</em>。</li>
+<li><strong>今日 (7/17) 关键</strong>：<em>Gemini 3.5 Pro GA + WAIC 开幕 (今晨北京)</em> + <em>American Express / TSMC ADR 反应 + 制药 (J&J Q2 已报 7/15)</em>。</li>
+<li><strong>观察</strong>：<em>"AI capex 无止境 (TSMC $64B + Meta $145B + Anthropic Samsung 芯片) + AI consumer app 放缓 (Netflix +11% YoY)"</em> 同日显性化 → <strong>H2 板块 rotation</strong>：<em>compute + fab 供应链 (SK Hynix / TSMC / ASML 生态) 与 AI consumer / streaming 分层加深</em>；<em>Anthropic $47B ARR + profitable 是 IPO S-1 时唯一未被 Netflix rerating 波及的应用层锚</em>。</li>
+</ul>
+<h3>🏗️ 6. AI × AEC（建筑/工程/施工）</h3>
+<p>来源：<a href="https://www.bloomberg.com/news/articles/2026-07-13/hyundai-hymtf-workers-strike-over-bonuses-ai-robot-job-security" target="_blank" rel="noopener">Bloomberg · Hyundai 罢工</a> · <a href="https://www.eweek.com/news/hyundai-workers-robot-strike-apac-south-korea/" target="_blank" rel="noopener">eWeek · Atlas 25K</a> · <a href="https://www.automateshow.com/blog/breaking-ground-to-groundbreaking-a-2026-look-at-robotics-in-construction" target="_blank" rel="noopener">Automate · Construction Robotics 2026</a> · <a href="https://www.fulcrumapp.com/blog/ai-in-construction-safety/" target="_blank" rel="noopener">Fulcrum · site cameras + AI 安全</a> · <a href="https://www.plantandmachinery-now.com/article/272507/rethinking-construction-safety-in-the-age-of-robotics-and-physical-ai" target="_blank" rel="noopener">Plant & Machinery · Physical AI 安全 rethink</a> · <a href="https://fortune.com/2026/07/15/construction-robotics-startup-monumental-raises-32-million-from-khosla-ventures-to-tackle-labor-shortages/" target="_blank" rel="noopener">Fortune · Monumental $32M</a></p>
+<ul>
+<li><strong>Hyundai humanoid Atlas 25K 部署计划 + 韩国工厂 3 日罢工 (7/13-15)</strong>（见 §重点 5）—— <em>蓝领首次 humanoid-specific 罢工</em>；<em>2028 US Georgia 起步 → 全球部署</em> 与 Buildroid US + Bedrock retrofit + Spot × Gemini Robotics 组合，<em>AEC/工业 execution 层 humanoid 4 anchor (Hyundai Atlas + Unitree + Agility + Tesla Optimus) 首次同期出现</em> —— 工业 vs 建筑现场重叠加深。</li>
+<li><strong>WAIC 2026 300 产品 debut 含 humanoid + surgical robot + 都市 vision AI</strong>（见 §重点 2）—— <em>中国系 physical AI 集中展示</em>；对 §笔记 4 Zeroth $73.6M (Ant Group) 是资本对应。</li>
+<li><strong>AEC AI 合规 / 保险 / NIOSH & CPWR 明确纳入 robotics 治理指南</strong> —— <em>保险 underwriting 首次为 "工人从高危 tasks 移除的机器人" 提供 explicit 折扣</em>；<em><a href="https://www.plantandmachinery-now.com/article/272507/rethinking-construction-safety-in-the-age-of-robotics-and-physical-ai" target="_blank" rel="noopener">Plant & Machinery</a> 报道基调是 "regulators + safety bodies + insurers 都开始 explicit 提及 robotics"</em>；对 §笔记 3 arxiv AEC 安全 VLM-LLM pipeline (2 篇) 是保险 / 政策落地闭环。</li>
+<li><strong>Buildroid + Bedrock + Monumental + Spot × Gemini + Hyundai Atlas 全球 physical-AI-in-construction 5 anchor 首次同期到位</strong> —— <em>"execution 层 5 家 anchor + BIM copilot 3 家 (Autodesk/Bentley/Trimble) + perception 3 家 (OpenSpace/Buildots/Doxel) + foundation 3 家 (Gemini Robotics-ER 1.6 + Mistral Robostral + BAAI Wujie)"</em> → <strong>AEC AI 4 层 stack 各层 3-5 家 anchor 全就位</strong>。</li>
+<li><strong>BAAI Wujie Physis-v0.1</strong> (WAIC 展示) —— <em>video + RGB-D + 3D 点云 + 力 / 触觉 统一 latent space</em>；<em>中国 embodied world model foundation 首个公开</em>；对 Google Gemini Robotics-ER 1.6 是 model 层直接对标。</li>
+<li><strong>信号</strong>：<em>Hyundai 罢工 + WAIC 300 debut + Kimi K3 open-weight + Anthropic hire structure</em> 组合意味着 <strong>"physical AI stack 已完成模型 + 硬件 + 部署 + 治理 + 劳工 5 面向"</strong> ——AEC / 工业 / humanoid 未来 12 个月主战场是 <em>"工人协议 + 保险 underwriting + 官方 partnership 数"</em> 三条 leading indicator。</li>
+</ul>
+<h3>⌚ 7. AI × Wearables（健康可穿戴）</h3>
+<p>来源：<a href="https://hitconsultant.net/2026/07/15/neko-health-raises-700-million-series-c/" target="_blank" rel="noopener">HIT Consultant · Neko $700M</a>（延续）· <a href="https://www.embs.org/pulse/articles/the-new-night-watch-advanced-sleep-sensors-uncover-what-keeps-us-awake/" target="_blank" rel="noopener">IEEE Pulse · Sleep sensors 2026</a> · <a href="https://health.yahoo.com/wellness/sleep/sleep-products/article/best-sleep-tracker-110301542.html" target="_blank" rel="noopener">Yahoo Health · 9 best sleep trackers 2026</a> · <a href="https://sleeplay.com/blogs/news/best-sleep-trackers-wearables-sleep-apnea" target="_blank" rel="noopener">Sleeplay · Sleep apnea trackers 2026</a> · <a href="https://www.buildfastwithai.com/blogs/ai-news-today-july-16-2026" target="_blank" rel="noopener">BuildFast 7/16 §11 Hemispheric brain-activity AI</a></p>
+<ul>
+<li><strong>Neko Health $700M / ~$7B</strong>（延续 7/15，见 7/16 §重点 3）—— <em>preventive imaging + AI + Manhattan 首店</em>；持续消化。</li>
+<li><strong>Hemispheric $52M brain-activity AI (以色列)</strong>（BuildFast 7/16 §11）—— <em>neural signal ML → 医学诊断 + 心理健康监测</em>；<em>BCI 相邻应用层</em> 融资 tier；对 Whoop Advisor + SensorFM Personal Health Agent 是 neural 侧补位。</li>
+<li><strong>Apple Watch Series 10 · FDA-cleared Sleep Apnea 检测</strong>（<a href="https://sleeplay.com/blogs/news/best-sleep-trackers-wearables-sleep-apnea" target="_blank" rel="noopener">Sleeplay 2026 榜</a>）—— <em>Apple 领跑 clinical health</em>；<em>Oura sleep/stress + Whoop recovery + Samsung smart + Fitbit value</em> 分层清晰；对 §笔记 1 HN 728 pts Sleep regularity > duration 论文是产品化对应。</li>
+<li><strong>睡眠 AI 感知层深化</strong> (<a href="https://www.embs.org/pulse/articles/the-new-night-watch-advanced-sleep-sensors-uncover-what-keeps-us-awake/" target="_blank" rel="noopener">IEEE Pulse 2026</a>) —— <em>PPG + accelerometer + pulse oximetry + skin temperature + FDA-cleared 2024 AI 分析算法</em>；SensorFM 5 sensor 组合是最直接产品化 anchor。</li>
+<li><strong>Fitbit → Google Health rebrand + Google Health Coach (Gemini)</strong> + <strong>Google Health CLI</strong> —— <em>AI health developer stack 首次开放</em>；40+ metrics 命令行；对 Whoop OS + Oura Cloud 是 platform 层直接压制。</li>
+<li><strong>Apple Intelligence 中国获批</strong> —— <em>iOS / watchOS 中国 wearable 集成路径</em> (Alibaba Qwen)；<em>Apple Watch × 中国健康数据合规</em> 首次通道明确。</li>
+<li><strong>信号</strong>：<em>Neko preventive AI + Hemispheric BCI + Apple Watch S10 Sleep Apnea + Google Health CLI + Apple 中国 AI 通过</em> 组合 → <strong>wearable AI 已完成 6 面向 (preventive scan + coaching agent + BCI + FDA clinical + developer platform + geo-compliance)</strong>；<em>Hyundai humanoid 罢工</em> 与 wearable 数据 privacy 讨论未来 12 个月会合并入 <em>"AI × 身体主权 (body sovereignty)"</em> 统一叙事。</li>
+</ul>
+<hr>
+<h2>想法</h2>
+<ol>
+<li>**Kimi K3 open-weight + WAICO 29 国 + Atlas 950 SuperPoD 同日发生 —— *中国 AI stack 三层 (model + governance + hardware) 首次全部到位，与美国 (Anthropic quality-safety + OpenAI political-integration) 双轨形成 3 × 2 = 6 种全球 AI 部署候选***：<em>Kimi K3 打进 US frontier tier + Atlas 950 8,192 chips 全国产 + WAICO 主导发展中国家 AI 治理 → 中国 stack 从"追赶"变"自成体系"</em>；配合 §重点 5 Apple × Qwen/Baidu 通道，<em>西方 tier-1 硬件商首次在中国市场完全依赖中国 model</em>。<strong>对个人 / 团队 workflow</strong>：<em>model provider 选型未来 12 个月要考虑 (1) closed frontier (Anthropic Fable 5 / OpenAI Sol / Google Gemini 3.5 Pro) (2) US open (Inkling / Grok Build) (3) 中国 open (Kimi K3 / DeepSeek / Qwen) 三个大类，</em>且要根据 <em>部署地缘 / compliance / privacy / 成本</em> 混合使用<em>；</em>端侧 (LM Studio Bionic + Bonsai 27B + Grok Build local)<em> 是 4th orthogonal axis。<strong>值得深挖</strong>：</em>Kimi K3 7/27 权重发布后独立第三方推理成本 + fine-tune 效果验证<em>；</em>Atlas 950 集群实测 vs 官宣性能 (1 EFLOPS FP8) 的独立 benchmark*。</li>
+</ol>
+<ol>
+<li>**Gemini 3.5 Pro GA + WAIC + Kimi K3 同日出场 —— *"三种 AI 分发范式 (closed premium tier + open weight + state-backed governance) 在 24 小时窗口内首次同框"***：Google 用 Ultra $250/月 门槛把 Deep Think 圈进 premium (类似 Anthropic Max 60x)，与 <em>Kimi K3 免费权重 + Atlas 950 国家算力</em> 形成 3 × 3 (三种模型 × 三种商业模式) 分布图；短期看 <em>Netflix Q2 rerating</em> 是 <em>"consumer AI 应用层增长天花板首现"</em>，长期看 <em>Deep Think Ultra tier 是否能提升单用户 ARPU</em> 是 closed 阵营价值判断的关键实验。<strong>值得深挖</strong>：<em>Google 7/17 首日实际发布 spec vs 泄露 spec 差距</em>，特别是 <em>Deep Think 与 Gemini 3.5 Flash 的能力落差如何定价</em> 会决定 Anthropic Fable 5 定价压力方向。</li>
+</ol>
+<ol>
+<li>**Hyundai humanoid Atlas 25K + Hemispheric BCI + Neko preventive AI + Mews 15% AI 归因裁员 + Fed AI Task Force (Andreessen) —— *"AI × 身体 × 劳工 × 医疗" 政治经济学 5 面向 4 周内齐现，AI 是 2026 H2 最强 political economy 主线***：<em>Hyundai 罢工是首个 humanoid-specific industrial action，Neko 是首个 preventive scan × AI × 硬件跨过 $5B private tier，Hemispheric 打开 BCI 商业化融资通道，Mews 是首个 AI-attribution 明说裁员</em> —— <em>AI 从技术议题跳入身体 / 就业 / 医疗 / 保险 综合政治经济学</em>。<strong>对个人</strong>：<em>wearable / healthcare AI 使用政策 + 工会新协议模板 + AI-attribution 裁员立法</em> 是接下来 12 个月的 personal + team policy 更新窗口。</li>
+</ol>
+<ol>
+<li>**TSMC $64B capex + $100B Arizona + Meta $145B + Anthropic Samsung + Atlas 950 (Huawei) 全国产 + 韩 $880B —— *"AI compute super-cycle 六大 anchor (TSMC + Meta + Anthropic + Huawei + 韩国 + Broadcom+TSMC Meta Iris)" H2 同期兑现，capex bottleneck 从 "会不会"变成 "谁能吃到 wafer"***：<em>70-80% TSMC capex 走高级制程 + 10-20% 先进封装 (CoWoS)</em> → <strong>CoWoS 供给依然是全行业 gating factor</strong>；配合 <em>TSMC 40%+ 全年营收指引 + margin caution</em> 组合 = <em>AI infra 板块单季 rerating 结构 (估值上顶 + 毛利承压)</em>。<strong>对 §重点 4 Netflix 拐点</strong>：<em>"上游 capex 通胀 + 下游消费 EPS 放缓" 首次同日出现</em>，H2 板块 rotation 需要新的 "consumer AI 保留高估值" 叙事，Kimi K3 open-weight + 端侧 (Bonsai/Bionic) 是唯一 orthogonal 出路。</li>
+</ol>
+<hr>
+<h2>值得深入研究的公司 / 人 / 论文</h2>
+<ul>
+<li><strong>Moonshot AI (Kimi K3)</strong> —— <em>2.8T MoE + 1M context + Arena 首选 + 7/27 权重开源</em>；中国 open frontier tier-1 anchor。</li>
+<li><strong>Huawei (Atlas 950 SuperPoD, Ascend 950DT)</strong> —— <em>8,192 chip 集群 + UnifiedBus 2.0 + 全无美系元件</em>；中国 hardware AI stack 顶层完成度 anchor。</li>
+<li><strong>WAICO (中国系全球 AI 治理组织)</strong> —— <em>29 国签署创始 + 联合国 SG 出席 + 无西方 tier-1 民主国</em>；接下来 12 个月是否会新增 30+ 国是关键节奏。</li>
+<li><strong>Google DeepMind (Gemini 3.5 Pro GA today)</strong> —— <em>2M context + Deep Think + Ultra $250/月</em>；<em>完整重构 + 6 周延期</em> 是否兑现是本季度最重大产品验证。</li>
+<li><strong>Apple (Intelligence 中国 × Alibaba Qwen + Baidu)</strong> —— <em>22 个月 gap 通过 outsource 填补</em>；Apple 中国 AI 分销新样本，观察 iOS 更新时间线 + Apple Watch × Qwen 集成路径。</li>
+<li><strong>Hyundai (Boston Dynamics + Atlas 25K 部署)</strong> —— <em>humanoid 大规模量产首个明确时间表</em>；工会协议是否成为全球模板是 leading indicator。</li>
+<li><strong>LM Studio (Bionic)</strong> —— <em>端侧 open-model agent + Zero Data Retention</em>；<em>Cursor 0day 反面案例 → LM Studio 正面产品化</em> 的直接对偶。</li>
+<li><strong>Liquid AI (Antidoom)</strong> —— <em>小模型可靠性技术 (Qwen3.5-4B 22.9% → 1% 失败率)</em>；<em>端侧 AI 可靠性中间层</em> 观察对象。</li>
+<li><strong>TSMC (2330.TW) + ASML (ASML)</strong> —— <em>$60-64B 2026 capex + Arizona +$100B + ASML 10% DUV 价格上调</em>；<em>fab bottleneck</em> 全球 tier-1 anchor 组合。</li>
+<li><strong>Netflix (NFLX)</strong> —— <em>AI-era consumer streaming rerating 首股</em>；<em>FX-neutral +11% YoY 是否会成为 AI-adjacent 消费股新估值 anchor</em>。</li>
+<li><strong>BAAI Wujie Physis-v0.1 + Gemini Robotics-ER 1.6</strong> —— <em>中美 embodied world model foundation 双 anchor</em>；观察 AEC / 工业 / humanoid 场景落地对比。</li>
+<li><strong>论文</strong>：<em>World Models Survey (2606.00133) + Reward as Agent for Embodied World Models (2606.19990) + Looped World Models (2606.18208) + Agentic World Modeling (2604.22748) + Grounded world models in biological organisms (2607.13560)</em> —— world model + embodied AI 组合读。</li>
+<li><strong>Simon Willison</strong> —— frontier-tooling 观察者；持续跟踪其对 Kimi K3 + Gemini 3.5 Pro + LM Studio Bionic 的评论。</li>
+<li><strong>Trend tracker 建议</strong>：</li>
+<li><em>open-weight frontier</em> (Kimi K3 vs Inkling vs Grok Build vs Qwen4) 独立 benchmark + 部署经济学</li>
+<li><em>WAICO 政治扩容</em> (成员国数 / 双边协议 / 联合国秘书处角色)</li>
+<li><em>Gemini 3.5 Pro Deep Think Ultra $250 tier</em> 的 ARPU 兑现速度</li>
+<li><em>TSMC N3 / CoWoS 分配 signal + 韩国 Samsung/SK Hynix supply-side</em> 季度 delta</li>
+<li><em>humanoid 蓝领罢工 + 工会协议</em> 是否复制到 Ford/GM/Tesla/Foxconn</li>
+<li><em>AI-attribution 裁员立法</em> 首个州级 / 联邦提案</li>
+</ul>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <span>© 2026 Xinrui Yi · Briefings</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);">← All briefings</a></span>
+  </div>
+</footer>
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const text = document.getElementById('themeText');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+let theme = prefersDark ? 'dark' : 'light';
+applyTheme(theme);
+toggle.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  applyTheme(theme);
+});
+function applyTheme(t) {
+  if (t === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    icon.textContent = '◑'; text.textContent = 'Light';
+  } else {
+    root.removeAttribute('data-theme');
+    icon.textContent = '◐'; text.textContent = 'Dark';
+  }
+}
+
+const audio = document.querySelector('.audio-el');
+if (audio) {
+  const playBtn = document.querySelector('.audio-play');
+  const playIcon = document.querySelector('.audio-icon-play');
+  const backBtn = document.querySelector('.audio-back');
+  const fwdBtn = document.querySelector('.audio-fwd');
+  const track = document.querySelector('.audio-track');
+  const progress = document.querySelector('.audio-progress');
+  const buffered = document.querySelector('.audio-buffered');
+  const curEl = document.querySelector('.audio-cur');
+  const durEl = document.querySelector('.audio-dur');
+
+  const fmt = (s) => {
+    if (!isFinite(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  };
+
+  const setPlaying = (isPlaying) => {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); }
+    else { audio.pause(); }
+  });
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+
+  backBtn.addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+  fwdBtn.addEventListener('click', () => {
+    const dur = isFinite(audio.duration) ? audio.duration : audio.currentTime + 10;
+    audio.currentTime = Math.min(dur, audio.currentTime + 10);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+    progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
+    curEl.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    durEl.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('progress', () => {
+    if (audio.buffered.length && audio.duration) {
+      const end = audio.buffered.end(audio.buffered.length - 1);
+      buffered.style.width = ((end / audio.duration) * 100) + '%';
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+    else if (e.code === 'ArrowLeft') { backBtn.click(); }
+    else if (e.code === 'ArrowRight') { fwdBtn.click(); }
+  });
+}
+</script>
+</body>
+</html>
