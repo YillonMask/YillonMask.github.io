@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Morning Briefing — 2026-08-07 · Xinrui Yi</title>
+<meta name="description" content="Daily AI/AEC/wearables briefing for 2026-08-07." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --bg-soft: #efeae2;
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --ink-muted: #8a8a8a;
+  --rule: #d9d3c8;
+  --accent: #b8412c;
+  --accent-soft: #e8c5bc;
+  --card: #fbf9f5;
+}
+[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --bg-soft: #161614;
+  --ink: #f0ece4;
+  --ink-soft: #b8b3a8;
+  --ink-muted: #6e6a62;
+  --rule: #2a2926;
+  --accent: #e8a07a;
+  --accent-soft: #4a2a20;
+  --card: #14140f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Geist', -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.serif { font-family: 'Fraunces', Georgia, serif; }
+.mono { font-family: 'Geist Mono', monospace; }
+.container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+nav {
+  position: sticky; top: 0;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule); z-index: 100;
+}
+.nav-inner {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 32px; max-width: 920px; margin: 0 auto;
+}
+.nav-brand {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 17px;
+  letter-spacing: -0.01em; color: var(--ink); text-decoration: none;
+}
+.nav-brand .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; align-items: center; font-size: 13px; }
+.nav-links a { color: var(--ink-soft); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--accent); }
+.theme-toggle {
+  background: none; border: 1px solid var(--rule); color: var(--ink-soft);
+  cursor: pointer; padding: 6px 10px; border-radius: 6px;
+  font-family: inherit; font-size: 12px; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+/* briefing page header */
+.brief-head {
+  padding: 80px 0 48px; border-bottom: 1px solid var(--rule);
+}
+.brief-eyebrow {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-muted); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.brief-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--ink-muted); }
+.brief-head h1 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 56px); line-height: 1.1;
+  letter-spacing: -0.025em; margin-bottom: 16px;
+}
+.brief-head h1 em { font-style: italic; color: var(--accent); font-weight: 300; }
+.brief-meta {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); display: flex; gap: 18px; flex-wrap: wrap;
+}
+.brief-meta .tag {
+  color: var(--ink-soft); border: 1px solid var(--rule);
+  padding: 2px 8px; border-radius: 4px;
+}
+
+/* prose */
+.prose { padding: 56px 0 80px; }
+.prose h1 { display: none; } /* the markdown's title H1 — we render our own header */
+.prose h2 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.prose h2:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.prose h3 {
+  font-family: 'Fraunces', serif; font-weight: 500;
+  font-size: 21px; letter-spacing: -0.015em;
+  margin: 40px 0 14px; color: var(--ink);
+}
+.prose p {
+  font-size: 16px; line-height: 1.75; color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.prose p strong { color: var(--ink); font-weight: 500; }
+.prose ul, .prose ol { margin: 0 0 22px 22px; }
+.prose li {
+  font-size: 16px; line-height: 1.7; color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.prose li strong { color: var(--ink); font-weight: 500; }
+.prose a {
+  color: var(--ink); text-decoration: none;
+  border-bottom: 1px solid var(--accent-soft);
+  transition: color 0.15s, border-color 0.15s;
+}
+.prose a:hover { color: var(--accent); border-color: var(--accent); }
+.prose code {
+  font-family: 'Geist Mono', monospace; font-size: 0.92em;
+  background: var(--bg-soft); padding: 1px 6px; border-radius: 3px;
+  border: 1px solid var(--rule);
+}
+.prose hr {
+  border: none; border-top: 1px solid var(--rule); margin: 48px 0;
+}
+.prose em { font-style: italic; color: var(--ink-muted); }
+
+/* index page list */
+.brief-list { padding: 56px 0 80px; }
+.brief-row {
+  display: grid; grid-template-columns: 140px 1fr;
+  gap: 32px; padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+.brief-row:last-child { border-bottom: 1px solid var(--rule); }
+.brief-row .date {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); letter-spacing: 0.04em;
+}
+.brief-row a {
+  font-family: 'Fraunces', serif; font-weight: 500; font-size: 22px;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -0.015em; transition: color 0.15s;
+}
+.brief-row a:hover { color: var(--accent); }
+.brief-row .audio-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'Geist Mono', monospace; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-left: 12px;
+  padding: 2px 7px; border: 1px solid var(--accent-soft);
+  border-radius: 4px; vertical-align: 2px;
+}
+.brief-row .tags {
+  margin-top: 6px; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+}
+
+footer {
+  padding: 28px 0; font-family: 'Geist Mono', monospace;
+  font-size: 11px; color: var(--ink-muted);
+  border-top: 1px solid var(--rule);
+}
+footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+/* audio player */
+.brief-audio { padding: 0; }
+.brief-audio + main.prose { padding-top: 0; }
+.brief-audio-title {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 30px; letter-spacing: -0.02em;
+  margin: 64px 0 24px; padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.audio-card {
+  background: var(--card); border: 1px solid var(--rule);
+  border-radius: 8px; padding: 20px 24px;
+}
+.audio-controls {
+  display: flex; align-items: center; gap: 14px;
+}
+.audio-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--rule);
+  color: var(--ink-soft); cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: inherit; font-size: 13px; gap: 2px;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.audio-btn:hover, .audio-btn:focus-visible {
+  border-color: var(--accent); color: var(--accent); outline: none;
+}
+.audio-play { width: 48px; height: 48px; font-size: 16px; }
+.audio-num {
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+}
+.audio-track {
+  flex: 1; height: 4px; background: var(--rule);
+  border-radius: 2px; position: relative; cursor: pointer;
+  min-width: 60px;
+}
+.audio-buffered, .audio-progress {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  border-radius: 2px; width: 0;
+}
+.audio-buffered { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+.audio-progress { background: var(--accent); }
+.audio-time {
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: var(--ink-muted); white-space: nowrap;
+}
+.audio-caption {
+  font-size: 12px; font-style: italic;
+  color: var(--ink-muted); margin: 12px 0 0; line-height: 1.4;
+}
+.audio-el { display: none; }
+
+@media (max-width: 720px) {
+  .container { padding: 0 22px; }
+  .nav-inner { padding: 14px 22px; }
+  .nav-links { gap: 16px; font-size: 12px; }
+  .brief-head { padding: 56px 0 36px; }
+  .prose { padding: 40px 0 56px; }
+  .prose h2 { font-size: 25px; }
+  .prose h3 { font-size: 19px; }
+  .brief-row { grid-template-columns: 1fr; gap: 6px; }
+  .audio-card { padding: 16px 18px; }
+  .audio-controls { flex-wrap: wrap; gap: 10px; }
+  .audio-time { flex-basis: 100%; text-align: right; margin-top: 4px; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-brand">Xinrui Yi<span class="dot">.</span></a>
+    <div class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="index.html">Briefings</a>
+      <a href="../index.html#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span id="themeIcon">◐</span>
+        <span id="themeText">Dark</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="brief-head">
+  <div class="container">
+    <div class="brief-eyebrow">Morning Briefing</div>
+    <h1>2026-08-07 <em>·</em> daily signal</h1>
+    <div class="brief-meta"><span class="tag">briefing</span><span class="tag">ai</span><span class="tag">market</span><span class="tag">aec</span><span class="tag">wearables</span></div>
+  </div>
+</header>
+
+<main class="prose">
+  <div class="container">
+    <h1>2026-08-07 Morning Briefing</h1>
+<h2>重点</h2>
+<ol>
+<li><strong>Google 四位顶级 AI 研究老将集体出走创业，"Discovery Loop" 瞄准全自动化科学研究</strong>：Jeff Dean（Google 27 年老将、公司最高技术荣誉 senior fellow）联合 Sanjay Ghemawat（同为 senior fellow）、Google Brain 联合创始人 Quoc Le、前 DeepMind VP Oriol Vinyals 离职创立 Discovery Loop，目标是用 AI 自动提出实验假设、执行、评估结果、迭代数千次，首战聚焦机器学习研究本身的自动化，未来延伸至芯片设计、药物发现、清洁能源；Radical Ventures 与 Khosla Ventures 联合领投种子轮（尚未 close），Alphabet 本身也是资金支持方之一——顶级研究人才"带着老东家的钱和祝福出走"正成为一种新常态。</li>
+<li><strong>AMD 收购 Taalas，把模型权重直接"刻"进芯片，剑指英伟达的推理护城河</strong>：这家成立于 2023 年的芯片初创公司放弃通用 GPU 路线，为特定模型定制蚀刻芯片，早期测试芯片跑 Meta Llama 3.1 8B 达到近 1.7 万 tokens/秒；交易预计 Q4 完成，收购金额未披露，市场将其与英伟达此前对 Groq 的 200 亿美元授权协议相提并论——"为 agent 推理定制专用硬件"正成为芯片巨头的新必争之地。</li>
+<li><strong>美股周五（8/7）收出年内新高，走弱的就业数据反而成了利好</strong>：S&P 500 +0.62% 至 <strong>7,757.64</strong> 创收盘新高，Nasdaq +1.3% 至 <strong>26,690.62</strong>，道指 +0.28%（+151.83 点）至 <strong>54,036.93</strong>；7 月非农意外减少 2.3 万人，市场解读为美联储近期无需加息，本周三大指数分别累涨 3.6%/5.2%/3%，为 4 月以来最佳单周表现。</li>
+<li><strong>"谁来监督 AI agent" 同一天在 HN、arXiv、Product Hunt 三条独立信息线上同时冒头</strong>：HN 头条研究显示人类审批 agent 指令时会漏掉三分之一的真实威胁（4 万局游戏、40.9 万次审批决策，平均准确率仅 66.3%）；同期 alphaXiv 挂出 HarnessOpt-Bench（衡量 LLM 自主优化执行框架的能力）与 Argus（用"证据支持 + 角色门控验证"让 agent 安全地自主修正目标）两篇论文；当日 Product Hunt 榜单里还出现独立开发者做的 "Soloop"（approval-first 单人创业者 agent OS）——从学术研究到独立开发者产品，行业正在同一时间点补上 agent 自主性的信任缺口。</li>
+<li><strong>Oracle 一边宣称"AI 已经在写 Oracle 自己的代码"，一边正式禁止 OpenJDK 接受 AI 生成的贡献</strong>：政策援引审阅负担、JDK 作为关键基础设施的安全风险、AI 生成内容 IP 归属仍在诉讼中三大理由；而同属 Oracle 旗下的 GraalVM 项目却允许 AI 生成贡献——大厂对外部开源社区和内部工程团队采用两套相反的 AI 代码政策，折射出行业对"AI 代码到底该不该被信任"仍无定论。</li>
+</ol>
+<hr>
+<h2>笔记</h2>
+<h3>📡 1. HN 信号</h3>
+<ul>
+<li><strong>AMD 官宣收购 Taalas，把模型权重直接蚀刻进芯片</strong>：Taalas 走的是与主流 GPU 完全不同的路线——不做通用芯片，而是为特定模型定制集成电路，早期测试芯片跑 Llama 3.1 8B 达到近 17,000 tokens/秒；交易预计 2026 Q4 完成，未披露金额。AMD 股价消息公布当日（8/6）收涨约 1.5%。这笔收购强化了 AMD 在"专用推理硬件"上的长期布局，与英伟达此前 200 亿美元 Groq 授权协议同属"为 agent 推理定制高性能芯片"这一新赛道。 <a href="https://www.theregister.com/systems/2026/08/06/amd-acquires-ai-chip-startup-taalas-to-boost-inference-performance-by-etching-models-into-silicon/5284344" target="_blank" rel="noopener">来源</a> · <a href="https://news.ycombinator.com/item?id=49201970" target="_blank" rel="noopener">讨论</a></li>
+<li><strong>Qwen3.8 Max 登顶 Artificial Analysis 智能指数最佳"整体+agentic"模型</strong>：在 Intelligence Index 上拿到 58 分，追平 Claude Opus 4.8（max），超过 Google、Meta、xAI 旗下所有模型，仅次于 Anthropic、OpenAI 顶级模型与 Moonshot AI 的 Kimi K3；在 OSWorld-Verified（agent 操作电脑能力）上拿到 86.1 分，超过 GPT-5.6 Sol Max（83.2）和 Fable 5（85.0）。但代价是完成 agentic 任务平均要 64 轮对话（上代 Qwen3.7 Max 仅 14 轮），单任务成本 $1.14，是上代的两倍以上——"更聪明"和"更省钱"正在成为 agentic 模型的两条分岔路线。 <a href="https://officechai.com/ai/qwen-3-8-max-scores-56-on-artificial-analysis-intelligence-index-ahead-of-all-us-companies-except-anthropic-and-openai/" target="_blank" rel="noopener">来源</a> · <a href="https://news.ycombinator.com/item?id=49200652" target="_blank" rel="noopener">讨论</a></li>
+<li><strong>研究显示人类审批 AI agent 指令时会漏掉三分之一的真实威胁</strong>：比利时开发者 Alex Wauters 做了一款交互小游戏，模拟 agent 权限审批场景，60 秒内尽可能多地批准/拒绝请求；基于 4 万局游戏、40.9 万次决策的数据显示平均准确率仅 66.3%，32.9% 的场次因误批威胁或误拦安全指令而倒扣分，只有 20.8% 的玩家能做到"零漏判且误拦率低于两成"。研究指出"审批疲劳"是真实存在的——请求越多，人类审批质量越差。这为当下"human-in-the-loop 就是安全"的默认假设泼了一盆冷水。 <a href="https://scalex.dev/blog/ai-agent-permissions-stats/" target="_blank" rel="noopener">来源</a> · <a href="https://news.ycombinator.com/item?id=49195468" target="_blank" rel="noopener">讨论</a></li>
+<li><strong>Oracle 正式禁止 OpenJDK 接受 AI 生成代码贡献，与 Ellison 的公开表态自相矛盾</strong>：政策明文规定"不得包含由大语言模型、扩散模型或类似深度学习系统生成（全部或部分）的内容"，理由是审阅负担、JDK 作为关键系统的安全风险、以及 AI 生成内容的 IP 归属仍处于诉讼中；但 Oracle 联合创始人 Larry Ellison 近期公开宣称"AI 模型已经在写 Oracle 自己的代码"，同属 Oracle 的 GraalVM 项目也允许 AI 生成贡献——同一家公司内部对 AI 代码信任度的两套标准形成鲜明反差。 <a href="https://app.dealroom.co/news/feed/oracle-bans-ai-generated-code-from-openjdk-despite-ellison-s-claim-oracle-isn-t-writing-its-own-code" target="_blank" rel="noopener">来源</a> · <a href="https://news.ycombinator.com/item?id=49213754" target="_blank" rel="noopener">讨论</a></li>
+<li><strong>DeepSeek V4 Flash 0731 在 ARC-AGI 上刷出高分</strong>：max effort 模式下 ARC-AGI-1 半私有集拿到 89.0%（单任务成本 $0.02），ARC-AGI-2 半私有集拿到 61.4%（单任务成本 $0.04）；这款 284B MoE、仅激活 13B 参数的模型正式版相比预览版大幅强化了 agentic 能力，以远小的激活参数量追平主流闭源模型水准，延续"小激活量也能打"的趋势。 <a href="https://arcprize.org/results/deepseek-v4-flash-0731" target="_blank" rel="noopener">来源</a> · <a href="https://news.ycombinator.com/item?id=49214008" target="_blank" rel="noopener">讨论</a></li>
+<li><strong>OpenAI 将旗下 Astra 模型标记为首个"critical"级网络安全能力模型</strong>：根据 OpenAI 的 Preparedness Framework，"critical"级意味着该模型可能具备在无人干预下对多种高强度加固现实系统开发出功能性零日漏洞的能力；OpenAI 为此隔离测试环境、限制 Astra 的网络与工具访问权限、加固权重存储并对每次 agentic 运行进行监控。这是该框架自 2023 年发布以来首次触发"critical"分级，标志着前沿模型的网络安全能力评估从理论走向实操门槛。 <a href="https://openai.com/index/responding-next-frontier-critical-cyber-capabilities/" target="_blank" rel="noopener">来源</a> · <a href="https://news.ycombinator.com/item?id=49213029" target="_blank" rel="noopener">讨论</a></li>
+<li><strong>Cloudflare 推出 Kitesurf：完全跑在 V8 isolates 里的"agent 专用浏览器"</strong>：不追求像素级渲染，而是用 Rust + WebAssembly + V8 isolates 在 Cloudflare Workers 上构建轻量浏览器，CPU/内存占用比 Chromium 低 3-7 倍（代价是墙钟时间慢约 1.7 倍），已通过 21.5 万+ Web Platform Tests，兼容 Puppeteer、Playwright 和 MCP 客户端；定位是给"不需要标签页、扩展和 60fps 渲染，只需要机器可读内容和隔离性"的 AI agent 使用，目前通过 Browser Run 免费公测，计划开源。 <a href="https://blog.cloudflare.com/kitesurf/" target="_blank" rel="noopener">来源</a> · <a href="https://news.ycombinator.com/item?id=49208393" target="_blank" rel="noopener">讨论</a></li>
+</ul>
+<h3>🔬 2. Reddit 脉搏</h3>
+<p>> 注：本轮 r/MachineLearning、r/SideProject 热帖列表页仍无法直接访问，以下经新闻/新闻信整理与 Product Hunt 榜单交叉确认，r/SideProject 部分以当日 Product Hunt 独立开发者产品替代（与 8/4 briefing 处理方式一致）。</p>
+<ul>
+<li><strong>r/MachineLearning：独立开发者用 SIREN 网络把《Bad Apple》动画压进 3.2MB</strong>：用户 Which_Lie_8932 在 8/5 发帖展示了一种隐式神经表征（INR）技术，把约 27 亿像素的经典动画压缩进一个 3.2MB 的神经网络（float16 下仅 1.6MB）——架构是 5 层 MLP + SIREN（正弦激活，ω₀=30），512 个隐藏单元，输入帧号+像素坐标输出灰度值，约 79 万参数。虽是娱乐向的技术展示，但延续了"隐式神经表征做极致视频压缩"这条研究线的持续热度。 <a href="https://buttondown.com/agent-k/archive/llm-daily-august-06-2026/" target="_blank" rel="noopener">来源</a> · <a href="https://www.reddit.com/r/MachineLearning/search/?q=Bad%20Apple%20SIREN&restrict_sr=1&sort=new" target="_blank" rel="noopener">讨论</a></li>
+<li><strong>r/SideProject 替代信号 · Product Hunt 8/7 日榜：Top 10 里近半是"agent 基础设施"类工具</strong>：当日榜首 Coldtea.ai（"让软件交付自动驾驶"）、第 2 名 Soloop（approval-first 单人创业者 agent OS，人类只对需要判断力的决策做最终把关）、第 6 名 Progress AI Observability（生产环境 agent 追踪评估）、第 8 名 Kitesurf（与本期 HN 同一产品）——独立开发者/小团队做的"给 AI agent 上笼头"类工具，与本期"重点 4"呼应，显示这不只是大厂和学术界的议题，一线 maker 社区也在同步补位。 <a href="https://www.producthunt.com/leaderboard/daily/2026/8/7" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Product Hunt 补充信号：Zinley 靠"有自己电话号码和邮箱的个人 AI 代理人"登顶月榜</strong>：不同于纯文字聊天机器人，Zinley 拥有独立电话号码和邮箱，能接电话、处理邮件、订东西、跟进事项，并在用户设定规则内自主行动、记住人际关系——8 月月榜以 41 万+票登顶，反映"能替你在现实世界打电话办事"的 agent 产品正在获得普通消费者层面的关注，而不只是开发者圈层。 <a href="https://www.producthunt.com/products/zinley" target="_blank" rel="noopener">来源</a></li>
+</ul>
+<h3>📄 3. AI Research</h3>
+<ul>
+<li><strong>Argus：让 agent 能安全地自主修改任务目标的通用运行时</strong>：由 Manager、Planner、Engineer、Reviewer 四个角色在持久化项目状态上协同执行任务，新记忆、技能、路由决策只有经过角色专属审核、并尽可能通过任务原生验证后才会被采纳；在 GPT-5.5 的七个基准测试场上，SWE-Bench Pro 达到约 78%（直接用 Copilot 仅 59%），代价是多用 1.41 倍 token。对做长程 agent（深度研究、多天任务）的团队，这是目前少见的"允许 agent 自主改目标但不失控"的架构参考，与本期"重点 4"的 agent 信任议题直接呼应。 <a href="https://www.alphaxiv.org/abs/2608.05144" target="_blank" rel="noopener">来源</a></li>
+<li><strong>HarnessOpt-Bench：第一个系统评测"LLM 能不能自己优化自己的执行框架"的基准</strong>：让一个"优化器 LLM + 编码 harness"拿到目标 agent 的初始 harness、评分反馈和固定预算，去修改 harness 并提交最终版本，在留出测试集上打分；覆盖 5 个前沿模型、4 个下游任务、111 次评测运行，发现"优化器模型本身的差异，比它们所用的编码 harness 的差异更大"、且"原生 harness 不总是比通用 harness 更优"。这是"harness engineering"叙事第一次有了标准化的可比较基准，值得所有在做 agent 自我改进的团队关注。 <a href="https://arxiv.org/abs/2608.06301" target="_blank" rel="noopener">来源</a></li>
+</ul>
+<h3>💰 4. 融资动态</h3>
+<ul>
+<li><strong>Discovery Loop（Jeff Dean 等四位 Google 研究老将创立）种子轮由 Radical Ventures 与 Khosla Ventures 联合领投</strong>：公司定位为 Public Benefit Corporation，目标是让 AI 自动提出、执行、评估、迭代科学实验，首战是自动化机器学习研究本身；轮次尚未 close，估值未披露，Alphabet 本身也是资金支持方之一——顶级大厂研究人才出走创业却仍拿老东家的钱，成为一种值得关注的新模式。 <a href="https://techcrunch.com/2026/08/05/jeff-dean-and-other-top-ai-researchers-are-leaving-google-to-launch-their-own-startup/" target="_blank" rel="noopener">来源</a></li>
+<li><strong>June AI 完成 $2000 万 Pre-seed，由 Marc Benioff 的 Time Ventures 领投</strong>：创始团队来自 Salesforce（CEO Efrat Rapoport 等四人），产品自动扫描企业现有系统（如 Salesforce）找出瓶颈并生成 agent 工作流，定位是"forward-deployed engineer 的替代品"；Michael Dell、Aaron Levie、George Kurtz 等跟投——"企业级 AI 落地难"正在催生一批专门解决"AI 部署最后一公里"的初创公司。 <a href="https://techcrunch.com/2026/08/03/a-marc-benioff-backed-startup-thinks-ai-can-solve-the-ai-deployment-problem/" target="_blank" rel="noopener">来源</a></li>
+<li><strong>迪拜出行金融科技 Moove 完成 $2.5 亿 C 轮</strong>：用于在全球范围融资和管理自动驾驶车队——自动驾驶车队金融化正成为一条独立的融资赛道，而非单纯依附于自动驾驶技术公司本身。 <a href="https://techstartups.com/2026/08/06/venture-capital-startup-funding-roundup-august-6-2026-bessemer-venture-partners-gates-frontier-general-atlantic-google-ventures-gradient-ventures-menlo-ventures-y-combinator-more/" target="_blank" rel="noopener">来源</a></li>
+<li><strong>旅行保险科技 Faye 完成 $5000 万 C 轮，由 Madrona Venture Group 领投</strong>：累计融资达 $1 亿，产品用 AI 提供即时保单和自动化理赔，去年营收翻倍，曾获 TIME Best Inventions 认可——垂直保险科技赛道里，"AI 自动理赔"仍是投资人愿意持续加码的确定性叙事。 <a href="https://blog.mean.ceo/startup-funding-announcements-news-august-2026/" target="_blank" rel="noopener">来源</a></li>
+</ul>
+<h3>📊 5. 市场脉搏</h3>
+<ul>
+<li><strong>周五（8/7）三大指数收出年内新高，本周为 4 月以来最佳单周表现</strong>：S&P 500 +0.62% 至 <strong>7,757.64</strong>（创收盘新高），Nasdaq +1.3% 至 <strong>26,690.62</strong>，道指 +0.28%（+151.83 点）至 <strong>54,036.93</strong>；本周累计涨幅分别为 S&P +3.6%、Nasdaq +5.2%、道指近 +3%。 <a href="https://finance.yahoo.com/markets/live/stock-market-today-friday-august-7-nasdaq-dow-sp-500-july-jobs-report-surprises-100009572.html" target="_blank" rel="noopener">来源</a></li>
+<li><strong>驱动因素：7 月非农意外转负，市场解读为"美联储可以继续按兵不动"</strong>：美国 7 月就业报告显示企业意外净减少 2.3 万个岗位，国债收益率随之下滑；美联储此前已连续两次会议维持利率在 3.5%-3.75% 区间不变（这是自今年美国-以色列对伊朗军事行动推高油价以来的首次维持不变），货币市场目前预期最快要到 12 月才可能有一次加息。 <a href="https://www.cnbc.com/2026/08/06/stock-market-today-live-updates.html" target="_blank" rel="noopener">来源</a></li>
+<li><strong>个股/行业信号：AMD 收购 Taalas 消息公布当日股价收涨约 1.5%</strong>：市场将此举解读为 AMD 补齐"专用 agent 推理芯片"版图、正面对抗英伟达的战略动作之一；本周稍早（8/4）Palantir 财报暴涨带动的芯片股/科技股行情仍在延续，本周整体呈现"弱经济数据 + AI 硬件叙事"双轮驱动的上涨格局。 <a href="https://blockonomi.com/advanced-micro-devices-amd-stock-climbs-after-taalas-acquisition-announcement/" target="_blank" rel="noopener">来源</a></li>
+</ul>
+<h3>🏗️ 6. AI × AEC (建筑/工程/施工)</h3>
+<ul>
+<li><strong>前 SpaceX 工程师创办的 TerraFirma 完成 $1.15 亿融资，把"任务控制中心"搬进施工现场</strong>：由 Kleiner Perkins 领投 $1 亿 A 轮，创始人 Noah Schochet、Noah McGuinness 把挖掘机、装载机等重型设备改装成可远程操控的半自主机器，一名熟练操作员可在类似 SpaceX 任务控制室的房间里同时监督多台设备；技术栈从 AI 前期施工规划软件一路延伸到远程指挥中心，长期目标还包括月球/火星建造。这是本期建筑科技融资里金额最大、叙事最鲜明的一笔，代表"航天级自动化经验"正被系统性地搬进传统建筑业。 <a href="https://www.cnbc.com/2026/07/14/terrafirma-construction-tech-spacex.html" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Bentley 把 Copilot Design Assistant 从"限量早鸟"扩展进 OpenRoads/OpenRail Designer 主流产品线</strong>：此前作为首款生成式 AI 土木场地设计应用的 OpenSite+ 已能单次点击评估数千种场地平整方案、交付速度提升最高 10 倍；2026 年初起，同一套 Copilot 能力开始整合进公司最主流的道路/铁路设计工具，意味着生成式 AI 正从"试点产品"走向"默认能力"。 <a href="https://blog.bentley.com/insights/meet-your-new-design-copilot-this-software-powered-by-generative-ai-is-changing-the-game-for-civil-engineers/" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Trimble Tekla 2026 上线"human-in-the-loop" AI 云端加工图生成功能</strong>：利用用户过往项目积累的图纸库自动生成钢结构加工图，2026 版本已从预览阶段转为正式功能——BIM 软件巨头正把 AI 生成能力嵌入最琐碎、最耗人力的详图深化环节，而非只做概念阶段的生成式设计。 <a href="https://support.tekla.com/doc/tekla-structures/2026/rel_dra_new_in_ai_cloud_fabrication_drawings" target="_blank" rel="noopener">来源</a></li>
+<li><strong>行业背景：Gartner 将"物理 AI"列为 2026 建筑业关键技术趋势，直指 50 万人的劳动力缺口</strong>：无人化打桩、平整、开挖作业区正从试点走向真实部署，行业普遍认为这是应对基建/数据中心/住房建设产能瓶颈的核心手段之一——TerraFirma 等公司拿到大额融资，正是这一宏观趋势在资本层面的直接体现。 <a href="https://www.equipmentjournal.com/tech-news/why-2026-will-be-a-critical-year-for-physical-ai-in-construction/" target="_blank" rel="noopener">来源</a></li>
+</ul>
+<h3>⌚ 7. AI × Wearables (健康可穿戴)</h3>
+<ul>
+<li><strong>Oura 上线 Health Panels，把血液生物标志物和戒指数据拼在一起</strong>：会员可在 App 内直接预约、查看血检结果，$99 起可关联最多 50 项生物标志物，与睡眠、身体准备度、活动等每日指标联动分析——延续"可穿戴厂商向预防性医疗靠拢"的路线，把连续传感器数据和传统实验室检测第一次做进同一个界面。 <a href="https://www.mobihealthnews.com/news/oura-releases-oura-ring-4-ceramic" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Garmin 推出无屏幕健康手环 Cirqa，正面对标 WHOOP，且不收订阅费</strong>：售价 $199.99，搭载上一代 Elevate 4 传感器，可佩戴在手腕或上臂，提供睡眠分期、HRV、呼吸频率、训练读数等与高端跑表同级的指标，且不像 WHOOP 需要按月订阅——传统硬件巨头正用"一次性买断"的定价策略，直接冲击 WHOOP/Oura 这类订阅制商业模式的护城河。 <a href="https://www.garmin.com/en-US/newsroom/press-release/wearables-health/meet-cirqa-smart-band-the-screen-free-health-and-fitness-tracker-from-garmin/" target="_blank" rel="noopener">来源</a></li>
+<li><strong>Google Research 发布 SensorFM：用 1 万亿分钟传感器数据预训练的可穿戴健康基础模型</strong>：训练数据来自 500 万 Fitbit/Pixel Watch 用户的 PPG、加速度计、皮电、体温、气压计五类传感器，在 35 项健康预测任务中的 34 项超过专用模型，且支持小样本适配和数据补全，定位是未来"个人健康 Agent"的底层感知层——这是"可穿戴数据分析从单点算法走向通用基础模型"的一个关键研究信号，与本期 AI Research 板块"通用底座模型"的思路同源。 <a href="https://research.google/blog/sensorfm-towards-a-general-intelligence-and-interface-for-wearable-health-data/" target="_blank" rel="noopener">来源</a></li>
+</ul>
+<hr>
+<h2>想法</h2>
+<ol>
+<li><strong>"agent 自主性该由谁把关"这个问题，今天同时出现在学术论文、大厂头条和独立开发者产品里</strong>：HN 的审批疲劳研究、alphaXiv 的 HarnessOpt-Bench/Argus、Product Hunt 榜单里的 Soloop——三条完全独立的信息线在同一天指向同一个结论：human-in-the-loop 本身并不可靠，行业正从"让人审批"转向"让系统结构性地限制 agent 能做什么"。值得画一张"agent 信任层"全景图，横向比较学术界、平台方、独立开发者三条路径的方案差异。</li>
+<li><strong>顶级研究人才带着老东家的钱出走创业，可能正在成为大厂留不住 AI 人才的新解法</strong>：Jeff Dean 团队创立 Discovery Loop 时 Alphabet 本身也是出资方之一，这种"离职但不撕破脸、继续绑定利益"的模式，如果被验证有效，未来可能会在 OpenAI、Anthropic、Meta 等公司看到更多类似案例——相比传统的"人才流失是零和博弈"叙事，这是一种更接近"内部孵化外部化"的新关系。</li>
+<li><strong>芯片层的"去英伟达化"正在从概念验证走向真金白银的并购</strong>：AMD 收购 Taalas、英伟达此前对 Groq 的巨额授权、DeepSeek 在非英伟达硬件上持续优化部署——三条线共同指向同一个方向：agent 推理时代的芯片竞争不再是单纯堆算力，而是"给特定模型定制硬件"这条路径正在被主流玩家验证为可行商业模式。</li>
+<li><strong>AEC 和可穿戴两个垂直行业，都在上演"硬件老牌厂商反向抄作业"的剧本</strong>：Garmin 推出无订阅费的 Cirqa 正面对标 WHOOP，Bentley/Trimble 把生成式 AI Copilot 嵌入自家旧 BIM 产品线而非任由 Higharc、Hypar 等初创公司抢跑——传统硬件/软件巨头没有被颠覆，而是选择用"更低定价+更成熟渠道"把新玩法据为己有，初创公司（TerraFirma 除外）在这两个垂直领域的融资规模明显小于纯软件 AI 赛道。</li>
+</ol>
+<hr>
+<p><strong>值得深入研究</strong>（不自动建文件）：</p>
+<ul>
+<li><strong>公司</strong>：Discovery Loop（Jeff Dean/Sanjay Ghemawat/Quoc Le/Oriol Vinyals 创立，AI 自动化科学研究，Radical Ventures + Khosla Ventures 领投）；Taalas（模型专用蚀刻芯片，已被 AMD 收购）；TerraFirma（前 SpaceX 工程师的半自主重型施工设备，$115M A 轮，Kleiner Perkins 领投）；June AI（企业 AI 部署自动化，Marc Benioff 背书）；Soloop（approval-first 单人创业者 agent OS）；Onyx Security（AI agent 控制平面，此前 $113M B 轮，与本期 agent 信任主线持续相关）。</li>
+<li><strong>人</strong>：Jeff Dean、Sanjay Ghemawat、Quoc Le、Oriol Vinyals（Discovery Loop 四位联合创始人）；Alex Wauters（比利时开发者，做了揭示"审批疲劳"的 agent 权限游戏）；Efrat Rapoport（June AI 创始人，前 Salesforce）。</li>
+<li><strong>论文</strong>：Argus（alphaXiv 2608.05144，evidence-backed + role-gated 的通用 agentic 运行时）；HarnessOpt-Bench（arXiv 2608.06301，首个"LLM 自我优化执行框架"标准化基准）；SensorFM（Google Research，1 万亿分钟可穿戴传感器数据预训练基础模型）。</li>
+<li><strong>主题</strong>：Qwen3.8 Max 的"更强但更贵"路径（agentic 任务轮数翻 4.6 倍、单任务成本翻倍）是否会成为行业新常态；OpenAI Astra 模型触发 Preparedness Framework 首次"critical"网络安全分级后的后续监管/行业反应；智能戒指/无屏手环赛道 Garmin Cirqa 加入后 WHOOP/Oura 的订阅制定价策略是否会松动。</li>
+</ul>
+<p>> 数据说明：市场数据为 8/7（周五）收盘表现，7 月非农数据为当日盘中驱动因素。Reddit 热帖列表页本轮仍无法直接访问，r/MachineLearning 部分经新闻/新闻信交叉确认真实性，讨论链接使用子版内搜索永久链；r/SideProject 未见独立于 Product Hunt 的突出话题，故沿用 8/4 briefing 的处理方式，以当日 Product Hunt 榜单信号替代。AEC 板块因当日无重大突发新闻，采用最近 1-4 周内仍具信号价值的产品发布/融资事件（TerraFirma 为 7/14，Bentley Copilot 扩展为 2026 年初，Tekla 2026 为 3/11 发布），已在正文标注时间。</p>
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <span>© 2026 Xinrui Yi · Briefings</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--rule);">← All briefings</a></span>
+  </div>
+</footer>
+<script>
+const root = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const icon = document.getElementById('themeIcon');
+const text = document.getElementById('themeText');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+let theme = prefersDark ? 'dark' : 'light';
+applyTheme(theme);
+toggle.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  applyTheme(theme);
+});
+function applyTheme(t) {
+  if (t === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    icon.textContent = '◑'; text.textContent = 'Light';
+  } else {
+    root.removeAttribute('data-theme');
+    icon.textContent = '◐'; text.textContent = 'Dark';
+  }
+}
+
+const audio = document.querySelector('.audio-el');
+if (audio) {
+  const playBtn = document.querySelector('.audio-play');
+  const playIcon = document.querySelector('.audio-icon-play');
+  const backBtn = document.querySelector('.audio-back');
+  const fwdBtn = document.querySelector('.audio-fwd');
+  const track = document.querySelector('.audio-track');
+  const progress = document.querySelector('.audio-progress');
+  const buffered = document.querySelector('.audio-buffered');
+  const curEl = document.querySelector('.audio-cur');
+  const durEl = document.querySelector('.audio-dur');
+
+  const fmt = (s) => {
+    if (!isFinite(s)) return '--:--';
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60).toString().padStart(2, '0');
+    return m + ':' + sec;
+  };
+
+  const setPlaying = (isPlaying) => {
+    playIcon.textContent = isPlaying ? '⏸' : '▶';
+    playBtn.setAttribute('aria-label', isPlaying ? 'Pause' : 'Play');
+  };
+
+  playBtn.addEventListener('click', () => {
+    if (audio.paused) { audio.play(); }
+    else { audio.pause(); }
+  });
+  audio.addEventListener('play', () => setPlaying(true));
+  audio.addEventListener('pause', () => setPlaying(false));
+  audio.addEventListener('ended', () => setPlaying(false));
+
+  backBtn.addEventListener('click', () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+  fwdBtn.addEventListener('click', () => {
+    const dur = isFinite(audio.duration) ? audio.duration : audio.currentTime + 10;
+    audio.currentTime = Math.min(dur, audio.currentTime + 10);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    const ratio = audio.duration ? (audio.currentTime / audio.duration) : 0;
+    progress.style.width = (ratio * 100) + '%';
+    track.setAttribute('aria-valuenow', Math.round(ratio * 100));
+    curEl.textContent = fmt(audio.currentTime);
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    durEl.textContent = fmt(audio.duration);
+  });
+  audio.addEventListener('progress', () => {
+    if (audio.buffered.length && audio.duration) {
+      const end = audio.buffered.end(audio.buffered.length - 1);
+      buffered.style.width = ((end / audio.duration) * 100) + '%';
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.metaKey || e.ctrlKey) return;
+    const tag = e.target.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable) return;
+    if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+    else if (e.code === 'ArrowLeft') { backBtn.click(); }
+    else if (e.code === 'ArrowRight') { fwdBtn.click(); }
+  });
+}
+</script>
+</body>
+</html>
