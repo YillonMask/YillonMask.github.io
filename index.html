@@ -389,20 +389,21 @@
   .skill-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    border: 2px solid var(--ink);
   }
   .skill-row {
     display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 40px;
-    padding-bottom: 20px;
+    grid-template-columns: 196px 1fr;
+    gap: 24px;
+    padding: 14px 18px;
     border-bottom: 1px solid var(--rule);
   }
   .skill-row:last-child { border-bottom: none; }
   .skill-cat {
     font-size: 14px;
     font-weight: 600;
-    color: var(--ink-muted);
+    font-stretch: 110%;
+    color: var(--ink);
   }
   .skill-list {
     font-size: 15.5px;
@@ -412,7 +413,24 @@
   .skill-list strong { color: var(--ink); font-weight: 600; }
 
   /* ---------- CONTACT / FOOTER ---------- */
-  .contact { padding: 96px 0 80px; }
+  .contact {
+    padding: 96px 0 88px;
+    border-bottom: 0;
+    background-color: var(--print);
+    background-image:
+      linear-gradient(var(--print-faint) 1px, transparent 1px),
+      linear-gradient(90deg, var(--print-faint) 1px, transparent 1px);
+    background-size: 24px 24px;
+    color: var(--print-line);
+  }
+  .contact p { opacity: 0.85; }
+  .contact-grid { border: 2px solid var(--print-line); }
+  .contact-card { padding: 14px 16px; }
+  .contact-card:nth-child(odd) { border-right: 1px solid color-mix(in srgb, var(--print-line) 45%, transparent); }
+  .contact-card:nth-child(-n+2) { border-bottom: 1px solid color-mix(in srgb, var(--print-line) 45%, transparent); }
+  .contact .contact-card .lbl { color: inherit; opacity: 0.75; }
+  .contact .contact-card a { color: inherit; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  .contact .contact-card a:hover { text-decoration-thickness: 2px; color: inherit; }
   .contact h2 {
     font-stretch: 125%;
     font-weight: 700;
@@ -423,19 +441,13 @@
   }
   .contact p {
     font-size: 17px;
-    color: var(--ink-soft);
     max-width: 54ch;
     margin-bottom: 36px;
   }
   .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 0 24px;
-    max-width: 720px;
-  }
-  .contact-card {
-    padding: 16px 0;
-    border-top: 1px solid var(--rule);
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 640px;
   }
   .contact-card .lbl {
     font-size: 13px;
@@ -456,6 +468,85 @@
     color: var(--ink-muted);
   }
 
+  /* ---------- SHEETS: drawings that carry the hero's blueprint down the page ---------- */
+  .schematic {
+    margin: 4px 0 22px;
+    background-color: var(--print);
+    background-image:
+      linear-gradient(var(--print-faint) 1px, transparent 1px),
+      linear-gradient(90deg, var(--print-faint) 1px, transparent 1px);
+    background-size: 16px 16px;
+    color: var(--print-line);
+    padding: 18px 18px 12px;
+    overflow-x: auto;
+  }
+  .schematic svg {
+    display: block;
+    width: 100%;
+    min-width: 540px;
+    height: auto;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+  }
+  .schematic .dash { stroke-dasharray: 5 4; }
+  .schematic .head { fill: currentColor; stroke: none; }
+  .schematic text {
+    fill: currentColor;
+    stroke: none;
+    text-anchor: middle;
+    font-family: 'Archivo', sans-serif;
+  }
+  .schematic text.b { font-size: 14px; font-weight: 600; font-stretch: 110%; }
+  .schematic text.s { font-size: 11.5px; opacity: 0.8; }
+  .schematic figcaption {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid color-mix(in srgb, var(--print-line) 35%, transparent);
+    font-size: 13px;
+    opacity: 0.85;
+  }
+
+  /* dimension-line timeline, spans proportional to years */
+  .dims {
+    position: relative;
+    display: flex;
+    margin: 0 0 64px 220px;
+    padding-bottom: 26px;
+  }
+  .dim {
+    position: relative;
+    padding: 0 8px 10px;
+    border-bottom: 1.5px solid var(--ink);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--ink-soft);
+  }
+  .dim::before, .dim::after {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    width: 1.5px;
+    height: 14px;
+    background: var(--ink);
+  }
+  .dim::before { left: 0; }
+  .dim::after { right: 0; }
+  .dim:nth-child(3) { color: var(--blue); }
+  .dim-years { position: absolute; left: 0; right: 0; bottom: 0; height: 18px; }
+  .dim-years span {
+    position: absolute;
+    transform: translateX(-50%);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink-muted);
+  }
+  .dim-years span:first-child { transform: none; }
+  .dim-years span:last-child { transform: translateX(-100%); }
+  /* let wide sketches scroll inside their frame instead of widening the page */
+  .project > div { min-width: 0; }
+
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 720px) {
     .container { padding: 0 16px; }
@@ -474,6 +565,12 @@
       gap: 10px;
     }
     .section-title { font-size: 28px; }
+    .dims { margin-left: 0; margin-bottom: 40px; }
+    .dim { font-size: 12px; padding: 0 4px 10px; }
+    .skill-row { padding: 12px 14px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-card:nth-child(odd) { border-right: 0; }
+    .contact-card:not(:last-child) { border-bottom: 1px solid color-mix(in srgb, var(--print-line) 45%, transparent); }
     .metrics { gap: 20px; }
     .metric .num { font-size: 21px; }
   }
@@ -596,6 +693,10 @@
       <div>
         <h3>Agent Teams - a Slack where every channel is a team of agents</h3>
         <p class="tagline">A CEO agent staffs a team from a goal, a PM agent hands out the work, and specialists report back.</p>
+        <figure class="schematic">
+          <svg viewBox="0 0 660 214" role="img" aria-label="Diagram: you give the CEO agent a goal, it staffs a PM agent, the PM assigns specialists who use tools and report back."><defs><marker id="ah-teams" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9 Z" class="head"/></marker></defs><rect x="8" y="72" width="96" height="48" rx="1"/><text x="56.0" y="93" class="b">You</text><text x="56.0" y="109" class="s">set a goal</text><rect x="134" y="72" width="104" height="48" rx="1"/><text x="186.0" y="93" class="b">CEO agent</text><text x="186.0" y="109" class="s">staffs a team</text><rect x="268" y="72" width="104" height="48" rx="1"/><text x="320.0" y="93" class="b">PM agent</text><text x="320.0" y="109" class="s">assigns tasks</text><polyline points="104,96.0 132,96.0" marker-end="url(#ah-teams)"/><polyline points="238,96.0 266,96.0" marker-end="url(#ah-teams)"/><rect x="414" y="8" width="104" height="48" rx="1"/><text x="466.0" y="37" class="b">Specialist</text><polyline points="372,96.0 392,96.0 392,32.0 412,32.0" marker-end="url(#ah-teams)"/><polyline points="518,32.0 546,32.0" marker-end="url(#ah-teams)"/><rect x="414" y="72" width="104" height="48" rx="1"/><text x="466.0" y="101" class="b">Specialist</text><polyline points="372,96.0 392,96.0 392,96.0 412,96.0" marker-end="url(#ah-teams)"/><polyline points="518,96.0 546,96.0" marker-end="url(#ah-teams)"/><rect x="414" y="136" width="104" height="48" rx="1"/><text x="466.0" y="165" class="b">Specialist</text><polyline points="372,96.0 392,96.0 392,160.0 412,160.0" marker-end="url(#ah-teams)"/><polyline points="518,160.0 546,160.0" marker-end="url(#ah-teams)"/><rect x="548" y="8" width="104" height="176" rx="1"/><text x="600" y="88" class="b">Tools</text><text x="600" y="106" class="s">web search,</text><text x="600" y="122" class="s">page fetch</text><polyline points="466,184 466,206 320,206 320,122" class="dash" marker-end="url(#ah-teams)"/><text x="393" y="198" class="s">report back</text></svg>
+          <figcaption>Who talks to whom inside a team.</figcaption>
+        </figure>
         <p class="project-desc">
           Built at a hackathon with a classmate: a Slack-style app where each channel is a team of
           <strong>long-running AI agents</strong>, with a Next.js / React frontend and a Node.js backend.
@@ -629,6 +730,10 @@
       <div>
         <h3>Fish Recovery - real-time compliant voice agent</h3>
         <p class="tagline">A LiveKit voice agent with Fish Audio TTS, LangGraph dialogue state, and FDCPA compliance gates.</p>
+        <figure class="schematic">
+          <svg viewBox="0 0 660 160" role="img" aria-label="Diagram: caller audio goes through LiveKit and Deepgram to a LangGraph state machine, a compliance gate checks each reply, then Fish Audio speaks it."><defs><marker id="ah-fish" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9 Z" class="head"/></marker></defs><rect x="8" y="8" width="140" height="48" rx="1"/><text x="78.0" y="29" class="b">Caller</text><text x="78.0" y="45" class="s">browser</text><rect x="176" y="8" width="140" height="48" rx="1"/><text x="246.0" y="29" class="b">LiveKit</text><text x="246.0" y="45" class="s">WebRTC audio</text><rect x="344" y="8" width="140" height="48" rx="1"/><text x="414.0" y="29" class="b">Deepgram</text><text x="414.0" y="45" class="s">speech to text</text><rect x="512" y="8" width="140" height="48" rx="1"/><text x="582.0" y="29" class="b">LangGraph</text><text x="582.0" y="45" class="s">state + Gemini</text><rect x="512" y="104" width="140" height="48" rx="1"/><text x="582.0" y="125" class="b">Compliance gate</text><text x="582.0" y="141" class="s">FDCPA checks</text><rect x="260" y="104" width="140" height="48" rx="1"/><text x="330.0" y="125" class="b">Fish Audio</text><text x="330.0" y="141" class="s">text to speech</text><polyline points="148,32.0 174,32.0" marker-end="url(#ah-fish)"/><polyline points="316,32.0 342,32.0" marker-end="url(#ah-fish)"/><polyline points="484,32.0 510,32.0" marker-end="url(#ah-fish)"/><polyline points="582,56 582,102" marker-end="url(#ah-fish)"/><polyline points="512,128.0 402,128.0" marker-end="url(#ah-fish)"/><polyline points="260,128.0 78,128.0 78,58" marker-end="url(#ah-fish)"/></svg>
+          <figcaption>One turn of a call, end to end.</figcaption>
+        </figure>
         <p class="project-desc">
           Built a browser-based <strong>debt-collection voice agent</strong> that can run a live call flow:
           opening, identity verification, objection handling, payment-plan negotiation, recap, and close.
@@ -667,6 +772,10 @@
       <div>
         <h3>Production RAG for a health optimization platform</h3>
         <p class="tagline">5,000+ beta users. 8,000+ daily queries. 99.5% uptime.</p>
+        <figure class="schematic">
+          <svg viewBox="0 0 660 96" role="img" aria-label="Diagram: query, hybrid search, rerank, PathRAG, answer."><defs><marker id="ah-rag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9 Z" class="head"/></marker></defs><rect x="8" y="8" width="108" height="48" rx="1"/><text x="62.0" y="29" class="b">Query</text><text x="62.0" y="45" class="s">user question</text><rect x="138" y="8" width="108" height="48" rx="1"/><text x="192.0" y="29" class="b">Hybrid search</text><text x="192.0" y="45" class="s">Weaviate, RRF</text><rect x="268" y="8" width="108" height="48" rx="1"/><text x="322.0" y="29" class="b">Rerank</text><text x="322.0" y="45" class="s">cross-encoder</text><rect x="398" y="8" width="108" height="48" rx="1"/><text x="452.0" y="29" class="b">PathRAG</text><text x="452.0" y="45" class="s">multi-hop graph</text><rect x="528" y="8" width="108" height="48" rx="1"/><text x="582.0" y="29" class="b">Answer</text><text x="582.0" y="45" class="s">LLM, grounded</text><polyline points="116,32.0 136,32.0" marker-end="url(#ah-rag)"/><polyline points="246,32.0 266,32.0" marker-end="url(#ah-rag)"/><polyline points="376,32.0 396,32.0" marker-end="url(#ah-rag)"/><polyline points="506,32.0 526,32.0" marker-end="url(#ah-rag)"/><text x="322" y="84" class="s">dense + sparse retrieval, top-20 candidates reranked before graph expansion</text></svg>
+          <figcaption>The retrieval path after the rebuild.</figcaption>
+        </figure>
         <p class="project-desc">
           Architected and scaled a <strong>retrieval-augmented generation system</strong> serving thousands
           of users on Google Cloud Run. The first version had a 2.3s response time and shaky retrieval
@@ -701,6 +810,10 @@
       <div>
         <h3>AI customer-service agents for enterprise clients</h3>
         <p class="tagline">Tools, knowledge bases, and the load-tested guts behind them.</p>
+        <figure class="schematic">
+          <svg viewBox="0 0 660 176" role="img" aria-label="Diagram: shopper questions go onto Kafka, agents answer using the order database behind a Redis cache and a knowledge base."><defs><marker id="ah-voc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9 Z" class="head"/></marker></defs><rect x="8" y="64" width="116" height="48" rx="1"/><text x="66.0" y="85" class="b">Shopper</text><text x="66.0" y="101" class="s">order question</text><rect x="154" y="64" width="116" height="48" rx="1"/><text x="212.0" y="85" class="b">Kafka</text><text x="212.0" y="101" class="s">inquiry events</text><rect x="300" y="64" width="116" height="48" rx="1"/><text x="358.0" y="85" class="b">Agents</text><text x="358.0" y="101" class="s">LangChain</text><rect x="446" y="8" width="96" height="48" rx="1"/><text x="494.0" y="29" class="b">Redis</text><text x="494.0" y="45" class="s">hot data</text><rect x="556" y="8" width="96" height="48" rx="1"/><text x="604.0" y="37" class="b">Order DB</text><rect x="446" y="120" width="206" height="48" rx="1"/><text x="549.0" y="141" class="b">Knowledge base</text><text x="549.0" y="157" class="s">client&#x27;s catalog</text><polyline points="124,88.0 152,88.0" marker-end="url(#ah-voc)"/><polyline points="270,88.0 298,88.0" marker-end="url(#ah-voc)"/><polyline points="416,88.0 430,88.0 430,32.0 444,32.0" marker-end="url(#ah-voc)"/><polyline points="542,32.0 554,32.0" marker-end="url(#ah-voc)"/><polyline points="430,88.0 430,144.0 444,144.0" marker-end="url(#ah-voc)"/></svg>
+          <figcaption>How a shopper question gets answered.</figcaption>
+        </figure>
         <p class="project-desc">
           Built and deployed <strong>AI-powered customer-service agents</strong> with database query tools
           for order lookup and per-tenant knowledge-base integration. The interesting part wasn't the
@@ -734,6 +847,10 @@
       <div>
         <h3>BiteWise — AI meal planning that doesn't hallucinate</h3>
         <p class="tagline">Top 30 finalist, TED AI hackathon (UN Sustainability Goals).</p>
+        <figure class="schematic">
+          <svg viewBox="0 0 660 208" role="img" aria-label="Diagram: the app sends your diet data through a LangChain chain of thought to Gemini for recipes and DALL·E 3 for photos; meals are stored in Firebase."><defs><marker id="ah-bite" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9 Z" class="head"/></marker></defs><rect x="8" y="64" width="116" height="48" rx="1"/><text x="66.0" y="85" class="b">You</text><text x="66.0" y="101" class="s">diet + goals</text><rect x="154" y="64" width="116" height="48" rx="1"/><text x="212.0" y="93" class="b">Flutter app</text><rect x="300" y="64" width="140" height="48" rx="1"/><text x="370.0" y="85" class="b">LangChain</text><text x="370.0" y="101" class="s">chain of thought</text><rect x="476" y="8" width="176" height="48" rx="1"/><text x="564.0" y="29" class="b">Gemini</text><text x="564.0" y="45" class="s">recipe</text><rect x="476" y="120" width="176" height="48" rx="1"/><text x="564.0" y="141" class="b">DALL·E 3</text><text x="564.0" y="157" class="s">recipe photo</text><rect x="154" y="152" width="116" height="48" rx="1"/><text x="212.0" y="173" class="b">Firebase</text><text x="212.0" y="189" class="s">tracked meals</text><polyline points="124,88.0 152,88.0" marker-end="url(#ah-bite)"/><polyline points="270,88.0 298,88.0" marker-end="url(#ah-bite)"/><polyline points="440,88.0 458,88.0 458,32.0 474,32.0" marker-end="url(#ah-bite)"/><polyline points="458,88.0 458,144.0 474,144.0" marker-end="url(#ah-bite)"/><polyline points="212,112 212,150" marker-end="url(#ah-bite)"/></svg>
+          <figcaption>From what you ate to a recipe.</figcaption>
+        </figure>
         <p class="project-desc">
           Android app for tracking dietary habits and getting personalized recipe recommendations.
           The technical challenge was hallucinations—LLMs love to invent ingredients and confident
@@ -759,6 +876,13 @@
     <div class="section-head">
       <div class="section-num">Background</div>
       <h2 class="section-title">From bridges to AI systems.</h2>
+    </div>
+
+    <div class="dims" role="img" aria-label="Timeline: 2017 to 2021 civil engineering at Buffalo, 2021 to 2023 China Railway, 2023 to 2026 M.S. CS at Northeastern">
+      <div class="dim" style="flex-grow:4"><span>Civil engineering, Buffalo</span></div>
+      <div class="dim" style="flex-grow:2"><span>China Railway</span></div>
+      <div class="dim" style="flex-grow:3"><span>M.S. CS, Northeastern</span></div>
+      <div class="dim-years"><span>2017</span><span style="left:44.4%">2021</span><span style="left:66.7%">2023</span><span style="left:100%">2026</span></div>
     </div>
 
     <div class="exp-item">
