@@ -646,6 +646,32 @@
   /* let wide sketches scroll inside their frame instead of widening the page */
   .project > div { min-width: 0; }
 
+  /* each project reads as a drawing sheet: title and sketch run the full width,
+     the title block and notes sit underneath */
+  .project { column-gap: 40px; row-gap: 0; padding: 56px 0; }
+  .project > div:not(.project-meta) { display: contents; }
+  .project h3, .project .tagline, .project .schematic { grid-column: 1 / -1; }
+  .project-meta { grid-column: 1; grid-row: 4 / span 6; }
+  .project-desc, .project-demo, .metrics, .project .stack, .project-links { grid-column: 2; }
+  .project h3 {
+    font-stretch: 112%;
+    font-size: clamp(26px, 3.4vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    max-width: 30ch;
+    text-wrap: balance;
+  }
+  .project .tagline { font-size: 17px; color: var(--ink-soft); margin-bottom: 24px; }
+  .project .schematic { margin: 0 0 28px; padding: 24px 24px 14px; }
+  .project-desc { margin-top: 2px; }
+  .metrics { gap: 28px 40px; padding: 20px 0; }
+  .metric .num {
+    font-stretch: 125%;
+    font-weight: 700;
+    font-size: clamp(26px, 3.4vw, 36px);
+    letter-spacing: -0.01em;
+  }
+
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 720px) {
     .container { padding: 0 16px; }
@@ -672,7 +698,11 @@
     }
     .section-title { font-size: 28px; }
     .sheet { border: 0; box-shadow: none; }
-    .project-meta { width: fit-content; min-width: 60%; }
+    .project { padding: 40px 0; }
+    .project-meta { width: fit-content; min-width: 60%; grid-row: auto; margin-bottom: 18px; }
+    .project-meta, .project-desc, .project-demo, .metrics, .project .stack, .project-links { grid-column: 1; }
+    .project h3, .project .tagline, .project .schematic { order: -1; }
+    .project .schematic { margin-left: -16px; margin-right: -16px; padding: 18px 16px 12px; }
     .dims { margin-left: 0; margin-bottom: 40px; }
     .dim { font-size: 12px; }
     .dim span { padding: 0 4px; }
@@ -680,8 +710,7 @@
     .contact-grid { grid-template-columns: 1fr; }
     .contact-card:nth-child(odd) { border-right: 0; }
     .contact-card:not(:last-child) { border-bottom: 1px solid color-mix(in srgb, var(--print-line) 45%, transparent); }
-    .metrics { gap: 20px; }
-    .metric .num { font-size: 21px; }
+    .metrics { gap: 20px 28px; }
   }
 </style>
 </head>
@@ -811,13 +840,11 @@
           <figcaption>The retrieval path after the rebuild.</figcaption>
         </figure>
         <p class="project-desc">
-          Architected and scaled a <strong>retrieval-augmented generation system</strong> serving thousands
-          of users on Google Cloud Run. The first version had a 2.3s response time and shaky retrieval
-          quality. I instrumented the pipeline with AutoRAG, isolated the bottlenecks, then rebuilt
-          retrieval around <strong>Weaviate with HNSW + hybrid (dense/sparse) search</strong>, overlapping
-          chunking, and a cross-encoder reranker. Layered <strong>PathRAG</strong> on top to query a
-          50GB+ multi-domain health dataset as a graph. Deployed via Terraform-managed Docker on GCP
-          with auto-scaling FastAPI workers.
+          Rebuilt the retrieval layer of a <strong>RAG system</strong> serving thousands of users on
+          Google Cloud Run. Profiled the pipeline with AutoRAG, moved retrieval to <strong>Weaviate hybrid
+          (dense + sparse) search</strong> with a cross-encoder reranker, and layered <strong>PathRAG</strong>
+          on top to query a 50GB+ health dataset as a graph. Deployed with Terraform-managed Docker and
+          auto-scaling FastAPI workers.
         </p>
         <div class="metrics">
           <div class="metric"><span class="num">2.3s → 1.4s</span><div class="lbl">Query Latency</div></div>
@@ -849,12 +876,10 @@
           <figcaption>How a shopper question gets answered.</figcaption>
         </figure>
         <p class="project-desc">
-          Built and deployed <strong>AI-powered customer-service agents</strong> with database query tools
-          for order lookup and per-tenant knowledge-base integration. The interesting part wasn't the
-          model—it was making it survive real traffic. Stood up <strong>Prometheus</strong> dashboards
-          for latency and throughput, ran <strong>Locust</strong> load tests to find breaking points,
-          added <strong>Redis caching</strong> for hot order/customer data, and moved inquiry events
-          onto <strong>Kafka</strong> for non-blocking processing across multiple agents.
+          Built <strong>customer-service agents</strong> with order-lookup tools and per-tenant knowledge
+          bases for enterprise clients. The hard part was surviving real traffic: <strong>Prometheus</strong>
+          dashboards and <strong>Locust</strong> load tests to find breaking points, <strong>Redis</strong>
+          caching for hot order data, and <strong>Kafka</strong> for non-blocking inquiry processing.
         </p>
         <div class="metrics">
           <div class="metric"><span class="num">280ms → 95ms</span><div class="lbl">Cached Query</div></div>
@@ -886,14 +911,11 @@
         </figure>
         <p class="project-desc">
           Built at a hackathon with a classmate: a Slack-style app where each channel is a team of
-          <strong>long-running AI agents</strong>, with a Next.js / React frontend and a Node.js backend.
-          You give the CEO agent a goal; it proposes team options and launches one. The PM agent then
-          assigns tasks, and specialist agents call real tools (web search, page fetch) and report back.
-          The agents run on <strong>LangChain Deep Agents over LangGraph</strong> as persistent workers
-          with task queues, inboxes and <strong>SSE streaming</strong> to the UI. Each agent's memory lives
-          in a <strong>git-backed vault</strong> with history, diff and restore. LLM calls fall back to a
-          second model when the first fails, and every call's cost, tokens, cache hits and latency is
-          logged and traced in <strong>LangSmith</strong>.
+          <strong>long-running AI agents</strong> on <strong>LangChain Deep Agents over LangGraph</strong>.
+          Agents run as persistent workers with task queues, inboxes and <strong>SSE streaming</strong>; each
+          one's memory lives in a <strong>git-backed vault</strong> with history, diff and restore. LLM calls
+          fall back to a second model on failure, and every call's cost, tokens and latency is traced in
+          <strong>LangSmith</strong>.
         </p>
         <div class="stack">
           <span>TypeScript</span><span>Next.js</span><span>React</span><span>LangGraph</span>
@@ -922,17 +944,17 @@
           <figcaption>One turn of a call, end to end.</figcaption>
         </figure>
         <p class="project-desc">
-          Built a browser-based <strong>debt-collection voice agent</strong> that can run a live call flow:
-          opening, identity verification, objection handling, payment-plan negotiation, recap, and close.
-          The Python worker connects to LiveKit, routes each user turn through a <strong>LangGraph state machine</strong>,
-          checks every generated response with a compliance layer, and streams speech through
-          <strong>Fish Audio TTS</strong>. The React interface shows transcript logs, call controls, and live
-          stage / emotion / verification chips from worker-published state instead of frontend heuristics.
+          A browser-based <strong>debt-collection voice agent</strong> that runs a full live call:
+          identity verification, objections, payment-plan negotiation, recap and close. Each turn goes
+          through a <strong>LangGraph state machine</strong> and a compliance check before
+          <strong>Fish Audio TTS</strong> speaks it, and the React UI shows live call stage, emotion and
+          verification state published by the worker.
         </p>
         <div class="project-demo">
           <iframe
             src="https://www.loom.com/embed/359a96a1f95e43c29f5975acba92dadf"
             title="Fish Recovery demo video"
+            loading="lazy"
             allowfullscreen>
           </iframe>
         </div>
@@ -964,11 +986,10 @@
           <figcaption>From what you ate to a recipe.</figcaption>
         </figure>
         <p class="project-desc">
-          Android app for tracking dietary habits and getting personalized recipe recommendations.
-          The technical challenge was hallucinations—LLMs love to invent ingredients and confident
-          nutrition numbers. I structured the prompt chain with <strong>Chain-of-Thought via LangChain</strong>
-          and tight grounding against tracked user data, cutting observed hallucinations by ~98%.
-          Recipes get generated by Gemini, accompanying images by DALL·E 3, all stored in Firebase.
+          An Android app that tracks what you eat and recommends recipes. LLMs love to invent
+          ingredients and nutrition numbers, so I grounded a <strong>Chain-of-Thought via LangChain</strong>
+          against tracked user data, cutting observed hallucinations by ~98%. Gemini writes the recipes,
+          DALL·E 3 draws them, Firebase stores everything.
         </p>
         <div class="stack">
           <span>Flutter</span><span>Firebase</span><span>Vertex AI</span>
