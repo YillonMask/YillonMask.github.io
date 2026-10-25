@@ -568,6 +568,39 @@
       <h2 class="section-title">Things I've <em>shipped</em>.</h2>
     </div>
 
+    <!-- PROJECT 0: AGENT TEAMS -->
+    <article class="project">
+      <div class="project-meta">
+        <span class="role">Hackathon · Team of 2</span>
+        Agent Teams<br>
+        Multi-Agent Platform<br>
+        2026
+      </div>
+      <div>
+        <h3>Agent Teams - a Slack where every channel is a team of agents</h3>
+        <p class="tagline">A CEO agent staffs a team from a goal, a PM agent hands out the work, and specialists report back.</p>
+        <p class="project-desc">
+          Built at a hackathon with a classmate: a Slack-style app where each channel is a team of
+          <strong>long-running AI agents</strong>, with a Next.js / React frontend and a Node.js backend.
+          You give the CEO agent a goal; it proposes team options and launches one. The PM agent then
+          assigns tasks, and specialist agents call real tools (web search, page fetch) and report back.
+          The agents run on <strong>LangChain Deep Agents over LangGraph</strong> as persistent workers
+          with task queues, inboxes and <strong>SSE streaming</strong> to the UI. Each agent's memory lives
+          in a <strong>git-backed vault</strong> with history, diff and restore. LLM calls fall back to a
+          second model when the first fails, and every call's cost, tokens, cache hits and latency is
+          logged and traced in <strong>LangSmith</strong>.
+        </p>
+        <div class="stack">
+          <span>TypeScript</span><span>Next.js</span><span>React</span><span>LangGraph</span>
+          <span>Deep Agents</span><span>LangChain</span><span>LangSmith</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/blueif16/agent-teams" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://agent-teams-mu.vercel.app" target="_blank" rel="noopener">Live Demo</a>
+        </div>
+      </div>
+    </article>
+
     <!-- PROJECT 0: FISH RECOVERY -->
     <article class="project">
       <div class="project-meta">
@@ -671,6 +704,7 @@
         </div>
       </div>
     </article>
+
 
     <!-- PROJECT 3: BITEWISE -->
     <article class="project">
