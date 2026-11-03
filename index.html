@@ -173,7 +173,18 @@
     gap: 48px;
     align-items: start;
   }
-  .hero-drawing { margin-top: 56px; }
+  .hero-drawing { margin-top: 56px; position: relative; }
+  .hero-drawing .ascii {
+    position: absolute;
+    left: 0; width: 100%;
+    top: -20%; height: 150%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  .hero-drawing .truss { transition: opacity 1s ease; }
+  .hero-drawing.live .ascii { opacity: 1; }
+  .hero-drawing.live .truss { opacity: 0; }
   .truss {
     display: block;
     width: 100%;
@@ -784,6 +795,7 @@
         <line x1="954" y1="202" x2="1000" y2="202" pathLength="1" style="--d:1.30s"/>
         <line class="water" x1="74" y1="196" x2="926" y2="196" style="--d:1.4s"/>
       </svg>
+      <canvas class="ascii" aria-hidden="true"></canvas>
     </div>
   </div>
 </header>
@@ -1172,6 +1184,115 @@
       text.textContent = 'Dark';
     }
   }
+
+  // Hero: once the SVG truss finishes drawing, it turns into a rotating 3D model rendered as ASCII.
+  (() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const wrap = document.querySelector('.hero-drawing');
+    const svg = wrap.querySelector('.truss');
+    const cvs = wrap.querySelector('.ascii');
+    const ctx = cvs.getContext('2d');
+    const off = document.createElement('canvas');
+    const octx = off.getContext('2d', { willReadFrequently: true });
+    let CW, CH, FONT;
+    const RAMP = ' .:-=+*x#%@', W = 55, F = 2400, CX = 500, CY = 126;
+
+    // 2D truss in SVG units: the drawn <line>s plus the outline path; each becomes a front and back face
+    const flat = [...svg.querySelectorAll('line:not(.water)')]
+      .map(l => ['x1', 'y1', 'x2', 'y2'].map(a => +l.getAttribute(a)))
+      .filter(([, y1, , y2]) => y1 < 160 || y2 < 160) // drop ground lines
+      .concat([[60, 150, 140, 50], [140, 50, 860, 50], [860, 50, 940, 150], [940, 150, 60, 150]]);
+    const segs = [];
+    for (const [x1, y1, x2, y2] of flat) for (const z of [-W, W]) segs.push([x1, y1, z, x2, y2, z]);
+    for (let x = 140; x <= 860; x += 80) {
+      segs.push([x, 50, -W, x, 50, W]);                       // top ties
+      if (x < 860) segs.push([x, 50, -W, x + 80, 50, W]);     // top lateral bracing
+    }
+    for (let x = 60; x <= 940; x += 80) segs.push([x, 150, -W, x, 150, W]); // floor beams
+    for (const x0 of [46, 926]) {                              // piers as boxes
+      const xs = [x0, x0 + 28], ys = [150, 202], zs = [-W - 12, W + 12];
+      for (const a of xs) for (const b of ys) segs.push([a, b, zs[0], a, b, zs[1]]);
+      for (const a of xs) for (const c of zs) segs.push([a, ys[0], c, a, ys[1], c]);
+      for (const b of ys) for (const c of zs) segs.push([xs[0], b, c, xs[1], b, c]);
+    }
+
+    let cssW, cssH, cols, rows, k, raf = 0, t0 = 0, last = 0, visible = true;
+    function size() {
+      const dpr = devicePixelRatio || 1;
+      cssW = cvs.clientWidth; cssH = cvs.clientHeight;
+      [CW, CH, FONT] = cssW < 600 ? [4, 7, 6] : [7, 11, 10]; // phones need a finer grid to read the truss
+      cvs.width = cssW * dpr; cvs.height = cssH * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cols = Math.ceil(cssW / CW); rows = Math.ceil(cssH / CH);
+      off.width = cols; off.height = rows;
+      k = cssW / 1000;
+    }
+
+    function frame(now) {
+      raf = visible ? requestAnimationFrame(frame) : 0;
+      if (now - last < 33) return; // ~30fps is plenty for ASCII
+      last = now;
+      const t = (now - t0) / 1000;
+      const e = Math.min(1, t / 4), amp = e * e * (3 - 2 * e); // ease in from the flat front view
+      const yaw = amp * 0.6 * Math.sin(t * 0.35), pitch = amp * 0.16;
+      const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+      const proj = (x, y, z) => {
+        x -= CX; y -= CY;
+        const x1 = x * cy - z * sy, z1 = x * sy + z * cy;
+        const y2 = y * cp - z1 * sp, z2 = y * sp + z1 * cp;
+        const s = F / (F + z2);
+        return [(x1 * s + CX) * k, (y2 * s + CY + 42.4) * k, s]; // 42.4 = canvas starts 20% of 212 above the SVG
+      };
+
+      // rasterize at one pixel per cell, then read brightness back
+      octx.setTransform(1 / CW, 0, 0, 1 / CH, 0, 0);
+      octx.globalCompositeOperation = 'source-over';
+      octx.clearRect(0, 0, cssW, cssH);
+      octx.globalCompositeOperation = 'lighter';
+      octx.strokeStyle = '#fff';
+      octx.lineWidth = CW * 0.7;
+      octx.lineCap = 'round';
+      for (const [ax, ay, az, bx, by, bz] of segs) {
+        const [x1, y1, s1] = proj(ax, ay, az), [x2, y2, s2] = proj(bx, by, bz);
+        octx.globalAlpha = Math.min(1, Math.max(0.45, ((s1 + s2) / 2 - 0.7) * 2.5)); // nearer = brighter
+        octx.beginPath(); octx.moveTo(x1, y1); octx.lineTo(x2, y2); octx.stroke();
+      }
+      const px = octx.getImageData(0, 0, cols, rows).data;
+
+      const color = getComputedStyle(root).getPropertyValue('--print-line').trim();
+      ctx.clearRect(0, 0, cssW, cssH);
+      ctx.fillStyle = color;
+      ctx.font = FONT + 'px ui-monospace, Menlo, monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const tick = Math.floor(t * 8);
+      for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+        const l = Math.sqrt(px[(r * cols + c) * 4 + 3] / 255); // alpha = coverage (RGB comes back un-premultiplied)
+        if (l < 0.2) continue;
+        const x = c * CW, y = r * CH;
+        ctx.globalAlpha = l * 0.3;
+        ctx.fillRect(x + 0.5, y + 0.5, CW - 1, CH - 1);
+        // a few lit cells flicker to a random glyph, like the reference
+        const h = (c * 73856093 ^ r * 19349663 ^ tick * 83492791) >>> 0;
+        const ch = h % 13 === 0 ? RAMP[1 + (h >>> 8) % (RAMP.length - 1)] : RAMP[Math.round(l * (RAMP.length - 1))];
+        ctx.globalAlpha = 0.35 + 0.65 * l;
+        ctx.fillText(ch, x + CW / 2, y + CH / 2);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    new IntersectionObserver(([en]) => {
+      visible = en.isIntersecting;
+      if (visible && t0 && !raf) raf = requestAnimationFrame(frame);
+    }).observe(cvs);
+    addEventListener('resize', size);
+    setTimeout(() => {
+      size();
+      wrap.classList.add('live');
+      t0 = performance.now();
+      if (visible) raf = requestAnimationFrame(frame);
+    }, 2400); // after the SVG draw-in finishes
+  })();
 
 </script>
 
