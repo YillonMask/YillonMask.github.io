@@ -215,6 +215,30 @@
     .truss > .water { opacity: 0.5; }
   }
 
+  /* Waterline stands in for the waveform on xiangyidesign.com: same dash and
+     weight as the drawn water, and it only appears once the ASCII truss
+     (which does not include that line) takes over. */
+  .waterline {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 2;
+  }
+  .hero-drawing.live .waterline { opacity: 1; transition: opacity 1s ease; }
+  .water-wave {
+    fill: none;
+    stroke: var(--print-line);
+    stroke-width: 1;
+    stroke-dasharray: 10 8;
+    opacity: 0.5;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .waterline { display: none; }
+  }
+
   .title-block {
     width: 100%;
     border-collapse: collapse;
@@ -612,6 +636,31 @@
     font-size: 13px;
     opacity: 0.85;
   }
+  /* Hover reveals a dimension line the way the reference reveals a second
+     layer on a project. Collapsed to nothing until hover, so the sheet is unchanged at rest. */
+  .schematic { position: relative; }
+  .schematic::before {
+    content: "";
+    position: absolute;
+    top: 14px;
+    left: 22px;
+    right: 22px;
+    height: 13px;
+    border-left: 2.5px solid var(--print-line);
+    border-right: 2.5px solid var(--print-line);
+    background: linear-gradient(var(--print-line), var(--print-line)) center / 100% 2.5px no-repeat;
+    transform: scaleX(0);
+    transform-origin: left center;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .project:hover .schematic::before,
+    .project:focus-within .schematic::before {
+      transform: scaleX(1);
+      transition: transform 0.45s cubic-bezier(.16, .84, .32, 1);
+    }
+  }
 
   /* dimension-line timeline, spans proportional to years */
   .dims {
@@ -760,7 +809,7 @@
       <table class="title-block">
         <caption>Title block</caption>
         <tr><th scope="row">Based in</th><td>Bay Area, CA</td></tr>
-        <tr><th scope="row">Available</th><td>May 2026, new grad</td></tr>
+        <tr><th scope="row">Available</th><td>Open to roles</td></tr>
         <tr><th scope="row">Roles</th><td>SWE, AI/ML engineering</td></tr>
         <tr><th scope="row">Work authorization</th><td>No sponsorship needed</td></tr>
         <tr><th scope="row">Resume</th><td><a href="resume.pdf" target="_blank" rel="noopener">Download PDF</a></td></tr>
@@ -796,6 +845,9 @@
         <line class="water" x1="74" y1="196" x2="926" y2="196" style="--d:1.4s"/>
       </svg>
       <canvas class="ascii" aria-hidden="true"></canvas>
+      <svg class="waterline" viewBox="0 0 1000 212" aria-hidden="true">
+        <path class="water-wave" d="M74 196 H926"/>
+      </svg>
     </div>
   </div>
 </header>
@@ -809,8 +861,8 @@
       <div class="label"><span class="cut" aria-hidden="true">A</span>About</div>
       <div>
         <p>
-          I'm <strong>Xinrui (Richard) Yi</strong>—an M.S. CS candidate graduating in May 2026,
-          looking for new-grad roles in AI/ML engineering and software engineering.
+          I'm <strong>Xinrui (Richard) Yi</strong>—M.S. Computer Science at Northeastern,
+          open to roles in AI/ML engineering and software engineering.
         </p>
         <p>
           My recent work has been on the unglamorous side of AI: making RAG retrieval actually return
@@ -1125,7 +1177,7 @@
   <div class="container">
     <h2>Let's talk.</h2>
     <p>
-      I'm actively looking for new-grad SWE and AI/ML engineering roles for 2026.
+      Open to SWE and AI/ML engineering roles.
       Best way to reach me is email — I read everything.
     </p>
     <div class="contact-grid">
@@ -1292,6 +1344,34 @@
       t0 = performance.now();
       if (visible) raf = requestAnimationFrame(frame);
     }, 2400); // after the SVG draw-in finishes
+  })();
+
+  // Continuous waterline, adapted from the reference's oscillating waveform.
+  (() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const path = document.querySelector('.water-wave');
+    const host = document.querySelector('.hero-drawing');
+    if (!path || !host) return;
+    const x0 = 74, x1 = 926, y = 196, steps = 32;
+    let raf = 0, t0 = 0, on = true;
+    function frame(now) {
+      raf = on ? requestAnimationFrame(frame) : 0;
+      if (!t0) t0 = now;
+      const t = (now - t0) / 1000;
+      let d = 'M' + x0 + ' ' + y;
+      for (let i = 1; i <= steps; i++) {
+        const u = i / steps;
+        const x = x0 + (x1 - x0) * u;
+        const yy = y + Math.sin(u * Math.PI * 4 + t * 3.6) * 12 * Math.sin(u * Math.PI);
+        d += ' L' + x.toFixed(1) + ' ' + yy.toFixed(1);
+      }
+      path.setAttribute('d', d);
+    }
+    new IntersectionObserver(([en]) => {
+      on = en.isIntersecting;
+      if (on && !raf) raf = requestAnimationFrame(frame);
+    }).observe(host);
+    raf = requestAnimationFrame(frame);
   })();
 
 </script>
