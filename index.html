@@ -957,7 +957,12 @@
     navToggleText.textContent = open ? "Close" : "Menu";
   }
   navToggle.addEventListener("click", () => setNav(!navLinks.classList.contains("open")));
-  navLinks.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setNav(false)));
+  navLinks.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => {
+    const href = a.getAttribute("href") || "";
+    // Hiding the clicked link in this same turn cancels a real navigation in Chrome.
+    if (href.startsWith("#")) setNav(false);
+    else setTimeout(() => setNav(false), 0);
+  }));
   document.addEventListener("click", (e) => {
     if (!navEl.contains(e.target)) setNav(false);
   });
