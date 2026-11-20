@@ -8,6 +8,7 @@ import Manifesto from './components/Manifesto'
 import Marquee from './components/Marquee'
 import FieldSection from './components/FieldSection'
 import Work from './components/Work'
+import OffTheClock from './components/OffTheClock'
 import Kitchen from './components/Kitchen'
 import Footer from './components/Footer'
 
@@ -52,6 +53,7 @@ export default function App() {
         <Marquee reduced={reduced} items={[{ t: 'AI Systems' }, { t: 'RAG', serif: true }, { t: 'Agents' }, { t: 'Machine Learning' }, { t: 'Built to tolerance', serif: true }]} />
         <FieldSection reduced={reduced} />
         <Work />
+        <OffTheClock />
         <Kitchen />
       </main>
       <Footer onTop={() => go('#top')} />
