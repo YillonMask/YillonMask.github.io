@@ -1,0 +1,10 @@
+{
+ "north": 37.448,
+ "south": 37.34372735749286,
+ "west": -122.27,
+ "east": -122.06,
+ "zoom": 13,
+ "minElev": -4.693196395220928,
+ "maxElev": 630.6142424854489,
+ "source": "AWS Terrain Tiles (Mapzen terrarium), USGS 3DEP et al."
+}
