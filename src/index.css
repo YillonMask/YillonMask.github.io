@@ -111,8 +111,11 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .field-copy { position: absolute; left: var(--pad); bottom: 12vh; width: min(560px, 44vw); z-index: 2; }
 .field-num { display: flex; overflow: hidden; font-size: 13px; margin-bottom: 10px; color: var(--sig); }
 .field-num span:first-child { display: inline-block; }
-.field-title { overflow: hidden; height: clamp(80px, 10vw, 180px); }
-.field-title h2 { font-size: clamp(80px, 10vw, 180px); line-height: 0.95; letter-spacing: -0.02em; }
+.field-copy { --ft: min(clamp(80px, 10vw, 180px), calc(min(560px, 44vw) / 3.5)); }
+/* Mask the chapter swap vertically only: clip-path with negative side insets leaves room for the
+   italic overhang (overflow:hidden used to shave the last letter when the title outgrew the column). */
+.field-title { height: var(--ft); clip-path: inset(0 calc(var(--ft) * -0.4) 0 calc(var(--ft) * -0.2)); }
+.field-title h2 { font-size: var(--ft); line-height: 0.95; letter-spacing: -0.02em; white-space: nowrap; }
 .field-line { margin-top: 20px; font-size: clamp(20px, 1.7vw, 28px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600; color: var(--bone); }
 .field-desc { margin-top: 12px; max-width: 360px; color: rgba(233,228,216,.7); font-size: 15px; line-height: 1.5; }
 .field-steps { position: absolute; right: var(--pad); bottom: 12vh; list-style: none; display: grid; gap: 10px; width: 220px; color: rgba(233,228,216,.35); }
@@ -322,7 +325,7 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
   .hero-foot .intro br { display: none; }
   .hero-foot { grid-template-columns: 1fr; gap: 12px; }
   .hero-foot .center, .hero-foot .right { display: none; }
-  .field-copy { width: auto; right: var(--pad); }
+  .field-copy { width: auto; right: var(--pad); --ft: clamp(56px, 20vw, 80px); }
   .field-steps { display: none; }
   .work { padding: 12vh 0 9vh; }
   .work-head { flex-direction: column; align-items: stretch; gap: 22px; }
