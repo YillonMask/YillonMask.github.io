@@ -54,6 +54,9 @@ export default function Kitchen() {
   const target = useRef(0)
   const cur = useRef(0)
   const colX = useRef(0)
+  // Dish switch replay: the new dish always starts assembled (frame 0) and plays its teardown as a timed
+  // animation up to wherever the scroll currently is, then hands control back to scroll. No page jump.
+  const replay = useRef<{ pending: boolean; t0: number; dur: number } | null>(null)
   const { scrollYProgress } = useScroll({ target: section, offset: ['start start', 'end end'] })
 
   useEffect(() => {
@@ -154,7 +157,19 @@ export default function Kitchen() {
     loadSeq(dir).then((s) => {
       if (!live) return
       seqRef.current = s
-      const wait = () => { if (!live) return; if (s.imgs[0]) { draw(); canvas.current?.classList.remove('is-swapping') } else requestAnimationFrame(wait) }
+      const wait = () => {
+        if (!live) return
+        if (!s.imgs[0]) { requestAnimationFrame(wait); return }
+        const r = replay.current
+        if (r?.pending) {
+          // longer playback the further the teardown has to travel (≈0.7–2.1s)
+          r.pending = false; r.t0 = performance.now(); r.dur = 700 + 1400 * target.current
+        }
+        draw()
+        canvas.current?.classList.remove('is-swapping')
+        // warm the other dish so the next switch starts instantly
+        for (const d of DISHES) if (d.dir !== dish.dir) loadSeq(d.dir + (mobile ? '_m' : '')).catch(() => {})
+      }
       wait()
     })
     return () => { live = false }
@@ -169,6 +184,16 @@ export default function Kitchen() {
     target.current = mapScroll(scrollYProgress.get())
     const loop = () => {
       raf = requestAnimationFrame(loop)
+      const r = replay.current
+      if (r) {
+        if (r.pending) { cur.current = 0; draw(); return }
+        const e = clamp((performance.now() - r.t0) / r.dur)
+        const k = e < 0.5 ? 4 * e * e * e : 1 - Math.pow(-2 * e + 2, 3) / 2 // easeInOutCubic
+        cur.current = target.current * k
+        draw()
+        if (e >= 1) replay.current = null
+        return
+      }
       const d = target.current - cur.current
       if (Math.abs(d) < 0.0005 && seqRef.current?.imgs.every(Boolean)) { if (d !== 0) { cur.current = target.current; draw() } return }
       cur.current += reduced ? d : d * 0.16
@@ -183,8 +208,12 @@ export default function Kitchen() {
   const choose = (k: number) => {
     if (k === di) return
     canvas.current?.classList.add('is-swapping')
-    colX.current = 0
-    window.setTimeout(() => setDi(k), 220)
+    window.setTimeout(() => {
+      colX.current = 0
+      // reduced motion: no playback, the new dish simply appears at the current scroll state
+      if (!reduced) replay.current = { pending: true, t0: 0, dur: 0 }
+      setDi(k)
+    }, 220)
   }
 
   return (
@@ -227,7 +256,7 @@ export default function Kitchen() {
           <span className="k-state">Assembled</span>
           <span className="k-bar"><i ref={bar} /></span>
           <span className="k-state">Exploded</span>
-          <span className="k-count" ref={count}>00 / 0{dish.parts.length}</span>
+          <span className="k-count" ref={count} key={dish.id} />
         </div>
         <div className="kitchen-note mono">
           <span>Amounts are rough home-style estimates, not a recipe.</span>
