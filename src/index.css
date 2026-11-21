@@ -69,6 +69,24 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--sig); box-shadow: 0 0 0 0 rgba(255,77,31,.6); animation: pulse 2s infinite; }
 @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(255,77,31,0); } 100% { box-shadow: 0 0 0 0 rgba(255,77,31,0); } }
 
+/* ---------- visitor badge (hero, top-right under the nav) ---------- */
+.visitor-wrap { position: absolute; top: calc(var(--pad) + 46px); right: var(--pad); z-index: 4; pointer-events: none; }
+.visitor { display: flex; align-items: center; gap: 14px; opacity: 0; transform: translateY(-6px); transition: opacity 1s ease, transform 1s cubic-bezier(.16,1,.3,1); }
+.visitor.on { opacity: 1; transform: none; }
+.visitor-text { white-space: nowrap; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; line-height: 1.3; text-align: right; }
+.visitor-k { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; color: rgba(233,228,216,.45); }
+.visitor-k .zh { text-transform: none; letter-spacing: .08em; font-size: 10.5px; }
+.visitor-k .dim { opacity: .6; }
+.visitor-v { font-size: 11px; color: rgba(233,228,216,.85); letter-spacing: .06em; }
+.visitor-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sig); box-shadow: 0 0 0 0 rgba(255,77,26,.6); animation: visitor-pulse 2.4s ease-out infinite; }
+@keyframes visitor-pulse { 0% { box-shadow: 0 0 0 0 rgba(255,77,26,.55); } 70%, 100% { box-shadow: 0 0 0 7px rgba(255,77,26,0); } }
+.visitor-globe { display: block; border-radius: 50%; }
+@media (max-width: 760px) {
+  .visitor-wrap { top: calc(var(--pad) + 40px); }
+  .visitor { gap: 10px; }
+  .visitor-k { font-size: 9px; }
+  .visitor-v { font-size: 10px; }
+}
 .hero-title { position: absolute; left: var(--pad); right: var(--pad); bottom: 15vh; z-index: 3; pointer-events: none; }
 .hero-title h1 { display: flex; flex-direction: column; font-size: clamp(64px, 13.2vw, 240px); line-height: 0.84; font-weight: 400; color: var(--bone); }
 .hero-title .indent { padding-left: 17vw; }
