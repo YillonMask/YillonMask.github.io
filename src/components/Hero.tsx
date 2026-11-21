@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import HeroField from '../gl/HeroField'
 import Magnetic from './Magnetic'
+import { visitorGeo, type Geo } from '../lib/geo'
+
+const Visitor = lazy(() => import('./Visitor'))
 
 const ease = [0.16, 1, 0.3, 1] as const
 const NAV = [['About', '#about'], ['Field', '#field'], ['Work', '#work'], ['Kitchen', '#kitchen'], ['Contact', '#contact']] as const
@@ -27,6 +30,21 @@ export default function Hero({ ready, reduced, onNav }: { ready: boolean; reduce
   const op = useTransform(scrollY, [0, 650], [1, 0])
   const d = ready ? 0 : 99
   const [open, setOpen] = useState(false)
+  const [geo, setGeo] = useState<Geo | null>(null)
+  const [small, setSmall] = useState(() => window.matchMedia('(max-width: 760px)').matches)
+
+  // visitor badge: look up location only once the intro has painted, when the browser is idle
+  useEffect(() => {
+    if (!ready) return
+    let live = true
+    const go = () => visitorGeo().then((g) => { if (live && g) setGeo(g) })
+    const ric = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback
+    const id = ric ? ric(go, { timeout: 2500 }) : window.setTimeout(go, 1200)
+    const mq = window.matchMedia('(max-width: 760px)')
+    const onMq = () => setSmall(mq.matches)
+    mq.addEventListener('change', onMq)
+    return () => { live = false; if (!ric) window.clearTimeout(id); mq.removeEventListener('change', onMq) }
+  }, [ready])
 
   return (
     <section className="hero" id="top">
@@ -63,6 +81,12 @@ export default function Hero({ ready, reduced, onNav }: { ready: boolean; reduce
           )}
         </AnimatePresence>
       </header>
+
+      {geo && (
+        <motion.div className="visitor-wrap" style={reduced ? undefined : { opacity: op }}>
+          <Suspense fallback={null}><Visitor geo={geo} reduced={reduced} size={small ? 44 : 60} /></Suspense>
+        </motion.div>
+      )}
 
       <motion.div className="hero-title" style={reduced ? undefined : { y, opacity: op }}>
         {ready && (
